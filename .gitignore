@@ -1,0 +1,17 @@
+# 视频文件（太大，不上传）
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.flv
+*.wmv
+*.webm
+*.mpg
+*.mpeg
+*.m4v
+
+# 临时文件
+temp/
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,880 @@
+{
+  "original_duration": 1456.94,
+  "final_duration": 799.5369999999998,
+  "compression_ratio": 0.4512217387126445,
+  "total_segments": 531,
+  "kept_segments": 310,
+  "merged_segments": 174,
+  "merged": [
+    {
+      "start_sec": 0.0,
+      "end_sec": 2.0,
+      "text": "今天要躺一個問題"
+    },
+    {
+      "start_sec": 7.0,
+      "end_sec": 10.0,
+      "text": "當大家用Cloud Code或者"
+    },
+    {
+      "start_sec": 11.0,
+      "end_sec": 15.0,
+      "text": "Collects等工具 做Web Code的時候"
+    },
+    {
+      "start_sec": 16.0,
+      "end_sec": 18.0,
+      "text": "如何提高效率"
+    },
+    {
+      "start_sec": 33.0,
+      "end_sec": 35.0,
+      "text": "這個長時間的這個工作"
+    },
+    {
+      "start_sec": 36.0,
+      "end_sec": 38.0,
+      "text": "並且能夠並行的工作"
+    },
+    {
+      "start_sec": 39.0,
+      "end_sec": 41.0,
+      "text": "我也做了最近一週"
+    },
+    {
+      "start_sec": 45.0,
+      "end_sec": 47.0,
+      "text": "那因為現在這個發展很快"
+    },
+    {
+      "start_sec": 56.0,
+      "end_sec": 58.0,
+      "text": "那今天的這個工作流程"
+    },
+    {
+      "start_sec": 61.0,
+      "end_sec": 63.0,
+      "text": "過短時間就無效了"
+    },
+    {
+      "start_sec": 64.0,
+      "end_sec": 66.0,
+      "text": "現在只是做個記錄"
+    },
+    {
+      "start_sec": 71.0,
+      "end_sec": 72.0,
+      "text": "第一個需求就是"
+    },
+    {
+      "start_sec": 73.0,
+      "end_sec": 77.0,
+      "text": "能夠長時間工作 不用人去干預"
+    },
+    {
+      "start_sec": 78.0,
+      "end_sec": 80.0,
+      "text": "第二個需求就是"
+    },
+    {
+      "start_sec": 83.0,
+      "end_sec": 85.0,
+      "text": "那第三個就是"
+    },
+    {
+      "start_sec": 93.0,
+      "end_sec": 95.0,
+      "text": "這個人沒有缺乱的改壞了"
+    },
+    {
+      "start_sec": 98.0,
+      "end_sec": 100.0,
+      "text": "跟這些需求呢"
+    },
+    {
+      "start_sec": 107.0,
+      "end_sec": 109.0,
+      "text": "網上很多之他"
+    },
+    {
+      "start_sec": 110.0,
+      "end_sec": 113.0,
+      "text": "開發者做法可能也是類似的"
+    },
+    {
+      "start_sec": 114.0,
+      "end_sec": 116.0,
+      "text": "可以公開參考一下"
+    },
+    {
+      "start_sec": 117.0,
+      "end_sec": 119.0,
+      "text": "那第一個就是說"
+    },
+    {
+      "start_sec": 120.0,
+      "end_sec": 122.0,
+      "text": "如何做到不打斷"
+    },
+    {
+      "start_sec": 126.0,
+      "end_sec": 127.0,
+      "text": "Codex為例"
+    },
+    {
+      "start_sec": 130.0,
+      "end_sec": 132.0,
+      "text": "我現在的左面上"
+    },
+    {
+      "start_sec": 135.0,
+      "end_sec": 136.0,
+      "text": "Cursor的"
+    },
+    {
+      "start_sec": 140.0,
+      "end_sec": 143.0,
+      "text": "Mining 就Terminal Mining行的窗口"
+    },
+    {
+      "start_sec": 145.0,
+      "end_sec": 147.0,
+      "text": "之所以這麼開呢"
+    },
+    {
+      "start_sec": 148.0,
+      "end_sec": 150.0,
+      "text": "可以並行的工作"
+    },
+    {
+      "start_sec": 151.0,
+      "end_sec": 152.0,
+      "text": "為什麼用Mining行呢"
+    },
+    {
+      "start_sec": 153.0,
+      "end_sec": 155.0,
+      "text": "就Cursor類似的這個插件"
+    },
+    {
+      "start_sec": 156.0,
+      "end_sec": 157.0,
+      "text": "類似插件其實"
+    },
+    {
+      "start_sec": 167.0,
+      "end_sec": 171.0,
+      "text": "人確認的一個步驟 那儘管在這裡"
+    },
+    {
+      "start_sec": 174.0,
+      "end_sec": 176.0,
+      "text": "Full Access Mode"
+    },
+    {
+      "start_sec": 177.0,
+      "end_sec": 179.0,
+      "text": "因為Cursor這個"
+    },
+    {
+      "start_sec": 180.0,
+      "end_sec": 184.0,
+      "text": "它實際上還是會 不停地去確認"
+    },
+    {
+      "start_sec": 191.0,
+      "end_sec": 193.0,
+      "text": "可能一兩分鐘就打斷一次"
+    },
+    {
+      "start_sec": 194.0,
+      "end_sec": 196.0,
+      "text": "只能單線成的去工作"
+    },
+    {
+      "start_sec": 198.0,
+      "end_sec": 202.0,
+      "text": "那如果有長時間工作 那推薦用這個Client"
+    },
+    {
+      "start_sec": 203.0,
+      "end_sec": 205.0,
+      "text": "那這個Client"
+    },
+    {
+      "start_sec": 206.0,
+      "end_sec": 208.0,
+      "text": "這邊實際上可以"
+    },
+    {
+      "start_sec": 209.0,
+      "end_sec": 211.0,
+      "text": "開放一個命令叫Appleware"
+    },
+    {
+      "start_sec": 213.0,
+      "end_sec": 218.0,
+      "text": "Appleware如果是在 Full Access的話"
+    },
+    {
+      "start_sec": 221.0,
+      "end_sec": 223.0,
+      "text": "基本上不太需要人"
+    },
+    {
+      "start_sec": 226.0,
+      "end_sec": 230.0,
+      "text": "試過最長的一個任務 跑了8個小時 不需要打斷它"
+    },
+    {
+      "start_sec": 237.0,
+      "end_sec": 239.0,
+      "text": "這個中等的這個"
+    },
+    {
+      "start_sec": 240.0,
+      "end_sec": 244.0,
+      "text": "當前的一個獨顯能力 一些危險的操作它"
+    },
+    {
+      "start_sec": 247.0,
+      "end_sec": 249.0,
+      "text": "所以這是第一個問題"
+    },
+    {
+      "start_sec": 251.0,
+      "end_sec": 260.0,
+      "text": "我會打開Appleware 想這個可以看 Appleware 當前就是Full Access模式"
+    },
+    {
+      "start_sec": 274.0,
+      "end_sec": 283.0,
+      "text": "足力執行的任務 那我個人的經驗呢 一般是3到4個 再多就不太好控制了 因為設計到上下文切換"
+    },
+    {
+      "start_sec": 297.0,
+      "end_sec": 301.0,
+      "text": "都處理同樣的代碼 這個要解決衝突問題"
+    },
+    {
+      "start_sec": 302.0,
+      "end_sec": 304.0,
+      "text": "多現成處理呢"
+    },
+    {
+      "start_sec": 308.0,
+      "end_sec": 314.0,
+      "text": "模塊有話很清楚 所以我還要獨立 最好是改不同的模塊"
+    },
+    {
+      "start_sec": 317.0,
+      "end_sec": 320.0,
+      "text": "開不同的窗口"
+    },
+    {
+      "start_sec": 321.0,
+      "end_sec": 338.0,
+      "text": "我現在做法就是開 在同一台籍式上 功能就開不同的Work3 從這裡可以看到 這個是本地的 Grid的空間 然後這兩個是 Delateral Work3E 然後這個是Work3E"
+    },
+    {
+      "start_sec": 339.0,
+      "end_sec": 344.0,
+      "text": "就是兩個Work3 那Work3的概念呢 大家可以去查一下"
+    },
+    {
+      "start_sec": 347.0,
+      "end_sec": 351.0,
+      "text": "它就是開了一個 建立一個單獨的墓樓"
+    },
+    {
+      "start_sec": 354.0,
+      "end_sec": 357.0,
+      "text": "你在這個墓樓下"
+    },
+    {
+      "start_sec": 358.0,
+      "end_sec": 360.0,
+      "text": "可以獨立工作 兩個墓樓之間"
+    },
+    {
+      "start_sec": 364.0,
+      "end_sec": 366.0,
+      "text": "解決了一個第三個問題"
+    },
+    {
+      "start_sec": 374.0,
+      "end_sec": 376.0,
+      "text": "但是Work3E裡面工作"
+    },
+    {
+      "start_sec": 378.0,
+      "end_sec": 381.0,
+      "text": "我可以指定這個"
+    },
+    {
+      "start_sec": 383.0,
+      "end_sec": 385.0,
+      "text": "那個Collecter說"
+    },
+    {
+      "start_sec": 388.0,
+      "end_sec": 397.0,
+      "text": "在Work3裡面整散改 包括提交代碼 提交代碼也是在Work3的繁殖 不允許直接提交到"
+    },
+    {
+      "start_sec": 398.0,
+      "end_sec": 399.0,
+      "text": "DEV和MF繁殖"
+    },
+    {
+      "start_sec": 401.0,
+      "end_sec": 404.0,
+      "text": "DEV和MF繁殖 必須通過PR"
+    },
+    {
+      "start_sec": 415.0,
+      "end_sec": 418.0,
+      "text": "怎麼做到長時間不打斷呢"
+    },
+    {
+      "start_sec": 429.0,
+      "end_sec": 433.0,
+      "text": "但是做前端設置到一個 見面調適的問題"
+    },
+    {
+      "start_sec": 439.0,
+      "end_sec": 441.0,
+      "text": "PrayRite的MCP"
+    },
+    {
+      "start_sec": 448.0,
+      "end_sec": 456.0,
+      "text": "這個PrayRiteMCP呢 安裝了以後呢 安裝畫也很簡單"
+    },
+    {
+      "start_sec": 457.0,
+      "end_sec": 459.0,
+      "text": "那個命令好像裝一下"
+    },
+    {
+      "start_sec": 460.0,
+      "end_sec": 470.0,
+      "text": "可以告訴KoreX 就是我這邊已經裝了 你幫我配一下 那它就會配一下 配成功的標誌呢"
+    },
+    {
+      "start_sec": 472.0,
+      "end_sec": 476.0,
+      "text": "是會在這個文件下"
+    },
+    {
+      "start_sec": 483.0,
+      "end_sec": 484.0,
+      "text": "PrayRiteMCP"
+    },
+    {
+      "start_sec": 487.0,
+      "end_sec": 490.0,
+      "text": "然後這個命令 好像一打的話"
+    },
+    {
+      "start_sec": 492.0,
+      "end_sec": 494.0,
+      "text": "那這個工具的作用呢"
+    },
+    {
+      "start_sec": 502.0,
+      "end_sec": 505.0,
+      "text": "因為我現在做的這個網頁操作的一個"
+    },
+    {
+      "start_sec": 507.0,
+      "end_sec": 513.0,
+      "text": "那你如果是要操作別的東西呢 可能要裝BAMCP 那相當於給它手的腳"
+    },
+    {
+      "start_sec": 516.0,
+      "end_sec": 519.0,
+      "text": "我還做了一個"
+    },
+    {
+      "start_sec": 525.0,
+      "end_sec": 532.0,
+      "text": "那這個所謂 OtherDvSkill 這個OtherDvSkill呢"
+    },
+    {
+      "start_sec": 533.0,
+      "end_sec": 537.0,
+      "text": "也是可以讓它 你可以給它提到一個手來做"
+    },
+    {
+      "start_sec": 543.0,
+      "end_sec": 546.0,
+      "text": "等一下我先開一個窗口"
+    },
+    {
+      "start_sec": 548.0,
+      "end_sec": 552.0,
+      "text": "那這個是給我呢 那個具體的"
+    },
+    {
+      "start_sec": 554.0,
+      "end_sec": 555.0,
+      "text": "實際上是放在"
+    },
+    {
+      "start_sec": 570.0,
+      "end_sec": 572.0,
+      "text": "那可以看到"
+    },
+    {
+      "start_sec": 573.0,
+      "end_sec": 581.0,
+      "text": "腳本的一個 木爐和一個 Skill的馬克大文件 我們可以大概看一下這個"
+    },
+    {
+      "start_sec": 583.0,
+      "end_sec": 591.0,
+      "text": "那這個馬克大文件 就描述了這個Skill的一些 基本的情況啊"
+    },
+    {
+      "start_sec": 595.0,
+      "end_sec": 604.0,
+      "text": "就是說這裡就是開發 自動開發的條式 在當前的work3 嚴格保證給它安全"
+    },
+    {
+      "start_sec": 606.0,
+      "end_sec": 611.0,
+      "text": "那通過這個 GOOtherDv來觸發這個Skill"
+    },
+    {
+      "start_sec": 613.0,
+      "end_sec": 622.0,
+      "text": "然後這裡做了一個約束 NetherTankerDv和MainFence 或者是它的"
+    },
+    {
+      "start_sec": 625.0,
+      "end_sec": 628.0,
+      "text": "是它分支啊 都緊處理當前的分支"
+    },
+    {
+      "start_sec": 634.0,
+      "end_sec": 636.0,
+      "text": "工作的範圍就限制在當前的分支了"
+    },
+    {
+      "start_sec": 639.0,
+      "end_sec": 651.0,
+      "text": "這個Skill 它還可以做 給它們Action 來做自動部署 就是說前段不需要 法式部署可以調整"
+    },
+    {
+      "start_sec": 652.0,
+      "end_sec": 661.0,
+      "text": "因為後段模糊的話 它需要部署 那就是我們配好這個Action 那也觸發這個Skill部署"
+    },
+    {
+      "start_sec": 664.0,
+      "end_sec": 673.0,
+      "text": "那好像這個 自動開發大概就這樣過程 那具體做的話呢"
+    },
+    {
+      "start_sec": 677.0,
+      "end_sec": 684.0,
+      "text": "這一列是主控監算 那這一列主控監我剛剛 做的一個工作"
+    },
+    {
+      "start_sec": 686.0,
+      "end_sec": 691.0,
+      "text": "啊對於這個 當前的迭代"
+    },
+    {
+      "start_sec": 692.0,
+      "end_sec": 712.0,
+      "text": "當前也是做了一個Sprint迭代 的工作做了一個回顧啊 那些已經做了 那些還沒做 讓它全程少秒處理一下 那這個可以當入跑 然後這個空間呢 這個我居然呢 我是做了一個 比較大的新的特性"
+    },
+    {
+      "start_sec": 713.0,
+      "end_sec": 717.0,
+      "text": "我現在這個工程是在做 一個會本工具"
+    },
+    {
+      "start_sec": 718.0,
+      "end_sec": 721.0,
+      "text": "做S就是一個會本的"
+    },
+    {
+      "start_sec": 723.0,
+      "end_sec": 730.0,
+      "text": "這樣保證這個角色 場景的一致性 那這一塊我"
+    },
+    {
+      "start_sec": 736.0,
+      "end_sec": 738.0,
+      "text": "這個這個文盪的目的"
+    },
+    {
+      "start_sec": 744.0,
+      "end_sec": 750.0,
+      "text": "這也是一個原型設置 和設置文盪"
+    },
+    {
+      "start_sec": 752.0,
+      "end_sec": 757.0,
+      "text": "然後這個設置呢 分階段來執行"
+    },
+    {
+      "start_sec": 759.0,
+      "end_sec": 775.0,
+      "text": "執行的設置文盪 可以接待呢 都最終有一個 輸入輸出的一個驗證 那我這邊可以 它剛剛跑一些東西啊 我這邊可以繼續 讓它跑一下"
+    },
+    {
+      "start_sec": 777.0,
+      "end_sec": 779.0,
+      "text": "Add這個"
+    },
+    {
+      "start_sec": 781.0,
+      "end_sec": 785.0,
+      "text": "然後在設置文盪"
+    },
+    {
+      "start_sec": 809.0,
+      "end_sec": 810.0,
+      "text": "通過測用力"
+    },
+    {
+      "start_sec": 815.0,
+      "end_sec": 817.0,
+      "text": "Water TV"
+    },
+    {
+      "start_sec": 834.0,
+      "end_sec": 837.0,
+      "text": "如果問題他會自動的測試"
+    },
+    {
+      "start_sec": 842.0,
+      "end_sec": 847.0,
+      "text": "Skill 自動跑的時候"
+    },
+    {
+      "start_sec": 850.0,
+      "end_sec": 874.24,
+      "text": "我這就不管他 這跟當前工作 相對獨立的內容 那我这一个时关就是会看一下当前需要哪些优化的 那我做了个机制本"
+    },
+    {
+      "start_sec": 875.0,
+      "end_sec": 877.32,
+      "text": "那这个是做一些零食优化"
+    },
+    {
+      "start_sec": 885.5,
+      "end_sec": 888.059,
+      "text": "看一下零食需要做什么优化"
+    },
+    {
+      "start_sec": 890.36,
+      "end_sec": 893.179,
+      "text": "那这个是现在正在做的一个见面啊"
+    },
+    {
+      "start_sec": 894.0,
+      "end_sec": 895.279,
+      "text": "这个先不去管他"
+    },
+    {
+      "start_sec": 905.519,
+      "end_sec": 907.82,
+      "text": "我发现在这个见面呢"
+    },
+    {
+      "start_sec": 909.36,
+      "end_sec": 912.679,
+      "text": "有一个东西不太好看像这个"
+    },
+    {
+      "start_sec": 918.58,
+      "end_sec": 920.36,
+      "text": "像这个就爆砍被遮入了"
+    },
+    {
+      "start_sec": 921.639,
+      "end_sec": 926.0,
+      "text": "这里也爆砍这个一个头的时候可以去掉"
+    },
+    {
+      "start_sec": 927.019,
+      "end_sec": 929.059,
+      "text": "那我这边零食做个记录"
+    },
+    {
+      "start_sec": 931.62,
+      "end_sec": 932.899,
+      "text": "这个前面都是"
+    },
+    {
+      "start_sec": 933.659,
+      "end_sec": 935.46,
+      "text": "零食记录的需求先"
+    },
+    {
+      "start_sec": 936.22,
+      "end_sec": 937.259,
+      "text": "还没写一下"
+    },
+    {
+      "start_sec": 988.319,
+      "end_sec": 990.379,
+      "text": "这个能不能"
+    },
+    {
+      "start_sec": 1011.639,
+      "end_sec": 1059.64,
+      "text": "我現在點是這個小的改進任務 他這邊在改了 就是把這個tag這個頭 這個頭爆看 取掉 也是多餘的 另外在這邊會被擋住這個問題啊 解決掉"
+    },
+    {
+      "start_sec": 1063.64,
+      "end_sec": 1104.64,
+      "text": "如果在這裡就完全擋住了 它現在就兩個就在執行了啊 另外如果還要再來一個 這邊反正都獨立工作都沒關係 這邊我還可以用這個 我一般使用clawcorder做這個diamond review 我做一個命令這邊也可以 如果有PR需要合的話我現在看有沒有PR"
+    },
+    {
+      "start_sec": 1110.64,
+      "end_sec": 1137.64,
+      "text": "但如果做完以後可以提供個PR 需要合的話我這邊這樣一個PR命令 它會這樣一次的操作來做合併 這個合併也可以 因為現在本地沒在工作嘛 可以直接本地工作 但它默然也會穿那個我吹來合併 穿了併像本地的工作"
+    },
+    {
+      "start_sec": 1144.64,
+      "end_sec": 1154.64,
+      "text": "這裡剛才讓我停掉了 實際上因為這個任務比較簡單 它這邊報告"
+    },
+    {
+      "start_sec": 1157.64,
+      "end_sec": 1161.64,
+      "text": "就是說應該說是都是通過的啊"
+    },
+    {
+      "start_sec": 1163.64,
+      "end_sec": 1182.64,
+      "text": "文盪可能還沒有更新 它問我現在跑這個自動測試 還是先跟它很高"
+    },
+    {
+      "start_sec": 1188.64,
+      "end_sec": 1191.64,
+      "text": "我擔心一點啊"
+    },
+    {
+      "start_sec": 1197.64,
+      "end_sec": 1216.64,
+      "text": "因為我很擔心 所以我也 tutte不錯 所以真的很不合併 我是教我一個教育 還是要 nive 03"
+    },
+    {
+      "start_sec": 1218.64,
+      "end_sec": 1252.44,
+      "text": "我是距離很高 好 你就新早上久了 我 Tap thelıb 用面子这个olin 然后 majestic 这种车playride这个风区"
+    },
+    {
+      "start_sec": 1253.94,
+      "end_sec": 1256.54,
+      "text": "但这个很奇怪 playride风区有时候"
+    },
+    {
+      "start_sec": 1257.24,
+      "end_sec": 1259.54,
+      "text": "他掉出来我们可以看到有时候"
+    },
+    {
+      "start_sec": 1259.94,
+      "end_sec": 1262.14,
+      "text": "我们又看不到但是他显示"
+    },
+    {
+      "start_sec": 1267.64,
+      "end_sec": 1270.74,
+      "text": "而且还提取的东西还是对的"
+    },
+    {
+      "start_sec": 1271.94,
+      "end_sec": 1274.94,
+      "text": "OK,这个是他自动掉的啊,这个我都没操作"
+    },
+    {
+      "start_sec": 1275.74,
+      "end_sec": 1276.94,
+      "text": "或者他自动操作的"
+    },
+    {
+      "start_sec": 1279.74,
+      "end_sec": 1287.34,
+      "text": "那如果他中间需要测试的用户秘密嘛,你也告诉他 我这边试现已经告诉我他就直接进行"
+    },
+    {
+      "start_sec": 1288.84,
+      "end_sec": 1292.14,
+      "text": "现在我都没有在操作,都是他自动来操作的"
+    },
+    {
+      "start_sec": 1294.24,
+      "end_sec": 1295.44,
+      "text": "下面可以看到"
+    },
+    {
+      "start_sec": 1297.54,
+      "end_sec": 1300.14,
+      "text": "这是他掉出来的元素"
+    },
+    {
+      "start_sec": 1308.64,
+      "end_sec": 1310.64,
+      "text": "处理的一个"
+    },
+    {
+      "start_sec": 1311.64,
+      "end_sec": 1314.64,
+      "text": "基本功能嘛,包括新建制产"
+    },
+    {
+      "start_sec": 1315.64,
+      "end_sec": 1317.64,
+      "text": "商厨制产,商厦给他查吧"
+    },
+    {
+      "start_sec": 1319.64,
+      "end_sec": 1322.64,
+      "text": "当然这里也要对制产进行一些解释"
+    },
+    {
+      "start_sec": 1325.64,
+      "end_sec": 1328.64,
+      "text": "他也会自动点制"
+    },
+    {
+      "start_sec": 1330.64,
+      "end_sec": 1335.64,
+      "text": "那总之就是我就不用人工去做这些操作了"
+    },
+    {
+      "start_sec": 1336.64,
+      "end_sec": 1337.64,
+      "text": "完全都是自动的"
+    },
+    {
+      "start_sec": 1353.64,
+      "end_sec": 1355.84,
+      "text": "总结一下,怎么做到"
+    },
+    {
+      "start_sec": 1356.64,
+      "end_sec": 1358.14,
+      "text": "长时间安全的"
+    },
+    {
+      "start_sec": 1360.94,
+      "end_sec": 1362.24,
+      "text": "那个编程工作"
+    },
+    {
+      "start_sec": 1364.94,
+      "end_sec": 1366.94,
+      "text": "还有一些方法"
+    },
+    {
+      "start_sec": 1367.94,
+      "end_sec": 1368.94,
+      "text": "先总结一下"
+    },
+    {
+      "start_sec": 1369.94,
+      "end_sec": 1372.94,
+      "text": "那第一个就是"
+    },
+    {
+      "start_sec": 1373.94,
+      "end_sec": 1377.94,
+      "text": "用Client不用这个ID里面的长线"
+    },
+    {
+      "start_sec": 1378.44,
+      "end_sec": 1379.44,
+      "text": "因为ID有线"
+    },
+    {
+      "start_sec": 1380.94,
+      "end_sec": 1383.44,
+      "text": "那把这个Approved"
+    },
+    {
+      "start_sec": 1383.94,
+      "end_sec": 1388.94,
+      "text": "做的这个完全允许的模式打开"
+    },
+    {
+      "start_sec": 1389.94,
+      "end_sec": 1390.94,
+      "text": "第二个呢,长线"
+    },
+    {
+      "start_sec": 1394.44,
+      "end_sec": 1396.44,
+      "text": "安全编辖画很出来"
+    },
+    {
+      "start_sec": 1398.94,
+      "end_sec": 1400.44,
+      "text": "第三个呢就是"
+    },
+    {
+      "start_sec": 1401.94,
+      "end_sec": 1404.44,
+      "text": "提供Skyo和MCP给他手脚"
+    },
+    {
+      "start_sec": 1405.44,
+      "end_sec": 1407.44,
+      "text": "让他能够掉给他Hub"
+    },
+    {
+      "start_sec": 1408.44,
+      "end_sec": 1410.94,
+      "text": "来给他个Action来部署"
+    },
+    {
+      "start_sec": 1414.94,
+      "end_sec": 1418.44,
+      "text": "那往夜这个现在可以用BREWIDE"
+    },
+    {
+      "start_sec": 1419.44,
+      "end_sec": 1423.94,
+      "text": "那是他这边操作的一些工具肯定也有"
+    },
+    {
+      "start_sec": 1429.44,
+      "end_sec": 1430.94,
+      "text": "那第四个呢就是"
+    },
+    {
+      "start_sec": 1431.44,
+      "end_sec": 1435.44,
+      "text": "画风好这个工作的模块"
+    },
+    {
+      "start_sec": 1437.44,
+      "end_sec": 1440.44,
+      "text": "每个线程的任务呢"
+    },
+    {
+      "start_sec": 1440.94,
+      "end_sec": 1445.94,
+      "text": "最好是处理独立的模块 好,怎么会直接"
+    },
+    {
+      "start_sec": 1446.94,
+      "end_sec": 1449.44,
+      "text": "互相基本上不干扰"
+    },
+    {
+      "start_sec": 1449.94,
+      "end_sec": 1451.94,
+      "text": "这样的话合并会比较方便"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ffmpeg:*)",
+      "Bash(ffprobe:*)",
+      "Bash(python3:*)",
+      "Bash(/Users/vik.qian/study/videomaker/smart_cut_execute.sh)",
+      "Bash(ls:*)",
+      "Skill(subtitle)",
+      "Skill(subtitle:*)",
+      "Bash(pip3 list:*)",
+      "Bash(pip install:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}
