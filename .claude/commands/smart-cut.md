@@ -4,9 +4,25 @@ allowed-tools: Bash(ffmpeg:*), Bash(python3:*), Read, Write, Edit
 argument-hint: <视频文件路径> [压缩百分比，如 50%]
 ---
 
-# 智能视频剪辑
+# 智能视频剪辑 V2
 
-分析视频内容，自动识别并剪除沉默、重复、口误等冗余片段，保留主要观点内容。
+分析视频内容，采用分层策略自动剪辑，保留主要观点内容。
+
+## 分层剪辑策略
+
+按以下优先级顺序处理：
+
+1. **第1层：裁剪没声音部分** - 移除空白片段（无字幕内容）
+2. **第2层：剪语气词** - 移除"嗯"、"啊"、"那个"等语气词和填充词
+3. **第3层：剪重复内容** - 移除重复语义、口误纠正等冗余内容
+4. **第4层：加速播放** - 使用1.0x-1.5x加速（保留所有内容但缩短时间）
+5. **第5层：剪除低价值内容** - 最后手段，移除重要性较低的片段
+
+这个策略确保：
+- 优先使用无损或低损方法（剪空白、语气词）
+- 在必要时使用加速播放保留内容
+- 只在最后才剪除有价值的内容
+- 全局扫描避免剪辑不均衡
 
 ## 输入参数
 
@@ -41,241 +57,105 @@ for part in parts[1:]:
 - 如果没有字幕，先调用 `/subtitle` 生成字幕
 - 获取视频时长：`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "<视频路径>"`
 
-### 3. 分析字幕内容
+### 3. 分析字幕内容（使用 V2 脚本）
 
-读取 SRT 字幕文件，使用 Python 解析每个片段：
+使用改进的分析脚本 `scripts/smart_cut_analysis_v2.py`：
 
-```python
-import re
-
-def parse_srt(srt_path):
-    """解析 SRT 文件，返回片段列表"""
-    with open(srt_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    pattern = r'(\d+)\n(\d{2}:\d{2}:\d{2},\d{3}) --> (\d{2}:\d{2}:\d{2},\d{3})\n(.*?)(?=\n\n|\Z)'
-    segments = []
-    for match in re.finditer(pattern, content, re.DOTALL):
-        idx, start, end, text = match.groups()
-        segments.append({
-            'index': int(idx),
-            'start': start,
-            'end': end,
-            'start_sec': timestamp_to_seconds(start),
-            'end_sec': timestamp_to_seconds(end),
-            'text': text.strip(),
-            'keep': True,  # 默认保留
-            'reason': None  # 移除原因
-        })
-    return segments
-
-def timestamp_to_seconds(ts):
-    """将时间戳转换为秒数"""
-    h, m, s = ts.replace(',', '.').split(':')
-    return int(h) * 3600 + int(m) * 60 + float(s)
+```bash
+python3 scripts/smart_cut_analysis_v2.py "<字幕路径>" [target_reduction]
 ```
+
+该脚本会：
+1. 解析 SRT 字幕文件
+2. 计算每个片段的内容重要性（1-10分）
+3. 执行分层剪辑策略：
+   - 第1层：标记空白片段
+   - 第2层：标记语气词和填充词
+   - 第3层：标记重复内容和口误
+   - 第4层：如需进一步压缩，计算加速播放速度
+   - 第5层：如仍不够，按重要性剪除低价值内容
+4. 生成 `*_cut_result.json` 结果文件
 
 ### 4. 智能识别冗余内容
 
-分析每个字幕片段，标记以下类型的冗余内容：
+**已在 `smart_cut_analysis_v2.py` 中实现，分层处理：**
+
+**第1层：空白片段（无声音）**
+- 检测无字幕文本的片段
+- 优先级最高，直接移除
+
+**第2层：语气词和填充词**
+- 扩展的语气词列表：嗯、啊、呃、那个、就是、然后等
+- 英文：um, uh, er, like, you know 等
+- 重复字符（如"选择选择选择"）
+- 过短片段（少于3个字符）
+
+**第3层：重复语义内容**
+- 相邻片段文字相似度 > 80%
+- 保留重要性更高的片段
+- 口误/自我纠正（包含"不是"、"我是说"等）
+
+**第4层：加速播放**
+- 如需进一步压缩，计算所需播放速度
+- 最多使用 1.5x 加速
+- 使用 FFmpeg 的 `setpts` 和 `atempo` 滤镜
+
+**第5层：剪除低价值内容**
+- 最后手段，按内容重要性排序
+- 优先移除重要性 < 7 的片段
+- 避免移除高价值内容
+
+### 5. 内容重要性评估
+
+**已在 `smart_cut_analysis_v2.py` 中实现：**
 
 ```python
-def analyze_segments(segments):
-    """分析并标记冗余片段"""
-
-    # 4.1 检测沉默/空白片段（无文字或只有语气词）
-    filler_words = {'嗯', '啊', '呃', '那个', '就是', '然后', '这个', '那么', '所以说', '对吧'}
-
-    for seg in segments:
-        text = seg['text'].strip()
-        # 空白或纯语气词
-        if not text or all(w in filler_words for w in text):
-            seg['keep'] = False
-            seg['reason'] = 'filler'
-            seg['priority'] = 1  # 最优先移除
-
-    # 4.2 检测重复内容（相邻片段文字相似度高）
-    for i in range(1, len(segments)):
-        if similarity(segments[i]['text'], segments[i-1]['text']) > 0.8:
-            segments[i]['keep'] = False
-            segments[i]['reason'] = 'duplicate'
-            segments[i]['priority'] = 2
-
-    # 4.3 检测口误/自我纠正（包含"不是"、"我是说"等纠正词）
-    correction_patterns = ['不是', '我是说', '不对', '应该是', '错了', '重来']
-    for seg in segments:
-        if any(p in seg['text'] for p in correction_patterns):
-            seg['keep'] = False
-            seg['reason'] = 'correction'
-            seg['priority'] = 3
-
-    # 4.4 检测过长的停顿（片段间隔超过2秒）
-    for i in range(1, len(segments)):
-        gap = segments[i]['start_sec'] - segments[i-1]['end_sec']
-        if gap > 2.0:
-            # 标记这个间隔需要被压缩
-            segments[i]['gap_before'] = gap
-
-    return segments
-
-def similarity(text1, text2):
-    """简单的文本相似度计算"""
-    set1, set2 = set(text1), set(text2)
-    if not set1 or not set2:
-        return 0
-    return len(set1 & set2) / len(set1 | set2)
+def calculate_importance(seg, all_segments, index):
+    """计算片段的内容重要性（1-10分）"""
+    # 考虑因素：
+    # 1. 文本长度（长文本通常更重要）
+    # 2. 关键词（技术术语、逻辑连接词）
+    # 3. 问句（引出重要内容）
+    # 4. 位置（开头和结尾更重要）
+    # 5. 与前后文的连贯性（新话题更重要）
 ```
 
-### 5. 根据目标百分比调整
-
-如果指定了目标压缩百分比，按优先级逐步移除片段直到达到目标：
-
-```python
-def adjust_to_target(segments, original_duration, target_reduction):
-    """调整移除片段以达到目标压缩率"""
-    if target_reduction is None:
-        return segments
-
-    target_duration = original_duration * (1 - target_reduction)
-
-    # 计算当前保留时长
-    current_duration = sum(
-        seg['end_sec'] - seg['start_sec']
-        for seg in segments if seg['keep']
-    )
-
-    if current_duration <= target_duration:
-        return segments  # 已达到目标
-
-    # 按优先级排序待移除片段（优先级低的片段）
-    # 优先级: 1=语气词, 2=重复, 3=纠正, 4=内容较少的片段
-    candidates = sorted(
-        [s for s in segments if s['keep']],
-        key=lambda x: (len(x['text']), -x.get('priority', 10))
-    )
-
-    for seg in candidates:
-        if current_duration <= target_duration:
-            break
-        seg_duration = seg['end_sec'] - seg['start_sec']
-        seg['keep'] = False
-        seg['reason'] = 'target_reduction'
-        current_duration -= seg_duration
-
-    return segments
-```
+这确保在第5层剪除时，优先保留高价值内容。
 
 ### 6. 使用 AI 提取主要观点
 
-调用 Claude 分析保留的字幕内容，提取视频主要观点：
+在剪辑完成后，分析保留的字幕内容，提取视频主要观点：
 
 ```python
-# 收集所有保留的文本
-kept_text = "\n".join([
-    f"[{seg['start']}] {seg['text']}"
-    for seg in segments if seg['keep']
-])
+# 收集所有保留的文本（按重要性排序）
+kept_texts = [(seg, seg['importance']) for seg in segments if seg['keep']]
+kept_texts.sort(key=lambda x: x[1], reverse=True)
 
-# 输出分析提示，让 Claude 总结主要观点
-print("=== 视频主要观点 ===")
-print(kept_text)
+# 输出高重要性内容
+for seg, importance in kept_texts[:20]:
+    print(f"[重要性:{importance}] [{seg['start']}] {seg['text']}")
 ```
 
-**请 Claude 分析上述内容，提取 3-5 个主要观点，格式如下：**
-1. 主要观点一
-2. 主要观点二
-...
+**请 Claude 分析上述内容，提取 3-5 个主要观点。**
 
-### 7. 生成 FFmpeg 剪辑命令
+### 4. 执行剪辑（使用 V2 脚本）
 
-根据保留的片段生成 FFmpeg 剪辑脚本：
+使用支持加速播放的执行脚本 `scripts/smart_cut_execute_v2.py`：
 
-```python
-def generate_ffmpeg_script(segments, input_path, output_path):
-    """生成 FFmpeg 剪辑命令"""
-    kept_segments = [s for s in segments if s['keep']]
-
-    if not kept_segments:
-        return None
-
-    # 生成 filter_complex 片段选择
-    filter_parts = []
-    concat_v = []
-    concat_a = []
-
-    for i, seg in enumerate(kept_segments):
-        start = seg['start_sec']
-        end = seg['end_sec']
-        # 视频和音频裁剪
-        filter_parts.append(
-            f"[0:v]trim=start={start}:end={end},setpts=PTS-STARTPTS[v{i}];"
-        )
-        filter_parts.append(
-            f"[0:a]atrim=start={start}:end={end},asetpts=PTS-STARTPTS[a{i}];"
-        )
-        concat_v.append(f"[v{i}]")
-        concat_a.append(f"[a{i}]")
-
-    # 拼接所有片段
-    n = len(kept_segments)
-    filter_complex = "".join(filter_parts)
-    filter_complex += f"{''.join(concat_v)}concat=n={n}:v=1:a=0[outv];"
-    filter_complex += f"{''.join(concat_a)}concat=n={n}:v=0:a=1[outa]"
-
-    cmd = f'''ffmpeg -i "{input_path}" -filter_complex "{filter_complex}" -map "[outv]" -map "[outa]" "{output_path}" -y'''
-
-    return cmd
+```bash
+python3 scripts/smart_cut_execute_v2.py "<result_json>" "<input_video>"
 ```
 
-### 8. 生成同步字幕
+该脚本会：
+1. 读取分析结果 JSON
+2. 根据每个片段的速度设置生成 FFmpeg filter
+3. 对需要加速的片段应用 `setpts` 和 `atempo` 滤镜
+4. 分批处理并合并所有片段
+5. 生成同步字幕文件（考虑加速后的时间轴）
 
-为剪辑后的视频生成新的同步字幕文件：
-
-```python
-def generate_new_srt(segments, output_srt_path):
-    """为剪辑后的视频生成新字幕"""
-    kept_segments = [s for s in segments if s['keep']]
-
-    new_srt = ""
-    current_time = 0.0
-
-    for i, seg in enumerate(kept_segments, 1):
-        duration = seg['end_sec'] - seg['start_sec']
-        start = seconds_to_timestamp(current_time)
-        end = seconds_to_timestamp(current_time + duration)
-
-        new_srt += f"{i}\n{start} --> {end}\n{seg['text']}\n\n"
-        current_time += duration
-
-    with open(output_srt_path, 'w', encoding='utf-8') as f:
-        f.write(new_srt)
-
-    return output_srt_path
-
-def seconds_to_timestamp(seconds):
-    """将秒数转换为 SRT 时间戳"""
-    hours = int(seconds // 3600)
-    minutes = int((seconds % 3600) // 60)
-    secs = int(seconds % 60)
-    millis = int((seconds - int(seconds)) * 1000)
-    return f"{hours:02d}:{minutes:02d}:{secs:02d},{millis:03d}"
-```
-
-### 9. 执行剪辑并输出结果
-
-1. 执行 FFmpeg 命令进行视频剪辑
-2. 输出文件命名：`原文件名_cut.mp4` 和 `原文件名_cut.srt`
-3. 显示剪辑统计信息：
-   - 原始时长 vs 剪辑后时长
-   - 压缩比例
-   - 移除的片段数量及原因分类
-   - 视频主要观点摘要
-
-## 输出文件
-
+输出文件：
 - `<原文件名>_cut.mp4` - 剪辑后的视频
 - `<原文件名>_cut.srt` - 同步字幕文件
-- 控制台输出剪辑报告和主要观点摘要
 
 ## 注意事项
 
@@ -283,7 +163,19 @@ def seconds_to_timestamp(seconds):
 - 对于非中文视频，需要先确认字幕语言正确
 - 剪辑过程可能较长，取决于视频长度和片段数量
 - 建议先不指定百分比，查看智能剪辑结果后再决定是否需要进一步压缩
-- 对于片段较多的视频，FFmpeg 命令可能会很长，会自动使用 concat demuxer 方式处理
+- 使用 V2 版本脚本支持加速播放和更智能的分层策略
+- 加速播放最多 1.5 倍，音频使用 `atempo` 滤镜保持音调
+- 分批处理避免 FFmpeg 命令过长
+
+## 实现细节
+
+使用以下脚本：
+- `scripts/smart_cut_analysis_v2.py` - 分层分析脚本
+- `scripts/smart_cut_execute_v2.py` - 支持加速播放的执行脚本
+
+旧版本脚本（不支持加速）：
+- `scripts/smart_cut_analysis.py` - 基础分析脚本
+- `scripts/smart_cut_execute.py` - 基础执行脚本
 
 ## 使用示例
 

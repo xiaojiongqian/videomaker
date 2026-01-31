@@ -12,6 +12,16 @@
 
 # 临时文件
 temp/
+tmp/
+*_temp/
+*_tmp/
 __pycache__/
 *.pyc
 .DS_Store
+
+# 音频文件
+*.wav
+*.mp3
+
+# JSON结果文件
+*_result.json
