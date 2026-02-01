@@ -177,6 +177,86 @@ python3 scripts/smart_cut_execute_v2.py "<result_json>" "<input_video>"
 - `scripts/smart_cut_analysis.py` - 基础分析脚本
 - `scripts/smart_cut_execute.py` - 基础执行脚本
 
+### 7. 字幕优化与硬字幕处理
+
+**字幕内容优化（LLM纠错）**
+
+1. 检查ASR识别错误，使用LLM纠正常见错误
+2. 将字幕拆分为单行短句（每个字幕段只有一行文本）
+3. 确保时间轴不重叠
+
+**字幕时间轴同步**
+
+```python
+def adjust_and_optimize_srt(input_srt, output_srt, speed_factor):
+    """调整时间轴并优化显示时长"""
+    # 1. 调整时间轴：所有时间除以加速倍数
+    start_sec = original_start / speed_factor
+    end_sec = original_end / speed_factor
+
+    # 2. 优化显示时长：根据文字长度
+    text_len = len(text)
+    min_duration = max(1.0, text_len * 0.3)  # 每字0.3秒
+    min_duration = min(min_duration, 5.0)     # 最多5秒
+
+    # 3. 确保不重叠
+    if segments[i]['end'] > segments[i+1]['start']:
+        segments[i]['end'] = segments[i+1]['start'] - 0.1
+```
+
+**硬字幕添加（关键参数）**
+
+```bash
+subtitles=<字幕文件>:force_style='
+FontName=PingFang SC,        # 中文字体
+FontSize=16,                 # 字体大小（16px清晰易读）
+Bold=1,                      # 加粗
+PrimaryColour=&H00FFFFFF,    # 白色
+OutlineColour=&H00000000,    # 黑色描边
+BorderStyle=1,
+Outline=2,                   # 描边宽度
+Shadow=1,                    # 阴影
+MarginV=35,                  # 底部边距（30-40贴近底部）
+MarginL=40,                  # 左边距
+MarginR=40,                  # 右边距
+Alignment=2                  # 底部居中
+'
+```
+
+**重要提示**：
+- `MarginV` 是从底部向上的距离，值越小越靠近底部（推荐30-40）
+- 字幕必须是单行，否则会堆叠显示
+- 显示时长根据文字长度优化（每字0.3秒，最少1秒，最多5秒）
+- 时间轴必须与加速后的视频同步（除以加速倍数）
+
+**完整处理流程**：
+
+```python
+# 1. 加速视频
+ffmpeg -i input.mp4 \
+  -filter:v "setpts=PTS/1.25" \
+  -filter:a "atempo=1.25" \
+  sped.mp4
+
+# 2. 调整字幕时间轴并优化显示时长
+# - 所有时间除以1.25
+# - 根据文字长度优化显示时长
+# - 确保不重叠
+
+# 3. 添加硬字幕
+ffmpeg -i sped.mp4 \
+  -vf "subtitles=adjusted.srt:force_style='FontSize=16,Bold=1,MarginV=35,Alignment=2'" \
+  final.mp4
+```
+
+### 8. 音视频同步验证
+
+```bash
+# 检查音视频时长差异（应小于0.5秒）
+ffprobe -v error -select_streams a:0 -show_entries stream=duration final.mp4
+ffprobe -v error -select_streams v:0 -show_entries stream=duration final.mp4
+```
+
 ## 使用示例
 
 ```bash
@@ -189,3 +269,15 @@ python3 scripts/smart_cut_execute_v2.py "<result_json>" "<input_video>"
 # 压缩一半时长
 /smart-cut video/example.mp4 50%
 ```
+
+## 最佳实践
+
+1. **处理顺序**：先加速 → 再智能剪辑 → 最后添加硬字幕
+2. **字幕优化**：
+   - 使用LLM纠正ASR识别错误
+   - 拆分为单行短句
+   - 根据文字长度优化显示时长（每字0.3秒）
+3. **硬字幕位置**：MarginV=30-40，确保在底部不遮挡主体
+4. **字体设置**：16px加粗，清晰易读
+5. **时间轴同步**：加速后字幕时间轴要同步调整（除以加速倍数）
+6. **显示时长**：最少1秒，最多5秒，确保观众有足够时间阅读
