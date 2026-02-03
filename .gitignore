@@ -9,6 +9,7 @@
 *.mpg
 *.mpeg
 *.m4v
+*.m4a
 
 # 临时文件
 temp/

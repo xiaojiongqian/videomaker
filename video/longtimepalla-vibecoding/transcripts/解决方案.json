@@ -1,0 +1,26 @@
+{
+  "filename": "解决方案.m4a",
+  "text": "解除方案",
+  "duration": 2.0,
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 2.0,
+      "text": "解除方案",
+      "tokens": [
+        50364,
+        17278,
+        32999,
+        9249,
+        28899,
+        50464
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.8954221861703056,
+      "compression_ratio": 0.5714285714285714,
+      "no_speech_prob": 0.26852935552597046
+    }
+  ]
+}

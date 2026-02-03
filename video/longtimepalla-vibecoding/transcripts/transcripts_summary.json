@@ -1,0 +1,20 @@
+[
+  {
+    "name": "任务处理流程",
+    "text": "讓我執行流程",
+    "duration": 2.0,
+    "audio_file": "audio/任务处理流程.m4a"
+  },
+  {
+    "name": "背景与需求",
+    "text": "背景需求",
+    "duration": 2.0,
+    "audio_file": "audio/背景与需求.m4a"
+  },
+  {
+    "name": "解决方案",
+    "text": "解除方案",
+    "duration": 2.0,
+    "audio_file": "audio/解决方案.m4a"
+  }
+]
