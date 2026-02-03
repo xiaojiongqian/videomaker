@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如何用 Codex/CC 实现长时间并行 Vibe Coding</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #7c3aed;
+            --text-color: #1f2937;
+            --text-light: #6b7280;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+            --code-bg: #f1f5f9;
+            --success-color: #10b981;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .summary {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        /* 目录样式 */
+        .toc {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+        
+        .toc h2 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .toc li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+        
+        .toc a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .toc a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* 内容样式 */
+        main {
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 50px 0 25px;
+            color: var(--primary-color);
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--border-color);
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin: 35px 0 20px;
+            color: var(--text-color);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        
+        /* 痛点列表 */
+        .pain-points {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid #f59e0b;
+        }
+        
+        .pain-points ol {
+            margin-left: 20px;
+        }
+        
+        .pain-points li {
+            margin: 12px 0;
+            font-weight: 500;
+        }
+        
+        /* 图片样式 */
+        figure {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        figure img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        figcaption {
+            margin-top: 15px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+        
+        /* 架构说明 */
+        .architecture {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+        
+        .architecture ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .architecture li {
+            margin: 12px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .architecture li::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+        
+        /* 安全约束 */
+        .warning {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid #ef4444;
+        }
+        
+        .warning strong {
+            color: #dc2626;
+        }
+        
+        /* 代码块 */
+        pre {
+            background: var(--code-bg);
+            padding: 20px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        code {
+            font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+        
+        /* 流程步骤 */
+        .flow-steps {
+            counter-reset: step;
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .flow-steps li {
+            counter-increment: step;
+            margin: 20px 0;
+            padding: 20px 20px 20px 70px;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        .flow-steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            background: var(--success-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .flow-steps strong {
+            color: #15803d;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        th {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:hover {
+            background: #f8fafc;
+        }
+        
+        /* 高亮文本 */
+        .highlight {
+            background: linear-gradient(120deg, #fef08a 0%, #fde047 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        /* 强调框 */
+        .emphasis {
+            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 5px solid var(--secondary-color);
+        }
+        
+        .emphasis p {
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            main {
+                padding: 30px 20px;
+            }
+            
+            h2 {
+                font-size: 1.4rem;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 12px;
+            }
+        }
+        
+        /* 页脚 */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* 锚点偏移 */
+        section {
+            scroll-margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>如何用 Codex/CC 实现长时间并行 Vibe Coding</h1>
+            <div class="summary">
+                一句话总结：通过 <span class="highlight">Full Access 模式</span> + <span class="highlight">Git Worktree</span> + <span class="highlight">MCP 工具</span> + <span class="highlight">自定义 Skill</span>，实现多任务并行、长时间无人值守的 AI 辅助编程。
+            </div>
+        </header>
+
+        <nav class="toc">
+            <h2>📑 目录</h2>
+            <ul>
+                <li><a href="#background">一、背景与需求</a></li>
+                <li><a href="#solution">二、解决方案</a>
+                    <ul style="margin-top: 8px; margin-left: 20px;">
+                        <li><a href="#cli">2.1 CLI 客户端 + Full Access 模式</a></li>
+                        <li><a href="#parallel">2.2 多窗口并行工作流架构</a></li>
+                        <li><a href="#worktree">2.3 Git Worktree 隔离工作空间</a></li>
+                        <li><a href="#mcp">2.4 MCP 工具扩展能力</a></li>
+                        <li><a href="#skill">2.5 自定义 Skill 实现自动化</a></li>
+                    </ul>
+                </li>
+                <li><a href="#workflow">三、任务执行流程</a>
+                    <ul style="margin-top: 8px; margin-left: 20px;">
+                        <li><a href="#control">3.1 主控窗口管理迭代</a></li>
+                        <li><a href="#optimize">3.2 实时处理小优化</a></li>
+                        <li><a href="#test">3.3 自动化测试验证</a></li>
+                        <li><a href="#pr">3.4 PR 合并流程</a></li>
+                    </ul>
+                </li>
+                <li><a href="#conclusion">四、总结</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="background">
+                <h2>一、背景与需求</h2>
+                
+                <p>用 Claude Code 或 Codex 这类工具做 Vibe Coding 的时候，大家可能都遇到过这些痛点：</p>
+                
+                <div class="pain-points">
+                    <ol>
+                        <li><strong>频繁打断</strong>：IDE 插件总是弹窗让你确认，一两分钟就打断一次</li>
+                        <li><strong>单线程工作</strong>：一次只能处理一个任务，效率上不去</li>
+                        <li><strong>安全担忧</strong>：担心 AI 乱改代码，把项目搞坏</li>
+                    </ol>
+                </div>
+                
+                <figure>
+                    <img src="images/diagram_comparison.svg" alt="单线程 vs 并行工作流对比">
+                    <figcaption>单线程开发 vs 并行开发对比：并行模式可同时执行多个任务，效率提升</figcaption>
+                </figure>
+                
+                <p>这篇文章分享一套经过实践验证的工作流，解决这三个问题。</p>
+            </section>
+
+            <section id="solution">
+                <h2>二、解决方案</h2>
+                
+                <h3 id="cli">2.1 使用 CLI 客户端 + Full Access 模式</h3>
+                
+                <p><strong>为什么不用 IDE 插件？</strong></p>
+                
+                <p>Cursor 这类 IDE 插件虽然方便，但即使开了 Full Access Mode，实际上还是会不停地弹窗确认，可能一两分钟就打断一次，只能单线程工作。</p>
+                
+                <p><strong>推荐做法</strong>：使用 Claude Code CLI 客户端，开启 Full Access 模式。</p>
+                
+                <figure>
+                    <img src="images/full_access_mode.jpg" alt="Full Access 模式设置">
+                    <figcaption>Claude Code 的 Agent (full access) 模式，实现长时间不打断</figcaption>
+                </figure>
+                
+                <p>实测最长跑过 <span class="highlight">8 小时</span> 的任务，完全不需要人工干预。当然，一些危险操作它还是会提示确认的。</p>
+                
+                <h3 id="parallel">2.2 多窗口并行工作流架构</h3>
+                
+                <p>一个人同时跑 <span class="highlight">3-4 个并行任务</span> 是比较合适的，再多就不太好控制了，因为涉及到上下文切换和代码冲突问题。</p>
+                
+                <figure>
+                    <img src="images/diagram_architecture.svg" alt="多窗口并行工作流架构">
+                    <figcaption>多窗口并行工作流架构：主控窗口管理多个 Worktree，每个独立运行</figcaption>
+                </figure>
+                
+                <div class="architecture">
+                    <strong>架构说明：</strong>
+                    <ul>
+                        <li><strong>主控窗口</strong>：负责任务分配和进度管理</li>
+                        <li><strong>Worktree A/B/C</strong>：独立工作空间，分别处理不同模块</li>
+                        <li><strong>Codex CLI</strong>：每个窗口独立运行，自主执行任务</li>
+                        <li><strong>Git Repository</strong>：统一代码管理，通过 PR 合并</li>
+                    </ul>
+                </div>
+                
+                <div class="emphasis">
+                    <p><strong>关键原则：</strong>每个任务最好处理不同的模块，互相不干扰，这样合并代码会比较方便。</p>
+                </div>
+                
+                <h3 id="worktree">2.3 Git Worktree 隔离工作空间</h3>
+                
+                <p>为了让多个任务能够并行而不冲突，使用 Git Worktree 是个好办法：</p>
+                
+                <ul>
+                    <li>每个 Worktree 是一个独立的工作目录</li>
+                    <li>可以在不同的 Worktree 里独立工作</li>
+                    <li>代码提交在各自的分支上，不会互相影响</li>
+                    <li>最后通过 PR 合并到主分支</li>
+                </ul>
+                
+                <div class="warning">
+                    <strong>安全约束：</strong>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>只允许在 Worktree 分支上提交代码</li>
+                        <li>不允许直接提交到 dev 或 main 分支</li>
+                        <li>必须通过 PR 流程合并</li>
+                    </ul>
+                </div>
+                
+                <h3 id="mcp">2.4 MCP 工具扩展能力</h3>
+                
+                <p>要让 AI 能够自动完成更多工作，需要给它"手脚"——也就是 MCP 工具。</p>
+                
+                <figure>
+                    <img src="images/mcp_tools_list.jpg" alt="MCP 工具列表">
+                    <figcaption>Playwright MCP 提供的自动化测试工具</figcaption>
+                </figure>
+                
+                <p>比如做前端开发，安装 Playwright MCP 后，AI 就能自动：</p>
+                
+                <ul>
+                    <li>打开浏览器访问页面</li>
+                    <li>点击按钮、填写表单</li>
+                    <li>截图验证界面效果</li>
+                    <li>运行端到端测试</li>
+                </ul>
+                
+                <p>安装很简单，告诉 Claude Code "帮我配置 Playwright MCP"，它就会自动完成配置。</p>
+                
+                <h3 id="skill">2.5 自定义 Skill 实现自动化开发</h3>
+                
+                <p>除了 MCP，还可以创建自定义 Skill 来规范 AI 的工作流程：</p>
+                
+                <pre><code>触发命令：/auto-dev
+功能：在当前 worktree 分支上自动开发
+约束：
+- 不允许直接修改 dev 和 main 分支
+- 只处理当前分支的代码
+- 可以自动部署到测试环境</code></pre>
+                
+                <p>这样一来，只要触发 <code>/auto-dev</code>，AI 就会按照预设的流程自动工作。</p>
+            </section>
+
+            <section id="workflow">
+                <h2>三、任务执行流程</h2>
+                
+                <p>完整的任务执行流程如下：</p>
+                
+                <figure>
+                    <img src="images/diagram_flow.svg" alt="任务执行流程">
+                    <figcaption>任务执行流程：从创建 Worktree 到合并代码的完整步骤</figcaption>
+                </figure>
+                
+                <p><strong>流程说明：</strong></p>
+                
+                <ol class="flow-steps">
+                    <li><strong>创建 Git Worktree</strong>：为每个任务创建独立工作空间</li>
+                    <li><strong>启动 Codex CLI</strong>：在对应 Worktree 中启动 AI 助手</li>
+                    <li><strong>AI 自主执行任务</strong>：代码编写、测试验证、文档更新</li>
+                    <li><strong>完成判断</strong>：检查任务是否完成</li>
+                    <li><strong>提交代码</strong>：将代码提交到对应分支</li>
+                    <li><strong>合并到主分支</strong>：通过 PR 流程合并代码</li>
+                </ol>
+                
+                <h3 id="control">3.1 主控窗口管理迭代</h3>
+                
+                <p>建议开一个"主控窗口"来管理整体进度：</p>
+                
+                <p>在主控窗口里可以：</p>
+                <ul>
+                    <li>查看当前迭代的任务列表</li>
+                    <li>回顾哪些已完成、哪些还没做</li>
+                    <li>分配新任务给其他窗口</li>
+                </ul>
+                
+                <h3 id="optimize">3.2 实时处理小优化</h3>
+                
+                <p>在开发过程中发现的小问题，可以随时记录并分配给空闲的窗口处理：</p>
+                
+                <p>比如发现某个 UI 元素被遮挡了，就可以开个新任务让 AI 去修复，不影响主线开发。</p>
+                
+                <h3 id="test">3.3 自动化测试验证</h3>
+                
+                <p>配合 Playwright MCP，AI 可以自动：</p>
+                
+                <ul>
+                    <li>运行测试用例</li>
+                    <li>验证界面效果</li>
+                    <li>发现问题自动修复</li>
+                    <li>生成测试报告</li>
+                </ul>
+                
+                <p>整个过程完全自动化，不需要人工操作。</p>
+                
+                <h3 id="pr">3.4 PR 合并流程</h3>
+                
+                <p>当一个任务完成后：</p>
+                
+                <ol>
+                    <li>AI 自动提交代码到 worktree 分支</li>
+                    <li>创建 PR 请求合并</li>
+                    <li>在主控窗口执行 PR 合并命令</li>
+                    <li>自动完成代码审查和合并</li>
+                </ol>
+            </section>
+
+            <section id="conclusion">
+                <h2>四、总结</h2>
+                
+                <p>实现长时间并行 Vibe Coding 的四个关键点：</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>要点</th>
+                            <th>做法</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>不打断</strong></td>
+                            <td>用 CLI 客户端 + Full Access 模式</td>
+                        </tr>
+                        <tr>
+                            <td><strong>并行工作</strong></td>
+                            <td>多窗口 + Git Worktree 隔离</td>
+                        </tr>
+                        <tr>
+                            <td><strong>扩展能力</strong></td>
+                            <td>MCP 工具（如 Playwright）+ 自定义 Skill</td>
+                        </tr>
+                        <tr>
+                            <td><strong>安全可控</strong></td>
+                            <td>分支保护 + PR 流程 + 模块化分工</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="emphasis">
+                    <p>这套工作流经过实际项目验证，可以显著提升 AI 辅助编程的效率。当然，AI 工具发展很快，这个方案可能过段时间就需要更新了，但核心思路——<strong>自动化、并行化、安全隔离</strong>——应该是通用的。</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>生成时间：2026年2月 | 基于 Markdown 文档自动构建</p>
+        </footer>
+    </div>
+</body>
+</html>
