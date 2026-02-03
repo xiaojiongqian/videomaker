@@ -1,0 +1,49 @@
+{
+  "video_duration": 800,
+  "description": "优化版 - 根据视频内容调整图表插入时机",
+  "analysis": "视频内容为Codex CLI多窗口并行开发演示，时长约13分钟。内容结构：开头介绍(0-30s)、对比讲解(30-90s)、流程演示(90-180s)、实际操作(180-800s)",
+  "overlays": [
+    {
+      "image": "architecture.png",
+      "start_time": 3,
+      "duration": 20,
+      "fade_in": 1.0,
+      "fade_out": 1.0,
+      "position": "center_right",
+      "width": 2500,
+      "height": 1875,
+      "x": 800,
+      "y": 150,
+      "opacity": 0.95,
+      "reason": "视频开场即展示多窗口环境，架构图在3秒时出现，帮助观众立即理解整体架构，持续20秒在介绍阶段充分展示"
+    },
+    {
+      "image": "comparison.png",
+      "start_time": 45,
+      "duration": 30,
+      "fade_in": 1.0,
+      "fade_out": 1.0,
+      "position": "center_right",
+      "width": 2500,
+      "height": 1500,
+      "x": 800,
+      "y": 350,
+      "opacity": 0.95,
+      "reason": "在视频中期(45秒)讲解单线程vs并行对比时出现，此时观众已了解环境，需要理解并行优势，持续30秒充分对比说明"
+    },
+    {
+      "image": "flow.png",
+      "start_time": 120,
+      "duration": 30,
+      "fade_in": 1.0,
+      "fade_out": 1.0,
+      "position": "center_right",
+      "width": 2200,
+      "height": 1826,
+      "x": 800,
+      "y": 50,
+      "opacity": 0.95,
+      "reason": "在深入演示阶段(120秒)展示任务执行流程，此时进入具体操作环节，流程图帮助理解执行步骤，持续30秒"
+    }
+  ]
+}

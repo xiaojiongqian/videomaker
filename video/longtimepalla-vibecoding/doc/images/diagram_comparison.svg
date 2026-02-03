@@ -1,0 +1,47 @@
+<svg width="800" height="480" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="480" fill="#fafafa"/>
+  <text x="400" y="40" text-anchor="middle" font-size="20" font-weight="500" fill="#2d3748" font-family="-apple-system, sans-serif">单线程 vs 并行工作流对比</text>
+  <line x1="250" y1="52" x2="550" y2="52" stroke="#e2e8f0" stroke-width="1"/>
+  
+  <!-- 左侧：单线程 -->
+  <rect x="60" y="70" width="330" height="360" rx="8" fill="#f7fafc" stroke="#cbd5e0" stroke-width="1.5"/>
+  <text x="225" y="100" text-anchor="middle" font-size="16" font-weight="500" fill="#744210">单线程开发</text>
+  
+  <rect x="90" y="125" width="270" height="55" rx="5" fill="#fed7d7" stroke="#feb2b2" stroke-width="1"/>
+  <text x="225" y="147" text-anchor="middle" font-size="12" fill="#742a2a">任务1 → 等待确认 → 完成</text>
+  <text x="225" y="165" text-anchor="middle" font-size="10" fill="#9b2c2c">耗时 T</text>
+  
+  <rect x="90" y="195" width="270" height="55" rx="5" fill="#fed7d7" stroke="#feb2b2" stroke-width="1"/>
+  <text x="225" y="217" text-anchor="middle" font-size="12" fill="#742a2a">任务2 → 等待确认 → 完成</text>
+  <text x="225" y="235" text-anchor="middle" font-size="10" fill="#9b2c2c">耗时 T</text>
+  
+  <rect x="90" y="265" width="270" height="55" rx="5" fill="#fed7d7" stroke="#feb2b2" stroke-width="1"/>
+  <text x="225" y="287" text-anchor="middle" font-size="12" fill="#742a2a">任务3 → 等待确认 → 完成</text>
+  <text x="225" y="305" text-anchor="middle" font-size="10" fill="#9b2c2c">耗时 T</text>
+  
+  <rect x="110" y="340" width="230" height="70" rx="5" fill="#c53030"/>
+  <text x="225" y="365" text-anchor="middle" fill="#ffffff" font-size="13">总时间</text>
+  <text x="225" y="390" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="600">3T (慢)</text>
+  
+  <!-- 右侧：并行 -->
+  <rect x="410" y="70" width="330" height="360" rx="8" fill="#f7fafc" stroke="#cbd5e0" stroke-width="1.5"/>
+  <text x="575" y="100" text-anchor="middle" font-size="16" font-weight="500" fill="#276749">并行开发</text>
+  
+  <rect x="440" y="125" width="270" height="75" rx="5" fill="#c6f6d5" stroke="#9ae6b4" stroke-width="1"/>
+  <text x="575" y="152" text-anchor="middle" font-size="12" fill="#22543d">任务1 + 任务2 + 任务3</text>
+  <text x="575" y="172" text-anchor="middle" font-size="11" fill="#276749">同时执行，无需等待</text>
+  <text x="575" y="190" text-anchor="middle" font-size="10" fill="#38a169">并行耗时 T</text>
+  
+  <rect x="440" y="220" width="270" height="100" rx="5" fill="#e6fffa" stroke="#81e6d9" stroke-width="1"/>
+  <text x="575" y="250" text-anchor="middle" font-size="12" fill="#234e52" font-weight="500">优势</text>
+  <text x="575" y="270" text-anchor="middle" font-size="11" fill="#285e61">✓ 节省时间 70%</text>
+  <text x="575" y="288" text-anchor="middle" font-size="11" fill="#285e61">✓ 减少上下文切换</text>
+  <text x="575" y="306" text-anchor="middle" font-size="11" fill="#285e61">✓ 提高专注度</text>
+  
+  <rect x="460" y="340" width="230" height="70" rx="5" fill="#38a169"/>
+  <text x="575" y="365" text-anchor="middle" fill="#ffffff" font-size="13">总时间</text>
+  <text x="575" y="390" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="600">T (快)</text>
+  
+  <!-- 中间箭头 -->
+  <path d="M405 250 L415 250" stroke="#a0aec0" stroke-width="2" marker-end="url(#arrowhead)"/>
+</svg>

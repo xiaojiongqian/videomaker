@@ -1,0 +1,48 @@
+{
+  "video_duration": 800,
+  "description": "中文版优化版 - 高清大图2500px + 长展示时间25-28秒 + 高压缩率CRF28",
+  "overlays": [
+    {
+      "image": "architecture.png",
+      "start_time": 8,
+      "duration": 25,
+      "fade_in": 0.8,
+      "fade_out": 0.8,
+      "position": "center_right",
+      "width": 2500,
+      "height": 1875,
+      "x": 800,
+      "y": 150,
+      "opacity": 0.96,
+      "reason": "开场介绍多窗口工作流，架构图2500px宽度占据屏幕65%区域，持续25秒充分展示"
+    },
+    {
+      "image": "comparison.png",
+      "start_time": 70,
+      "duration": 28,
+      "fade_in": 0.8,
+      "fade_out": 0.8,
+      "position": "center_right",
+      "width": 2500,
+      "height": 1500,
+      "x": 800,
+      "y": 350,
+      "opacity": 0.96,
+      "reason": "讲解单线程vs并行对比，对比图2500px宽度占据屏幕65%区域，持续28秒让观众充分理解"
+    },
+    {
+      "image": "flow.png",
+      "start_time": 200,
+      "duration": 25,
+      "fade_in": 0.8,
+      "fade_out": 0.8,
+      "position": "center_right",
+      "width": 2500,
+      "height": 2072,
+      "x": 800,
+      "y": 50,
+      "opacity": 0.96,
+      "reason": "讲解任务执行流程，流程图2500px宽度占据屏幕65%区域，持续25秒清晰展示步骤"
+    }
+  ]
+}
