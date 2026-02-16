@@ -15,7 +15,10 @@
       "Bash(ELEVENLABS_API_KEY=\"sk_bbd31e22b5cf9150bd90758ad755cd0fc09e96b8cc3460e7\" python3:*)",
       "Bash(pip3 install:*)",
       "Bash(edge-tts:*)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(brew install:*)",
+      "Bash(soffice:*)",
+      "Bash(magick:*)"
     ]
   }
 }
