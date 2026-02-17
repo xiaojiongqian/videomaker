@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="900" height="400">
+  <defs>
+    <!-- Gradient definitions -->
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4A90D9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5BA3E8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7B68EE;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9B82FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E74C3C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6B6B;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4A90D9;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7B68EE;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E74C3C;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="900" height="400" fill="#FAFBFC"/>
+  
+  <!-- Title -->
+  <text x="450" y="45" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="600" fill="#2C3E50">AI 编程的三个阶段演进</text>
+  
+  <!-- Timeline arrow -->
+  <path d="M 80 220 L 820 220" stroke="url(#arrowGrad)" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <polygon points="830,220 815,212 815,228" fill="#E74C3C"/>
+  
+  <!-- Stage 1: Copilot -->
+  <g transform="translate(150, 220)">
+    <!-- Node circle -->
+    <circle r="35" fill="url(#grad1)" filter="url(#shadow)"/>
+    <text y="5" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="white">1</text>
+    
+    <!-- Stage label -->
+    <text y="-60" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="16" font-weight="600" fill="#2C3E50">副驾驶</text>
+    <text y="-42" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#7F8C8D">Copilot</text>
+    
+    <!-- Year -->
+    <rect x="-35" y="50" width="70" height="22" rx="11" fill="#E8F4FD"/>
+    <text y="66" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="500" fill="#4A90D9">2022-2023</text>
+    
+    <!-- Tool -->
+    <text y="90" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#5D6D7E">GitHub Copilot</text>
+    
+    <!-- Efficiency -->
+    <text y="110" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="600" fill="#4A90D9">1.2-1.5x</text>
+  </g>
+  
+  <!-- Stage 2: Co-worker -->
+  <g transform="translate(450, 220)">
+    <!-- Node circle -->
+    <circle r="40" fill="url(#grad2)" filter="url(#shadow)"/>
+    <text y="5" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="22" font-weight="bold" fill="white">2</text>
+    
+    <!-- Stage label -->
+    <text y="-70" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="16" font-weight="600" fill="#2C3E50">搭档</text>
+    <text y="-52" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#7F8C8D">Co-worker</text>
+    
+    <!-- Year -->
+    <rect x="-28" y="55" width="56" height="22" rx="11" fill="#F0EBFF"/>
+    <text y="71" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="500" fill="#7B68EE">2024</text>
+    
+    <!-- Tool -->
+    <text y="95" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#5D6D7E">Cursor</text>
+    
+    <!-- Efficiency -->
+    <text y="115" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="600" fill="#7B68EE">2-5x</text>
+  </g>
+  
+  <!-- Stage 3: Manager -->
+  <g transform="translate(750, 220)">
+    <!-- Node circle -->
+    <circle r="45" fill="url(#grad3)" filter="url(#shadow)"/>
+    <text y="5" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="24" font-weight="bold" fill="white">3</text>
+    
+    <!-- Stage label -->
+    <text y="-80" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="16" font-weight="600" fill="#2C3E50">指挥官</text>
+    <text y="-62" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#7F8C8D">Manager</text>
+    
+    <!-- Year -->
+    <rect x="-28" y="60" width="56" height="22" rx="11" fill="#FDEDEC"/>
+    <text y="76" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="500" fill="#E74C3C">2025</text>
+    
+    <!-- Tool -->
+    <text y="100" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#5D6D7E">Codex / Claude</text>
+    
+    <!-- Efficiency -->
+    <text y="120" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="15" font-weight="600" fill="#E74C3C">5-50x</text>
+  </g>
+  
+  <!-- Evolution indicators -->
+  <text x="300" y="260" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#95A5A6">代码补全 → 对话协作</text>
+  <text x="600" y="260" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#95A5A6">对话协作 → 多 Agent 并行</text>
+  
+  <!-- Bottom caption -->
+  <text x="450" y="350" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" fill="#7F8C8D">从「写代码的人」到「指挥 AI 写代码的人」再到「管理 AI 团队的人」</text>
+</svg>
