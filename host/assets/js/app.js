@@ -64,7 +64,6 @@ function updateSelectOptions(selectEl, values, formatter = (value) => value) {
 }
 
 async function initIndexPage() {
-  const latestListEl = document.getElementById('latestList');
   const contentListEl = document.getElementById('contentList');
   const resultMetaEl = document.getElementById('resultMeta');
 
@@ -77,13 +76,10 @@ async function initIndexPage() {
     const published = await listPublishedContent();
 
     if (!published.length) {
-      renderEmptyState(latestListEl, '当前没有已发布内容。');
       renderEmptyState(contentListEl, '请先在 content-index.json 中将内容状态设为 published。');
       resultMetaEl.textContent = '已发布内容 0 篇';
       return;
     }
-
-    latestListEl.innerHTML = published.slice(0, 3).map(renderCard).join('');
 
     const filters = getFilterOptions(published);
     updateSelectOptions(typeSelect, filters.types, getTypeLabel);
@@ -115,7 +111,6 @@ async function initIndexPage() {
     applyFilters();
   } catch (error) {
     console.error(error);
-    renderEmptyState(latestListEl, '加载失败，请检查 content-index.json。');
     renderEmptyState(contentListEl, '加载失败，请稍后重试。');
     resultMetaEl.textContent = '内容加载失败';
   }

@@ -1,5 +1,17 @@
 [
   {
+    "id": "pr-merge-guide",
+    "title": "/pr:merge — 用一条命令，重建团队的代码质量底线",
+    "type": "article",
+    "topic": ["AI 编程", "团队协作", "工程质量"],
+    "date": "2026-02-18",
+    "summary": "从自动合并到质量门禁，介绍 /pr:merge 如何把代码审查、测试与合并流程一体化。",
+    "cover": "../articals/pr-merge/image/pr-merge-comments.webp",
+    "source": "../articals/pr-merge/PR-MERGE-GUIDE.md",
+    "status": "published",
+    "updatedAt": "2026-02-18"
+  },
+  {
     "id": "ai-coding-evolution",
     "title": "AI 编程的三个阶段：从副驾驶到团队指挥官",
     "type": "article",
