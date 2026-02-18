@@ -38,20 +38,16 @@
 - 首页 `/`
   - Hero（站点定位）
   - 最新发布（按时间倒序）
+  - 内容列表（含筛选/搜索）
   - 主题入口（AI 编程、习惯成长、Vibe Coding 等）
   - 精选长文
-- 内容总览 `/content`
-  - 筛选：类型（文章/视频总结/音频总结）、主题、年份
-  - 搜索：标题/摘要/标签
-- 主题页 `/topic/:topic`
-  - 同一主题下跨类型聚合（例如“AI 编程”同时包含文章与视频总结）
 - 详情页 `/post/:slug`
   - Markdown 渲染正文
   - 目录（TOC）
   - 上一篇/下一篇
   - 关联内容推荐
-- 关于页 `/about`
-  - 项目说明、更新方式、仓库链接
+
+说明：为保证 KISS/SOLID/DRY，当前版本只保留“首页 + 详情页”两页结构。
 
 ---
 
@@ -88,7 +84,7 @@
 - `hidden`：已下架但保留，不展示。
 
 前端展示规则：
-- 首页、列表页、搜索页**仅展示 `published`**。
+- 首页列表模块与搜索模块**仅展示 `published`**。
 
 日常操作：
 - 上架：将 `status` 改为 `published`。
@@ -121,9 +117,7 @@
 ```text
 host/
   index.html
-  content.html
   post.html
-  about.html
   assets/
     css/
       base.css
@@ -131,9 +125,11 @@ host/
       components.css
     js/
       app.js
-      router.js
       content-service.js
       markdown-renderer.js
+    vendor/
+      marked.esm.js
+      purify.es.mjs
   data/
     content-index.json
   guide.md
@@ -228,55 +224,69 @@ host/
 推荐使用 **GitHub Actions + Pages**：
 
 1. 仓库 Settings → Pages → Source 选择 “GitHub Actions”
-2. 工作流将 `host/` 作为发布根目录
+2. 工作流先构建 `_site/`，再将 `_site/` 作为发布产物
 3. 推送到主分支后自动部署
 
 工作流要点：
-- 无需构建时，直接上传 `host/` 目录为 artifact
-- 若后续增加索引生成脚本，可在 Action 中先执行脚本再发布
+- 使用 `scripts/prepare_pages_bundle.py` 生成 `_site/`（部署产物）
+- 在构建阶段自动同步 Markdown/图片到 `_site/content/`，并重写索引中的 `source/cover`
+- 上传 `_site/` 目录为 Pages artifact，再执行部署
 
 > 若仓库为 `username.github.io`：站点根路径为 `/`
 > 若仓库为普通项目仓库：站点根路径通常为 `/<repo-name>/`（例如 `/videomaker/`）
 
 ---
 
-## 9. 实施里程碑（建议）
+## 9. 实施里程碑（含状态与补充要求）
 
 ### M1（1-2 天）
+- 状态：已完成（2026-02-18）
 - 输入：
   - 本设计文档（信息架构、视觉规范）
   - 白名单内容路径约定（`articals/`、`video/**/doc/`、`audio/**/doc/`）
 - 工作：
-  - 固化 IA 与页面路由（首页/内容页/详情页/关于页）
+  - 固化 IA 与页面路由（首页/详情页）
   - 搭建基础页面骨架与公共布局（导航、页脚、主容器）
   - 建立视觉主题变量与基础排版样式
 - 输出：
-  - 页面骨架文件：`host/index.html`、`host/content.html`、`host/post.html`、`host/about.html`
+  - 页面骨架文件：`host/index.html`、`host/post.html`
   - 样式基础文件：`host/assets/css/base.css`、`host/assets/css/theme.css`、`host/assets/css/components.css`
 - 验证（阶段验收）：
-  - 四个页面本地可访问，无 404、无明显布局错乱
+  - 首页与详情页本地可访问，无 404、无明显布局错乱
   - 在 `<768px` 移动端宽度下可正常浏览（无横向滚动）
-  - 首页、内容页、详情页具备可用的占位结构（非空白页）
+  - 首页与详情页具备可用的占位结构（非空白页）
 
 ### M2（1-2 天）
+- 状态：已完成（2026-02-18）
 - 输入：
   - M1 的页面骨架与样式
   - 待发布 Markdown 与图片资源
 - 工作：
   - 建立并接入 `host/data/content-index.json`（集中管理内容状态）
-  - 完成内容加载、筛选、搜索与详情路由联动
+  - 完成首页内容加载、筛选、搜索与详情路由联动
   - 打通 Markdown 渲染链路（parser + sanitize + TOC）
 - 输出：
   - 可维护的内容索引文件（至少含 `id/title/source/status/updatedAt`）
-  - 内容服务与渲染逻辑：`content-service.js`、`markdown-renderer.js`
-  - 列表页与详情页数据联动可用
+  - 内容服务与渲染逻辑：`app.js`、`content-service.js`、`markdown-renderer.js`
+  - 首页列表模块与详情页数据联动可用
 - 验证（阶段验收）：
-  - 列表页仅展示 `status=published` 的内容
+  - 首页列表仅展示 `status=published` 的内容
   - 支持按主题/类型/时间（或等价字段）浏览
   - 抽检至少 3 篇内容：Markdown 正常渲染，图片与相对链接可用
   - 详情页目录（TOC）可用，页面无阻断级脚本错误
+- 实施状态补充：
+  - 首页已落地：最新发布 + 全量列表 + 关键词/类型/主题/年份筛选
+  - 详情页已落地：`post.html?id=<content-id>`、Markdown 渲染、TOC、上一篇/下一篇
+  - 渲染链路已落地：`marked` -> `DOMPurify` -> 相对链接/图片重写 -> 标题锚点与 TOC
+  - 数据源已落地：`host/data/content-index.json` 集中维护
+- 已完成验证：
+  - 本地可访问：`/host/index.html`、`/host/post.html` 返回 200
+  - 首页数据联动可用：内容卡片渲染与筛选条件响应正常
+  - 详情页渲染可用：抽检多篇文档，Markdown/图片/目录正常
+  - 移动端（375px）无横向滚动：首页与详情页均通过
 
 ### M3（1 天）
+- 状态：已完成（2026-02-18）
 - 输入：
   - M2 完整功能站点
   - GitHub 仓库与 Pages 配置权限
@@ -295,14 +305,18 @@ host/
     - Accessibility ≥ 95
     - Best Practices ≥ 95
     - SEO ≥ 95
-  - 首页/列表/详情全链路可用（浏览、搜索、打开正文）
-
----
-
-## 10. 后续增强（可选）
-
-- 全站暗黑模式切换（记忆用户偏好）
-- 标签页云与时间轴视图
-- “系列阅读”自动串联
-- 多语言（中英）与双语切换
-- PWA 离线缓存（只读）
+  - 首页/详情全链路可用（浏览、搜索、打开正文）
+- 补充要求（来自当前实现）：
+  - 已实现“内容同步”方案：构建时将引用内容同步到 `_site/content/`
+  - 部署工作流使用 `_site/` 作为唯一发布目录，避免 `host/` 外部依赖
+- 实施状态补充：
+  - 已新增部署工作流：`.github/workflows/pages.yml`
+  - 已新增打包脚本：`scripts/prepare_pages_bundle.py`
+  - 已完成 SEO/A11y 基础增强：OG/Twitter meta、skip link、focus-visible、robots/sitemap 生成
+- 已完成验证：
+  - 本地页面验证通过：首页/详情页 200、移动端无横向滚动
+  - 功能验证通过：首页筛选与详情页 Markdown/TOC/上一篇下一篇可用
+  - 构建验证通过：`prepare_pages_bundle.py` 可产出可部署 `_site/`，含 `content/` 与重写后的索引
+  - Lighthouse（本地）：
+    - 首页：Performance 93 / Accessibility 100 / Best Practices 96 / SEO 100
+    - 详情页：Performance 78 / Accessibility 100 / Best Practices 96 / SEO 100（性能受客户端动态渲染导致的 CLS 影响）

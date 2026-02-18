@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VideoMaker 发布站</title>
+    <meta name="description" content="VideoMaker 内容发布站：首页展示最新发布与可筛选的内容列表。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="VideoMaker 发布站" />
+    <meta property="og:description" content="首页展示最新发布与可筛选的内容列表。" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="stylesheet" href="./assets/css/theme.css" />
+    <link rel="stylesheet" href="./assets/css/base.css" />
+    <link rel="stylesheet" href="./assets/css/components.css" />
+  </head>
+  <body data-page="index">
+    <a class="skip-link" href="#main-content">跳到正文</a>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="./index.html">VideoMaker</a>
+        <nav class="nav" aria-label="主导航">
+          <a aria-current="page" href="./index.html">首页</a>
+          <a href="./post.html">详情页</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="section">
+        <div class="container stack">
+          <section class="hero">
+            <h1>集中展示可发布内容的轻量化前端站点</h1>
+            <p>
+              以 Markdown 为单一内容源，在 GitHub Pages 上提供现代、清爽、可维护的阅读体验。
+            </p>
+            <div class="chips" aria-label="主题">
+              <span class="chip">AI 编程</span>
+              <span class="chip">习惯成长</span>
+              <span class="chip">Vibe Coding</span>
+              <span class="chip">视频转文档</span>
+            </div>
+          </section>
+
+          <section class="stack" aria-labelledby="latest-title">
+            <div>
+              <h2 id="latest-title">最新发布</h2>
+              <p class="muted">按 `date/updatedAt` 倒序展示最近更新的内容。</p>
+            </div>
+            <div id="latestList" class="card-grid" aria-live="polite">
+              <article class="card">
+                <h3>加载中...</h3>
+                <p class="muted">正在读取内容索引。</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="stack" aria-labelledby="all-title">
+            <div>
+              <h2 id="all-title">全部内容</h2>
+              <p class="muted">仅展示 `published` 内容，支持关键词与多条件筛选。</p>
+            </div>
+
+            <section class="toolbar" aria-label="筛选工具栏">
+              <div class="field">
+                <label for="keyword">关键词</label>
+                <input id="keyword" type="search" placeholder="输入标题、摘要或标签" />
+              </div>
+              <div class="field">
+                <label for="type">类型</label>
+                <select id="type">
+                  <option value="">全部</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="topic">主题</label>
+                <select id="topic">
+                  <option value="">全部</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="year">年份</label>
+                <select id="year">
+                  <option value="">全部</option>
+                </select>
+              </div>
+            </section>
+
+            <div id="resultMeta" class="muted" aria-live="polite"></div>
+            <div id="contentList" class="card-grid" aria-live="polite"></div>
+          </section>
+
+          <section class="stack" aria-labelledby="site-note-title">
+            <div>
+              <h2 id="site-note-title">站点说明（合并版）</h2>
+              <p class="muted">
+                当前采用 KISS 结构：仅保留首页与详情页，减少重复页面与维护成本。
+              </p>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>VideoMaker 发布站 · M2 数据驱动首页</p>
+      </div>
+    </footer>
+
+    <script type="module" src="./assets/js/app.js"></script>
+  </body>
+</html>

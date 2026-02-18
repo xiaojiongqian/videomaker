@@ -19,6 +19,7 @@ tmp/
 __pycache__/
 *.pyc
 .DS_Store
+.tmp_*
 
 # 音频文件
 *.wav
@@ -26,3 +27,6 @@ __pycache__/
 
 # JSON结果文件
 *_result.json
+
+# GitHub Pages 构建产物
+_site/
