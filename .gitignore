@@ -26,3 +26,6 @@ __pycache__/
 
 # JSON结果文件
 *_result.json
+
+# GitHub Pages 构建产物
+_site/

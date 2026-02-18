@@ -1,0 +1,50 @@
+[
+  {
+    "id": "ai-coding-evolution",
+    "title": "AI 编程的三个阶段：从副驾驶到团队指挥官",
+    "type": "article",
+    "topic": ["AI 编程", "工程方法"],
+    "date": "2026-02-01",
+    "summary": "从 Copilot 到多 Agent 并行开发的实践总结。",
+    "cover": "../articals/coding-evolution/images/ai-coding-evolution-timeline.svg",
+    "source": "../articals/coding-evolution/ai-coding-evolution.md",
+    "status": "published",
+    "updatedAt": "2026-02-17"
+  },
+  {
+    "id": "ai-cognition-habits",
+    "title": "AI 使用者认知与高效能习惯的对应关系",
+    "type": "video-note",
+    "topic": ["AI 应用", "习惯成长"],
+    "date": "2026-02-16",
+    "summary": "通过三层认知模型映射高效能习惯，强调目标与价值产出。",
+    "cover": "../video/7habit-and-AI/doc/images/01_title.png",
+    "source": "../video/7habit-and-AI/doc/2026-02-16 21-19-31_cut_sum.md",
+    "status": "published",
+    "updatedAt": "2026-02-16"
+  },
+  {
+    "id": "codex-parallel-vibe-coding",
+    "title": "如何用 Codex/CC 实现长时间并行 Vibe Coding",
+    "type": "video-note",
+    "topic": ["AI 编程", "Vibe Coding"],
+    "date": "2026-02-12",
+    "summary": "通过 Full Access + Worktree + MCP + Skill 构建长时间并行开发流程。",
+    "cover": "../video/longtimepalla-vibecoding/doc/images/diagram_architecture.svg",
+    "source": "../video/longtimepalla-vibecoding/doc/并行长时间使用codex_cut_sum.md",
+    "status": "published",
+    "updatedAt": "2026-02-12"
+  },
+  {
+    "id": "seven-habits-reflection",
+    "title": "高效能人士的7个习惯：从认知到实践的跃迁",
+    "type": "audio-note",
+    "topic": ["习惯成长", "个人管理"],
+    "date": "2026-01-30",
+    "summary": "围绕主动积极、以终为始、要事第一展开系统反思与行动计划。",
+    "cover": "",
+    "source": "../audio/7habits感想/doc/高效能人士7习惯培训感想_sum.md",
+    "status": "published",
+    "updatedAt": "2026-01-30"
+  }
+]
