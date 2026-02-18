@@ -19,6 +19,7 @@ tmp/
 __pycache__/
 *.pyc
 .DS_Store
+.tmp_*
 
 # 音频文件
 *.wav
