@@ -19,6 +19,7 @@ from xml.sax.saxutils import escape
 
 ABSOLUTE_REF = re.compile(r"^(?:[a-z][a-z0-9+.-]*:|//|#)", re.IGNORECASE)
 MARKDOWN_LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
+ASSET_REF = re.compile(r'(?P<prefix>\b(?:href|src)=["\'])(?P<path>(?:\./)?assets/[^"\']+)(?P<suffix>["\'])')
 
 
 def parse_args() -> argparse.Namespace:
@@ -26,6 +27,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--src", default="host", help="Source host directory")
     parser.add_argument("--out", default="_site", help="Output bundle directory")
     parser.add_argument("--site-url", default="", help="Public site URL for sitemap/robots")
+    parser.add_argument(
+        "--asset-version",
+        default="",
+        help="Optional cache-busting version appended to local CSS/JS assets in HTML",
+    )
     return parser.parse_args()
 
 
@@ -125,6 +131,32 @@ def rewrite_index_and_copy_content(out_root: Path, repo_root: Path) -> list[dict
     return items
 
 
+def append_asset_version_to_html(out_root: Path, asset_version: str) -> None:
+    version = asset_version.strip()
+    if not version:
+        return
+
+    html_files = list(out_root.glob("*.html"))
+
+    for html_path in html_files:
+        text = html_path.read_text(encoding="utf-8")
+
+        def _replace(match: re.Match[str]) -> str:
+            raw_path = match.group("path")
+            if not raw_path.endswith((".css", ".js")):
+                return match.group(0)
+            if "v=" in raw_path:
+                return match.group(0)
+
+            separator = "&" if "?" in raw_path else "?"
+            updated = f"{raw_path}{separator}v={quote(version, safe='')}"
+            return f'{match.group("prefix")}{updated}{match.group("suffix")}'
+
+        rewritten = ASSET_REF.sub(_replace, text)
+        if rewritten != text:
+            html_path.write_text(rewritten, encoding="utf-8")
+
+
 def normalize_site_url(site_url: str) -> str:
     return site_url.strip().rstrip("/")
 
@@ -180,6 +212,7 @@ def main() -> None:
     shutil.copytree(src_root, out_root)
 
     items = rewrite_index_and_copy_content(out_root, repo_root)
+    append_asset_version_to_html(out_root, args.asset_version)
     write_robots(out_root, site_url)
     write_sitemap(out_root, site_url, items)
 

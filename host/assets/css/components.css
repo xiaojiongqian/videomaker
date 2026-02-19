@@ -309,13 +309,12 @@
 }
 
 .post img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
+  width: auto;
+  max-width: 100%;
   height: auto;
-  object-fit: contain;
-  background: var(--color-surface-muted);
+  background: transparent;
   border-radius: var(--radius-sm);
-  margin: var(--space-4) 0;
+  margin: var(--space-4) auto;
 }
 
 #postContent {

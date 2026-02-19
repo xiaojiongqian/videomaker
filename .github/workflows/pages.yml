@@ -39,7 +39,8 @@ jobs:
           python3 scripts/prepare_pages_bundle.py \
             --src host \
             --out _site \
-            --site-url "${SITE_URL}"
+            --site-url "${SITE_URL}" \
+            --asset-version "${GITHUB_SHA}"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
