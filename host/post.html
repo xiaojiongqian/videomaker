@@ -31,7 +31,7 @@
           <aside class="toc" aria-label="目录">
             <h2>目录</h2>
             <ul id="tocList">
-              <li class="muted">加载中...</li>
+              <li class="muted">如未执行 JavaScript，请参考正文下方静态目录。</li>
             </ul>
           </aside>
           <div
@@ -45,13 +45,21 @@
 
           <article class="post" aria-labelledby="post-title">
             <header class="post-intro-panel" aria-label="文章简介">
-              <p id="postMeta" class="muted">正在加载内容...</p>
-              <h1 id="post-title">加载中...</h1>
-              <p id="postSummary" class="post-intro-summary muted"></p>
+              <p id="postMeta" class="muted">AI时代内容详情（支持静态抓取）</p>
+              <h1 id="post-title">AI时代内容详情</h1>
+              <p id="postSummary" class="post-intro-summary muted">JavaScript 启用后将自动加载对应内容。</p>
             </header>
 
             <div id="postContent" class="stack">
-              <p class="muted">正在渲染 Markdown...</p>
+              <section id="postFallbackIndex" class="note">
+                <h2>静态可抓取目录</h2>
+                <p class="muted">如抓取器不执行 JavaScript，请使用以下静态详情链接：</p>
+                <!-- AUTO_FALLBACK_LIST_START -->
+                <ul id="postFallbackList">
+                  <li class="muted">正在生成静态目录...</li>
+                </ul>
+                <!-- AUTO_FALLBACK_LIST_END -->
+              </section>
             </div>
 
             <nav aria-label="上一篇下一篇" class="chips" id="postNav"></nav>

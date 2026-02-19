@@ -28,8 +28,16 @@ function formatDate(value) {
   }).format(ts);
 }
 
+function getPostHref(item) {
+  const page = typeof item.page === 'string' ? item.page.trim() : '';
+  if (page) {
+    return page;
+  }
+  return `./post.html?id=${encodeURIComponent(item.id)}`;
+}
+
 function renderCard(item) {
-  const href = `./post.html?id=${encodeURIComponent(item.id)}`;
+  const href = getPostHref(item);
   const topics = item.topic.length ? item.topic.join(' / ') : '未分类';
 
   return `
@@ -319,14 +327,14 @@ function renderPostNavigation(items, currentIndex) {
   if (currentIndex > 0) {
     const prev = items[currentIndex - 1];
     links.push(
-      `<a class="chip" href="./post.html?id=${encodeURIComponent(prev.id)}">← ${escapeHtml(prev.title)}</a>`
+      `<a class="chip" href="${escapeHtml(getPostHref(prev))}">← ${escapeHtml(prev.title)}</a>`
     );
   }
 
   if (currentIndex < items.length - 1) {
     const next = items[currentIndex + 1];
     links.push(
-      `<a class="chip" href="./post.html?id=${encodeURIComponent(next.id)}">${escapeHtml(next.title)} →</a>`
+      `<a class="chip" href="${escapeHtml(getPostHref(next))}">${escapeHtml(next.title)} →</a>`
     );
   }
 
