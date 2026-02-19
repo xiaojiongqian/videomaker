@@ -184,7 +184,7 @@ async function initPostPage() {
     const item = published[currentIndex < 0 ? 0 : currentIndex];
     const topics = item.topic.length ? item.topic.join(' / ') : '未分类';
 
-    document.title = `${item.title} - VideoMaker 发布站`;
+    document.title = `${item.title} - AI时代`;
 
     postTitleEl.textContent = item.title;
     postMetaEl.textContent = `${getTypeLabel(item.type)} · ${formatDate(item.date || item.updatedAt)} · ${topics}`;

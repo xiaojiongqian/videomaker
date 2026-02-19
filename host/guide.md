@@ -1,4 +1,4 @@
-# VideoMaker 发布站点设计文档（GitHub Pages）
+# AI时代 发布站点设计文档（GitHub Pages）
 
 ## 1. 项目目标
 
