@@ -118,17 +118,198 @@ async function initIndexPage() {
 
 function renderToc(tocItems) {
   const tocList = document.getElementById('tocList');
+  const topLevelItems = tocItems.filter((item) => item.level === 2);
 
-  if (!tocItems.length) {
+  if (!topLevelItems.length) {
     tocList.innerHTML = '<li class="muted">暂无目录</li>';
     return;
   }
 
-  tocList.innerHTML = tocItems
+  tocList.innerHTML = topLevelItems
     .map((item) => {
       return `<li data-level="${item.level}"><a href="#${escapeHtml(item.id)}">${escapeHtml(item.text)}</a></li>`;
     })
     .join('');
+}
+
+function initTocActiveState() {
+  const tocList = document.getElementById('tocList');
+  if (!tocList) {
+    return;
+  }
+
+  const links = [...tocList.querySelectorAll('a[href^="#"]')];
+  if (!links.length) {
+    return;
+  }
+
+  const records = links
+    .map((link) => {
+      let targetId = (link.getAttribute('href') || '').replace('#', '');
+      try {
+        targetId = decodeURIComponent(targetId);
+      } catch {
+        // Keep original anchor id when decoding fails.
+      }
+      return {
+        link,
+        item: link.closest('li'),
+        target: document.getElementById(targetId),
+      };
+    })
+    .filter((record) => record.target);
+
+  if (!records.length) {
+    return;
+  }
+
+  const clearActive = () => {
+    records.forEach((record) => {
+      record.link.classList.remove('is-active');
+      record.item?.classList.remove('is-active');
+    });
+  };
+
+  const setActiveById = (id) => {
+    clearActive();
+    const active = records.find((record) => record.target.id === id);
+    if (!active) {
+      return;
+    }
+    active.link.classList.add('is-active');
+    active.item?.classList.add('is-active');
+  };
+
+  setActiveById(records[0].target.id);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+      if (visible.length) {
+        setActiveById(visible[0].target.id);
+        return;
+      }
+
+      const passed = records
+        .map((record) => record.target)
+        .filter((target) => target.getBoundingClientRect().top <= 140);
+
+      if (passed.length) {
+        setActiveById(passed[passed.length - 1].id);
+      }
+    },
+    {
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: [0, 1],
+    }
+  );
+
+  records.forEach((record) => observer.observe(record.target));
+}
+
+const TOC_WIDTH_STORAGE_KEY = 'ai-era.toc.width';
+
+function initTocResizer() {
+  const layout = document.querySelector('.post-layout');
+  const tocEl = document.querySelector('.toc');
+  const resizerEl = document.getElementById('tocResizer');
+  if (!layout || !tocEl || !resizerEl) {
+    return;
+  }
+
+  const desktopMedia = window.matchMedia('(min-width: 1024px)');
+  const clampWidth = (value) => Math.max(220, Math.min(420, Math.round(value)));
+  const readStoredWidth = () => {
+    try {
+      return Number.parseInt(localStorage.getItem(TOC_WIDTH_STORAGE_KEY) || '', 10);
+    } catch {
+      return Number.NaN;
+    }
+  };
+  const writeStoredWidth = (value) => {
+    try {
+      localStorage.setItem(TOC_WIDTH_STORAGE_KEY, String(value));
+    } catch {
+      // Ignore storage failures and keep runtime behavior.
+    }
+  };
+  const applyWidth = (value) => {
+    const next = clampWidth(value);
+    layout.style.setProperty('--toc-width', `${next}px`);
+    return next;
+  };
+
+  const applyStoredWidth = () => {
+    if (!desktopMedia.matches) {
+      layout.style.removeProperty('--toc-width');
+      return;
+    }
+    const stored = readStoredWidth();
+    if (Number.isFinite(stored)) {
+      applyWidth(stored);
+    }
+  };
+
+  applyStoredWidth();
+  desktopMedia.addEventListener('change', applyStoredWidth);
+
+  let dragging = false;
+  let activePointerId = null;
+  let startX = 0;
+  let startWidth = 0;
+
+  const stopDragging = () => {
+    dragging = false;
+    activePointerId = null;
+    resizerEl.classList.remove('is-dragging');
+  };
+
+  resizerEl.addEventListener('pointerdown', (event) => {
+    if (!desktopMedia.matches) {
+      return;
+    }
+    dragging = true;
+    activePointerId = event.pointerId;
+    startX = event.clientX;
+    startWidth = tocEl.getBoundingClientRect().width;
+    resizerEl.classList.add('is-dragging');
+    resizerEl.setPointerCapture(event.pointerId);
+    event.preventDefault();
+  });
+
+  resizerEl.addEventListener('pointermove', (event) => {
+    if (!dragging || event.pointerId !== activePointerId) {
+      return;
+    }
+    const width = applyWidth(startWidth + (event.clientX - startX));
+    writeStoredWidth(width);
+  });
+
+  resizerEl.addEventListener('pointerup', (event) => {
+    if (event.pointerId !== activePointerId) {
+      return;
+    }
+    stopDragging();
+  });
+
+  resizerEl.addEventListener('pointercancel', stopDragging);
+  resizerEl.addEventListener('lostpointercapture', stopDragging);
+
+  resizerEl.addEventListener('keydown', (event) => {
+    if (!desktopMedia.matches) {
+      return;
+    }
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
+      return;
+    }
+    event.preventDefault();
+    const delta = event.key === 'ArrowRight' ? 16 : -16;
+    const width = applyWidth(tocEl.getBoundingClientRect().width + delta);
+    writeStoredWidth(width);
+  });
 }
 
 function renderPostNavigation(items, currentIndex) {
@@ -157,6 +338,7 @@ async function initPostPage() {
   const postMetaEl = document.getElementById('postMeta');
   const postSummaryEl = document.getElementById('postSummary');
   const postContentEl = document.getElementById('postContent');
+  initTocResizer();
 
   try {
     const published = await listPublishedContent();
@@ -193,6 +375,7 @@ async function initPostPage() {
     const { html, toc } = await renderMarkdownDocument(item.source);
     postContentEl.innerHTML = html;
     renderToc(toc);
+    initTocActiveState();
     renderPostNavigation(published, currentIndex < 0 ? 0 : currentIndex);
   } catch (error) {
     console.error(error);
