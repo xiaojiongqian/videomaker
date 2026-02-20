@@ -392,6 +392,7 @@ def build_post_static_html(
             <h2>目录</h2>
             <ul id="tocList">{toc_html}</ul>
           </aside>
+          <div class="toc-resizer" aria-hidden="true"></div>
           <article class="post" aria-labelledby="post-title">
             <header class="post-intro-panel" aria-label="文章简介">
               <p id="postMeta" class="muted">{post_meta}</p>
