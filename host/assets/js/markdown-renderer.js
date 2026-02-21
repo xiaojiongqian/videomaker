@@ -42,6 +42,26 @@ function rewriteRelativeUrls(root, sourceUrl) {
   });
 }
 
+function rewriteMermaidCodeBlocks(root) {
+  root.querySelectorAll('pre > code').forEach((codeEl) => {
+    const className = codeEl.className || '';
+    const isMermaid = /\b(?:language|lang)-mermaid\b/i.test(className);
+    if (!isMermaid) {
+      return;
+    }
+
+    const preEl = codeEl.parentElement;
+    if (!preEl) {
+      return;
+    }
+
+    const mermaidEl = document.createElement('div');
+    mermaidEl.className = 'mermaid';
+    mermaidEl.textContent = codeEl.textContent || '';
+    preEl.replaceWith(mermaidEl);
+  });
+}
+
 function slugifyHeading(text) {
   const normalized = text
     .trim()
@@ -99,6 +119,7 @@ export async function renderMarkdownDocument(sourcePath) {
   const wrapper = document.createElement("div");
   wrapper.append(template.content);
 
+  rewriteMermaidCodeBlocks(wrapper);
   rewriteRelativeUrls(wrapper, sourceUrl);
   const toc = assignHeadingIds(wrapper);
 

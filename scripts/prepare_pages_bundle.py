@@ -28,6 +28,9 @@ OL_LINE = re.compile(r"^\s*\d+\.\s+(.+?)\s*$")
 IMAGE_LINE = re.compile(r"^\s*!\[(.*?)\]\((.+?)\)\s*$")
 INLINE_CODE = re.compile(r"`([^`]+)`")
 INLINE_LINK = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+TABLE_COLUMN_SPLIT = re.compile(r"(?<!\\)\|")
+TABLE_SEPARATOR_CELL = re.compile(r"^:?-{3,}:?$")
+CODE_FENCE_LINE = re.compile(r"^\s*```(?P<lang>[\w-]+)?(?:\s+.*)?\s*$")
 FALLBACK_LIST_BLOCK = re.compile(
     r"(?P<start><!-- AUTO_FALLBACK_LIST_START -->)(?P<body>.*?)(?P<end><!-- AUTO_FALLBACK_LIST_END -->)",
     re.DOTALL,
@@ -198,7 +201,7 @@ def resolve_local_href(target: str, source_file: Path, page_dir: Path, out_root:
 
 def render_inline_text(text: str, source_file: Path, page_dir: Path, out_root: Path) -> str:
     escaped = html.escape(text)
-    escaped = INLINE_CODE.sub(lambda m: f"<code>{html.escape(m.group(1))}</code>", escaped)
+    escaped = INLINE_CODE.sub(lambda m: f"<code>{m.group(1)}</code>", escaped)
 
     def replace_link(match: re.Match[str]) -> str:
         label = html.escape(match.group(1))
@@ -209,6 +212,90 @@ def render_inline_text(text: str, source_file: Path, page_dir: Path, out_root: P
     return INLINE_LINK.sub(replace_link, escaped)
 
 
+def parse_table_cells(line: str) -> list[str]:
+    raw = line.strip()
+    if "|" not in raw:
+        return []
+    if raw.startswith("|"):
+        raw = raw[1:]
+    if raw.endswith("|"):
+        raw = raw[:-1]
+    if "|" not in raw and not raw.strip():
+        return []
+    cells = [cell.replace(r"\|", "|").strip() for cell in TABLE_COLUMN_SPLIT.split(raw)]
+    return cells
+
+
+def is_table_separator_row(line: str, expected_cols: int) -> bool:
+    cells = parse_table_cells(line)
+    if len(cells) != expected_cols:
+        return False
+    return all(TABLE_SEPARATOR_CELL.fullmatch(cell.replace(" ", "")) for cell in cells)
+
+
+def table_alignments(line: str, expected_cols: int) -> list[str | None]:
+    cells = parse_table_cells(line)
+    if len(cells) != expected_cols:
+        return [None] * expected_cols
+
+    alignments: list[str | None] = []
+    for cell in cells:
+        marker = cell.replace(" ", "")
+        left = marker.startswith(":")
+        right = marker.endswith(":")
+        if left and right:
+            alignments.append("center")
+        elif right:
+            alignments.append("right")
+        elif left:
+            alignments.append("left")
+        else:
+            alignments.append(None)
+    return alignments
+
+
+def render_table_html(
+    header_cells: list[str],
+    body_rows: list[list[str]],
+    alignments: list[str | None],
+    source_file: Path,
+    page_dir: Path,
+    out_root: Path,
+) -> str:
+    rows: list[str] = ["<table>", "<thead>", "<tr>"]
+
+    for index, cell in enumerate(header_cells):
+        alignment = alignments[index] if index < len(alignments) else None
+        attr = f' style="text-align:{alignment}"' if alignment else ""
+        rendered = render_inline_text(cell, source_file, page_dir, out_root)
+        rows.append(f"<th{attr}>{rendered}</th>")
+
+    rows.extend(["</tr>", "</thead>"])
+
+    if body_rows:
+        rows.append("<tbody>")
+        for row in body_rows:
+            rows.append("<tr>")
+            for index, cell in enumerate(row):
+                alignment = alignments[index] if index < len(alignments) else None
+                attr = f' style="text-align:{alignment}"' if alignment else ""
+                rendered = render_inline_text(cell, source_file, page_dir, out_root)
+                rows.append(f"<td{attr}>{rendered}</td>")
+            rows.append("</tr>")
+        rows.append("</tbody>")
+
+    rows.append("</table>")
+    return "\n".join(rows)
+
+
+def render_code_block(code_text: str, language: str) -> str:
+    lang = (language or "").strip().lower()
+    escaped = html.escape(code_text)
+    if lang == "mermaid":
+        return f'<div class="mermaid">{escaped}</div>'
+    return f"<pre><code>{escaped}</code></pre>"
+
+
 def render_markdown_basic(markdown_text: str, source_file: Path, page_dir: Path, out_root: Path) -> tuple[str, list[dict]]:
     lines = markdown_text.splitlines()
     parts: list[str] = []
@@ -216,6 +303,7 @@ def render_markdown_basic(markdown_text: str, source_file: Path, page_dir: Path,
     id_counter: dict[str, int] = {}
 
     in_code = False
+    code_language = ""
     code_lines: list[str] = []
     paragraph_lines: list[str] = []
     list_type: str | None = None
@@ -235,28 +323,34 @@ def render_markdown_basic(markdown_text: str, source_file: Path, page_dir: Path,
             parts.append(f"</{list_type}>")
             list_type = None
 
-    for line in lines:
-        stripped = line.rstrip("\n")
+    index = 0
+    while index < len(lines):
+        stripped = lines[index].rstrip("\n")
 
-        if stripped.strip().startswith("```"):
+        fence_match = CODE_FENCE_LINE.match(stripped)
+        if fence_match:
             flush_paragraph()
             close_list()
             if in_code:
-                code_html = html.escape("\n".join(code_lines))
-                parts.append(f"<pre><code>{code_html}</code></pre>")
+                parts.append(render_code_block("\n".join(code_lines), code_language))
                 code_lines = []
                 in_code = False
+                code_language = ""
             else:
                 in_code = True
+                code_language = (fence_match.group("lang") or "").strip()
+            index += 1
             continue
 
         if in_code:
             code_lines.append(stripped)
+            index += 1
             continue
 
         if not stripped.strip():
             flush_paragraph()
             close_list()
+            index += 1
             continue
 
         heading_match = HEADING_LINE.match(stripped)
@@ -272,6 +366,7 @@ def render_markdown_basic(markdown_text: str, source_file: Path, page_dir: Path,
             if level in (2, 3):
                 toc.append({"id": final_id, "text": title, "level": level})
             parts.append(f'<h{level} id="{html.escape(final_id, quote=True)}">{html.escape(title)}</h{level}>')
+            index += 1
             continue
 
         image_match = IMAGE_LINE.match(stripped)
@@ -281,6 +376,7 @@ def render_markdown_basic(markdown_text: str, source_file: Path, page_dir: Path,
             alt = html.escape(image_match.group(1))
             src = resolve_local_href(image_match.group(2), source_file, page_dir, out_root)
             parts.append(f'<p><img src="{html.escape(src, quote=True)}" alt="{alt}" loading="lazy" decoding="async" /></p>')
+            index += 1
             continue
 
         ul_match = UL_LINE.match(stripped)
@@ -291,6 +387,7 @@ def render_markdown_basic(markdown_text: str, source_file: Path, page_dir: Path,
                 parts.append("<ul>")
                 list_type = "ul"
             parts.append(f"<li>{render_inline_text(ul_match.group(1), source_file, page_dir, out_root)}</li>")
+            index += 1
             continue
 
         ol_match = OL_LINE.match(stripped)
@@ -301,15 +398,40 @@ def render_markdown_basic(markdown_text: str, source_file: Path, page_dir: Path,
                 parts.append("<ol>")
                 list_type = "ol"
             parts.append(f"<li>{render_inline_text(ol_match.group(1), source_file, page_dir, out_root)}</li>")
+            index += 1
             continue
 
+        if index + 1 < len(lines):
+            header_cells = parse_table_cells(stripped)
+            if len(header_cells) >= 2 and is_table_separator_row(lines[index + 1], len(header_cells)):
+                flush_paragraph()
+                close_list()
+                alignments = table_alignments(lines[index + 1], len(header_cells))
+
+                body_rows: list[list[str]] = []
+                index += 2
+                while index < len(lines):
+                    row_line = lines[index].rstrip("\n")
+                    if not row_line.strip():
+                        break
+                    row_cells = parse_table_cells(row_line)
+                    if len(row_cells) != len(header_cells):
+                        break
+                    body_rows.append(row_cells)
+                    index += 1
+
+                parts.append(
+                    render_table_html(header_cells, body_rows, alignments, source_file, page_dir, out_root)
+                )
+                continue
+
         paragraph_lines.append(stripped)
+        index += 1
 
     flush_paragraph()
     close_list()
     if in_code:
-        code_html = html.escape("\n".join(code_lines))
-        parts.append(f"<pre><code>{code_html}</code></pre>")
+        parts.append(render_code_block("\n".join(code_lines), code_language))
 
     return "\n".join(parts), toc
 
@@ -410,6 +532,7 @@ def build_post_static_html(
         <p>作者：Vik Qian · 版权所有 © 2026 AI时代</p>
       </div>
     </footer>
+    <script type="module" src="{asset('../assets/js/post-static.js')}"></script>
   </body>
 </html>
 """

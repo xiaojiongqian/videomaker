@@ -8,6 +8,11 @@
 - 内容总索引：`host/data/content-index.json`
 - 站点仅展示：`status = "published"` 条目
 
+## 本地预览
+
+- 默认端口：`./preview`
+- 指定端口：`./preview --9000`（或 `./preview --port 9000`）
+
 ## 功能
 
 - **字幕生成** - 从视频文件中提取音频，自动识别语音并生成字幕

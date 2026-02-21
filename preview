@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DEFAULT_PORT=8001
+PORT="${DEFAULT_PORT}"
+
+usage() {
+  cat <<'EOF'
+Usage:
+  ./preview                 # Use default port 8001
+  ./preview --9000          # Use custom port 9000
+  ./preview --port 9000     # Use custom port 9000
+  ./preview --help
+EOF
+}
+
+is_valid_port() {
+  [[ "$1" =~ ^[0-9]+$ ]] || return 1
+  (( "$1" >= 1 && "$1" <= 65535 ))
+}
+
+while (($#)); do
+  case "$1" in
+    --help|-h)
+      usage
+      exit 0
+      ;;
+    --port)
+      shift
+      if (($# == 0)); then
+        echo "Error: --port requires a value." >&2
+        usage >&2
+        exit 1
+      fi
+      PORT="$1"
+      ;;
+    --[0-9]*)
+      PORT="${1#--}"
+      ;;
+    [0-9]*)
+      PORT="$1"
+      ;;
+    *)
+      echo "Error: unsupported argument '$1'." >&2
+      usage >&2
+      exit 1
+      ;;
+  esac
+  shift
+done
+
+if ! is_valid_port "$PORT"; then
+  echo "Error: invalid port '$PORT'. Use 1-65535." >&2
+  exit 1
+fi
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$REPO_ROOT"
+
+ASSET_VERSION="local-$(date +%s)"
+python3 scripts/prepare_pages_bundle.py \
+  --src host \
+  --out _site \
+  --asset-version "${ASSET_VERSION}"
+
+echo
+echo "Preview URL:"
+echo "  http://localhost:${PORT}/"
+echo "  http://localhost:${PORT}/index.html"
+echo "  http://localhost:${PORT}/index"
+echo "  http://localhost:${PORT}/post/pr-merge-guide.html"
+echo "  http://localhost:${PORT}/post/pr-merge-guide"
+echo
+echo "Press Ctrl+C to stop."
+python3 scripts/preview_server.py --port "${PORT}" --dir _site

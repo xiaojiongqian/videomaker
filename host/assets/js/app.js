@@ -4,6 +4,7 @@ import {
   listPublishedContent,
   queryContent,
 } from './content-service.js';
+import { renderMermaidDiagrams } from './diagram-renderer.js';
 import { renderMarkdownDocument } from './markdown-renderer.js';
 
 function escapeHtml(value) {
@@ -382,6 +383,7 @@ async function initPostPage() {
 
     const { html, toc } = await renderMarkdownDocument(item.source);
     postContentEl.innerHTML = html;
+    await renderMermaidDiagrams(postContentEl);
     renderToc(toc);
     initTocActiveState();
     renderPostNavigation(published, currentIndex < 0 ? 0 : currentIndex);
