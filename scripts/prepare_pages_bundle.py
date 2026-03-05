@@ -28,6 +28,10 @@ OL_LINE = re.compile(r"^\s*\d+\.\s+(.+?)\s*$")
 IMAGE_LINE = re.compile(r"^\s*!\[(.*?)\]\((.+?)\)\s*$")
 INLINE_CODE = re.compile(r"`([^`]+)`")
 INLINE_LINK = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+INLINE_BOLD = re.compile(r"(?<!\\)\*\*(.+?)(?<!\\)\*\*")
+INLINE_ITALIC = re.compile(r"(?<!\\)\*(?!\*)(.+?)(?<!\\)\*(?!\*)")
+INLINE_HTML_TAG = re.compile(r"</?(?:strong|b|em|i|span)(?:\s+[^>]*?)?>", re.IGNORECASE)
+SAFE_COLOR_VALUE = re.compile(r"^(#[0-9a-fA-F]{3,8}|[a-zA-Z]+)$")
 TABLE_COLUMN_SPLIT = re.compile(r"(?<!\\)\|")
 TABLE_SEPARATOR_CELL = re.compile(r"^:?-{3,}:?$")
 CODE_FENCE_LINE = re.compile(r"^\s*```(?P<lang>[\w-]+)?(?:\s+.*)?\s*$")
@@ -199,17 +203,82 @@ def resolve_local_href(target: str, source_file: Path, page_dir: Path, out_root:
     return rebuilt
 
 
+def sanitize_inline_html_tag(raw_tag: str) -> str | None:
+    close_match = re.fullmatch(r"</\s*(strong|b|em|i|span)\s*>", raw_tag, flags=re.IGNORECASE)
+    if close_match:
+        return f"</{close_match.group(1).lower()}>"
+
+    open_match = re.fullmatch(r"<\s*(strong|b|em|i|span)(?P<attrs>\s+[^>]*)?>", raw_tag, flags=re.IGNORECASE)
+    if not open_match:
+        return None
+
+    tag_name = open_match.group(1).lower()
+    attrs = (open_match.group("attrs") or "").strip()
+    if not attrs:
+        return f"<{tag_name}>"
+
+    style_match = re.fullmatch(r"""style\s*=\s*(["'])(.*?)\1""", attrs, flags=re.IGNORECASE | re.DOTALL)
+    if not style_match:
+        return f"<{tag_name}>"
+
+    style_value = style_match.group(2).strip()
+    color_match = re.fullmatch(r"color\s*:\s*([^;]+)\s*;?", style_value, flags=re.IGNORECASE)
+    if not color_match:
+        return f"<{tag_name}>"
+
+    color_value = color_match.group(1).strip()
+    if not SAFE_COLOR_VALUE.fullmatch(color_value):
+        return f"<{tag_name}>"
+
+    safe_color = html.escape(color_value, quote=True)
+    return f'<{tag_name} style="color:{safe_color};">'
+
+
+def preserve_allowed_inline_html(text: str) -> tuple[str, dict[str, str]]:
+    placeholders: dict[str, str] = {}
+
+    def replace_tag(match: re.Match[str]) -> str:
+        safe_tag = sanitize_inline_html_tag(match.group(0))
+        if not safe_tag:
+            return match.group(0)
+        token = f"__INLINE_HTML_TOKEN_{len(placeholders)}__"
+        placeholders[token] = safe_tag
+        return token
+
+    rewritten = INLINE_HTML_TAG.sub(replace_tag, text)
+    return rewritten, placeholders
+
+
 def render_inline_text(text: str, source_file: Path, page_dir: Path, out_root: Path) -> str:
-    escaped = html.escape(text)
-    escaped = INLINE_CODE.sub(lambda m: f"<code>{m.group(1)}</code>", escaped)
+    text_with_tokens, html_tokens = preserve_allowed_inline_html(text)
+    escaped = html.escape(text_with_tokens)
+
+    code_tokens: dict[str, str] = {}
+
+    def replace_code(match: re.Match[str]) -> str:
+        token = f"__INLINE_CODE_TOKEN_{len(code_tokens)}__"
+        code_tokens[token] = f"<code>{match.group(1)}</code>"
+        return token
+
+    escaped = INLINE_CODE.sub(replace_code, escaped)
+    escaped = INLINE_BOLD.sub(lambda m: f"<strong>{m.group(1)}</strong>", escaped)
+    escaped = INLINE_ITALIC.sub(lambda m: f"<em>{m.group(1)}</em>", escaped)
 
     def replace_link(match: re.Match[str]) -> str:
-        label = html.escape(match.group(1))
+        label = match.group(1)
         target = resolve_local_href(match.group(2), source_file, page_dir, out_root)
         href = html.escape(target, quote=True)
         return f'<a href="{href}">{label}</a>'
 
-    return INLINE_LINK.sub(replace_link, escaped)
+    rendered = INLINE_LINK.sub(replace_link, escaped)
+
+    for token, content in code_tokens.items():
+        rendered = rendered.replace(token, content)
+
+    for token, tag in html_tokens.items():
+        rendered = rendered.replace(token, tag)
+
+    return rendered
 
 
 def parse_table_cells(line: str) -> list[str]:
