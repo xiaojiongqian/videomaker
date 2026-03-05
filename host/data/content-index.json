@@ -1,5 +1,17 @@
 [
   {
+    "id": "claude-code-agent-design",
+    "title": "学习 Claude Code 开发经验：构建优秀 Agent 的实战借鉴",
+    "type": "article",
+    "topic": ["AI 编程", "Agent 设计", "工程方法"],
+    "date": "2026-03-05",
+    "summary": "从 AskUserQuestion、Task Tool 与 Progressive Disclosure 的演进，总结可直接复用的 Agent 设计方法。",
+    "cover": "../articals/agent-design-method/images/source_img_1.jpg",
+    "source": "../articals/agent-design-method/ClaudeCode开发经验，构建优秀Agent的实战借鉴.md",
+    "status": "published",
+    "updatedAt": "2026-03-05"
+  },
+  {
     "id": "pr-merge-guide",
     "title": "/pr:merge — 用一条命令，重建团队的代码质量底线",
     "type": "article",
