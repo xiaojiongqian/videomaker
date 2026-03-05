@@ -281,7 +281,7 @@ ffprobe -v error -select_streams v:0 -show_entries stream=duration final.mp4
     ↓
 步骤2: 智能剪辑（去除空白和语气词）
     ↓
-步骤3: 重新生成字幕（对剪辑后的视频做ASR）⭐ 关键
+步骤3: 重新生成字幕（对剪辑后的视频做ASR，中文用FunASR，其他语言用Whisper）⭐ 关键
     ↓
 步骤4: 优化字幕（LLM纠错 + 单行拆分）
     ↓
@@ -304,7 +304,8 @@ ffprobe -v error -select_streams v:0 -show_entries stream=duration final.mp4
 
 1. **字幕优化**：
    - 使用LLM纠正ASR识别错误
-   - 拆分为单行短句
+   - **绝对不能修改时间戳**，只改文本内容
+   - 超过 24 字符的行拆分为两行（在标点或中点处断开）
    - 根据文字长度优化显示时长（每字0.3秒）
 2. **硬字幕位置**：MarginV=30-40，确保在底部不遮挡主体
 3. **字体设置**：16px加粗，清晰易读

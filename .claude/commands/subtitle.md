@@ -26,32 +26,60 @@ argument-hint: <视频文件路径>
 - 输出目录与视频文件同目录
 
 ### 3. 生成字幕
-使用 Python 和 Whisper 进行语音识别：
+
+**根据语言选择 ASR 引擎**：
+- **中文视频** → 使用 FunASR（阿里达摩院，中文识别更准确）
+- **其他语言** → 使用 Whisper（OpenAI，多语言支持）
+
+#### 3a. 中文视频：使用 FunASR
+
+```python
+from funasr import AutoModel
+
+model = AutoModel(
+    model="iic/speech_seaco_paraformer_large_asr_nat-zh-cn-16k-common-vocab8404-pytorch",
+    vad_model="iic/speech_fsmn_vad_zh-cn-16k-common-pytorch",
+    punc_model="iic/punc_ct-transformer_zh-cn-common-vocab272727-pytorch",
+)
+
+res = model.generate(input="<视频文件路径>", batch_size_s=300)
+
+item = res[0]
+full_text = item["text"]
+timestamps = item["timestamp"]  # 每个非标点字符的 [start_ms, end_ms]
+
+# 注意：标点符号由 punc_model 后加，没有对应时间戳
+# 需要跳过标点来对齐 timestamps
+punc_chars = set("。！？；，、：""''（）《》【】…—·!?,;:\"'()[]{}.-")
+
+ts_idx = 0
+char_ts = []
+for ch in full_text:
+    if ch in punc_chars:
+        char_ts.append(None)
+    else:
+        if ts_idx < len(timestamps):
+            char_ts.append(timestamps[ts_idx])
+            ts_idx += 1
+        else:
+            char_ts.append(None)
+
+# 按标点断句生成 SRT 段落
+# 句号/问号/感叹号处断句，逗号处超过 18 字也断句
+```
+
+#### 3b. 其他语言：使用 Whisper
 
 ```python
 import whisper
 
-model = whisper.load_model("base")  # 可选: tiny, base, small, medium, large
-result = model.transcribe("audio.wav", language="zh")
+model = whisper.load_model("medium")  # 可选: tiny, base, small, medium, large
+result = model.transcribe("audio.wav", language="<语言代码>")
 
 # 生成 SRT 格式字幕
-def format_timestamp(seconds):
-    hours = int(seconds // 3600)
-    minutes = int((seconds % 3600) // 60)
-    secs = int(seconds % 60)
-    millis = int((seconds - int(seconds)) * 1000)
-    return f"{hours:02d}:{minutes:02d}:{secs:02d},{millis:03d}"
-
-srt_content = ""
 for i, segment in enumerate(result["segments"], 1):
-    start = format_timestamp(segment["start"])
-    end = format_timestamp(segment["end"])
-    text = segment["text"].strip()
-    srt_content += f"{i}\n{start} --> {end}\n{text}\n\n"
-
-# 保存字幕文件
-with open("output.srt", "w", encoding="utf-8") as f:
-    f.write(srt_content)
+    # segment 自带 start/end 时间戳（秒）
+    pass
 ```
 
 ### 4. 输出结果
@@ -61,6 +89,7 @@ with open("output.srt", "w", encoding="utf-8") as f:
 
 ## 注意事项
 
-- 如果 whisper 未安装，先执行：`pip install openai-whisper`
-- 对于长视频，使用 `tiny` 或 `base` 模型以加快速度
-- 默认识别中文，可根据视频内容调整 language 参数
+- 中文视频必须使用 FunASR，识别准确率显著高于 Whisper
+- FunASR 的 timestamp 是词级别的，标点符号没有时间戳，需要用标点感知对齐
+- 其他语言使用 Whisper，如未安装先执行：`pip install openai-whisper`
+- 对于长视频，Whisper 使用 `base` 或 `small` 模型以加快速度

@@ -23,7 +23,10 @@
       "Bash(gh pr view:*)",
       "Bash(gh pr checks:*)",
       "Bash(gh pr diff:*)",
-      "Bash(git branch:*)"
+      "Bash(git branch:*)",
+      "Bash(BASEDIR=\"/Users/vik.qian/study/videomaker/articals/pr-merge/video\")",
+      "Bash(whisper:*)",
+      "Bash(funasr:*)"
     ]
   }
 }

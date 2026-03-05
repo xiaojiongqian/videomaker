@@ -1,0 +1,130 @@
+Title: Claude Code 工程師：像 Agent 一樣思考 | 科技 | 鉅亨號 | Anue鉅亨
+
+URL Source: http://hao.cnyes.com/post/235279
+
+Published Time: 2026-03-03T10:28:39.000Z
+
+Markdown Content:
+`Anthropic 工程師 Thariq 分享了建構 Claude Code 過程中關於 Agent 工具設計的經驗教訓。`
+
+![Image 1](https://hao.cnyes.com/download_image.ashx?file=%2FUpload%2F9ae90c23300e44c7b35fc60d0f8955b1)
+
+文章通過幾個真實案例，講述了 AskUserQuestion 工具的三次迭代、Todo List 到 Task 系統的演進、搜尋工具的變遷，以及漸進式發現機制的設計思路。
+
+核心觀點是：
+
+> Agent 的工具設計沒有標準答案，你得不斷觀察模型的行為，反覆實驗迭代，學會「像 Agent 一樣看世界」。
+
+`原文作者：Thariq（@trq212），發佈於 2026 年 2 月 28 日`
+
+`原文連結：https://x.com/trq212/article/2027463795355095314`
+
+![Image 2](https://hao.cnyes.com/download_image.ashx?file=%2FUpload%2F17ffffc305bf47a49e867612aa84d492)
+
+建構 Agent 最難的部分之一，就是設計它的「動作空間」（action space）。
+
+Claude 通過 Tool Calling 來執行操作，而 Claude API 提供了多種建構工具的方式，包括 bash、skills，以及最近新增的 code execution（關於程式設計式工具呼叫的更多內容，可以參考 @RLanceMartin 的文章）。
+
+面對這麼多選項，你該怎麼設計 Agent 的工具？
+
+只需要一個 bash 或 code execution 就夠了嗎？
+
+還是說需要 50 個工具，每個場景配一個？
+
+我喜歡用一個類比來思考這個問題。
+
+想像你被給了一道很難的數學題，你希望手邊有什麼工具？答案取決於你自身的能力。
+
+紙筆是最基本的，但手算效率很低。
+
+計算器好一些，不過你得會用那些高級功能。最快最強的選擇是電腦，但前提是你得會寫程式碼。
+
+這個類比可以直接套用到 Agent 工具設計上：**你要給它與其能力匹配的工具。**但你怎麼知道它的能力邊界在那？答案是：仔細觀察，閱讀它的輸出，反覆實驗。
+
+**學會像 Agent 一樣看世界。**
+
+以下是我們在建構 Claude Code 過程中總結的幾條經驗。
+
+![Image 3](https://hao.cnyes.com/download_image.ashx?file=%2FUpload%2F18ce40bd52c2468a8ccb2d03f1f2d358)
+
+建構 AskUserQuestion 工具時，我們的目標是提升 Claude 向使用者提問的能力（也叫 elicitation）。
+
+Claude 當然可以用純文字提問，但我們發現使用者回答這類問題時總覺得很費勁。怎麼才能降低這種摩擦，提高使用者和 Claude 之間的溝通效率？
+
+**第一次嘗試：改造 ExitPlanTool**
+
+我們先試著在 ExitPlanTool 上加一個參數，讓它在輸出計畫的同時附帶一組問題。這是最容易實現的方案，但 Claude 被搞糊塗了。我們同時要求它輸出計畫和提問，如果使用者的回答和計畫內容矛盾怎麼辦？Claude 是不是還得再呼叫一次 ExitPlanTool？
+
+這條路走不通。
+
+（關於我們為什麼要做 ExitPlanTool，可以參考這篇關於 prompt caching 的文章：https://x.com/trq212/status/2024574133011673516 ）
+
+**第二次嘗試：改輸出格式**
+
+接著我們試了修改 Claude 的輸出指令，讓它用一種特殊的 Markdown 格式來提問。比如，要求它輸出一組帶備選項的問題列表，我們再把它解析渲染成 UI。
+
+這是最通用的方案，Claude 的格式輸出能力也還行，但不夠穩定。它會多說幾句話，漏掉選項，或者乾脆換一種格式輸出。
+
+**第三次嘗試：AskUserQuestion 工具**
+
+![Image 4](https://hao.cnyes.com/download_image.ashx?file=%2FUpload%2F8cd0c9c68f5d462bb463a0587cd39fba)
+
+最後我們做了一個獨立的工具，Claude 可以在任何時候呼叫它，但在 plan mode 中會被特別引導去使用。工具觸發後會彈出一個模態框，展示問題列表並阻塞 Agent 循環，直到使用者回答完畢。
+
+這個工具讓我們得到了結構化的輸出，確保使用者能看到多個選項，還支援在 Agent SDK 或 skills 中靈活復用。
+
+最關鍵的是：**Claude 確實喜歡呼叫這個工具**，輸出效果也很好。再精心設計的工具，如果模型不知道怎麼用，那也是白搭。
+
+這是 elicitation 的最終形態嗎？不好說。正如下一個例子會展示的，對一個模型有效的方案，換一個模型未必好使。
+
+![Image 5](https://hao.cnyes.com/download_image.ashx?file=%2FUpload%2Fb799f3c17a504814a17134d06066aac7)
+
+Claude Code 剛上線時，我們意識到模型需要一個 Todo List 來保持工作節奏。在開始時寫下待辦事項，完成後逐項打勾。為此我們做了 TodoWrite 工具，用來建立和更新待辦列表，並展示給使用者。
+
+但即便如此，Claude 還是經常忘記自己該幹什麼。於是我們每隔 5 輪對話就插入一條系統提醒，告訴 Claude 當前的目標。
+
+然而隨著模型升級，情況反轉了。
+
+新模型不僅不需要這些提醒，反而覺得 Todo List 成了束縛。被反覆提醒 Todo 內容，讓 Claude 覺得自己必須嚴格執行列表，而不能靈活調整。同時，Opus 4.5 在使用子 Agent 方面能力大幅提升，但多個子 Agent 怎麼協作共享一個 Todo List 呢？
+
+看到這些變化，我們用 Task Tool 替換了 TodoWrite（關於 Task Tool 的詳細介紹見：https://x.com/trq212/status/2014480496013803643 ）。
+
+TodoWrite 的目的是讓模型「不跑偏」，而 Task Tool 更側重於**Agent 之間的協作溝通**。Task 支援依賴關係、可以跨子 Agent 同步進度，模型也可以自由修改和刪除任務。
+
+這個案例的教訓是：**隨著模型能力提升，曾經必需的工具可能反過來變成約束。**你需要不斷重新審視之前的假設。這也是為什麼最好只支援少數幾個能力相近的模型。
+
+對 Claude 來說，搜尋工具格外重要，因為它們決定了模型能否自主建構上下文。
+
+Claude Code 最初用的是 RAG 向量資料庫來尋找上下文。RAG 速度快、效果不錯，但需要建索引、做配置，在不同環境下容易出問題。更關鍵的是，**上下文是系統預先「喂」給 Claude 的，Claude 沒有自己發現上下文的能力。**
+
+但既然 Claude 能在網上搜尋資訊，為什麼不讓它搜尋你的程式碼庫？我們給了 Claude 一個 Grep 工具，讓它自己搜尋檔案、建構上下文。
+
+這是我們觀察到的一個趨勢：**隨著 Claude 變得更聰明，只要給它合適的工具，它自主建構上下文的能力就越來越強。**
+
+當我們引入 Agent Skills 時，正式提出了「漸進式發現」（progressive disclosure）的概念，讓 Agent 通過主動探索來逐步發現相關上下文。
+
+Claude 可以讀取 skill 檔案，而這些檔案又引用了其他檔案，模型可以遞迴地一層層往下讀。事實上，skills 的一個常見用法就是給 Claude 增加搜尋能力，比如教它怎麼呼叫某個 API 或查詢資料庫。
+
+一年下來，Claude 從幾乎無法自主建構上下文，進化到了能夠跨多層檔案巢狀搜尋，精準定位所需資訊。
+
+**漸進式發現**現在已經成為我們在不增加工具數量的前提下擴展功能的常用手段。
+
+Claude Code 目前有大約 20 個工具，我們一直在問自己：這些都需要嗎？新增一個工具的門檻很高，因為每多一個選項，模型就多一分思考負擔。
+
+比如，我們發現 Claude 對自身瞭解不夠。你問它怎麼加入 MCP，問 slash command 是什麼，它答不上來。
+
+我們可以把這些資訊全塞進 system prompt，但使用者其實很少問這類問題，強行加進去只會帶來 context rot（上下文腐化），干擾 Claude 的本職工作：寫程式碼。
+
+於是我們嘗試了漸進式發現的方式：給 Claude 一個文件連結，讓它需要時自己載入搜尋。這招能用，但 Claude 會把大量搜尋結果全塞進上下文來找答案，其實使用者只需要一個簡潔的回覆。
+
+所以我們做了**Claude Code Guide 子 Agent**。當使用者問 Claude 關於自身的問題時，Claude 會呼叫這個子 Agent。子 Agent 有詳細的文件搜尋指令，知道該搜什麼、返回什麼。
+
+雖然還不完美（Claude 被問到自身配置問題時偶爾還是會犯迷糊），但比之前好多了。我們在沒有增加任何工具的情況下，擴展了 Claude 的能力範圍。
+
+如果你期待一套關於工具設計的嚴格規則，很遺憾，這篇文章給不了你。
+
+為模型設計工具，**藝術的成分和科學的成分一樣多**。它取決於你用的模型、Agent 的目標，以及運行環境。
+
+多實驗，仔細看輸出，大膽嘗試新方案。
+
+**學會像 Agent 一樣看世界，像 Agent 一樣思考。** (AGI Hunt)
