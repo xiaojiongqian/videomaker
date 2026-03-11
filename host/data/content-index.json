@@ -1,5 +1,17 @@
 [
   {
+    "id": "ai-agent-quality-parallel-workflow",
+    "title": "基于 AI Agent 的质量管理及并行开发工作流",
+    "type": "video-note",
+    "topic": ["AI 编程", "工程质量", "并行开发"],
+    "date": "2026-03-12",
+    "summary": "围绕 code review 前移、worktree 隔离、Playwright 自动验收和 draft PR 收口，整理一套让 AI 真正进入工程流程的可落地工作流。",
+    "cover": "../video/工程化AI并行开发和质量门禁的讨论/doc/images/02_codex_workspace.jpg",
+    "source": "../video/工程化AI并行开发和质量门禁的讨论/doc/基于AI Agent的质量管理及并行开发工作流_cut_sum.md",
+    "status": "published",
+    "updatedAt": "2026-03-12"
+  },
+  {
     "id": "claude-code-agent-design",
     "title": "学习 Claude Code 开发经验：构建优秀 Agent 的实战借鉴",
     "type": "article",
