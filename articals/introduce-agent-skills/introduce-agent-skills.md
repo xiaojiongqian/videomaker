@@ -1,13 +1,3 @@
----
-title: Agent Skill：把一次性提示词，变成可复用的能力模块
-slug: introduce-agent-skills
-summary: 这篇文章从一张 blog 封面图的四次尝试说起，解释什么是 agent skill、为什么要用它，以及如何使用、制作、发布和管理 skill；最后结合我正在使用的视频、博客和研发类 skills，说明 skill 真正带来的不是“多一个提示词”，而是把经验沉淀成可复用的工作流。
-excerpt: 第一次口述 prompt、后面两次修 prompt 都不能让我满意；直到把审美约束交给美学 skill，封面图才立刻贴近主题。Skill 的价值，不是更会说，而是更会稳定地做。
-coverImage: /Users/vik.qian/study/videomaker/articals/introduce-agent-skills/images/ai-native-cover-20260314-editorial-用skill版.webp
-tags: [Agent, Skills, AI Native, Workflow, Automation]
-language: zh-CN
-status: published
----
 
 ![Agent Skill 封面图](./images/ai-native-cover-20260314-editorial-用skill版.webp)
 
