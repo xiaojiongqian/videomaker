@@ -39,6 +39,7 @@ FALLBACK_LIST_BLOCK = re.compile(
     r"(?P<start><!-- AUTO_FALLBACK_LIST_START -->)(?P<body>.*?)(?P<end><!-- AUTO_FALLBACK_LIST_END -->)",
     re.DOTALL,
 )
+FRONT_MATTER_BLOCK = re.compile(r"^---\r?\n[\s\S]*?\r?\n---\r?\n?")
 
 
 def parse_args() -> argparse.Namespace:
@@ -52,6 +53,11 @@ def parse_args() -> argparse.Namespace:
         help="Optional cache-busting version appended to local CSS/JS assets in HTML",
     )
     return parser.parse_args()
+
+
+def strip_front_matter(markdown_text: str) -> str:
+    match = FRONT_MATTER_BLOCK.match(markdown_text)
+    return markdown_text[match.end():] if match else markdown_text
 
 
 def is_relative_local_ref(raw: str) -> bool:
@@ -138,7 +144,7 @@ def rewrite_index_and_copy_content(out_root: Path, repo_root: Path) -> list[dict
         if rewritten_source:
             item["source"] = rewritten_source
             source_file = (source_context.parent / source_ref).resolve()
-            markdown_text = source_file.read_text(encoding="utf-8")
+            markdown_text = strip_front_matter(source_file.read_text(encoding="utf-8"))
 
             for md_ref in extract_markdown_local_refs(markdown_text):
                 copy_ref_to_content(md_ref, source_file, repo_root, out_root)
@@ -621,7 +627,7 @@ def write_static_post_pages(out_root: Path, items: list[dict], asset_version: st
         if not source_path.exists():
             continue
 
-        markdown_text = source_path.read_text(encoding="utf-8")
+        markdown_text = strip_front_matter(source_path.read_text(encoding="utf-8"))
         body_html, toc = render_markdown_basic(markdown_text, source_path, post_dir, out_root)
         prev_item = published_items[index - 1] if index > 0 else None
         next_item = published_items[index + 1] if index < len(published_items) - 1 else None
