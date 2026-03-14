@@ -1,5 +1,17 @@
 [
   {
+    "id": "introduce-agent-skills",
+    "title": "Agent Skill：把一次性提示词，变成可复用的能力模块",
+    "type": "article",
+    "topic": ["AI 编程", "Agent", "Skills"],
+    "date": "2026-03-14",
+    "summary": "从四次 blog 封面图尝试讲起，解释什么是 agent skill、为什么要用它，以及如何制作、发布、安装和安全地管理 skill。",
+    "cover": "../articals/introduce-agent-skills/images/ai-native-cover-20260314-editorial-用skill版.webp",
+    "source": "../articals/introduce-agent-skills/introduce-agent-skills.md",
+    "status": "published",
+    "updatedAt": "2026-03-14"
+  },
+  {
     "id": "ai-agent-quality-parallel-workflow",
     "title": "基于 AI Agent 的质量管理及并行开发工作流",
     "type": "video-note",
