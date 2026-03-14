@@ -8,6 +8,15 @@ marked.setOptions({
   headerIds: false,
 });
 
+function stripFrontMatter(markdown) {
+  if (!markdown.startsWith("---")) {
+    return markdown;
+  }
+
+  const match = markdown.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/);
+  return match ? markdown.slice(match[0].length) : markdown;
+}
+
 function isExternalReference(value) {
   return /^(?:[a-z][a-z0-9+.-]*:|#|\/\/)/i.test(value);
 }
@@ -106,7 +115,7 @@ export async function renderMarkdownDocument(sourcePath) {
     throw new Error(`无法读取文档：${response.status}`);
   }
 
-  const markdown = await response.text();
+  const markdown = stripFrontMatter(await response.text());
   const rendered = marked.parse(markdown);
   const safeHtml = DOMPurify.sanitize(rendered, {
     USE_PROFILES: { html: true },
