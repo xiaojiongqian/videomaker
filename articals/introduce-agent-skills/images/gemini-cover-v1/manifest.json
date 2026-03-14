@@ -1,0 +1,90 @@
+{
+  "generatedAt": "2026-03-14T11:09:35.990Z",
+  "model": "gemini-3.1-flash-image-preview",
+  "service": "vertex",
+  "serviceOrder": [
+    "vertex",
+    "gemini"
+  ],
+  "prompt": "Create a premium editorial 21:9 blog cover about Agent Skill: the moment a one-off prompt becomes a reusable capability. Ultra-wide cinematic studio scene. On the left, scattered prompt snippets, rough thumbnail attempts, and messy paper cards dissolve in warm amber light. In the center, one bold translucent module, like a skill cartridge or capability block, locks into place with satisfying precision. On the right, a clean AI creation workstation and large monitor show an organized workflow with selected outputs, validation chips, neat candidate cards, and realistic product UI density. Strong split composition from chaos to structure, warm orange transitioning to cool teal and clean white, premium matte metal and frosted glass materials, high contrast, deep depth, bold focal point, eye-catching but disciplined, no humans, no generic sci-fi holograms, no clutter, no unreadable fake text.",
+  "refs": [
+    "/Users/vik.qian/study/videomaker/articals/introduce-agent-skills/images/ai-native-cover-20260314-editorial-用skill版.webp",
+    "/Users/vik.qian/study/videomaker/articals/introduce-agent-skills/images/workflow-vs-agent.webp"
+  ],
+  "outDir": "/Users/vik.qian/study/videomaker/articals/introduce-agent-skills/images/gemini-cover-v1",
+  "requestConfig": {
+    "maxOutputTokens": 32768,
+    "temperature": 1,
+    "topP": 0.95,
+    "responseModalities": [
+      "TEXT",
+      "IMAGE"
+    ],
+    "thinkingConfig": {
+      "includeThoughts": false,
+      "thinkingLevel": "HIGH"
+    },
+    "imageConfig": {
+      "aspectRatio": "21:9",
+      "imageSize": "2K"
+    },
+    "safetySettings": [
+      {
+        "category": "HARM_CATEGORY_HATE_SPEECH",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_HARASSMENT",
+        "threshold": "OFF"
+      }
+    ]
+  },
+  "effectiveRequestConfig": {
+    "maxOutputTokens": 32768,
+    "temperature": 1,
+    "topP": 0.95,
+    "responseModalities": [
+      "TEXT",
+      "IMAGE"
+    ],
+    "thinkingConfig": {
+      "includeThoughts": false,
+      "thinkingLevel": "HIGH"
+    },
+    "imageConfig": {
+      "aspectRatio": "21:9",
+      "imageSize": "2K"
+    },
+    "safetySettings": [
+      {
+        "category": "HARM_CATEGORY_HATE_SPEECH",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_HARASSMENT",
+        "threshold": "OFF"
+      }
+    ]
+  },
+  "responseTextPath": "/Users/vik.qian/study/videomaker/articals/introduce-agent-skills/images/gemini-cover-v1/response.txt",
+  "images": [
+    "/Users/vik.qian/study/videomaker/articals/introduce-agent-skills/images/gemini-cover-v1/introduce-agent-skills-cover-v1-01.png",
+    "/Users/vik.qian/study/videomaker/articals/introduce-agent-skills/images/gemini-cover-v1/introduce-agent-skills-cover-v1-02.png"
+  ]
+}

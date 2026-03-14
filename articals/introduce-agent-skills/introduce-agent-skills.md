@@ -1,5 +1,5 @@
 
-![Agent Skill 封面图](./images/ai-native-cover-20260314-editorial-用skill版.webp)
+![Agent Skill 封面图](./images/agent-skill-cover-20260314-21x9.webp)
 
 # Agent Skill：把一次性提示词，变成可复用的能力模块
 

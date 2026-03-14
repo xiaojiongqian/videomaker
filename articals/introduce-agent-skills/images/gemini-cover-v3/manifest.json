@@ -1,0 +1,89 @@
+{
+  "generatedAt": "2026-03-14T11:11:55.406Z",
+  "model": "gemini-3.1-flash-image-preview",
+  "service": "vertex",
+  "serviceOrder": [
+    "vertex",
+    "gemini"
+  ],
+  "prompt": "Create an eye-catching 21:9 editorial cover for an article about agent skills, reusable modules that turn one-off prompting into repeatable workflows. Do not show animals, watercolor paintings, or a big title. Panoramic left-to-right transformation. Left side: crumpled prompt notes, loose chat snippets, fragmented output cards, and failed attempts scattered in warm orange light. Center: one large skill module becomes the unmistakable hero, a crafted object made of layered paper tabs, brushed metal, frosted glass, and connector rails, snapping into a system spine with precision. Right side: clean modular cards, script tabs, reference panels, validation markers, and polished outputs lock into an organized workflow on a wide desktop interface. Strong focal hierarchy, cream background with graphite shadows, coral orange transitioning into cool cyan, premium magazine art direction, crisp studio lighting, subtle motion, minimal but bold, product-relevant interface cues, no people, no animals, no fantasy, no neon cyberpunk, no clutter, no giant text overlay, no unreadable fake dashboard text.",
+  "refs": [
+    "/Users/vik.qian/study/videomaker/articals/introduce-agent-skills/images/workflow-vs-agent.webp"
+  ],
+  "outDir": "/Users/vik.qian/study/videomaker/articals/introduce-agent-skills/images/gemini-cover-v3",
+  "requestConfig": {
+    "maxOutputTokens": 32768,
+    "temperature": 1,
+    "topP": 0.95,
+    "responseModalities": [
+      "TEXT",
+      "IMAGE"
+    ],
+    "thinkingConfig": {
+      "includeThoughts": false,
+      "thinkingLevel": "HIGH"
+    },
+    "imageConfig": {
+      "aspectRatio": "21:9",
+      "imageSize": "2K"
+    },
+    "safetySettings": [
+      {
+        "category": "HARM_CATEGORY_HATE_SPEECH",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_HARASSMENT",
+        "threshold": "OFF"
+      }
+    ]
+  },
+  "effectiveRequestConfig": {
+    "maxOutputTokens": 32768,
+    "temperature": 1,
+    "topP": 0.95,
+    "responseModalities": [
+      "TEXT",
+      "IMAGE"
+    ],
+    "thinkingConfig": {
+      "includeThoughts": false,
+      "thinkingLevel": "HIGH"
+    },
+    "imageConfig": {
+      "aspectRatio": "21:9",
+      "imageSize": "2K"
+    },
+    "safetySettings": [
+      {
+        "category": "HARM_CATEGORY_HATE_SPEECH",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_HARASSMENT",
+        "threshold": "OFF"
+      }
+    ]
+  },
+  "responseTextPath": null,
+  "images": [
+    "/Users/vik.qian/study/videomaker/articals/introduce-agent-skills/images/gemini-cover-v3/introduce-agent-skills-cover-v3-01.png",
+    "/Users/vik.qian/study/videomaker/articals/introduce-agent-skills/images/gemini-cover-v3/introduce-agent-skills-cover-v3-02.png"
+  ]
+}
