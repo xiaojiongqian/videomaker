@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "chapter_id": "CH005",
+  "chapter_title": "替补席尽头的灯",
+  "status": "initialized",
+  "required_steps": {
+    "continuity_audit": true,
+    "dialogue_audit": false
+  },
+  "notes": "CH005 starts the gated workflow. Do not create chapters/CH005.md until the workflow reaches archived."
+}

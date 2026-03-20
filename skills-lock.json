@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "skills": {
+    "novel-bible-manager": {
+      "source": "xiaojiongqian/skills-hub",
+      "sourceType": "github",
+      "computedHash": "01ff99fe5e2ef11f030c0ca135ee68eba3afc8785d4dcbaef50e69ecc980a1b5"
+    },
+    "novel-chapter-summarizer": {
+      "source": "xiaojiongqian/skills-hub",
+      "sourceType": "github",
+      "computedHash": "27e30d61fc6ebaef193ac777385a1a3b1a0452b2520d265ddfdfac10763b3656"
+    },
+    "novel-continuity-auditor": {
+      "source": "xiaojiongqian/skills-hub",
+      "sourceType": "github",
+      "computedHash": "aad6a0eef6b957464c4cae234fa875e211e66701c0902e09827eef128bfe0248"
+    },
+    "novel-dialogue-editor": {
+      "source": "xiaojiongqian/skills-hub",
+      "sourceType": "github",
+      "computedHash": "9b5b29b9240029f7ff337912871928eedd1aba4acc9e3d295652a32edd6291e6"
+    },
+    "novel-orchestrator-main": {
+      "source": "xiaojiongqian/skills-hub",
+      "sourceType": "github",
+      "computedHash": "ce8bdcbca237b40d427d1a93f14da3af9764ae9641fe74e792a2a8691d851c8d"
+    },
+    "novel-plot-architect": {
+      "source": "xiaojiongqian/skills-hub",
+      "sourceType": "github",
+      "computedHash": "d782972b55998e023ded20a32155fd34323114a518a38fd1286914e8e5d3f1e6"
+    },
+    "novel-scene-dramatizer": {
+      "source": "xiaojiongqian/skills-hub",
+      "sourceType": "github",
+      "computedHash": "4aa913aa513d2684e205db9e00fe194e27b4743abac0dea5ca44c1843f6a86f7"
+    }
+  }
+}

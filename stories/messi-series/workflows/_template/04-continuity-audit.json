@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "task_type": "continuity-audit",
+  "agent_role": "novel-continuity-auditor",
+  "status": "ready",
+  "artifacts": [
+    {
+      "type": "audit_report",
+      "findings": []
+    }
+  ],
+  "diagnostics": [],
+  "proposed_writebacks": []
+}

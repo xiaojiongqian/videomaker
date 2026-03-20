@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "task_type": "chapter-summary",
+  "agent_role": "novel-chapter-summarizer",
+  "status": "completed",
+  "artifacts": [
+    {
+      "type": "chapter_summary",
+      "content": {
+        "one_line_summary": "本章写梅西在 2001 年 4 月 7 日迎来青年队正式首秀并进球，却在一周后的第二场正式比赛中遭遇腓骨骨折，随即进入恢复期。",
+        "major_beats": [
+          "2001 年 4 月 7 日，梅西在对安波斯塔的正式比赛中完成青年队首秀并进球，巴萨 3 比 0 取胜。",
+          "一周后对托尔托萨的第二场正式比赛里，巴萨 5 比 1 获胜，但梅西因腓骨骨折被提前换下。",
+          "骨折把刚建立起来的正式比赛连续性再次打断。",
+          "恢复期里，豪尔赫与俱乐部照料他，他则从看台和场边继续观看队友训练与比赛。",
+          "章节尾部把时间推进到下赛季回归 U14A 训练，为 CH004 的完整爆发做准备。"
+        ],
+        "state_changes": [
+          "“能否正式上场”的问题短暂得到答案，但立刻被伤病重新打断。",
+          "身体限制从抽象压力变成已实际发生的职业阻力。",
+          "梅西的成长线进一步显出一种特征：每次获得入口，几乎都会同时遇到新的现实成本。"
+        ],
+        "open_loops": {
+          "opened": [],
+          "advanced": [
+            "小身体是否能承受大命运",
+            "餐巾纸上的承诺何时真正落地",
+            "里奥能否在巴塞罗那真正找到归属"
+          ],
+          "resolved": []
+        },
+        "carry_forward": [
+          "CH004 应承接伤愈后的 U14A 赛季，写出 31 场 38 球与加泰罗尼亚杯决赛的爆发期。",
+          "后续继续优先使用官方或高可靠公开来源，不补写未经证实的私密细节。"
+        ]
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "confidence": "high",
+      "note": "本次优化不改变 canon，只压缩结构与摘要表达。"
+    }
+  ],
+  "proposed_writebacks": [
+    "update chapters/CH003.md from workflows/CH003/06-revised.md",
+    "refresh summaries/CH003.summary.md from workflows/CH003/07-summary.json"
+  ],
+  "change_set": [
+    {
+      "target": "chapters/CH003.md",
+      "action": "replace",
+      "reason": "optimize prose while preserving canon"
+    },
+    {
+      "target": "summaries/CH003.summary.md",
+      "action": "replace",
+      "reason": "re-render summary from structured workflow artifact"
+    }
+  ]
+}

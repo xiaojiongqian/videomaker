@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "task_type": "chapter-plan",
+  "agent_role": "novel-plot-architect",
+  "status": "ready",
+  "artifacts": [
+    {
+      "type": "chapter_plan",
+      "title": "CHXXX plan",
+      "content": []
+    }
+  ],
+  "diagnostics": [],
+  "proposed_writebacks": []
+}

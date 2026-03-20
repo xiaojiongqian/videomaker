@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "task_type": "chapter-plan",
+  "agent_role": "novel-plot-architect",
+  "status": "completed",
+  "artifacts": [
+    {
+      "type": "chapter_plan",
+      "title": "CH001 plan",
+      "content": [
+        {
+          "unit": "opening",
+          "goal": "迅速建立罗萨里奥、早慧球感与身体限制的并置",
+          "obstacle": "不能写成百科摘要，也不能编造家庭细节",
+          "beat": "球先替梅西说话，身体却迟迟跟不上"
+        },
+        {
+          "unit": "trial-turn",
+          "goal": "把 2000 年巴塞罗那试训写成少年成长的第一次现实转轨",
+          "obstacle": "公开事实有限，必须避免伪场景化过度",
+          "beat": "球场上疑虑退开，球场外风险重新围拢"
+        },
+        {
+          "unit": "napkin-commitment",
+          "goal": "把 2000-12-14 餐巾纸承诺写成责任落地，而非神话奇观",
+          "obstacle": "避免浪漫化过度和作者解释句",
+          "beat": "迟疑被写成责任，轻的一张纸把未来压重"
+        },
+        {
+          "unit": "exit-hook",
+          "goal": "把下一章义务转成章节尾部的余压",
+          "obstacle": "不出现“下一章将……”式元叙事",
+          "beat": "被看见不等于被接纳，等待仍在前方"
+        }
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "analysis_dimension": "structure",
+      "severity": "low",
+      "confidence": "high",
+      "note": "优化重点应放在推进感和段落重心，而非新增事实。"
+    }
+  ],
+  "proposed_writebacks": [
+    "update workflows/CH001/03-draft.md",
+    "update workflows/CH001/06-revised.md",
+    "refresh summaries/CH001.summary.md after archive"
+  ]
+}

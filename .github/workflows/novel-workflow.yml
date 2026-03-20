@@ -1,0 +1,34 @@
+name: Novel Workflow Gate
+
+on:
+  push:
+    paths:
+      - "stories/messi-series/**"
+      - "scripts/novel_workflow.py"
+      - "scripts/novel_workflow_check.py"
+      - ".agents/skills/novel-*.md"
+      - ".github/workflows/novel-workflow.yml"
+  pull_request:
+    paths:
+      - "stories/messi-series/**"
+      - "scripts/novel_workflow.py"
+      - "scripts/novel_workflow_check.py"
+      - ".agents/skills/novel-*.md"
+      - ".github/workflows/novel-workflow.yml"
+  workflow_dispatch:
+
+jobs:
+  novel-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run novel workflow checks
+        run: |
+          python3 scripts/novel_workflow.py check stories/messi-series --all

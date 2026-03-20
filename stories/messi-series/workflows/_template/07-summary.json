@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "task_type": "chapter-summary",
+  "agent_role": "novel-chapter-summarizer",
+  "status": "ready",
+  "artifacts": [
+    {
+      "type": "chapter_summary",
+      "content": {
+        "one_line_summary": "",
+        "major_beats": [],
+        "state_changes": [],
+        "open_loops": {
+          "opened": [],
+          "advanced": [],
+          "resolved": []
+        },
+        "carry_forward": []
+      }
+    }
+  ],
+  "diagnostics": [],
+  "proposed_writebacks": [],
+  "change_set": []
+}

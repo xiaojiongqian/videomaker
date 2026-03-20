@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "task_type": "chapter-plan",
+  "agent_role": "novel-plot-architect",
+  "status": "completed",
+  "artifacts": [
+    {
+      "type": "chapter_plan",
+      "title": "CH004 plan",
+      "content": [
+        {
+          "unit": "season-line",
+          "goal": "把完整赛季写成第一次连续不被打断的推进",
+          "obstacle": "不能写成统计罗列",
+          "beat": "此前断掉的那口气第一次被完整地跑完"
+        },
+        {
+          "unit": "results-gain-weight",
+          "goal": "让 31 场 38 球真正转成系统内部的重新估值",
+          "obstacle": "避免空泛夸赞“天才”",
+          "beat": "只要把他放进比赛里，结果就会不断出现"
+        },
+        {
+          "unit": "mask-final",
+          "goal": "把面具决赛写成赛季逻辑的集中呈现",
+          "obstacle": "不依赖传奇滤镜或过度浪漫化",
+          "beat": "保护没有消失，但比赛还是被他推向另一边"
+        },
+        {
+          "unit": "drive",
+          "goal": "把 Alex Garcia 的回忆吸收入角色动力，不写成资料提示",
+          "obstacle": "不能直接暴露来源口吻",
+          "beat": "别人盼休息，他更想训练和比赛"
+        },
+        {
+          "unit": "handoff",
+          "goal": "把 CH005 的升级压力埋好",
+          "obstacle": "不提前写成年赛事",
+          "beat": "一个赛季把名字从“可能”推到“必须继续看下去”"
+        }
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "analysis_dimension": "structure",
+      "severity": "low",
+      "confidence": "high",
+      "note": "现稿的事实完整，但中后段有少量重复“阻力仍在、进球也在”的解释，可压缩。"
+    }
+  ],
+  "proposed_writebacks": [
+    "update workflows/CH004/03-draft.md",
+    "update workflows/CH004/06-revised.md",
+    "refresh summaries/CH004.summary.md after archive"
+  ]
+}

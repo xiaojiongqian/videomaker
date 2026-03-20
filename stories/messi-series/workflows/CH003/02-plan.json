@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "task_type": "chapter-plan",
+  "agent_role": "novel-plot-architect",
+  "status": "completed",
+  "artifacts": [
+    {
+      "type": "chapter_plan",
+      "title": "CH003 plan",
+      "content": [
+        {
+          "unit": "dated-opening",
+          "goal": "用 2001-04-07 这个具体日期把长期等待切开",
+          "obstacle": "既要有事实重量，也不能写成成绩播报",
+          "beat": "等待第一次被真实比分切开"
+        },
+        {
+          "unit": "first-allowance",
+          "goal": "把正式出场写成系统终于允许他把自己交给结果",
+          "obstacle": "避免与 CH002 的等待主题重复过多",
+          "beat": "名字终于被写进正式名单"
+        },
+        {
+          "unit": "injury-reversal",
+          "goal": "让第二场比赛的腓骨骨折形成突然且干净的转折",
+          "obstacle": "不能靠夸张戏剧化取代事实本身",
+          "beat": "起点刚显形，就被身体向后拖走"
+        },
+        {
+          "unit": "sideline-months",
+          "goal": "把恢复期写成场边生活与少年脆弱感的沉积",
+          "obstacle": "不能扩写具体未证实的康复细节",
+          "beat": "他知道比赛仍在往前，自己却只能隔着一点距离看着"
+        },
+        {
+          "unit": "exit-hook",
+          "goal": "把 U14A 回归作为尾压，交给 CH004 承接",
+          "obstacle": "避免直接跳成下季成绩单",
+          "beat": "好消息和坏消息一起上身，事情却没有停"
+        }
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "analysis_dimension": "structure",
+      "severity": "low",
+      "confidence": "high",
+      "note": "现稿有效，但中后段关于少年脆弱与成长的解释性句子略多，可再收紧。"
+    }
+  ],
+  "proposed_writebacks": [
+    "update workflows/CH003/03-draft.md",
+    "update workflows/CH003/06-revised.md",
+    "refresh summaries/CH003.summary.md after archive"
+  ]
+}

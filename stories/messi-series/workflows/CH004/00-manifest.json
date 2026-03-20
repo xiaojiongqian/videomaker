@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "chapter_id": "CH004",
+  "chapter_title": "面具下的赛季",
+  "status": "archived",
+  "required_steps": {
+    "continuity_audit": true,
+    "dialogue_audit": false
+  },
+  "notes": "Update status as the workflow advances. Do not archive the chapter until lint passes."
+}

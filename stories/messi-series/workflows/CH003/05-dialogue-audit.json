@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "task_type": "dialogue-audit",
+  "agent_role": "novel-dialogue-editor",
+  "status": "ready",
+  "artifacts": [
+    {
+      "type": "dialogue_revision",
+      "content": []
+    }
+  ],
+  "diagnostics": [],
+  "proposed_writebacks": []
+}

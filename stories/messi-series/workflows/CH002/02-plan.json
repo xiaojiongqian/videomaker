@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "task_type": "chapter-plan",
+  "agent_role": "novel-plot-architect",
+  "status": "completed",
+  "artifacts": [
+    {
+      "type": "chapter_plan",
+      "title": "CH002 plan",
+      "content": [
+        {
+          "unit": "delayed-entry",
+          "goal": "把餐巾纸后的两个月等待写成进入拉玛西亚前的第一道缓冲带",
+          "obstacle": "不能只复述事实日期，需要形成少年处境压力",
+          "beat": "门已经开了一条缝，人却还站在门外"
+        },
+        {
+          "unit": "la-masia-order",
+          "goal": "把拉玛西亚写成一种生活秩序，而不是地名说明",
+          "obstacle": "避免介绍文口吻",
+          "beat": "先住进制度里，再轮到住进比赛里"
+        },
+        {
+          "unit": "registration-gap",
+          "goal": "突出六个月不能正式比赛对少年球员的真正损耗",
+          "obstacle": "不能滑成抽象励志话术",
+          "beat": "别人被写进名单，他只能一堂课一堂课把自己留在草地上"
+        },
+        {
+          "unit": "peer-buffer",
+          "goal": "让同龄队友的帮助进入文本，抵消纯孤绝叙事",
+          "obstacle": "不能虚构具体对白或桥段",
+          "beat": "最难跨过去的几步，有人先替他带了一程"
+        },
+        {
+          "unit": "forward-pressure",
+          "goal": "以未来正式比赛效率作为本章尾压，但不抢走 CH003 的空间",
+          "obstacle": "避免提前写成成绩单",
+          "beat": "后来那些数字不是突然长出来的"
+        }
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "analysis_dimension": "structure",
+      "severity": "low",
+      "confidence": "high",
+      "note": "现稿有效，但中段关于等待与专注的论述略重复，可压缩并前移场域感。"
+    }
+  ],
+  "proposed_writebacks": [
+    "update workflows/CH002/03-draft.md",
+    "update workflows/CH002/06-revised.md",
+    "refresh summaries/CH002.summary.md after archive"
+  ]
+}

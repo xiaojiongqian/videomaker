@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "task_type": "chapter-summary",
+  "agent_role": "novel-chapter-summarizer",
+  "status": "completed",
+  "artifacts": [
+    {
+      "type": "chapter_summary",
+      "content": {
+        "one_line_summary": "本章写梅西伤愈后迎来 U14A 的首个完整爆发赛季，并在加泰罗尼亚杯决赛的面具场面中，把等待、伤病与进球压成第一次完整的连续成果。",
+        "major_beats": [
+          "伤愈后，梅西第一次迎来一个不再被持续打断的完整赛季。",
+          "U14A 赛季里，他交出 31 场 38 球、4 次帽子戏法、1 次单场 4 球和 9 次梅开二度的持续输出。",
+          "赛季被写成梅西第一次从“值得讨论的孩子”变成“只要上场就持续产生结果的球员”。",
+          "加泰罗尼亚杯决赛对西班牙人，梅西戴着面具出场，7 分钟后摘下面具，并在半场前攻入两球。",
+          "巴塞罗那最终 4 比 1 夺冠，这一场面成为少年阶段最集中的赛季收束。"
+        ],
+        "state_changes": [
+          "伤病没有消失，但它第一次没有阻止梅西把一整个赛季踢完整。",
+          "连续输出让梅西在巴萨青训体系里的位置从“值得观察”推进到“必须持续上调和重视”。",
+          "身体与命运的冲突从单纯阻碍，转成伴随成长长期存在的背景压力。"
+        ],
+        "open_loops": {
+          "opened": [],
+          "advanced": [
+            "小身体是否能承受大命运",
+            "餐巾纸上的承诺何时真正落地",
+            "“天才”会不会先成为枷锁"
+          ],
+          "resolved": []
+        },
+        "carry_forward": [
+          "CH005 应进入更高年龄层和更快升级阶段，写出青训体系内部对梅西的重新估值。",
+          "后续继续优先使用官方统计、俱乐部材料或高可靠公开来源。"
+        ]
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "confidence": "high",
+      "note": "本次优化不改变 canon，只提升整章赛季线的集中度与摘要表达。"
+    }
+  ],
+  "proposed_writebacks": [
+    "update chapters/CH004.md from workflows/CH004/06-revised.md",
+    "refresh summaries/CH004.summary.md from workflows/CH004/07-summary.json"
+  ],
+  "change_set": [
+    {
+      "target": "chapters/CH004.md",
+      "action": "replace",
+      "reason": "optimize prose while preserving canon"
+    },
+    {
+      "target": "summaries/CH004.summary.md",
+      "action": "replace",
+      "reason": "re-render summary from structured workflow artifact"
+    }
+  ]
+}
