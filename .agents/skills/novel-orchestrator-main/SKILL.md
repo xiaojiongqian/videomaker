@@ -60,6 +60,18 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
 如果一个任务同时要求“生成新内容”和“判断它是否合理”，先生成，再审计。
 如果一个任务可以拆成多个互不污染的分析维度，允许并行分析，但统一汇总后再决定写回。
 
+## Set the Chapter Promise First
+
+在进入章节工作流前，先用 `references/novel-system/references/story-engine.md` 做一次内部检查：
+
+- 本章的 `disturbance` 是什么
+- 谁在 `pursuit`
+- 压力如何 `escalation`
+- 哪个节点构成 `irreversible turn`
+- 章末留下什么 `residue`
+
+如果这五项说不清，本章大概率还不该直接扩写，应先回退给 `novel-plot-architect`。
+
 ## Prefer Serial, Use Parallel Deliberately
 
 默认串行。
@@ -92,12 +104,16 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
 最少校验这些字段：
 
 - `schema_version`
+- `contract_version`
+- `task_id`
 - `task_type`
 - `agent_role`
 - `status`
 - `artifacts`
 - `diagnostics`
+- `recommendations`
 - `proposed_writebacks`
+- `execution`
 
 遇到以下情况时，不要直接写回：
 
@@ -120,14 +136,60 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
 5. 检查正文表面是否泄漏作者工作台
    - 不允许出现“本章要写什么”“下一章会怎样”“如果说前一章”“根据某资料/回顾”“这里值得写的是”这类规划语、解释语、资料提示语
    - 如果是纪实 / 现实向写法，把来源事实吸收进叙事表面，来源单列到状态文件或 source 清单，不写进正文
+   - 同时检查正文是否被总结句、评论句和抽象判断压过了具体事件
+   - 同时检查语言是否顺读，是否频繁依赖空心过桥句、模板化对照句和脱离现场的抽象比喻撑段落
+   - 如果 public/canon/source 已经给出关键人物名字，不要长期退回“某人”“一个人”“一个球员”这类发虚指代
 6. 按需并行调用 `novel-continuity-auditor` 和 `novel-dialogue-editor`
 7. 汇总问题并修订正文
+   - 如果 continuity 审计拦下了草稿，优先把 findings 压成定向 redraft 指令，再回到 `novel-scene-dramatizer` 做 1 到 2 轮 targeted rewrite，而不是直接放弃或只做表面润色
 8. 调用 `novel-chapter-summarizer` 生成摘要和状态变更草案
 9. 决定是否更新 `CURRENT_STATE.md`、`OPEN_LOOPS.md`、`FORESHADOWS.md`、`CHARACTER_ARCS.md`、`RECENT_EVENTS.md`
 10. 最后才归档章节正文
 
 如果用户只要求规划，不要越权扩写正文。
 如果用户只要求审计，不要顺手重写整章。
+
+## Hold a Higher Story Bar
+
+把“像小说”视为正文层硬要求，而不是锦上添花。
+
+默认把以下问题当成缺陷，而不是风格偏好：
+
+- 正文主要靠总结、评论、主题判断推进
+- 读完一章记得观点，却记不住人物、事件和场面
+- 角色长期只以功能标签出现，缺少稳定名字、关系位置和辨识度
+- 情节像履历表、资料卡或赛季述评，而不是由事件连续推动
+- 冲突停留在旁白判断里，没有落实到动作、阻力、选择、代价和结果
+- 语言像模板拼接，段首频繁先给概念判断，真正的动作总要晚一拍才落地
+- 短段和转场句只负责评论、命名或挂牌，不负责推进
+
+主调度应显式检查这些问题：
+
+1. 这一章是否由事件推动，而不是由总结句推动
+2. 关键人物是否尽量有名有姓
+3. 角色是否有可见差异
+4. 章节里是否存在可复述的场面节点
+5. 总结桥段是否只是桥，而不是主干
+6. 这一章是否有清楚的 `chapter promise`
+7. 章末留下的是事件余波，还是作者判断
+8. 语言表面是否顺读，还是总靠抽象结论、模板句式和空心短段撑节奏
+
+对于纪实、现实向、历史向写法：
+
+- 如果 public/source/canon 已给出名字，优先直接使用名字
+- 如果来源没有名字，不要虚构；使用稳定角色标签，并给出可观察区分点
+- 不要为了“更有血有肉”越过事实边界去编对白、私密心理或未公开细节
+
+如果草稿故事性明显不足，不要直接归档。优先回退到：
+
+- `novel-plot-architect`
+  - 当问题是事件链、章内结构、转折和场面支点不够
+- `novel-scene-dramatizer`
+  - 当问题是 plan 可用，但正文过于概述、发虚、像评论
+- `novel-dialogue-editor`
+  - 当问题集中在对白、声音和关系推进
+- `novel-continuity-auditor`
+  - 当需要把“总结腔 / 角色发虚 / 事件不落地”作为显式质量问题审计
 
 ## Preserve Narrative Surface
 
@@ -156,6 +218,14 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
 - “根据某资料 / 某回顾……”
 - “这里最值得写的是……”
 - 任何直接解释自己正在构思、组织、取材或论证的句子
+- 长时间替代事件推进的评论腔、总结腔和主题概括
+
+不要把章节写成：
+
+- 赛季述评
+- 履历罗列
+- 资料改写稿
+- 主题评论文
 
 ## Persist Workflow Artifacts
 
@@ -181,6 +251,8 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
   - `novel-chapter-summarizer` 产物
 - `08-writeback.md`
   - 本次 canon admission 与状态写回说明
+- `09-execution-log.json`
+  - 真实 sub-agent 调度痕迹、required role provenance 与显式 exception
 
 不要直接把第一版正文写进 `chapters/`。
 先让 workflow 工件齐全，再把稳定稿归档为正式章节。
@@ -190,8 +262,16 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
 推荐命令：
 
 - `python3 scripts/novel_workflow.py init <project_root> <chapter_id> "<chapter_title>"`
+- `python3 scripts/novel_workflow.py run-chapter <project_root> <chapter_id> --archive`
 - `python3 scripts/novel_workflow.py check <project_root> <chapter_id>`
 - `python3 scripts/novel_workflow.py archive <project_root> <chapter_id>`
+
+标准章节 workflow 默认启用强制 sub-agent policy：
+
+- `00-manifest.json` 里的 `execution_policy.require_subagents` 默认应为 `true`
+- `09-execution-log.json` 必须记录 required role 的真实 dispatch
+- `02-plan.json`、`04-continuity-audit.json`、`05-dialogue-audit.json`、`07-summary.json` 必须带 `contract_version`、`task_id`、`execution`
+- required role 缺失真实 `subagent` provenance 时，不得归档
 
 ## Gate With Workflow Lint
 
@@ -209,11 +289,16 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
 - 缺少必需审计文件
 - 缺少 `07-summary.json`
 - 缺少 `08-writeback.md`
+- 在 strict workflow 中缺少 `09-execution-log.json`
+- 在 strict workflow 中 required role 没有真实 sub-agent dispatch
+- 在 strict workflow 中 artifact 缺少 `contract_version`、`task_id` 或 `execution`
 - 正文里出现元叙事 / 作者工作台泄漏
+- 正文明显以总结、评论、概述替代事件推进，且未返工
+- 连续性审计仍报出 `readability` 或 `prose-naturalness` 的中高严重度问题
 - workflow manifest 与章节 id / 状态不一致
 
 如果项目提供了 workflow lint，先修 lint，再写回 `chapters/`、`summaries/` 和状态文件。
-如果项目提供了 workflow runner，默认通过 runner 执行 `init`、`set-status`、`archive`，避免手工漏步。
+如果项目提供了 workflow runner，默认通过 runner 执行 `init`、`run-chapter`、`archive`，避免手工漏步。
 
 ## Write Back Conservatively
 
@@ -235,14 +320,15 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
 
 把每次子 skill 调用都视为一次隔离的短会话。
 
-如果运行环境支持 sub-agent：
+对标准章节任务，默认必须使用真实子 agent，而不是主调度自己包办所有步骤。
 
 1. 为每个子 skill 提供最小必要上下文
 2. 不继承无关历史噪音
 3. 只回收结构化产物和诊断
+4. 为每次 dispatch 分配稳定 `task_id`
+5. 把 dispatch 写入 `09-execution-log.json`
 
-对标准章节任务，默认优先使用真实子 agent，而不是主调度自己包办所有步骤。
-建议至少拆成：
+默认至少拆成：
 
 - `novel-plot-architect`
 - `novel-scene-dramatizer`
@@ -253,13 +339,22 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
 - `novel-continuity-auditor`
 - `novel-dialogue-editor`
 
-只有在运行环境明确不支持 sub-agent、或任务规模极小且用户接受简化流程时，才允许收缩成单代理串行模拟。
+只有在以下情况同时成立时，才允许非 sub-agent fallback：
 
-如果运行环境不支持 sub-agent：
+1. `00-manifest.json` 的 `execution_policy.fallback_policy.allow_modes` 显式允许
+2. `09-execution-log.json` 里登记了 exception
+3. exception 含 `agent_role`、`output_refs`、`fallback_mode`、`reason_code`、`approved_by`、`justification`
+4. lint 没有拒绝该 fallback
 
-1. 用命名上下文块重述最小输入
-2. 明确禁止子 skill 依赖隐式记忆
-3. 在每次调用后只保留结构化结果，不保留散漫对话
+如果以上任一条件不成立，单代理串行模拟视为无效，不得声称已完成多 skill 协作。
+
+主调度自己的职责是：
+
+1. 裁剪上下文
+2. 分发真实 sub-agent 任务
+3. 汇总草稿与审计
+4. 生成 `06-revised.md` 和 `08-writeback.md`
+5. 执行最小状态写回
 
 ## Shared Source
 
@@ -267,6 +362,8 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
 - `references/novel-system/contracts.md`
 - `references/novel-system/context-model.md`
 - `references/novel-system/conventions.md`
+- `references/novel-system/references/story-engine.md`
+- `references/novel-system/references/language-surface.md`
 - `references/novel-system/schemas/`
 - `references/novel-system/templates/`
 

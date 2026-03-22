@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "task_id": "CH006-continuity-001",
+  "task_type": "continuity-audit",
+  "agent_role": "novel-continuity-auditor",
+  "status": "completed",
+  "execution": {
+    "mode": "subagent",
+    "trace_ref": "09-execution-log.json",
+    "provenance": {
+      "agent_session_id": "019d1118-f8ef-79b3-bbbb-d7f797a84a72",
+      "agent_run_id": "",
+      "external_invocation_id": "CH006-continuity-001:2026-03-21T15:52:22Z"
+    },
+    "input_snapshot": {
+      "context_refs": [
+        "01-context.md",
+        "06-revised.md"
+      ],
+      "context_hash": "sha256:52ea797cf951bdbc789f8b6ea23dc5c7b1fcea87798d48b0e2d43375177ac6c7"
+    }
+  },
+  "artifacts": [
+    {
+      "type": "audit_report",
+      "findings": [
+        {
+          "analysis_dimension": "narrative-surface",
+          "severity": "high",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "草稿按“正式首秀-首个正式进球-世青赛-UEFA比较”顺序罗列节点，但多数段落在事件刚落地后就立刻转入总结和归纳，整体更像纪实摘要或媒体回顾，而不是以场面推进的章节正文。",
+          "fix": "回退到事件表面重写，优先把 2004 年 10 月 16 日首秀和 2005 年 5 月 1 日进球写成可见动作连续体，减少节点后立即下结论的句子，让“正式入口第一次落地”从场面里成立。"
+        },
+        {
+          "analysis_dimension": "commentary-drift",
+          "severity": "high",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "“这次出场没有把位置一并解决”“问题不只是……”“纪录不会顺手替他清空竞争”“称呼先到了，位置还没有”等句子持续替读者解释意义，评论密度偏高，压过了事件自身的叙述重量。",
+          "fix": "把解释性判断压缩到章节收束处一到两句，其余改为公开可见后果、比赛内即时变化和具体场面，让“位置未稳”和“比较先到”由事件关系显出，而不是由旁白反复说明。"
+        },
+        {
+          "analysis_dimension": "character-embodiment",
+          "severity": "medium",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "梅西、德科、罗纳尔迪尼奥虽然具名，但梅西主要仍以“被写进记录的人名”出现，缺少足够稳定的身体动作、跑位关系和当下承压感，人物辨识度与重量不足。",
+          "fix": "在首秀和首球段补入梅西的跑动、时机、与换下者/传球者的场上关系等可见细节，减少把人物当作履历节点承载体的写法。"
+        },
+        {
+          "analysis_dimension": "tension",
+          "severity": "medium",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "章节口头上明确了“位置未坐实”和“比较提前压来”两条冲突，但除了越位无效这一瞬间外，冲突大多停留在旁白判断；尤其“公开比较”主要在尾段以信息块方式进入，没有充分落到具体事件节点上。",
+          "fix": "让比较压力更早、更具体地附着到公开节点，并把“下一张名单”的不确定性绑定到首秀和首球后的即时后果，增强事件之间的反压和推进，而不是只在段尾概括。"
+        }
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "analysis_dimension": "timeline",
+      "severity": "none",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "时间顺序与章节范围基本准确：2004 年 10 月 16 日正式首秀，2005 年 5 月 1 日首个正式进球，随后是 2005 年夏世青赛与 2005 年 9 月底的 UEFA 比较；2003 年波尔图也被明确限定为友谊赛背景。"
+    },
+    {
+      "analysis_dimension": "fact-boundary",
+      "severity": "none",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "未见把阶段性机会误写成正式确立，也未混入来源说明、统计口吻、私密更衣室细节、虚构媒体原话或成年后完整履历，纪实边界总体守住。"
+    },
+    {
+      "analysis_dimension": "character-source",
+      "severity": "none",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "未见 unsupported character attribution 或 unsupported internal-state inference 的硬伤；相关压力判断主要停留在叙述层，而非伪造人物对白或内心。"
+    },
+    {
+      "analysis_dimension": "narrative-surface",
+      "severity": "high",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "章节主要依靠节点概述与总结句推进，事件表面偏薄，纪实小说语体被摘要式写法明显稀释。"
+    },
+    {
+      "analysis_dimension": "character-embodiment",
+      "severity": "medium",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "人物虽具名，但可见压力与在场感不足，梅西更像纪录条目承载者，而不是正在被比赛与比较逼迫的年轻球员。"
+    },
+    {
+      "analysis_dimension": "commentary-drift",
+      "severity": "high",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "抽象判断和意义归纳过密，旁白持续替读者解释“这意味着什么”，削弱了事件自己发声。"
+    },
+    {
+      "analysis_dimension": "tension",
+      "severity": "medium",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "有基础冲突节点，但“位置未稳”和“比较先到”的压力尚未稳定落成场面中的反作用、选择与代价。"
+    },
+    {
+      "analysis_dimension": "continuity",
+      "severity": "none",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "开放回路承接正确：正式入口已打开但稳定位置未解决，公开比较开始早于真正站稳，没有明显回退或篡改既有方向。"
+    }
+  ],
+  "recommendations": [
+    "回退到 scene-level 重写，不改现有事实节点与时间顺序，优先补强正式首秀与阿尔瓦塞特进球两个核心事件段。",
+    "把解释性总结句压缩到章节收束处一到两句，其余改为可见动作、公开表面和即时后果，降低 commentary drift。",
+    "让“公开比较开始到来”更早、更具体地落在公开事件节点上，避免只在尾段以信息块方式交代。"
+  ],
+  "proposed_writebacks": [
+    "将本次审计结果登记为 CH006 的 continuity audit 记录。",
+    "将 CH006 标记为需针对 narrative-surface、commentary-drift、character-embodiment、tension 四项返工。"
+  ],
+  "change_set": []
+}

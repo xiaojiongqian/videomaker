@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "chapter_id": "CH005",
+  "orchestrator_role": "novel-orchestrator-main",
+  "status": "in_progress",
+  "dispatches": [
+    {
+      "task_id": "CH005-plan-001",
+      "agent_role": "novel-plot-architect",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d1171-8f9a-7da1-9c08-d812970e4ebf",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md"
+      ],
+      "output_refs": [
+        "02-plan.json"
+      ],
+      "started_at": "2026-03-21T17:29:08Z",
+      "completed_at": "2026-03-21T17:34:05Z",
+      "model": "gpt-5.4",
+      "notes": ""
+    },
+    {
+      "task_id": "CH005-draft-001",
+      "agent_role": "novel-scene-dramatizer",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d1176-1a0d-7502-96a8-dc511a9b84d2",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "02-plan.json"
+      ],
+      "output_refs": [
+        "03-draft.md"
+      ],
+      "started_at": "2026-03-21T17:34:05Z",
+      "completed_at": "2026-03-21T17:35:44Z",
+      "model": "gpt-5.4",
+      "notes": ""
+    },
+    {
+      "task_id": "CH005-continuity-001",
+      "agent_role": "novel-continuity-auditor",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d1177-9b56-7b12-a756-eced91258e3a",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "output_refs": [
+        "04-continuity-audit.json"
+      ],
+      "started_at": "2026-03-21T17:35:44Z",
+      "completed_at": "2026-03-21T17:38:29Z",
+      "model": "gpt-5.4",
+      "notes": ""
+    }
+  ],
+  "exceptions": []
+}

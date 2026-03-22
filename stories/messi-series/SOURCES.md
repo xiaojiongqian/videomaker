@@ -44,6 +44,38 @@
      - 回到 U14A 后交出 31 场 38 球、4 次帽子戏法、1 次单场 4 球、9 次梅开二度
      - 加泰罗尼亚杯决赛对西班牙人 4 比 1 取胜，梅西戴面具出场、7 分钟后摘下并在半场前攻入两球
      - Alex Garcia 对其训练欲望与完整赛季表现的回顾
+     - 2003/04 赛季先后完成 U19A、巴萨 C、巴萨 B 首秀，并在四支梯队合计出战 37 场正式比赛、攻入 35 球
+     - 2003 年 11 月 16 日对波尔图的一线队友谊赛首秀发生在这一快速升级赛季中
+     - 对格拉马内特 B 上演帽子戏法并在第 89、90 分钟连入两球完成逆转
+     - 赛季末回到 U19B 参与最后三轮并帮助球队拿下联赛冠军
+
+7. FC Barcelona, “21 years since Leo Messi debuted for FC Barcelona”
+   - 链接: https://www.fcbarcelona.com/en/news/4169478/21-years-since-leo-messi-debuted-for-fc-barcelona
+   - 用途:
+     - 2003 年 11 月 16 日对波尔图的比赛是梅西巴萨一线队首次出场
+     - 梅西当时 16 岁
+     - 第 71 分钟替补登场，替下 Fernando Navarro
+
+8. FC Barcelona, “#Messi399. Did you know...?”
+   - 链接: https://www.fcbarcelona.com/en/news/1129857/messi-did-you-know
+   - 用途:
+     - 梅西巴萨一线队正式比赛首秀发生在 2004 年 10 月 16 日对西班牙人的德比战
+     - 他在第 82 分钟替补登场，换下德科
+     - 2005 年 5 月 1 日对阿尔瓦塞特的比赛，是他一线队首个正式进球之战
+
+9. FC Barcelona, “20 years since Leo Messi's first official goal”
+   - 链接: https://www.fcbarcelona.com/en/football/first-team/news/4256638/20-years-since-leo-messis-first-official-goal/featured
+   - 用途:
+     - 2005 年 5 月 1 日对阿尔瓦塞特，梅西在第 88 分钟出场
+     - 他先有一球因越位被判无效，随后再次接罗纳尔迪尼奥挑传破门
+     - 这个进球让他在当时成为西甲最年轻进球者
+
+10. UEFA, “Messi, ¿el nuevo Maradona?”
+   - 链接: https://es.uefa.com/news-media/news/01ad-0f8ea700117c-8afe36659d4c-1000--messi-el-nuevo-maradona/
+   - 用途:
+     - 到 2005 年 9 月底，欧洲主流足球媒体已公开把梅西与马拉多纳相提并论
+     - 文中明确回顾了他 2003 年 11 月的波尔图友谊赛首秀、2004 年对西班牙人的正式比赛首秀，以及对阿尔瓦塞特后成为巴萨最年轻联赛进球者
+     - 文中还记录了 2005 年夏天阿根廷世青赛后，梅西的公众关注度和俱乐部位置一起加速上升
 
 ## Source Use Rules
 - 仅把上述来源能支撑的事实写成确定表述。

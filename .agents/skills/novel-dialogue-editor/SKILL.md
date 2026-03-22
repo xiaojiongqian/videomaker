@@ -14,6 +14,12 @@ description: 长篇小说对白与角色声音修订。用于打磨对白、区�
 
 优先兼容 `novel-orchestrator-main` 的 `TaskEnvelope`。
 
+如果你是在标准章节 workflow 中被调用：
+
+- 默认应作为独立真实 sub-agent 执行
+- 是否必须执行由 manifest 决定，而不是由主调度临时省略
+- strict workflow 下，若被要求出工件却没有独立 dispatch，应返回 `blocked`
+
 最少需要：
 
 - `task_type`
@@ -37,9 +43,12 @@ description: 长篇小说对白与角色声音修订。用于打磨对白、区�
 - 角色是否在无必要时解释过多
 - 对话是否推动冲突或关系变化
 - 沉默、打断、转移话题是否被利用
+- 说话者是否仍像“功能标签”而不是具体人物
+- 如果已有 canon/public/source 名字，是否被无谓地写成 generic speaker
 
 角色区分不靠口癖堆砌。
 优先通过句长、节奏、信息取舍、回避方式和攻击方式区分声音。
+如果要快速抓说话人差异，优先回到角色此刻的目标、风险和回避方式，而不是给每个人硬加口头禅。
 
 ## Work in This Order
 
@@ -48,6 +57,10 @@ description: 长篇小说对白与角色声音修订。用于打磨对白、区�
 3. 在不改变事实的前提下压缩台词
 4. 加强潜台词、打断和反应
 5. 标记仍需上游修复的结构问题
+
+如果问题根因不是台词本身，而是人物没有名字、目标不清、关系不成立或场景没有足够事件压力，明确回退给上游，不要假装只靠润色对白就能补救。
+
+如果对白周围的叙述语言发僵、模板味过重或只会用判断句承接，也要明确指出这是上游 `scene` 问题，而不是用几句台词修辞掩盖。
 
 ## Return Structured Output
 
@@ -69,6 +82,20 @@ description: 长篇小说对白与角色声音修订。用于打磨对白、区�
 
 如果章节几乎没有对白，或 orchestrator 明确将对白审计标记为非必需，可以跳过该文件；但跳过应由 manifest 显式声明，而不是临时省略。
 
+推荐至少保留：
+
+- `schema_version`
+- `contract_version`
+- `task_id`
+- `task_type`
+- `agent_role`
+- `status`
+- `execution`
+- `artifacts`
+- `diagnostics`
+- `recommendations`
+- `proposed_writebacks`
+
 ## Refuse Scope Creep
 
 不要无授权改写核心情节。
@@ -79,4 +106,6 @@ description: 长篇小说对白与角色声音修订。用于打磨对白、区�
 
 - `references/novel-system/references/dialogue.md`
 - `references/novel-system/references/dramatic-tension.md`
+- `references/novel-system/references/story-engine.md`
+- `references/novel-system/references/language-surface.md`
 - `references/novel-system/conventions.md`

@@ -1,0 +1,203 @@
+{
+  "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "task_id": "CH005-continuity-001",
+  "task_type": "continuity-audit",
+  "agent_role": "novel-continuity-auditor",
+  "status": "completed",
+  "execution": {
+    "mode": "subagent",
+    "trace_ref": "09-execution-log.json",
+    "provenance": {
+      "agent_session_id": "019d1177-9b56-7b12-a756-eced91258e3a",
+      "agent_run_id": "",
+      "external_invocation_id": "CH005-continuity-001:2026-03-21T17:35:44Z"
+    },
+    "input_snapshot": {
+      "context_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "context_hash": "sha256:b5b0be9044103e78b9ebeab18464c614b97cd40f2fd134c2bb3c27f4060ea9a6"
+    }
+  },
+  "artifacts": [
+    {
+      "type": "audit_report",
+      "findings": [
+        {
+          "analysis_dimension": "narrative-surface",
+          "severity": "high",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "草稿主要靠赛果罗列加抽象判断推进，除格拉马内特B一段外，绝大多数段落都在做履历式压缩和概念性归纳，未把“门槛感”落到可见场面，已偏离上下文要求的“避免写成履历表”。",
+          "fix": "回退到 scene-level 重组，保留 3 到 4 个关键节点做在场叙述，把赛季总账和跨层级轨迹压缩到章末余波，不要让统计与总结承担主要推进功能。"
+        },
+        {
+          "analysis_dimension": "tension",
+          "severity": "high",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "本章缺少稳定的最小 story engine。开头有上调扰动，但没有持续可见的追求线；升级多由旁白宣告，不是由事件链逼出；格拉马内特B的逆转虽有局部张力，却没有统摄全章；章末留下的是作者总结，不是场面余波。",
+          "fix": "先明确单章主线，例如“摸到一线队门槛后，能否在成人正式比赛里继续被使用”，再让 U19A 首秀、波尔图友谊赛、巴萨C逆转、巴萨B首秀形成递进压力和偏转。"
+        },
+        {
+          "analysis_dimension": "character-embodiment",
+          "severity": "high",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "梅西在章内主要是被上调、被使用、被重新分配的对象，读者看见的是身份标签和层级移动，看不见他在每个节点上的即时目标、外部 stakes、身体负荷和压力反应。决定性力量也始终是抽象“体系”，人物场域过空。",
+          "fix": "每个保留节点至少补一组可观察信息：他当下要完成什么、外部压力来自哪里、比赛怎样逼迫他调整；避免只用“瘦小左脚球员/少年”这类抽象标签替代人物在场感。"
+        },
+        {
+          "analysis_dimension": "commentary-drift",
+          "severity": "high",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "文中反复出现带总评性质的句子，如“旧的判断都要被推翻一次，再重写一次”“更难再被忽视的事实”“灯确实亮过，门槛也确实摸到了”，叙述频繁滑向回顾式评论，纪实小说表层被解释腔覆盖。",
+          "fix": "删减段内的二次解释和判断句，让可核验节点自己承担意义；必要过渡只保留最小连接，不用作者口吻替读者下结论。"
+        },
+        {
+          "analysis_dimension": "character-source",
+          "severity": "medium",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "草稿把选择逻辑和评估意图多次归给抽象主体，如“名单先把梅西放进”“体系里关于这个瘦小左脚球员的分配开始变快”“一线队友谊赛后的注意力没有把他直接送进更高处”“体系没有把他钉死在任何一级”。这些不是给定上下文中的具名角色，也没有可见来源支撑，属于 unsupported character attribution。",
+          "fix": "把抽象主体改写成可观察结果，只写他随后在哪一级出场、踢了多久、比赛结果如何；若没有来源支持，不要替‘体系’赋予明确意志和判断。"
+        },
+        {
+          "analysis_dimension": "fact-boundary",
+          "severity": "medium",
+          "confidence": "medium",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "硬时间点和赛果基本守住了，但多处把阶段性机会放大成制度性结论，例如“名单也不再只是把他提上来试一试”“前面的进球和翻盘不能替他跳过这一关”“1比0……足够说明他已经被继续向上调用”。上下文只提供公开节点，不足以支持这些内部判定和因果解释。",
+          "fix": "保留“门槛感”时，只写到公开可见的层级移动与使用方式，避免把一次出场、一次进球或一次调用写成更正式的确立或稳定结论。"
+        },
+        {
+          "analysis_dimension": "continuity",
+          "severity": "low",
+          "confidence": "medium",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "本章延续了“继续上调”的开放回路，但“更高年龄层与更强对抗如何重新测试身体和节奏”主要停留在口头宣告，没有被场面证明；“天才会不会先把他压垮”这一条则未见承接，导致 arc 推进更多停在主题复述层。",
+          "fix": "如果当前来源不足以支撑更完整承接，就把本章收窄到“层级持续上调但身份未固化”；若要推进其他开放回路，需先有可写成场面的支撑节点。"
+        }
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "analysis_dimension": "timeline",
+      "severity": "none",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "未发现明确日期或顺序冲突；叙述保持在 2003/04 赛季内，也没有提前写到 2004/05 的正式首秀、首球或公开大规模比较。"
+    },
+    {
+      "analysis_dimension": "fact-boundary",
+      "severity": "medium",
+      "confidence": "medium",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "硬事实节点基本符合上下文，但存在把公开结果扩写成内部判断、稳定身份或制度性评估的倾向。"
+    },
+    {
+      "analysis_dimension": "character-source",
+      "severity": "medium",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "多次由抽象“名单/体系/注意力”承担决策意志，属于未获上下文支撑的角色归因。"
+    },
+    {
+      "analysis_dimension": "narrative-surface",
+      "severity": "high",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "整体表面更接近赛季摘要和成长概述，而非由事件节点推进的章节正文。"
+    },
+    {
+      "analysis_dimension": "character-embodiment",
+      "severity": "high",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "关键人物主要以功能位出现，缺少即时目标、外部 stakes 和可观察压力反应。"
+    },
+    {
+      "analysis_dimension": "commentary-drift",
+      "severity": "high",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "解释句和总结句密度过高，叙述多次滑向作者式评论。"
+    },
+    {
+      "analysis_dimension": "tension",
+      "severity": "high",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "单章缺少清楚的扰动-追求-升级-偏转-余波链条，整体 contour 发平。"
+    },
+    {
+      "analysis_dimension": "continuity",
+      "severity": "low",
+      "confidence": "medium",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "本章没有与既有事实冲突，但对开放回路的承接偏抽象，arc 推进力度有限。"
+    }
+  ],
+  "recommendations": [
+    "不要直接微修现稿；先回退到 novel-plot-architect，把 CH005 收束成少量 scene beats，再交给正文重写。",
+    "重写时只让公开、可核验节点承担场面锚点，删除或弱化所有无法由同段可见事实支撑的制度判断和因果解释。",
+    "把“门槛感”具体化为可观察压力：出场层级、90 分钟负荷、比分状态、成人对抗和位置竞争，而不是反复用抽象总结句宣告。",
+    "章末不要再用赛季总账做大段总结；改为保留一个更具体的余波画面，再用极短信息补足赛季统计。",
+    "若没有来源支持的具名决策者，就不要硬补人物；应减少对抽象‘体系’的拟人化归因。"
+  ],
+  "proposed_writebacks": [
+    "写入 workflows/CH005/04-continuity-audit.json。",
+    "在 orchestrator 任务状态中将 CH005 标记为需回退到 planning，先补 scene-level outline 再重写正文。",
+    "不更新任何 canon/state 正文档案；本次问题主要属于章节执行层，而非既有事实库。"
+  ],
+  "change_set": []
+}

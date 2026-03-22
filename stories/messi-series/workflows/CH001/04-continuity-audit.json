@@ -1,12 +1,86 @@
 {
   "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "task_id": "CH001-continuity-001",
   "task_type": "continuity-audit",
   "agent_role": "novel-continuity-auditor",
   "status": "completed",
+  "execution": {
+    "mode": "subagent",
+    "trace_ref": "09-execution-log.json",
+    "provenance": {
+      "agent_session_id": "019d1175-5cf2-7581-9a2d-7b3d5d194d4d",
+      "agent_run_id": "",
+      "external_invocation_id": "CH001-continuity-001:2026-03-21T17:33:17Z"
+    },
+    "input_snapshot": {
+      "context_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "context_hash": "sha256:b50d0207852eaffab63d89b43b27ab3a90fc891fbca5a550fe33026c0105e1e4"
+    }
+  },
   "artifacts": [
     {
       "type": "audit_report",
-      "findings": []
+      "findings": [
+        {
+          "analysis_dimension": "narrative-surface",
+          "severity": "high",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "本章主要靠概括句和判断句推进，尤其试训段仍是“被看见、被衡量、值得继续讨论”的抽象总结，没有落成一个有限窗口内可定位的观察与判断事件。这直接违背了 context 对试训段“必须写成事件节点”的约束。",
+          "fix": "把试训段收束成 1-2 个可见节点：到场、受观察、试训结束后仍未落纸；删减抽象概括，改用日期、动作、场地、纸面状态来推进。"
+        },
+        {
+          "analysis_dimension": "character-embodiment",
+          "severity": "high",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "梅西在章内大多是被陈述的对象，缺少可见的即时目标、外部 stakes 下的压力反应与处境变化。除末段雷克萨奇外，关键成年人长期不具名，人物辨识度弱，容易只剩“少年”“成年人”“巴塞罗那方面”的功能位。",
+          "fix": "让每段都落到人物动作和压力反应：前段明确“保住道路”的外部 stakes，试训段让梅西处在具体被观察场面里，并尽早引入具名关键人或明确谁在做什么。"
+        },
+        {
+          "analysis_dimension": "character-source",
+          "severity": "medium",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "草稿多次把“巴塞罗那方面”“身边的成年人”作为统一主体，替其代写判断或意图，如“愿意继续把他留在视线里”“只剩下一个不够稳固的事实”。这超出给定上下文支持，也踩到 source boundary 中“不统一代写心理”的限制。",
+          "fix": "把集合主体改回可观察层：谁写下什么、谁没有完成什么手续、纸面是否存在；无来源时不要写统一判断、心理或意向。"
+        },
+        {
+          "analysis_dimension": "commentary-drift",
+          "severity": "medium",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "“远方很难只被当成远方”“空白就越显眼”“机会脱离了空气”等句群把等待与悬置写成作者评论和抽象命题，削弱纪实小说的现场感。中段连续数段在解释意义，而不是推进事件。",
+          "fix": "压缩比喻和主题判断，把“等待”具体化为试训已结束、手续未成、纸面仍空白等外部状态，让意义从节点自己显出来。"
+        },
+        {
+          "analysis_dimension": "tension",
+          "severity": "medium",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "章节有基础 contour：治疗压力是扰动，试训是窗口，餐巾纸是转折，结尾保留余波；但升级和偏转主要靠概念总结完成，读者较难记住试训到承诺之间具体发生了哪几个事件，story engine 偏平。",
+          "fix": "在试训结束与 2000-12-14 之间补一层可见升级：窗口结束后机会为何更危险、什么缺口必须被“写下来”才能改变局面；让转折由具体缺口触发，而不是由作者解释触发。"
+        }
+      ]
     }
   ],
   "diagnostics": [
@@ -15,27 +89,92 @@
       "severity": "none",
       "confidence": "high",
       "evidence_refs": [
-        "chapters/CH001.md",
-        "SOURCES.md"
+        "01-context.md",
+        "03-draft.md"
       ],
-      "note": "未发现与既有时间线冲突的事实。"
+      "note": "1995 进入纽维尔老男孩少年队、2000 年 9 月试训、2000-12-14 餐巾纸承诺的顺序一致，未见时间线冲突。"
     },
     {
-      "analysis_dimension": "canon-boundary",
+      "analysis_dimension": "fact-boundary",
+      "severity": "none",
+      "confidence": "medium",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "未见新增可核验硬事实、私密生活细节或伪引语，也未把 2000-12-14 误写成手续完成；边界风险主要体现在集合主体的推断性表述，已计入 character-source。"
+    },
+    {
+      "analysis_dimension": "character-source",
+      "severity": "medium",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "存在对“巴塞罗那方面”“身边的成年人”的统一代写判断与意图，超出给定上下文的可证实范围。"
+    },
+    {
+      "analysis_dimension": "narrative-surface",
+      "severity": "high",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "章面高度概述化，试训段未落成被观察、被判断的具体事件节点，整体更像提炼后的说明文而非纪实小说表面。"
+    },
+    {
+      "analysis_dimension": "character-embodiment",
+      "severity": "high",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "关键人物缺少稳定辨识度与即时目标，梅西承受的压力多以作者概括出现，外部 stakes 与反应没有被具象化。"
+    },
+    {
+      "analysis_dimension": "commentary-drift",
+      "severity": "medium",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "中段大量使用抽象判断和主题句解释“远方”“空白”“空气”，等待与悬置没有充分落到可观察状态。"
+    },
+    {
+      "analysis_dimension": "tension",
+      "severity": "medium",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "有扰动、转折和余波的骨架，但追求线、升级和偏转缺少事件化承载，chapter contour 发平。"
+    },
+    {
+      "analysis_dimension": "continuity",
       "severity": "none",
       "confidence": "high",
       "evidence_refs": [
-        "chapters/CH001.md",
-        "SOURCES.md"
+        "01-context.md",
+        "03-draft.md"
       ],
-      "note": "当前章未引入未经授权的新设定，可安全做语面与结构优化。"
+      "note": "结尾守住了关键约束：餐巾纸承诺被写成“机会第一次落到纸面”，没有被误写为手续完成、归属完成或风险消失；开放回路也被保留。"
     }
   ],
   "recommendations": [
-    "保留既有事实边界，集中优化段落推进与句面强度。",
-    "不需要回退上游规划。"
+    "先回退到 `novel-plot-architect`，把 CH001 三段骨架细化为事件节点：前史只留必要压力起点，试训段明确观察与判断窗口，2000-12-14 明确纸面转折。",
+    "再交 `novel-scene-dramatizer` 按节点重写正文表面，中段禁止连续抽象解释段；每段至少保留一个可观察动作、状态变化或纸面变化。",
+    "收紧 source boundary：未具名且无来源支撑的群体不代写心理，不用“巴塞罗那方面”“身边的成年人”承载统一判断。",
+    "保留结尾“机会落纸但未完成”的正确边界，但把“归属、身体压力、天才标签”的余波改成从当前事件自然外溢，而不是作者补充说明。"
   ],
   "proposed_writebacks": [
-    "update workflows/CH001/06-revised.md"
-  ]
+    "将本次结果持久化为 `workflows/CH001/04-continuity-audit.json`。",
+    "将 CH001 标记为 `needs-structural-redraft`，先补试训期事件节点与压力梯度，再进入正文重写。",
+    "不写回 canon；仅更新 workflow 审计记录与章节状态。"
+  ],
+  "change_set": []
 }

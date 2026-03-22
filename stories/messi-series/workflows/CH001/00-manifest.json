@@ -1,11 +1,58 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "chapter_id": "CH001",
   "chapter_title": "餐巾纸上的名字",
-  "status": "archived",
+  "status": "drafted",
   "required_steps": {
     "continuity_audit": true,
     "dialogue_audit": false
   },
-  "notes": "Update status as the workflow advances. Do not archive the chapter until lint passes."
+  "notes": "Update status as the workflow advances. Do not archive the chapter until lint passes.",
+  "contract_version": "2026-03",
+  "execution_policy": {
+    "orchestration_mode": "multi-skill-subagents",
+    "require_subagents": true,
+    "trace_file": "09-execution-log.json",
+    "required_dispatches": [
+      {
+        "agent_role": "novel-plot-architect",
+        "output_refs": [
+          "02-plan.json"
+        ],
+        "when": "always"
+      },
+      {
+        "agent_role": "novel-scene-dramatizer",
+        "output_refs": [
+          "03-draft.md"
+        ],
+        "when": "always"
+      },
+      {
+        "agent_role": "novel-continuity-auditor",
+        "output_refs": [
+          "04-continuity-audit.json"
+        ],
+        "when": "required_steps.continuity_audit"
+      },
+      {
+        "agent_role": "novel-dialogue-editor",
+        "output_refs": [
+          "05-dialogue-audit.json"
+        ],
+        "when": "required_steps.dialogue_audit"
+      },
+      {
+        "agent_role": "novel-chapter-summarizer",
+        "output_refs": [
+          "07-summary.json"
+        ],
+        "when": "always"
+      }
+    ],
+    "fallback_policy": {
+      "allow_modes": [],
+      "require_exception_entry": true
+    }
+  }
 }

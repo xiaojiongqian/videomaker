@@ -1,12 +1,97 @@
 {
   "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "task_id": "CH002-continuity-001",
   "task_type": "continuity-audit",
   "agent_role": "novel-continuity-auditor",
   "status": "completed",
+  "execution": {
+    "mode": "subagent",
+    "trace_ref": "09-execution-log.json",
+    "provenance": {
+      "agent_session_id": "019d1174-c5f4-72c0-a051-e1b82663e5b3",
+      "agent_run_id": "",
+      "external_invocation_id": "CH002-continuity-001:2026-03-21T17:32:38Z"
+    },
+    "input_snapshot": {
+      "context_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "context_hash": "sha256:9f6c5b2e756b61eb4b5814012c8e1e520054ecd6f93828ea52fa7e5bb6ee50c8"
+    }
+  },
   "artifacts": [
     {
       "type": "audit_report",
-      "findings": []
+      "findings": [
+        {
+          "analysis_dimension": "narrative-surface",
+          "severity": "high",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "本章主要由抽象判断句和概念复述推进。除“抵达拉玛西亚”“得知六个月无法踢正式比赛”“训练与少量友谊赛”“同龄队友帮助适应”外，几乎没有新增的可见事件节点，读后难以记住发生了哪几件事，已触发正文表面过于总结化的问题。",
+          "fix": "回退到节点化重写：至少落出“进入旧楼/被纳入秩序”“正式比赛被关门”“一次训练或友谊赛后的落差”“一名具名队友提供缓冲”四个可见节点，每段用动作和处境变化承载信息。"
+        },
+        {
+          "analysis_dimension": "commentary-drift",
+          "severity": "high",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "大量句子直接替章节做主题判断而不是让事件生长判断，例如“字先落下，身体却晚到”“等待也因此变了形”“代价也从这里开始计时”。章末也以总括性结论收束，纪实小说表面被评论腔覆盖。",
+          "fix": "删减高密度对偶句和总结句，把结论埋回场面；章末保留一个未完成的处境余波，不用总括式宣判。"
+        },
+        {
+          "analysis_dimension": "tension",
+          "severity": "high",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "扰动点存在（文件延迟），偏转也存在（同龄人缓冲），但 pursuit、升级和余波都停在抽象层。梅西要争取什么、局面如何一层层加压、章末究竟留下什么新的不稳定，都没有通过事件链显形，chapter contour 发平。",
+          "fix": "明确短期追求线，并让限制通知、训练或友谊赛反馈、同龄人介入形成因果推进；章末留下“仍不能正式出场但已不再完全悬空”的偏转余波。"
+        },
+        {
+          "analysis_dimension": "character-embodiment",
+          "severity": "medium",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "梅西多以“那副小身体”“被延迟挡在正式比赛外的人”等功能性描述存在，皮克、法布雷加斯等人也基本停留在名单式辅助位。关键人物的即时目标、外部 stakes 和压力反应没有被具体现身。",
+          "fix": "给梅西一个眼前必须解决的具体问题和可观察反应；至少让一名具名队友通过具体互动出现，避免角色只剩身份标签。"
+        },
+        {
+          "analysis_dimension": "character-source",
+          "severity": "medium",
+          "confidence": "medium",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "若只按给定上下文，\"最需要用比赛确认自己的人\"、\"真正难熬的地方\"、\"开始成为队伍里被看见、被带进来的一员\"等属于未经直接支撑的内心或地位判断，超出安全的观察层。",
+          "fix": "把心理与地位判断降格为可见外部迹象，例如训练分组、被招呼同行、友谊赛后的反应，不直接替人物下内在结论。"
+        },
+        {
+          "analysis_dimension": "fact-boundary",
+          "severity": "medium",
+          "confidence": "medium",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "\"诺坎普旁那栋旧楼没有制造什么抵达的仪式\"把未给定的信息写成了确定的场面质感；结尾\"承诺到这里才算真正落地\"又把阶段性进入写得过满，容易把“人到了/被收进日常”误读成承诺已经完成兑现。",
+          "fix": "把未证实的负面场景判断改成中性可证实描写；把“真正落地”改成“第一次有了物理落点/开始兑现但尚未完成”，保留 open loop。"
+        }
+      ]
     }
   ],
   "diagnostics": [
@@ -15,27 +100,92 @@
       "severity": "none",
       "confidence": "high",
       "evidence_refs": [
-        "chapters/CH001.md",
-        "SOURCES.md",
-        "chapters/CH002.md"
+        "01-context.md",
+        "03-draft.md"
       ],
-      "note": "两个月后抵达拉玛西亚、六个月无法正式比赛、同龄队友帮助适应等事实与既有来源一致。"
+      "note": "“餐巾纸承诺后约两个月抵达拉玛西亚”与“因文件延迟产生六个月正式比赛空窗，期间只能训练并踢少量友谊赛”的顺序保持一致，未见硬性时间线冲突。"
     },
     {
-      "analysis_dimension": "narrative-focus",
+      "analysis_dimension": "fact-boundary",
+      "severity": "medium",
+      "confidence": "medium",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "正文存在把未给定场面质感写实化，以及把阶段性进入写得过于完成化的风险，尤其是“没有制造什么抵达的仪式”和“承诺到这里才算真正落地”两处。"
+    },
+    {
+      "analysis_dimension": "character-source",
+      "severity": "medium",
+      "confidence": "medium",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "对梅西心理需求、承受感受和队内位置变化的判断，超出了给定上下文直接可支撑的范围，存在 unsupported internal-state inference 与 social-position inference。"
+    },
+    {
+      "analysis_dimension": "narrative-surface",
+      "severity": "high",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "章节主要靠总结句与概念句推进，事件表面过薄，已偏向资料改写式叙述，不符合“更集中、更有节奏”的目标。"
+    },
+    {
+      "analysis_dimension": "character-embodiment",
+      "severity": "medium",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "关键人物仍偏功能位化。梅西缺少可见的即时目标和压力反应，具名同龄队友也尚未形成稳定辨识度。"
+    },
+    {
+      "analysis_dimension": "commentary-drift",
+      "severity": "high",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "作者式主题提炼和评论腔占比过高，尤其在段首、段尾和章末收束处，压过了纪实小说应有的场面承载。"
+    },
+    {
+      "analysis_dimension": "tension",
+      "severity": "high",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "本章具备扰动点与偏转点，但追求线不清、升级不成链、余波落成总括而非悬置，最小 story engine 不足。"
+    },
+    {
+      "analysis_dimension": "continuity",
       "severity": "low",
       "confidence": "medium",
       "evidence_refs": [
-        "chapters/CH002.md"
+        "01-context.md",
+        "03-draft.md"
       ],
-      "note": "现稿中“等待中的自我维持”表达有效，但可进一步减少抽象复述，让场域压力更集中。"
+      "note": "未见直接作者工作台泄漏或来源名出面；主要连续性风险在于章末过早回答“餐巾纸承诺何时真正落地”，会削弱与下阶段正式比赛爆发锚点之间的延续张力。"
     }
   ],
   "recommendations": [
-    "保留事实边界，压缩重复论述，强化拉玛西亚作为秩序系统的存在感。",
-    "不需要回退上游规划。"
+    "先回退到 `novel-plot-architect` 把 CH002 压成 4 到 5 个明确 beat，再重写正文；当前问题不是补几句能解决。",
+    "重写时坚持“每段至少有一个可见动作、限制变化或关系变化”，不要让段落只靠论断句推进。",
+    "把所有无法从给定上下文直接支撑的心理、地位和场面负判断改成观察层表达。",
+    "让至少一名具名同龄队友在具体互动中出场，承担“缓冲”而不是资料名单功能。",
+    "章末只保留部分落地，不要把餐巾纸承诺写成已完成兑现；把余波对准下一阶段正式比赛中的高效输出锚点。"
   ],
   "proposed_writebacks": [
-    "update workflows/CH002/06-revised.md"
-  ]
+    "建议由 orchestrator 将本审计结果写入 `workflows/CH002/04-continuity-audit.json`。",
+    "在正文完成节点化重写前，不更新 canon；修订后再复审 `OPEN_LOOPS` 与 `RECENT_EVENTS` 是否需要同步。"
+  ],
+  "change_set": []
 }

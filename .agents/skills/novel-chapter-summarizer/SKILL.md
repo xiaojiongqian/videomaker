@@ -14,6 +14,12 @@ description: 长篇小说章节摘要与状态沉淀。用于把章节草稿或�
 
 优先兼容 `novel-orchestrator-main` 的 `TaskEnvelope`。
 
+如果你是在标准章节 workflow 中被调用：
+
+- 默认应作为独立真实 sub-agent 执行
+- 你的输出需要能被 runner 自动渲染
+- 如果主调度没有独立 dispatch，却直接伪造 `07-summary.json`，在 strict workflow 下应返回 `blocked`
+
 最少需要：
 
 - `task_type`
@@ -25,6 +31,7 @@ description: 长篇小说章节摘要与状态沉淀。用于把章节草稿或�
   - 至少包括目标章节或稳定草稿、当前状态、相邻章节摘要、相关回路条目
 - `constraints`
   - 说明摘要粒度、是否允许状态推断
+  - 默认要求：不要做无来源的人名补全、角色个性诊断或演员式拼接
 - `expected_outputs`
   - 说明需要摘要、recent events、state patch 或 loop delta
 
@@ -33,7 +40,7 @@ description: 长篇小说章节摘要与状态沉淀。用于把章节草稿或�
 优先提取这些内容：
 
 - 一句话章节摘要
-- 关键 beats
+- 可观察的关键事件 / 决定 / 反转 beats
 - 实际发生的状态变化
 - 新增 / 推进 / 回收的开放回路
 - 新埋或兑现的伏笔
@@ -42,13 +49,41 @@ description: 长篇小说章节摘要与状态沉淀。用于把章节草稿或�
 不要做剧情复述。
 不要把细节越写越长。
 
+## Preserve Concrete Story Memory
+
+摘要不是主题评论，也不是把一章压成几个抽象判断。
+
+默认保留这些信息：
+
+- 谁在场
+- 谁做了什么
+- 哪个动作或事件改变了局面
+- 后果落在谁身上
+- 下一章必须接住什么具体余波
+
+如果 public/canon/source 已给出人物名字，优先直接保留名字。
+如果来源没有名字，不要虚构；使用稳定角色标签，并保留可观察区分点。
+
+尤其注意：
+
+- `one_line_summary` 应写明本章真正发生的门槛事件或局面变化，不要只写主题
+- `major_beats` 应保留具体事件锚点、具名人物和场面节点，不要写成“人物进一步成长”“关系继续变化”这类空话
+- `state_changes` 应只写被正文明确支持的变化，不把性格判断当状态变化
+- `carry_forward` 应写明未完成义务、后果和风险，而不是空泛展望
+- 如果一章的真正力量来自章末余波，`carry_forward` 必须把那股压力保留下来，不要只剩事件年表
+
+如果原章本身过于概述、导致很难提炼出清晰事件锚点，应在 `diagnostics` 中明确指出，提醒 orchestrator 回退到上游重写，而不是替正文发明细节。
+
+如果原章的语言表面过于模板化、空心过桥句太多，导致事件锚点总被判断句盖住，也应在 `diagnostics` 中明确指出。
+
 ## Work in This Order
 
 1. 从正文中提取可确认事实
-2. 区分“发生了什么”和“这意味着什么”
-3. 压缩成摘要与事件条目
-4. 推导最小状态变更
-5. 标明哪些内容可写回，哪些只适合提醒
+2. 先做 evidence-backed event ledger，列出具名人物、稳定角色标签和关键场面锚点
+3. 区分“发生了什么”和“这意味着什么”
+4. 压缩成摘要与事件条目
+5. 推导最小状态变更
+6. 标明哪些内容可写回，哪些只适合提醒
 
 ## Return Structured Output
 
@@ -59,6 +94,7 @@ description: 长篇小说章节摘要与状态沉淀。用于把章节草稿或�
   - 例如 `chapter_summary`、`recent_event_entries`、`current_state_patch`
 - `diagnostics`
   - 标出不确定的解释、信息缺口、需要人工确认的状态变化
+  - 标出 unsupported inference、角色指代不稳、事件锚点不足等风险
 - `recommendations`
   - 建议同步哪些状态文件
 - `proposed_writebacks`
@@ -72,9 +108,12 @@ description: 长篇小说章节摘要与状态沉淀。用于把章节草稿或�
 推荐 `07-summary.json` 至少保留：
 
 - `schema_version`
+- `contract_version`
+- `task_id`
 - `task_type`
 - `agent_role`
 - `status`
+- `execution`
 - `artifacts`
 - `diagnostics`
 - `recommendations`
@@ -85,6 +124,7 @@ description: 长篇小说章节摘要与状态沉淀。用于把章节草稿或�
 
 - `one_line_summary`
 - `major_beats`
+- `actor_refs`
 - `state_changes`
 - `open_loops`
   - `opened`
@@ -92,15 +132,25 @@ description: 长篇小说章节摘要与状态沉淀。用于把章节草稿或�
   - `resolved`
 - `carry_forward`
 
+推荐 `diagnostics` 尽量保留：
+
+- `analysis_dimension`
+- `confidence`
+- `evidence_refs`
+- `note`
+
 ## Refuse Scope Creep
 
 不要替正文补写新桥段。
 不要把自己的推测当成既成事实。
 不要输出一份比原章还长的“摘要”。
+不要借摘要之名夹带人物性格判词、主题结论或作者解释。
 
 ## Shared References
 
 - `references/novel-system/context-model.md`
+- `references/novel-system/references/story-engine.md`
+- `references/novel-system/references/story-quality.md`
 - `references/novel-system/schemas/chapter-summary.schema.md`
 - `references/novel-system/templates/chapter-summary.template.md`
 - `references/novel-system/templates/CURRENT_STATE.template.md`

@@ -1,8 +1,25 @@
 {
   "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "task_id": "CHXXX-plan-001",
   "task_type": "chapter-plan",
   "agent_role": "novel-plot-architect",
   "status": "ready",
+  "execution": {
+    "mode": "pending",
+    "trace_ref": "09-execution-log.json",
+    "provenance": {
+      "agent_session_id": "",
+      "agent_run_id": "",
+      "external_invocation_id": ""
+    },
+    "input_snapshot": {
+      "context_refs": [
+        "01-context.md"
+      ],
+      "context_hash": ""
+    }
+  },
   "artifacts": [
     {
       "type": "chapter_plan",
@@ -11,5 +28,6 @@
     }
   ],
   "diagnostics": [],
+  "recommendations": [],
   "proposed_writebacks": []
 }

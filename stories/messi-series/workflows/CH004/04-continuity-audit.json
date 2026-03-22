@@ -1,12 +1,108 @@
 {
   "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "task_id": "CH004-continuity-001",
   "task_type": "continuity-audit",
   "agent_role": "novel-continuity-auditor",
   "status": "completed",
+  "execution": {
+    "mode": "subagent",
+    "trace_ref": "09-execution-log.json",
+    "provenance": {
+      "agent_session_id": "019d1174-7c1e-7721-81e7-99999c89f862",
+      "agent_run_id": "",
+      "external_invocation_id": "CH004-continuity-001:2026-03-21T17:32:19Z"
+    },
+    "input_snapshot": {
+      "context_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "context_hash": "sha256:1c6d54f3fbd0f86bfb62251314a584736d5e28a51d5117418c56cf1e8e257f7c"
+    }
+  },
   "artifacts": [
     {
       "type": "audit_report",
-      "findings": []
+      "findings": [
+        {
+          "analysis_dimension": "fact-boundary",
+          "severity": "high",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "草稿把决赛面具直接解释成旧伤阴影回返，并据此延展出身体是否真正站稳的判断；但上下文只支持他戴着面具出场、7 分钟后摘下、半场前两球，不支持把面具与此前腓骨骨折建立直接因果或象征绑定。",
+          "fix": "保留面具这一可观察事实，删去它与腓骨骨折的直接绑定；若需要保留压力感，只能写成未定悬念，不能写成已知因果。"
+        },
+        {
+          "analysis_dimension": "fact-boundary",
+          "severity": "medium",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "草稿把系统内重新估值写成近乎已成立的机构结论，如巴塞罗那内部该怎样重新看待这个名字、已经很难再把他只当成需要保护和等待的少年、新的重量落到他身上。这会把阶段性机会误写成正式确立。",
+          "fix": "把机构层面的判断降格为压力或悬念，只呈现表现逼近重新估值门槛，不把俱乐部内部态度写成已被确认的结论。"
+        },
+        {
+          "analysis_dimension": "character-source",
+          "severity": "medium",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "除 Alex Garcia 对训练和比赛欲望的回忆外，草稿还把怀疑、巴塞罗那、新的重量等集体心态当成可直接叙述对象，属于 unsupported character attribution 和 unsupported internal-state inference。",
+          "fix": "把无来源的集体心态改成可观察后果、可归属视角，或压回叙事问题句；Alex Garcia 的回忆只用于支撑训练与比赛欲望，不外溢承担机构态度。"
+        },
+        {
+          "analysis_dimension": "narrative-surface",
+          "severity": "high",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "章节主要靠总结句和统计汇总推进，恢复、连场、持续输出与决赛之间缺少足够的事件节点承接。读完主要记住的是数据和结论，而不是发生了哪几件具体的事。",
+          "fix": "至少补足三个可见节点：恢复后第一次被完整周程承载、赛季中段连续高效被确认、面具决赛；让统计嵌入事件，而不是整段代替事件。"
+        },
+        {
+          "analysis_dimension": "commentary-drift",
+          "severity": "high",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "文本频繁用解释性判断替代场面推进，例如把整季意义、长期能力、天才负荷直接说透，叙事不断滑向评论和履历式阐释，削弱纪实小说表面。",
+          "fix": "删减解释章义的判断句，把意义留给动作、比分、重复出场与结果关系自行显现；章末用余波收尾，不用作者总结收口。"
+        },
+        {
+          "analysis_dimension": "character-embodiment",
+          "severity": "medium",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "梅西在本章里主要作为持续输出者和被重新估值对象存在，缺少可见的即时目标、外部 stakes 和压力反应；Alex Garcia 也只是佐证功能位，人物辨识度不够稳。",
+          "fix": "在恢复、连场、决赛三个节点分别给出 Messi 当下要完成的具体目标与压力反应，并让 Alex Garcia 只承担一个清晰观察位。"
+        },
+        {
+          "analysis_dimension": "tension",
+          "severity": "medium",
+          "confidence": "high",
+          "evidence_refs": [
+            "01-context.md",
+            "03-draft.md"
+          ],
+          "note": "本章有概念上的 season arc，但最小 story engine 仍偏弱：扰动是复出后能否持续承载，追求线和升级 mostly 以概述出现，真正事件化的偏转几乎只剩面具 7 分钟后摘下与半场前两球，余波又被总结句吞掉，章节轮廓发平。",
+          "fix": "把 disturbance、pursuit、escalation、turn、residue 明确落到事件节点：开章立下连续出场压力，中段用连续周程与重复高效形成升级，决赛中用面具与摘下面具形成可见偏转，章末保留承诺未落地与天才负荷的余波。"
+        }
+      ]
     }
   ],
   "diagnostics": [
@@ -15,27 +111,91 @@
       "severity": "none",
       "confidence": "high",
       "evidence_refs": [
-        "chapters/CH003.md",
-        "chapters/CH004.md",
-        "SOURCES.md"
+        "01-context.md",
+        "03-draft.md"
       ],
-      "note": "伤愈、U14A 完整赛季、加泰罗尼亚杯决赛和面具场景与现有来源一致。"
+      "note": "宏观顺序与必需事实一致：恢复后进入完整赛季，随后抵达加泰罗尼亚杯决赛，面具出场、7 分钟后摘下、半场前两球、最终 4 比 1 取胜。硬时间线无冲突。"
     },
     {
-      "analysis_dimension": "narrative-focus",
-      "severity": "low",
-      "confidence": "medium",
+      "analysis_dimension": "fact-boundary",
+      "severity": "high",
+      "confidence": "high",
       "evidence_refs": [
-        "chapters/CH004.md"
+        "01-context.md",
+        "03-draft.md"
       ],
-      "note": "现稿有效，但有关“阻力仍在、结果也在”的解释有可压缩空间，整章可更像完整赛季弧线。"
+      "note": "存在明显越界：一是把决赛面具直接绑定为旧伤回返，二是把系统内重新估值写成近乎已成立的机构结论。"
+    },
+    {
+      "analysis_dimension": "character-source",
+      "severity": "medium",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "Alex Garcia 的支持范围仅限训练和比赛欲望，其余集体心态与内部判断缺少可归属来源。"
+    },
+    {
+      "analysis_dimension": "narrative-surface",
+      "severity": "high",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "章节主要由抽象连接句、赛季总结句和统计句构成，事件表面不足，接近总结稿而非章节。"
+    },
+    {
+      "analysis_dimension": "character-embodiment",
+      "severity": "medium",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "关键人物有名字，但缺少即时目标、外部 stakes 与压力反应，仍偏功能位。"
+    },
+    {
+      "analysis_dimension": "commentary-drift",
+      "severity": "high",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "解释性判断句密集，叙事频繁滑向评论与概念归纳。"
+    },
+    {
+      "analysis_dimension": "tension",
+      "severity": "medium",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "最小 story engine 只在概念上成立，缺少足够事件化的升级与偏转，章节轮廓偏平。"
+    },
+    {
+      "analysis_dimension": "continuity",
+      "severity": "none",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "开放回路都有被点到：身体承载、餐巾纸承诺、天才负荷均未被错误关闭。问题主要在承载方式过于总结化，而非 continuity 断裂。"
     }
   ],
   "recommendations": [
-    "保留全部事实节点，压缩重复解释，让赛季线与决赛线更紧密。",
-    "不需要回退上游规划。"
+    "回退到 beat 级重组，按恢复后连续周程、赛季中段持续输出、面具决赛三个节点重建章节骨架。",
+    "删除或降格所有无来源的机构态度、集体怀疑和内部判断，把它们改成可观察结果或未决压力。",
+    "把面具只作为已知可观察事实处理，不直接绑定到此前腓骨骨折；避免把未证实的象征意义写死。",
+    "减少总结句和评论句密度，把统计数据嵌入事件推进，让章末留下余波而不是总评。"
   ],
   "proposed_writebacks": [
-    "update workflows/CH004/06-revised.md"
-  ]
+    "持久化本次审计结果到 workflows/CH004/04-continuity-audit.json。",
+    "在进入正文重写前，先回退到 CH004 章纲层明确 disturbance、pursuit、escalation、turn、residue 五个节点。"
+  ],
+  "change_set": []
 }

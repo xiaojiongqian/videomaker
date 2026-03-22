@@ -1,61 +1,102 @@
 {
   "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "task_id": "CH004-summary-001",
   "task_type": "chapter-summary",
   "agent_role": "novel-chapter-summarizer",
   "status": "completed",
+  "execution": {
+    "mode": "subagent",
+    "trace_ref": "09-execution-log.json",
+    "provenance": {
+      "agent_session_id": "019d10f2-0ae6-7690-9d52-b83865fdc2a5",
+      "agent_run_id": "",
+      "external_invocation_id": "CH004-summary-001:2026-03-21T15:09:51Z"
+    },
+    "input_snapshot": {
+      "context_refs": [
+        "01-context.md",
+        "06-revised.md"
+      ],
+      "context_hash": "sha256:7e82417945ca0d51c166ffefe92e4eb0fb415b03e85bf9095a690c07ce9ba178"
+    }
+  },
   "artifacts": [
     {
       "type": "chapter_summary",
       "content": {
-        "one_line_summary": "本章写梅西伤愈后迎来 U14A 的首个完整爆发赛季，并在加泰罗尼亚杯决赛的面具场面中，把等待、伤病与进球压成第一次完整的连续成果。",
+        "one_line_summary": "梅西在腓骨骨折恢复后终于跑完一个不再被持续打断的 U14A 完整赛季，并在对西班牙人的加泰罗尼亚杯决赛中摘下面具、半场前攻入两球，帮助巴塞罗那 4 比 1 夺冠，把自己从“可能”推到拉玛西亚“必须继续看下去”的位置。",
+        "actor_refs": [
+          "梅西",
+          "巴塞罗那U14A",
+          "巴塞罗那",
+          "西班牙人",
+          "拉玛西亚/巴塞罗那青训体系",
+          "Alex Garcia"
+        ],
         "major_beats": [
-          "伤愈后，梅西第一次迎来一个不再被持续打断的完整赛季。",
-          "U14A 赛季里，他交出 31 场 38 球、4 次帽子戏法、1 次单场 4 球和 9 次梅开二度的持续输出。",
-          "赛季被写成梅西第一次从“值得讨论的孩子”变成“只要上场就持续产生结果的球员”。",
-          "加泰罗尼亚杯决赛对西班牙人，梅西戴着面具出场，7 分钟后摘下面具，并在半场前攻入两球。",
-          "巴塞罗那最终 4 比 1 夺冠，这一场面成为少年阶段最集中的赛季收束。"
+          "梅西从腓骨骨折中恢复后回到巴塞罗那 U14A，第一次迎来一个不再被持续打断的完整赛季。",
+          "梅西在 U14A 的 31 场比赛里打进 38 球，并交出 4 次帽子戏法、1 次单场 4 球和 9 次梅开二度，把高效输出从零散闪光变成整季持续结果。",
+          "对巴塞罗那青训体系而言，梅西从“值得议论的孩子”和“餐巾纸上的名字”变成了只要被放进比赛就会持续制造结果的球员。",
+          "加泰罗尼亚杯决赛对西班牙人时，梅西因颧骨受伤戴面具出场，7 分钟后摘下面具，并在半场前攻入两球。",
+          "巴塞罗那 4 比 1 击败西班牙人，捧起加泰罗尼亚杯；Alex Garcia 后来回忆，这一阶段的梅西有非常强的训练和比赛欲望。"
         ],
         "state_changes": [
-          "伤病没有消失，但它第一次没有阻止梅西把一整个赛季踢完整。",
-          "连续输出让梅西在巴萨青训体系里的位置从“值得观察”推进到“必须持续上调和重视”。",
-          "身体与命运的冲突从单纯阻碍，转成伴随成长长期存在的背景压力。"
+          "梅西从腓骨骨折中恢复后回到巴塞罗那 U14A，并完成了一个不再被持续打断的完整赛季。",
+          "梅西把 U14A 赛季的产出固定为 31 场 38 球、4 次帽子戏法、1 次单场 4 球和 9 次梅开二度，整季结果第一次持续而稳定地写上记分牌。",
+          "对巴塞罗那青训体系而言，梅西不再只是“值得议论的孩子”或“餐巾纸上的名字”，而是被放进比赛就能持续制造结果的球员。",
+          "巴塞罗那在加泰罗尼亚杯决赛 4 比 1 战胜西班牙人夺冠，梅西在戴面具出场后 7 分钟摘下面具，并在半场前打入两球。"
         ],
         "open_loops": {
           "opened": [],
           "advanced": [
-            "小身体是否能承受大命运",
-            "餐巾纸上的承诺何时真正落地",
-            "“天才”会不会先成为枷锁"
+            "小身体是否能承受大命运：梅西刚从腓骨骨折的赛季中恢复，又在颧骨受伤后戴面具出战决赛，身体阻力仍与比赛产出并存。",
+            "餐巾纸上的承诺何时真正落地：梅西已经用完整赛季和决赛两球把名字一次次写回比赛，但承诺本身仍未被正式兑现。",
+            "“天才”会不会先成为枷锁：梅西的整季爆发把他从“值得议论”推到“必须继续看下去”，围绕他的持续注视被进一步放大。"
           ],
           "resolved": []
         },
         "carry_forward": [
-          "CH005 应进入更高年龄层和更快升级阶段，写出青训体系内部对梅西的重新估值。",
-          "后续继续优先使用官方统计、俱乐部材料或高可靠公开来源。"
+          "梅西带着 31 场 38 球和加泰罗尼亚杯决赛两球的履历进入下一阶段，拉玛西亚已经无法把他仅仅当成一张餐巾纸上的名字。",
+          "梅西的身体阻力没有退场；腓骨骨折后的完整赛季与颧骨保护场面都应继续支撑“小身体是否能承受大命运”这条线。",
+          "巴塞罗那青训体系已把梅西的位置推到“必须继续看下去”，后续涉及机会、资源或期待变化时应以这一前提为准。",
+          "Alex Garcia 记住的是梅西强烈的训练和比赛欲望，这可以作为后续呈现其工作惯性与竞争驱动力的稳定记忆点。",
+          "餐巾纸上的承诺仍未正式兑现，整季爆发只是把兑现的时间与压力继续往前推。"
         ]
       }
     }
   ],
   "diagnostics": [
     {
+      "analysis_dimension": "summary",
       "confidence": "high",
-      "note": "本次优化不改变 canon，只提升整章赛季线的集中度与摘要表达。"
-    }
-  ],
-  "proposed_writebacks": [
-    "update chapters/CH004.md from workflows/CH004/06-revised.md",
-    "refresh summaries/CH004.summary.md from workflows/CH004/07-summary.json"
-  ],
-  "change_set": [
-    {
-      "target": "chapters/CH004.md",
-      "action": "replace",
-      "reason": "optimize prose while preserving canon"
+      "evidence_refs": [
+        "01-context.md",
+        "06-revised.md"
+      ],
+      "note": "本章是赛季概述章，可靠事件锚点集中在伤后完整赛季、31 场 38 球的数据、加泰罗尼亚杯决赛的面具场面与 Alex Garcia 的回忆；摘要已围绕这些事实压缩。"
     },
     {
-      "target": "summaries/CH004.summary.md",
-      "action": "replace",
-      "reason": "re-render summary from structured workflow artifact"
+      "analysis_dimension": "unsupported-inference",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "06-revised.md"
+      ],
+      "note": "“系统内重新估值”只可落在正文已明写的位置变化，即梅西从“可能”被推到“必须继续看下去”；不能外推为明确晋升、合同兑现、具体管理决策或未写明的更衣室/家庭场面。"
     }
-  ]
+  ],
+  "recommendations": [
+    "同步 CH004 的结构化摘要到 summaries/CH004.summary.md。",
+    "向 RECENT_EVENTS.md 追加梅西伤后完成完整 U14A 赛季、31 场 38 球、加泰罗尼亚杯决赛两球与巴塞罗那 4 比 1 夺冠。",
+    "向 CURRENT_STATE.md 更新梅西在拉玛西亚内部已从“可能”推进到“必须继续看下去”。",
+    "向 OPEN_LOOPS.md 推进三个既有回路：身体承受力、餐巾纸承诺、天才标签带来的持续注视。"
+  ],
+  "proposed_writebacks": [
+    "summaries/CH004.summary.md: 写入 one_line_summary、actor_refs、major_beats、state_changes、open_loops、carry_forward。",
+    "RECENT_EVENTS.md: 记录梅西伤后完成完整 U14A 赛季，以及加泰罗尼亚杯决赛摘下面具后半场前两球、巴塞罗那 4 比 1 夺冠。",
+    "CURRENT_STATE.md: 更新梅西已用整季结果把自己推进拉玛西亚“必须继续看下去”的位置。",
+    "OPEN_LOOPS.md: 将“小身体是否能承受大命运”“餐巾纸上的承诺何时真正落地”“天才会不会先成为枷锁”标记为 advanced，不新增回路。"
+  ],
+  "change_set": []
 }

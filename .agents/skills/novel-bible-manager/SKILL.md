@@ -18,6 +18,12 @@ description: 长篇小说设定与状态档案维护。用于维护和修订世�
 优先接收契约化输入。
 如果与 `novel-orchestrator-main` 配合，兼容其 `TaskEnvelope`。
 
+如果你是在标准章节 workflow 中被调用来做状态写回补丁：
+
+- 默认应作为独立真实 sub-agent 执行
+- 只输出条目 patch、change set 或 state patch，不接管正文
+- strict workflow 下，若被要求伪造 bible/update 工件却没有独立 dispatch，应返回 `blocked`
+
 最少需要：
 
 - `task_type`
@@ -45,6 +51,30 @@ description: 长篇小说设定与状态档案维护。用于维护和修订世�
    - 检查是否和既有规则、时间线、角色背景或已知秘密冲突
 5. 输出最小变更集
    - 优先返回条目 patch 和 change set，不整份覆盖大文件
+
+## Preserve Character Embodiment
+
+角色档案不要只保存“功能”和“设定点”，还要保存后续写作真正会用到的人物辨识信息。
+
+如果 source/canon 支持，优先沉淀：
+
+- 稳定姓名 / public name / canon name
+- 角色位置
+- 关键关系
+- 可观察特征
+- 即时目标或长期追求
+- 外部 stakes / 容易失去的东西
+- 压力下常见反应
+- 角色内部或位置上的矛盾点
+- 与其他人物的主要摩擦面
+
+避免把角色档案做成：
+
+- 只有背景年份和标签
+- 只有“主角/反派/导师”这类功能位
+- 没有任何能帮助正文把人物写活的条目
+
+如果来源没有名字，不要虚构；用稳定角色标签和可观察区分点代替。
 
 ## Preserve Canon Hygiene
 

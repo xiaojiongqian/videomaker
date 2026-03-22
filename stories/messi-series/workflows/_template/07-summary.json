@@ -1,8 +1,26 @@
 {
   "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "task_id": "CHXXX-summary-001",
   "task_type": "chapter-summary",
   "agent_role": "novel-chapter-summarizer",
   "status": "ready",
+  "execution": {
+    "mode": "pending",
+    "trace_ref": "09-execution-log.json",
+    "provenance": {
+      "agent_session_id": "",
+      "agent_run_id": "",
+      "external_invocation_id": ""
+    },
+    "input_snapshot": {
+      "context_refs": [
+        "01-context.md",
+        "06-revised.md"
+      ],
+      "context_hash": ""
+    }
+  },
   "artifacts": [
     {
       "type": "chapter_summary",
@@ -20,6 +38,7 @@
     }
   ],
   "diagnostics": [],
+  "recommendations": [],
   "proposed_writebacks": [],
   "change_set": []
 }
