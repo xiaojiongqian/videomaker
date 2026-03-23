@@ -2,7 +2,7 @@
   "schema_version": "1.1",
   "chapter_id": "CH002",
   "chapter_title": "低处奔跑",
-  "status": "drafted",
+  "status": "archived",
   "required_steps": {
     "continuity_audit": true,
     "dialogue_audit": false

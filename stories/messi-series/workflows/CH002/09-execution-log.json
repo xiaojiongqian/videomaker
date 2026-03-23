@@ -3,32 +3,35 @@
   "contract_version": "2026-03",
   "chapter_id": "CH002",
   "orchestrator_role": "novel-orchestrator-main",
-  "status": "in_progress",
+  "status": "completed",
   "dispatches": [
     {
-      "task_id": "CH002-plan-001",
+      "task_id": "CH002-plan-002",
       "agent_role": "novel-plot-architect",
       "mode": "subagent",
       "status": "completed",
-      "agent_session_id": "019d1171-0b77-75b2-8d08-b4c07a777dd4",
+      "agent_session_id": "019d13f2-8182-7942-87ca-f4f9a213de94",
       "agent_run_id": "",
       "input_refs": [
-        "01-context.md"
+        "01-context.md",
+        "../../summaries/CH001.summary.md",
+        "../../summaries/CH003.summary.md",
+        "../../OPEN_LOOPS.md",
+        "../../STYLE_GUIDE.md",
+        "../../SOURCES.md"
       ],
       "output_refs": [
         "02-plan.json"
       ],
-      "started_at": "2026-03-21T17:28:34Z",
-      "completed_at": "2026-03-21T17:30:56Z",
       "model": "gpt-5.4",
-      "notes": ""
+      "notes": "Refreshed CH002 into a five-node bridge plan centered on the file-delay gate."
     },
     {
-      "task_id": "CH002-draft-001",
+      "task_id": "CH002-draft-002",
       "agent_role": "novel-scene-dramatizer",
       "mode": "subagent",
       "status": "completed",
-      "agent_session_id": "019d1173-34f4-76d1-84af-774fe509a6eb",
+      "agent_session_id": "019d13f6-452f-7132-9228-55b5d9c24b2e",
       "agent_run_id": "",
       "input_refs": [
         "01-context.md",
@@ -37,17 +40,15 @@
       "output_refs": [
         "03-draft.md"
       ],
-      "started_at": "2026-03-21T17:30:56Z",
-      "completed_at": "2026-03-21T17:32:38Z",
       "model": "gpt-5.4",
-      "notes": ""
+      "notes": "Generated the refreshed structural draft for the current re-optimization pass."
     },
     {
-      "task_id": "CH002-continuity-001",
+      "task_id": "CH002-continuity-audit-001",
       "agent_role": "novel-continuity-auditor",
       "mode": "subagent",
       "status": "completed",
-      "agent_session_id": "019d1174-c5f4-72c0-a051-e1b82663e5b3",
+      "agent_session_id": "019d13f8-c891-7ed3-8bac-43905ff426ba",
       "agent_run_id": "",
       "input_refs": [
         "01-context.md",
@@ -56,10 +57,120 @@
       "output_refs": [
         "04-continuity-audit.json"
       ],
-      "started_at": "2026-03-21T17:32:38Z",
-      "completed_at": "2026-03-21T17:35:58Z",
       "model": "gpt-5.4",
-      "notes": ""
+      "notes": "First continuity pass on the refreshed draft; blocked on narrative-surface and commentary drift."
+    },
+    {
+      "task_id": "CH002-redraft-001",
+      "agent_role": "novel-scene-dramatizer",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d13fb-cea9-7831-8250-83c1c2538024",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "02-plan.json",
+        "04-continuity-audit.json"
+      ],
+      "output_refs": [
+        "06-revised.md"
+      ],
+      "model": "gpt-5.4",
+      "notes": "First targeted redraft after the blocking audit."
+    },
+    {
+      "task_id": "CH002-continuity-audit-002",
+      "agent_role": "novel-continuity-auditor",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d13fd-d970-7610-8899-b60751abd746",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "06-revised.md"
+      ],
+      "output_refs": [
+        "04-continuity-audit.json"
+      ],
+      "model": "gpt-5.4",
+      "notes": "Second continuity pass; summary-feel issues remained."
+    },
+    {
+      "task_id": "CH002-redraft-002",
+      "agent_role": "novel-scene-dramatizer",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d1400-fc4d-7fa3-bb0c-e446598f50f7",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "02-plan.json",
+        "04-continuity-audit.json"
+      ],
+      "output_refs": [
+        "06-revised.md"
+      ],
+      "model": "gpt-5.4",
+      "notes": "Second targeted redraft; later narrowed by the orchestrator before final audit."
+    },
+    {
+      "task_id": "CH002-orchestrator-revision-001",
+      "agent_role": "novel-orchestrator-main",
+      "mode": "orchestrator",
+      "status": "completed",
+      "agent_session_id": "019d1408-80f5-75b3-889a-cb30e5ca3653",
+      "agent_run_id": "",
+      "input_refs": [
+        "06-revised.md",
+        "04-continuity-audit.json"
+      ],
+      "output_refs": [
+        "06-revised.md"
+      ],
+      "model": "gpt-5.4",
+      "notes": "Applied the final narrow manual rewrite that the passing audit evaluated."
+    },
+    {
+      "task_id": "CH002-continuity-audit-003",
+      "agent_role": "novel-continuity-auditor",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d1408-80f5-75b3-889a-cb30e5ca3653",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "02-plan.json",
+        "06-revised.md",
+        "../../SOURCES.md",
+        "../../summaries/CH001.summary.md",
+        "../../summaries/CH003.summary.md"
+      ],
+      "output_refs": [
+        "04-continuity-audit.json"
+      ],
+      "model": "gpt-5.4",
+      "notes": "Final passing continuity audit on the latest 06-revised.md."
+    },
+    {
+      "task_id": "CH002-summary-002",
+      "agent_role": "novel-chapter-summarizer",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d13e7-b5c3-7952-90ae-e486e60300d1",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "06-revised.md",
+        "../../OPEN_LOOPS.md",
+        "../../CURRENT_STATE.md",
+        "../../summaries/CH003.summary.md",
+        "../../SOURCES.md"
+      ],
+      "output_refs": [
+        "07-summary.json"
+      ],
+      "model": "gpt-5.4",
+      "notes": "Structured summary for the passing CH002 revision."
     }
   ],
   "exceptions": []

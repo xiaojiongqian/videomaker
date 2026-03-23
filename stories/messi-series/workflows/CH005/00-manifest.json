@@ -2,7 +2,7 @@
   "schema_version": "1.1",
   "chapter_id": "CH005",
   "chapter_title": "替补席尽头的灯",
-  "status": "drafted",
+  "status": "audited",
   "required_steps": {
     "continuity_audit": true,
     "dialogue_audit": false

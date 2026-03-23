@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "contract_version": "2026-03",
-  "task_id": "CH005-continuity-001",
+  "task_id": "CH005-continuity-005",
   "task_type": "continuity-audit",
   "agent_role": "novel-continuity-auditor",
   "status": "completed",
@@ -9,16 +9,16 @@
     "mode": "subagent",
     "trace_ref": "09-execution-log.json",
     "provenance": {
-      "agent_session_id": "019d1177-9b56-7b12-a756-eced91258e3a",
+      "agent_session_id": "019d145c-da5e-7831-9eb6-72dce521dda7",
       "agent_run_id": "",
-      "external_invocation_id": "CH005-continuity-001:2026-03-21T17:35:44Z"
+      "external_invocation_id": "CH005-continuity-005:2026-03-22T07:05:22Z"
     },
     "input_snapshot": {
       "context_refs": [
         "01-context.md",
-        "03-draft.md"
+        "06-revised.md"
       ],
-      "context_hash": "sha256:b5b0be9044103e78b9ebeab18464c614b97cd40f2fd134c2bb3c27f4060ea9a6"
+      "context_hash": "sha256:f6e97ef7b5a007b847e4547f6658942dc44a28165617d0edc66b4efce4e2baf6"
     }
   },
   "artifacts": [
@@ -33,8 +33,8 @@
             "01-context.md",
             "03-draft.md"
           ],
-          "note": "草稿主要靠赛果罗列加抽象判断推进，除格拉马内特B一段外，绝大多数段落都在做履历式压缩和概念性归纳，未把“门槛感”落到可见场面，已偏离上下文要求的“避免写成履历表”。",
-          "fix": "回退到 scene-level 重组，保留 3 到 4 个关键节点做在场叙述，把赛季总账和跨层级轨迹压缩到章末余波，不要让统计与总结承担主要推进功能。"
+          "note": "节点基本齐全，但整章主要按“日期/级别/比分/结果”顺排：U19A三节点被压在一段里，波尔图、欧罗巴、格拉马内特B、马塔罗、赛季末回调也都以资料式摘要推进。上下文要求把章身压在2到4个硬节点上，优先让“波尔图门槛”“格拉马内特B逆转”可被清楚复述；现稿仍然是桥接吞掉整章，读感更像履历表而不是事件链。",
+          "fix": "回退到结构重写，不做轻微润色；用U19B到U19A的快速上调建立扰动，主体拉长波尔图门槛与格拉马内特B逆转，欧罗巴90分钟、马塔罗首秀和赛季末回U19B只做短桥接，并始终服务“位置未固定”。"
         },
         {
           "analysis_dimension": "tension",
@@ -44,63 +44,52 @@
             "01-context.md",
             "03-draft.md"
           ],
-          "note": "本章缺少稳定的最小 story engine。开头有上调扰动，但没有持续可见的追求线；升级多由旁白宣告，不是由事件链逼出；格拉马内特B的逆转虽有局部张力，却没有统摄全章；章末留下的是作者总结，不是场面余波。",
-          "fix": "先明确单章主线，例如“摸到一线队门槛后，能否在成人正式比赛里继续被使用”，再让 U19A 首秀、波尔图友谊赛、巴萨C逆转、巴萨B首秀形成递进压力和偏转。"
+          "note": "章内没有被清楚看见的追求线。上下文规定的核心是“被提到更高一级后还要继续被使用”，但现稿只记录发生过哪些出场和进球，没有把U19A连续进球、11月16日波尔图首度摸门槛、11月29日欧罗巴踢满90分钟、格拉马内特B最后两分钟逆转、再到巴萨B与赛季末回U19B组织成扰动、升级、偏转和余波。事实在，但chapter contour发平。",
+          "fix": "把“继续留在更高一级的使用里”写成显性追求；让波尔图成为turn，让欧罗巴90分钟和格拉马内特B末段逆转成为门槛后的重新过关与升级，最后用赛季末回U19B形成明确余波。"
         },
         {
           "analysis_dimension": "character-embodiment",
           "severity": "high",
-          "confidence": "high",
+          "confidence": "medium",
           "evidence_refs": [
             "01-context.md",
             "03-draft.md"
           ],
-          "note": "梅西在章内主要是被上调、被使用、被重新分配的对象，读者看见的是身份标签和层级移动，看不见他在每个节点上的即时目标、外部 stakes、身体负荷和压力反应。决定性力量也始终是抽象“体系”，人物场域过空。",
-          "fix": "每个保留节点至少补一组可观察信息：他当下要完成什么、外部压力来自哪里、比赛怎样逼迫他调整；避免只用“瘦小左脚球员/少年”这类抽象标签替代人物在场感。"
+          "note": "梅西在各节点里主要只是完成首秀、进球、踢满90分钟的功能位。即使不能补写内心，也应让人物承受可观察的外部压力，例如更高层级的持续调用、整场90分钟负荷、1比2落后时被压缩到第89和第90分钟的局面，以及赛季末又被放回U19B的处境。现稿这些压力大多停留在结果表上，人物没有被事件压出轮廓。",
+          "fix": "用可观察压力替代心理推断：把层级变化、90分钟、落后比分、最后两分钟和赛季末回调直接压到人物行动线上，让读者看到他在“能否继续被使用”的外部处境里，而不是只看到数据。"
         },
         {
           "analysis_dimension": "commentary-drift",
-          "severity": "high",
-          "confidence": "high",
-          "evidence_refs": [
-            "01-context.md",
-            "03-draft.md"
-          ],
-          "note": "文中反复出现带总评性质的句子，如“旧的判断都要被推翻一次，再重写一次”“更难再被忽视的事实”“灯确实亮过，门槛也确实摸到了”，叙述频繁滑向回顾式评论，纪实小说表层被解释腔覆盖。",
-          "fix": "删减段内的二次解释和判断句，让可核验节点自己承担意义；必要过渡只保留最小连接，不用作者口吻替读者下结论。"
-        },
-        {
-          "analysis_dimension": "character-source",
           "severity": "medium",
           "confidence": "high",
           "evidence_refs": [
             "01-context.md",
             "03-draft.md"
           ],
-          "note": "草稿把选择逻辑和评估意图多次归给抽象主体，如“名单先把梅西放进”“体系里关于这个瘦小左脚球员的分配开始变快”“一线队友谊赛后的注意力没有把他直接送进更高处”“体系没有把他钉死在任何一级”。这些不是给定上下文中的具名角色，也没有可见来源支撑，属于 unsupported character attribution。",
-          "fix": "把抽象主体改写成可观察结果，只写他随后在哪一级出场、踢了多久、比赛结果如何；若没有来源支持，不要替‘体系’赋予明确意志和判断。"
+          "note": "“季前的出场刚过去，联赛里的出场和进球已经一并接了上来”“第71分钟后的那次出场刚过去，下一场正式比赛已经是整整90分钟”这类桥句在替事件下结论，推动方式偏摘要评论。最后又以“37场正式比赛35球，另有1场一线队友谊赛”收口，进一步把章节拉回赛季回顾。",
+          "fix": "删减解释性桥句，让事件骨架自己承担意义；赛季统计如果保留，只能作为附带信息，不能成为最后记忆点。"
         },
         {
-          "analysis_dimension": "fact-boundary",
+          "analysis_dimension": "prose-naturalness",
           "severity": "medium",
-          "confidence": "medium",
+          "confidence": "high",
           "evidence_refs": [
             "01-context.md",
             "03-draft.md"
           ],
-          "note": "硬时间点和赛果基本守住了，但多处把阶段性机会放大成制度性结论，例如“名单也不再只是把他提上来试一试”“前面的进球和翻盘不能替他跳过这一关”“1比0……足够说明他已经被继续向上调用”。上下文只提供公开节点，不足以支持这些内部判定和因果解释。",
-          "fix": "保留“门槛感”时，只写到公开可见的层级移动与使用方式，避免把一次出场、一次进球或一次调用写成更正式的确立或稳定结论。"
+          "note": "句面频繁重复“日期/对手/比分/结果”的模板，再补一记对照判断，整体像档案条目拼接。标题带有意象，但正文几乎全是赛事播报式句群，语言没有被这一章的具体压力逼出来。",
+          "fix": "打破同模开段和比分播报式节奏；保留公开锚点，但让句子先落到节点压力与动作，再给结论，避免每段都像资料卡。"
         },
         {
           "analysis_dimension": "continuity",
-          "severity": "low",
-          "confidence": "medium",
+          "severity": "medium",
+          "confidence": "high",
           "evidence_refs": [
             "01-context.md",
             "03-draft.md"
           ],
-          "note": "本章延续了“继续上调”的开放回路，但“更高年龄层与更强对抗如何重新测试身体和节奏”主要停留在口头宣告，没有被场面证明；“天才会不会先把他压垮”这一条则未见承接，导致 arc 推进更多停在主题复述层。",
-          "fix": "如果当前来源不足以支撑更完整承接，就把本章收窄到“层级持续上调但身份未固化”；若要推进其他开放回路，需先有可写成场面的支撑节点。"
+          "note": "现稿没有撞破CH004或CH006的硬边界，也没有把阶段性机会误写成正式确立；但本章 promised residue 是“门槛摸到，身份仍未固定”。现稿最终停在赛季总账，弱化了“赛季末还要回到U19B踢最后三轮并夺冠”这一更关键的处境信号，因此与本次返工目标只部分对齐。",
+          "fix": "把结尾中心从赛季总数移回“摸到门槛后仍在不同名单之间流动”的处境，让赛季末回U19B与11月16日的一线队友谊赛首秀形成反差完成收束。"
         }
       ]
     }
@@ -114,27 +103,27 @@
         "01-context.md",
         "03-draft.md"
       ],
-      "note": "未发现明确日期或顺序冲突；叙述保持在 2003/04 赛季内，也没有提前写到 2004/05 的正式首秀、首球或公开大规模比较。"
+      "note": "时间顺序保持在2003/04赛季内，从2003年8月的U19B/U19A到11月16日波尔图、11月29日欧罗巴、2004年3月6日马塔罗、赛季末回U19B，没有提前越入CH006已写定的2004年10月16日与2005年5月1日。上下文未给格拉马内特B具体日期，现稿 placement 也未与已给锚点冲突。"
     },
     {
       "analysis_dimension": "fact-boundary",
-      "severity": "medium",
-      "confidence": "medium",
-      "evidence_refs": [
-        "01-context.md",
-        "03-draft.md"
-      ],
-      "note": "硬事实节点基本符合上下文，但存在把公开结果扩写成内部判断、稳定身份或制度性评估的倾向。"
-    },
-    {
-      "analysis_dimension": "character-source",
-      "severity": "medium",
+      "severity": "none",
       "confidence": "high",
       "evidence_refs": [
         "01-context.md",
         "03-draft.md"
       ],
-      "note": "多次由抽象“名单/体系/注意力”承担决策意志，属于未获上下文支撑的角色归因。"
+      "note": "草稿未补写对白、家庭场景、更衣室细节、内部会议或确定性心理，也没有把波尔图机会写成正式一线队位置确立；不存在明显元叙事泄漏。主要问题是过于摘要，不是事实越界。"
+    },
+    {
+      "analysis_dimension": "character-source",
+      "severity": "none",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "表层具名锚点均在允许范围内：梅西、巴塞罗那各级梯队、波尔图、欧罗巴、格拉马内特B、马塔罗、Fernando Navarro；也没有把“名单”“体系”“俱乐部判断”拟人化成有明确意志的决策角色。"
     },
     {
       "analysis_dimension": "narrative-surface",
@@ -144,27 +133,27 @@
         "01-context.md",
         "03-draft.md"
       ],
-      "note": "整体表面更接近赛季摘要和成长概述，而非由事件节点推进的章节正文。"
+      "note": "草稿仍然主要以赛季资料串联推进，节点多而展开少。波尔图与格拉马内特B都被写到，但前者几乎只是履历句，后者虽有骨架也缺少前后回响，整体仍像赛季概览。"
     },
     {
       "analysis_dimension": "character-embodiment",
       "severity": "high",
-      "confidence": "high",
+      "confidence": "medium",
       "evidence_refs": [
         "01-context.md",
         "03-draft.md"
       ],
-      "note": "关键人物主要以功能位出现，缺少即时目标、外部 stakes 和可观察压力反应。"
+      "note": "关键人物虽然具名稳定，但实体感不足。梅西大多只以“首秀者/进球者/踢满90分钟者”的身份出现，看不到明确即时目标、外部stakes和压力反应。"
     },
     {
       "analysis_dimension": "commentary-drift",
-      "severity": "high",
+      "severity": "medium",
       "confidence": "high",
       "evidence_refs": [
         "01-context.md",
         "03-draft.md"
       ],
-      "note": "解释句和总结句密度过高，叙述多次滑向作者式评论。"
+      "note": "桥接句频繁代替节点下判断，尤其是“刚过去……已经……”类句式在解释意义而不是让事件自己发光；末尾用总数据收束，也把文本拉向赛季评论。"
     },
     {
       "analysis_dimension": "tension",
@@ -174,30 +163,50 @@
         "01-context.md",
         "03-draft.md"
       ],
-      "note": "单章缺少清楚的扰动-追求-升级-偏转-余波链条，整体 contour 发平。"
+      "note": "最小story engine未成形。扰动有开头，但追求线不清；升级被写成节点累加而不是压力递进；波尔图作为turn被记录了，却没有带出之后必须重新过关的偏转；结尾也没有留下足够强的余波。"
     },
     {
-      "analysis_dimension": "continuity",
+      "analysis_dimension": "readability",
       "severity": "low",
       "confidence": "medium",
       "evidence_refs": [
         "01-context.md",
         "03-draft.md"
       ],
-      "note": "本章没有与既有事实冲突，但对开放回路的承接偏抽象，arc 推进力度有限。"
+      "note": "基本顺读，时间与结果都清楚；但四段几乎都以压缩罗列推进，层次起伏很小，读者更容易记住信息点，不容易记住被压力推动的过程。"
+    },
+    {
+      "analysis_dimension": "prose-naturalness",
+      "severity": "medium",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "语言表面有明显模板感：日期、对手、比分、结果反复并列，之后再补一句总结性对照，像档案拼接而非事件驱动 prose。"
+    },
+    {
+      "analysis_dimension": "continuity",
+      "severity": "medium",
+      "confidence": "high",
+      "evidence_refs": [
+        "01-context.md",
+        "03-draft.md"
+      ],
+      "note": "相邻章节硬事实没有冲突，但本章需要承接CH004的“名单开始快速上调”并为CH006保留“只摸到门槛、未获正式确立”的位置。现稿虽未越界，却没有把“赛季末仍回U19B”的未落定处境作为主收束，连续性回声偏弱。"
     }
   ],
   "recommendations": [
-    "不要直接微修现稿；先回退到 novel-plot-architect，把 CH005 收束成少量 scene beats，再交给正文重写。",
-    "重写时只让公开、可核验节点承担场面锚点，删除或弱化所有无法由同段可见事实支撑的制度判断和因果解释。",
-    "把“门槛感”具体化为可观察压力：出场层级、90 分钟负荷、比分状态、成人对抗和位置竞争，而不是反复用抽象总结句宣告。",
-    "章末不要再用赛季总账做大段总结；改为保留一个更具体的余波画面，再用极短信息补足赛季统计。",
-    "若没有来源支持的具名决策者，就不要硬补人物；应减少对抽象‘体系’的拟人化归因。"
+    "本稿应判定为需要结构返工，不建议只做句面抛光。",
+    "重建章骨时把“被提到更高一级后还要继续被使用”设为显性追求线，用U19A连续进球、波尔图、欧罗巴90分钟、格拉马内特B逆转、巴萨B首秀和赛季末回U19B串成一条压力链。",
+    "主体优先展开两个硬节点：2003年11月16日波尔图的一线队友谊赛首次出场，以及格拉马内特B一战第89和第90分钟把1比2改写成3比2；其余节点仅作承压桥接。",
+    "结尾不要再让“37场正式比赛35球，另有1场一线队友谊赛”成为最后记忆点；应改为“门开过一次，但身份仍在不同名单之间流动”的处境性收束。",
+    "句面层面削减“刚过去……已经……”与比分播报式模板句，让公开锚点直接承担叙事重量。"
   ],
   "proposed_writebacks": [
-    "写入 workflows/CH005/04-continuity-audit.json。",
-    "在 orchestrator 任务状态中将 CH005 标记为需回退到 planning，先补 scene-level outline 再重写正文。",
-    "不更新任何 canon/state 正文档案；本次问题主要属于章节执行层，而非既有事实库。"
+    "写回审计结论：CH005 continuity gate 未通过，主要阻塞维度为 narrative-surface、tension、character-embodiment、commentary-drift、prose-naturalness。",
+    "写回任务状态：CH005 标记为 needs-structural-redraft，而非 line-edit-ready。",
+    "不建议更新 canon；当前问题来自章节实现与章内引擎不足，不是事实库缺口。"
   ],
   "change_set": []
 }

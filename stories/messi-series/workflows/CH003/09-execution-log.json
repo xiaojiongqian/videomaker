@@ -3,25 +3,132 @@
   "contract_version": "2026-03",
   "chapter_id": "CH003",
   "orchestrator_role": "novel-orchestrator-main",
-  "status": "in_progress",
+  "status": "completed",
   "dispatches": [
     {
-      "task_id": "CH003-plan-001",
+      "task_id": "CH003-plan-002",
       "agent_role": "novel-plot-architect",
       "mode": "subagent",
       "status": "completed",
-      "agent_session_id": "019d13a1-6fcd-76f3-895e-3f776c92feff",
+      "agent_session_id": "019d13f2-8182-7942-87ca-f4f9a213de94",
       "agent_run_id": "",
       "input_refs": [
-        "01-context.md"
+        "01-context.md",
+        "../../summaries/CH002.summary.md",
+        "../../summaries/CH004.summary.md",
+        "../../OPEN_LOOPS.md",
+        "../../STYLE_GUIDE.md",
+        "../../SOURCES.md"
       ],
       "output_refs": [
         "02-plan.json"
       ],
-      "started_at": "2026-03-22T03:40:40Z",
-      "completed_at": "2026-03-22T03:43:31Z",
       "model": "gpt-5.4",
-      "notes": ""
+      "notes": "Refreshed CH003 into a five-node bridge centered on official debut, fracture interruption, and recovery in Barcelona."
+    },
+    {
+      "task_id": "CH003-draft-002",
+      "agent_role": "novel-scene-dramatizer",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d13f6-452f-7132-9228-55b5d9c24b2e",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "02-plan.json",
+        "../../summaries/CH002.summary.md",
+        "../../summaries/CH004.summary.md",
+        "../../STYLE_GUIDE.md",
+        "../../SOURCES.md"
+      ],
+      "output_refs": [
+        "03-draft.md"
+      ],
+      "model": "gpt-5.4",
+      "notes": "Generated the first refreshed draft for CH003."
+    },
+    {
+      "task_id": "CH003-continuity-audit-002",
+      "agent_role": "novel-continuity-auditor",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d1408-80f5-75b3-889a-cb30e5ca3653",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "02-plan.json",
+        "03-draft.md",
+        "../../SOURCES.md",
+        "../../summaries/CH002.summary.md",
+        "../../summaries/CH004.summary.md"
+      ],
+      "output_refs": [
+        "04-continuity-audit.json"
+      ],
+      "model": "gpt-5.4",
+      "notes": "First audit on the refreshed draft; blocked on commentary-heavy back half."
+    },
+    {
+      "task_id": "CH003-redraft-001",
+      "agent_role": "novel-scene-dramatizer",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d13f6-452f-7132-9228-55b5d9c24b2e",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "02-plan.json",
+        "03-draft.md",
+        "04-continuity-audit.json",
+        "../../SOURCES.md"
+      ],
+      "output_refs": [
+        "06-revised.md"
+      ],
+      "model": "gpt-5.4",
+      "notes": "Targeted redraft compressed the back half to external consequences and removed commentary drift."
+    },
+    {
+      "task_id": "CH003-continuity-audit-003",
+      "agent_role": "novel-continuity-auditor",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d1408-80f5-75b3-889a-cb30e5ca3653",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "02-plan.json",
+        "06-revised.md",
+        "../../SOURCES.md",
+        "../../summaries/CH002.summary.md",
+        "../../summaries/CH004.summary.md"
+      ],
+      "output_refs": [
+        "04-continuity-audit.json"
+      ],
+      "model": "gpt-5.4",
+      "notes": "Passing audit on the revised CH003 draft."
+    },
+    {
+      "task_id": "CH003-summary-002",
+      "agent_role": "novel-chapter-summarizer",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d13e7-b5c3-7952-90ae-e486e60300d1",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "06-revised.md",
+        "../../OPEN_LOOPS.md",
+        "../../CURRENT_STATE.md",
+        "../../summaries/CH004.summary.md",
+        "../../SOURCES.md"
+      ],
+      "output_refs": [
+        "07-summary.json"
+      ],
+      "model": "gpt-5.4",
+      "notes": "Structured summary for the passing CH003 revision."
     }
   ],
   "exceptions": []

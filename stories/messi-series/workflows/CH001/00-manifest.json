@@ -2,7 +2,7 @@
   "schema_version": "1.1",
   "chapter_id": "CH001",
   "chapter_title": "餐巾纸上的名字",
-  "status": "drafted",
+  "status": "archived",
   "required_steps": {
     "continuity_audit": true,
     "dialogue_audit": false

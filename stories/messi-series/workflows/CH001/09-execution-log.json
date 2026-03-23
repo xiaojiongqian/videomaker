@@ -3,63 +3,145 @@
   "contract_version": "2026-03",
   "chapter_id": "CH001",
   "orchestrator_role": "novel-orchestrator-main",
-  "status": "in_progress",
+  "status": "completed",
   "dispatches": [
     {
-      "task_id": "CH001-plan-001",
+      "task_id": "CH001-plan-002",
       "agent_role": "novel-plot-architect",
       "mode": "subagent",
       "status": "completed",
-      "agent_session_id": "019d1170-b6d6-7951-9134-2c21049e12ed",
+      "agent_session_id": "019d13da-91ce-7f92-ba06-4084aaaf561e",
       "agent_run_id": "",
       "input_refs": [
-        "01-context.md"
+        "01-context.md",
+        "../../OPEN_LOOPS.md",
+        "../../STYLE_GUIDE.md",
+        "../../summaries/CH002.summary.md",
+        "../../SOURCES.md"
       ],
       "output_refs": [
         "02-plan.json"
       ],
-      "started_at": "2026-03-21T17:28:12Z",
-      "completed_at": "2026-03-21T17:31:09Z",
+      "started_at": "2026-03-22T04:43:30Z",
+      "completed_at": "2026-03-22T04:45:13Z",
       "model": "gpt-5.4",
-      "notes": ""
+      "notes": "Structural redraft plan focused on eventifying the trial window and the paper-state escalation."
     },
     {
-      "task_id": "CH001-draft-001",
+      "task_id": "CH001-draft-002",
       "agent_role": "novel-scene-dramatizer",
       "mode": "subagent",
       "status": "completed",
-      "agent_session_id": "019d1173-6a8c-7052-89b5-5358c9d7c802",
+      "agent_session_id": "019d13de-2479-7e30-acda-9e91c8049270",
       "agent_run_id": "",
       "input_refs": [
         "01-context.md",
-        "02-plan.json"
+        "02-plan.json",
+        "../../STYLE_GUIDE.md",
+        "../../summaries/CH002.summary.md",
+        "../../SOURCES.md"
       ],
       "output_refs": [
         "03-draft.md"
       ],
-      "started_at": "2026-03-21T17:31:09Z",
-      "completed_at": "2026-03-21T17:33:17Z",
+      "started_at": "2026-03-22T04:46:10Z",
+      "completed_at": "2026-03-22T04:48:50Z",
       "model": "gpt-5.4",
-      "notes": ""
+      "notes": "First draft on the refreshed plan."
     },
     {
-      "task_id": "CH001-continuity-001",
+      "task_id": "CH001-continuity-002",
       "agent_role": "novel-continuity-auditor",
       "mode": "subagent",
       "status": "completed",
-      "agent_session_id": "019d1175-5cf2-7581-9a2d-7b3d5d194d4d",
+      "agent_session_id": "019d13e0-91ce-7cd3-a3ab-64f1906331fa",
       "agent_run_id": "",
       "input_refs": [
         "01-context.md",
-        "03-draft.md"
+        "02-plan.json",
+        "03-draft.md",
+        "../../OPEN_LOOPS.md",
+        "../../STYLE_GUIDE.md",
+        "../../summaries/CH002.summary.md",
+        "../../SOURCES.md"
       ],
       "output_refs": [
         "04-continuity-audit.json"
       ],
-      "started_at": "2026-03-21T17:33:17Z",
-      "completed_at": "2026-03-21T17:36:08Z",
+      "started_at": "2026-03-22T04:49:10Z",
+      "completed_at": "2026-03-22T04:51:10Z",
       "model": "gpt-5.4",
-      "notes": ""
+      "notes": "Blocking narrative-surface finding; superseded after targeted redraft."
+    },
+    {
+      "task_id": "CH001-redraft-001",
+      "agent_role": "novel-scene-dramatizer",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d13e2-d2c9-74f1-b20a-e0e14055f7a7",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "02-plan.json",
+        "03-draft.md",
+        "../../STYLE_GUIDE.md",
+        "../../summaries/CH002.summary.md",
+        "../../SOURCES.md"
+      ],
+      "output_refs": [
+        "06-revised.md"
+      ],
+      "started_at": "2026-03-22T04:52:00Z",
+      "completed_at": "2026-03-22T04:54:10Z",
+      "model": "gpt-5.4",
+      "notes": "Targeted rewrite against continuity findings; integrated by orchestrator into the stable revised draft."
+    },
+    {
+      "task_id": "CH001-continuity-003",
+      "agent_role": "novel-continuity-auditor",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d13e4-bcd1-7082-a151-e551fbd78c3c",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "02-plan.json",
+        "06-revised.md",
+        "../../OPEN_LOOPS.md",
+        "../../STYLE_GUIDE.md",
+        "../../summaries/CH002.summary.md",
+        "../../SOURCES.md"
+      ],
+      "output_refs": [
+        "04-continuity-audit.json"
+      ],
+      "started_at": "2026-03-22T04:54:40Z",
+      "completed_at": "2026-03-22T04:56:17Z",
+      "model": "gpt-5.4",
+      "notes": "Pre-archive passing audit."
+    },
+    {
+      "task_id": "CH001-summary-002",
+      "agent_role": "novel-chapter-summarizer",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d13e7-b5c3-7952-90ae-e486e60300d1",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "06-revised.md",
+        "../../OPEN_LOOPS.md",
+        "../../CURRENT_STATE.md",
+        "../../summaries/CH002.summary.md",
+        "../../SOURCES.md"
+      ],
+      "output_refs": [
+        "07-summary.json"
+      ],
+      "started_at": "2026-03-22T04:58:20Z",
+      "completed_at": "2026-03-22T05:00:01Z",
+      "model": "gpt-5.4",
+      "notes": "Regenerated structured memory from the revised stable chapter."
     }
   ],
   "exceptions": []

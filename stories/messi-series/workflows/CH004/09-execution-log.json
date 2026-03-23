@@ -3,63 +3,91 @@
   "contract_version": "2026-03",
   "chapter_id": "CH004",
   "orchestrator_role": "novel-orchestrator-main",
-  "status": "in_progress",
+  "status": "completed",
   "dispatches": [
     {
-      "task_id": "CH004-plan-001",
+      "task_id": "CH004-plan-002",
       "agent_role": "novel-plot-architect",
       "mode": "subagent",
       "status": "completed",
-      "agent_session_id": "019d1171-8f9a-79a2-81f0-ca546f620323",
+      "agent_session_id": "019d13f2-8182-7942-87ca-f4f9a213de94",
       "agent_run_id": "",
       "input_refs": [
-        "01-context.md"
+        "01-context.md",
+        "../../summaries/CH003.summary.md",
+        "../../summaries/CH005.summary.md",
+        "../../OPEN_LOOPS.md",
+        "../../STYLE_GUIDE.md",
+        "../../SOURCES.md"
       ],
       "output_refs": [
         "02-plan.json"
       ],
-      "started_at": "2026-03-21T17:29:08Z",
-      "completed_at": "2026-03-21T17:30:28Z",
       "model": "gpt-5.4",
-      "notes": ""
+      "notes": "Refreshed CH004 into a five-node season arc centered on uninterrupted output and the mask-final action chain."
     },
     {
-      "task_id": "CH004-draft-001",
+      "task_id": "CH004-draft-002",
       "agent_role": "novel-scene-dramatizer",
       "mode": "subagent",
       "status": "completed",
-      "agent_session_id": "019d1172-c86c-7642-bda1-12be4783411d",
+      "agent_session_id": "019d13f6-452f-7132-9228-55b5d9c24b2e",
       "agent_run_id": "",
       "input_refs": [
         "01-context.md",
-        "02-plan.json"
+        "02-plan.json",
+        "../../summaries/CH003.summary.md",
+        "../../summaries/CH005.summary.md",
+        "../../STYLE_GUIDE.md",
+        "../../SOURCES.md"
       ],
       "output_refs": [
         "03-draft.md"
       ],
-      "started_at": "2026-03-21T17:30:28Z",
-      "completed_at": "2026-03-21T17:32:19Z",
       "model": "gpt-5.4",
-      "notes": ""
+      "notes": "Generated the refreshed CH004 draft with compressed season line and clean final action chain."
     },
     {
-      "task_id": "CH004-continuity-001",
+      "task_id": "CH004-continuity-audit-002",
       "agent_role": "novel-continuity-auditor",
       "mode": "subagent",
       "status": "completed",
-      "agent_session_id": "019d1174-7c1e-7721-81e7-99999c89f862",
+      "agent_session_id": "019d1408-80f5-75b3-889a-cb30e5ca3653",
       "agent_run_id": "",
       "input_refs": [
         "01-context.md",
-        "03-draft.md"
+        "02-plan.json",
+        "03-draft.md",
+        "../../SOURCES.md",
+        "../../summaries/CH003.summary.md",
+        "../../summaries/CH005.summary.md"
       ],
       "output_refs": [
         "04-continuity-audit.json"
       ],
-      "started_at": "2026-03-21T17:32:19Z",
-      "completed_at": "2026-03-21T17:35:12Z",
       "model": "gpt-5.4",
-      "notes": ""
+      "notes": "Passing audit on the refreshed CH004 draft."
+    },
+    {
+      "task_id": "CH004-summary-002",
+      "agent_role": "novel-chapter-summarizer",
+      "mode": "subagent",
+      "status": "completed",
+      "agent_session_id": "019d13e7-b5c3-7952-90ae-e486e60300d1",
+      "agent_run_id": "",
+      "input_refs": [
+        "01-context.md",
+        "06-revised.md",
+        "../../OPEN_LOOPS.md",
+        "../../CURRENT_STATE.md",
+        "../../summaries/CH005.summary.md",
+        "../../SOURCES.md"
+      ],
+      "output_refs": [
+        "07-summary.json"
+      ],
+      "model": "gpt-5.4",
+      "notes": "Structured summary for the passing CH004 revision."
     }
   ],
   "exceptions": []
