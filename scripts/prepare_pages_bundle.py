@@ -40,6 +40,12 @@ FALLBACK_LIST_BLOCK = re.compile(
     re.DOTALL,
 )
 FRONT_MATTER_BLOCK = re.compile(r"^---\r?\n[\s\S]*?\r?\n---\r?\n?")
+DEFAULT_CHANNEL = "ai"
+TYPE_LABELS = {
+    "article": "文章",
+    "video-note": "视频总结",
+    "audio-note": "音频总结",
+}
 
 
 def parse_args() -> argparse.Namespace:
@@ -58,6 +64,184 @@ def parse_args() -> argparse.Namespace:
 def strip_front_matter(markdown_text: str) -> str:
     match = FRONT_MATTER_BLOCK.match(markdown_text)
     return markdown_text[match.end():] if match else markdown_text
+
+
+def normalize_channel(value: str) -> str:
+    channel = value.strip()
+    return channel or DEFAULT_CHANNEL
+
+
+def get_item_channel(item: dict) -> str:
+    return normalize_channel(str(item.get("channel", DEFAULT_CHANNEL)))
+
+
+def get_item_type_label(item: dict) -> str:
+    type_label = str(item.get("typeLabel", "")).strip()
+    if type_label:
+        return type_label
+    return TYPE_LABELS.get(str(item.get("type", "")).strip(), str(item.get("type", "")).strip() or "未分类")
+
+
+def get_channel_label(channel: str) -> str:
+    if channel == "novel":
+        return "小说"
+    return "AI时代"
+
+
+def get_channel_index_href(channel: str, relative_prefix: str = ".") -> str:
+    base = f"{relative_prefix}/index.html"
+    if channel == DEFAULT_CHANNEL:
+        return base
+    return f"{base}?channel={quote(channel, safe='')}"
+
+
+def parse_markdown_h1(markdown_text: str) -> str:
+    for line in strip_front_matter(markdown_text).splitlines():
+        stripped = line.strip()
+        if stripped.startswith("# "):
+            return stripped[2:].strip()
+    return ""
+
+
+def parse_summary_one_line(markdown_text: str) -> str:
+    in_summary = False
+    for line in strip_front_matter(markdown_text).splitlines():
+        stripped = line.strip()
+        if stripped.startswith("## "):
+            if in_summary:
+                break
+            in_summary = stripped == "## One-Line Summary"
+            continue
+
+        if in_summary and stripped.startswith("- "):
+            return stripped[2:].strip()
+
+    return ""
+
+
+def parse_project_snapshot_value(markdown_text: str, key: str) -> str:
+    in_snapshot = False
+    key_prefix = f"- {key}:"
+
+    for line in strip_front_matter(markdown_text).splitlines():
+        stripped = line.strip()
+        if stripped.startswith("## "):
+            if in_snapshot:
+                break
+            in_snapshot = stripped == "## Project Snapshot"
+            continue
+
+        if in_snapshot and stripped.startswith(key_prefix):
+            return stripped[len(key_prefix) :].strip()
+
+    return ""
+
+
+def parse_chapter_sequence(chapter_id: str, fallback: int) -> int:
+    match = re.search(r"(\d+)$", chapter_id)
+    if match:
+        return int(match.group(1))
+    return fallback
+
+
+def build_story_site_items(repo_root: Path) -> list[dict]:
+    stories_root = repo_root / "stories"
+    if not stories_root.exists():
+        return []
+
+    items: list[dict] = []
+
+    for config_path in sorted(stories_root.glob("*/site.json")):
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+        series_root = config_path.parent
+        channel = normalize_channel(str(config.get("channel", "novel")))
+        type_value = str(config.get("type", series_root.name)).strip() or series_root.name
+        topics = config.get("topic") if isinstance(config.get("topic"), list) else []
+        chapters_dir = series_root / str(config.get("chaptersDir", "chapters"))
+        summaries_dir = series_root / str(config.get("summariesDir", "summaries"))
+        index_path = series_root / str(config.get("indexFile", "INDEX.md"))
+
+        if not chapters_dir.exists():
+            raise SystemExit(f"Chapters directory not found for site config: {chapters_dir}")
+        if not index_path.exists():
+            raise SystemExit(f"Index file not found for site config: {index_path}")
+
+        project_index_text = index_path.read_text(encoding="utf-8")
+        series_title = str(config.get("typeLabel", "")).strip() or parse_project_snapshot_value(project_index_text, "Title") or type_value
+        default_summary = str(config.get("seriesSummary", "")).strip() or parse_project_snapshot_value(project_index_text, "Premise")
+
+        chapter_ids = config.get("publishedChapters")
+        if isinstance(chapter_ids, list) and chapter_ids:
+            published_chapters = [str(chapter_id).strip() for chapter_id in chapter_ids if str(chapter_id).strip()]
+        else:
+            published_chapters = [path.stem for path in sorted(chapters_dir.glob("CH*.md"))]
+
+        for fallback_sequence, chapter_id in enumerate(published_chapters, start=1):
+            chapter_path = chapters_dir / f"{chapter_id}.md"
+            if not chapter_path.exists():
+                raise SystemExit(f"Published chapter not found: {chapter_path}")
+
+            chapter_text = chapter_path.read_text(encoding="utf-8")
+            chapter_title = parse_markdown_h1(chapter_text) or chapter_id
+            summary_path = summaries_dir / f"{chapter_id}.summary.md"
+            chapter_summary = ""
+            if summary_path.exists():
+                chapter_summary = parse_summary_one_line(summary_path.read_text(encoding="utf-8"))
+
+            items.append(
+                {
+                    "id": f"{type_value}-{chapter_id.lower()}",
+                    "title": chapter_title,
+                    "type": type_value,
+                    "typeLabel": series_title,
+                    "topic": topics,
+                    "summary": chapter_summary or default_summary or chapter_title,
+                    "source": f"../{chapter_path.relative_to(repo_root).as_posix()}",
+                    "status": "published",
+                    "channel": channel,
+                    "sequence": parse_chapter_sequence(chapter_id, fallback_sequence),
+                    "chapterId": chapter_id,
+                    "seriesTitle": series_title,
+                }
+            )
+
+    return items
+
+
+def ensure_unique_item_ids(items: list[dict]) -> None:
+    seen: set[str] = set()
+    duplicates: set[str] = set()
+
+    for item in items:
+        item_id = str(item.get("id", "")).strip()
+        if not item_id:
+            continue
+        if item_id in seen:
+            duplicates.add(item_id)
+        seen.add(item_id)
+
+    if duplicates:
+        duplicate_text = ", ".join(sorted(duplicates))
+        raise SystemExit(f"Duplicate content ids found: {duplicate_text}")
+
+
+def sort_items_for_channel(items: list[dict], channel: str) -> list[dict]:
+    relevant = [item for item in items if get_item_channel(item) == channel and item.get("status") == "published" and item.get("id")]
+
+    if channel == "novel":
+        return sorted(
+            relevant,
+            key=lambda item: (
+                int(item.get("sequence")) if str(item.get("sequence", "")).isdigit() else 10**9,
+                str(item.get("title", "")),
+            ),
+        )
+
+    return sorted(
+        relevant,
+        key=lambda item: (str(item.get("date") or item.get("updatedAt") or ""), str(item.get("title", ""))),
+        reverse=True,
+    )
 
 
 def is_relative_local_ref(raw: str) -> bool:
@@ -129,10 +313,13 @@ def extract_markdown_local_refs(markdown_text: str) -> Iterable[str]:
 def rewrite_index_and_copy_content(out_root: Path, repo_root: Path) -> list[dict]:
     index_path = out_root / "data" / "content-index.json"
     items = json.loads(index_path.read_text(encoding="utf-8"))
+    items.extend(build_story_site_items(repo_root))
+    ensure_unique_item_ids(items)
 
     host_root = repo_root / "host"
 
     for item in items:
+        item["channel"] = get_item_channel(item)
         item_id = str(item.get("id", "")).strip()
         if item_id:
             item["page"] = f"./post/{quote(item_id, safe='')}.html"
@@ -521,6 +708,13 @@ def build_post_static_html(
 ) -> str:
     version = quote(asset_version, safe="") if asset_version else ""
     suffix = f"?v={version}" if version else ""
+    channel = get_item_channel(item)
+    channel_label = get_channel_label(channel)
+    brand_href = get_channel_index_href(channel, "..")
+    ai_href = get_channel_index_href(DEFAULT_CHANNEL, "..")
+    novel_href = get_channel_index_href("novel", "..")
+    ai_current = ' aria-current="page"' if channel == DEFAULT_CHANNEL else ""
+    novel_current = ' aria-current="page"' if channel == "novel" else ""
 
     def asset(path: str) -> str:
         return f"{path}{suffix}"
@@ -551,8 +745,14 @@ def build_post_static_html(
 
     topics = item.get("topic") or []
     topic_text = " / ".join(topics) if isinstance(topics, list) and topics else "未分类"
-    date_value = item.get("date") or item.get("updatedAt") or "日期未知"
-    post_meta = f'{html.escape(str(item.get("type", "article")))} · {html.escape(str(date_value))} · {html.escape(topic_text)}'
+    type_label = html.escape(get_item_type_label(item))
+    if channel == "novel":
+        sequence_value = item.get("sequence")
+        sequence_text = f"第{sequence_value}章" if str(sequence_value).isdigit() else "小说章节"
+        post_meta = f'小说 · {type_label} · {html.escape(sequence_text)}'
+    else:
+        date_value = item.get("date") or item.get("updatedAt") or "日期未知"
+        post_meta = f"{type_label} · {html.escape(str(date_value))} · {html.escape(topic_text)}"
     summary = html.escape(str(item.get("summary", "")))
     title = html.escape(str(item.get("title", "未命名内容")))
 
@@ -561,10 +761,10 @@ def build_post_static_html(
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} - AI时代</title>
+    <title>{title} - {channel_label}</title>
     <meta name="description" content="{summary or title}" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="{title} - AI时代" />
+    <meta property="og:title" content="{title} - {channel_label}" />
     <meta property="og:description" content="{summary or title}" />
     <meta name="twitter:card" content="summary" />
     <link rel="stylesheet" href="{asset('../assets/css/theme.css')}" />
@@ -575,10 +775,10 @@ def build_post_static_html(
     <a class="skip-link" href="#main-content">跳到正文</a>
     <header class="site-header">
       <div class="container site-header__inner">
-        <a class="brand" href="../index.html">AI时代</a>
+        <a id="siteBrand" class="brand" href="{brand_href}">{channel_label}</a>
         <nav class="nav" aria-label="主导航">
-          <a href="../index.html">首页</a>
-          <a aria-current="page" href="#">详情页</a>
+          <a id="navAi"{ai_current} href="{ai_href}">AI时代</a>
+          <a id="navNovel"{novel_current} href="{novel_href}">小说</a>
         </nav>
       </div>
     </header>
@@ -604,7 +804,7 @@ def build_post_static_html(
     </main>
     <footer class="site-footer">
       <div class="container">
-        <p>作者：Vik Qian · 版权所有 © 2026 AI时代</p>
+        <p id="siteFooterText">作者：Vik Qian · 版权所有 © 2026 {channel_label}</p>
       </div>
     </footer>
     <script type="module" src="{asset('../assets/js/post-static.js')}"></script>
@@ -616,24 +816,27 @@ def build_post_static_html(
 def write_static_post_pages(out_root: Path, items: list[dict], asset_version: str) -> None:
     post_dir = out_root / "post"
     post_dir.mkdir(parents=True, exist_ok=True)
-    published_items = [item for item in items if item.get("status") == "published" and item.get("id")]
+    channels = sorted({get_item_channel(item) for item in items if item.get("status") == "published"})
 
-    for index, item in enumerate(published_items):
-        source_ref = str(item.get("source", "")).strip()
-        if not source_ref:
-            continue
+    for channel in channels:
+        published_items = sort_items_for_channel(items, channel)
 
-        source_path = (out_root / source_ref.lstrip("./")).resolve()
-        if not source_path.exists():
-            continue
+        for index, item in enumerate(published_items):
+            source_ref = str(item.get("source", "")).strip()
+            if not source_ref:
+                continue
 
-        markdown_text = strip_front_matter(source_path.read_text(encoding="utf-8"))
-        body_html, toc = render_markdown_basic(markdown_text, source_path, post_dir, out_root)
-        prev_item = published_items[index - 1] if index > 0 else None
-        next_item = published_items[index + 1] if index < len(published_items) - 1 else None
-        page_html = build_post_static_html(item, body_html, toc, prev_item, next_item, asset_version)
-        output_path = post_dir / f'{quote(str(item["id"]), safe="")}.html'
-        output_path.write_text(page_html, encoding="utf-8")
+            source_path = (out_root / source_ref.lstrip("./")).resolve()
+            if not source_path.exists():
+                continue
+
+            markdown_text = strip_front_matter(source_path.read_text(encoding="utf-8"))
+            body_html, toc = render_markdown_basic(markdown_text, source_path, post_dir, out_root)
+            prev_item = published_items[index - 1] if index > 0 else None
+            next_item = published_items[index + 1] if index < len(published_items) - 1 else None
+            page_html = build_post_static_html(item, body_html, toc, prev_item, next_item, asset_version)
+            output_path = post_dir / f'{quote(str(item["id"]), safe="")}.html'
+            output_path.write_text(page_html, encoding="utf-8")
 
 
 def inject_post_fallback_list(out_root: Path, items: list[dict]) -> None:
@@ -642,21 +845,20 @@ def inject_post_fallback_list(out_root: Path, items: list[dict]) -> None:
         return
 
     entries: list[str] = []
-    for item in items:
-        if item.get("status") != "published":
-            continue
-        item_id = str(item.get("id", "")).strip()
-        if not item_id:
-            continue
+    for channel in sorted({get_item_channel(item) for item in items if item.get("status") == "published"}):
+        for item in sort_items_for_channel(items, channel):
+            item_id = str(item.get("id", "")).strip()
+            if not item_id:
+                continue
 
-        title = html.escape(str(item.get("title", item_id)))
-        summary = html.escape(str(item.get("summary", "")))
-        href = item.get("page") or f"./post/{quote(item_id, safe='')}.html"
-        entries.append(
-            f'<li><a href="{html.escape(str(href), quote=True)}">{title}</a>'
-            + (f'<span class="muted"> · {summary}</span>' if summary else "")
-            + "</li>"
-        )
+            title = html.escape(str(item.get("title", item_id)))
+            summary = html.escape(str(item.get("summary", "")))
+            href = item.get("page") or f"./post/{quote(item_id, safe='')}.html"
+            entries.append(
+                f'<li><a href="{html.escape(str(href), quote=True)}">{title}</a>'
+                + (f'<span class="muted"> · {summary}</span>' if summary else "")
+                + "</li>"
+            )
 
     if not entries:
         return
@@ -690,6 +892,12 @@ def write_sitemap(out_root: Path, site_url: str, items: list[dict]) -> None:
         return
 
     entries = [f"{site_url}/", f"{site_url}/index.html"]
+    channels = sorted({get_item_channel(item) for item in items if item.get("status") == "published"})
+    for channel in channels:
+        if channel == DEFAULT_CHANNEL:
+            continue
+        entries.append(f"{site_url}/index.html?channel={quote(channel, safe='')}")
+
     for item in items:
         item_id = item.get("id", "")
         if not item_id:

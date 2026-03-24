@@ -23,3 +23,9 @@
   introduced_in: CH001
   current_status: active
   note: 比较和期待会越来越响，但正文不急着替它们做总结。
+
+- id: loop-argentina
+  label: 俱乐部的答案能不能换成蓝白条纹里的答案
+  introduced_in: CH008
+  current_status: active
+  note: 10号、三冠王和金球奖已经把俱乐部一侧的判断推到最高处；2010 世界杯出局、2011 主场美洲杯再度失利与队长袖标到来，只让国家队那边的提问更集中地压到梅西身上。

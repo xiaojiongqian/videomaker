@@ -1,11 +1,45 @@
 import {
+  filterContentByChannel,
   getFilterOptions,
   getTypeLabel,
+  listAllPublishedContent,
   listPublishedContent,
   queryContent,
+  sortContentItems,
 } from './content-service.js';
 import { renderMermaidDiagrams } from './diagram-renderer.js';
 import { renderMarkdownDocument } from './markdown-renderer.js';
+
+const DEFAULT_CHANNEL = 'ai';
+
+const CHANNEL_CONFIGS = {
+  ai: {
+    label: 'AI时代',
+    description: '支持筛选与检索的 AI 内容卡片列表。',
+    indexHeading: 'AI时代',
+    indexIntro: '支持按关键词、类型、主题与年份筛选已发布内容。',
+    keywordPlaceholder: '输入标题、摘要或标签',
+    typeFilterLabel: '类型',
+    yearFilterVisible: true,
+    resultUnit: '篇',
+    emptyListText: 'AI时代频道暂无已发布内容。',
+    emptyFilterText: '没有匹配结果，请尝试调整筛选条件。',
+    footerLabel: 'AI时代',
+  },
+  novel: {
+    label: '小说',
+    description: '支持筛选与检索的小说章节列表。',
+    indexHeading: '小说',
+    indexIntro: '支持按关键词、系列与主题筛选已发布章节。',
+    keywordPlaceholder: '输入章节标题、摘要或标签',
+    typeFilterLabel: '系列',
+    yearFilterVisible: false,
+    resultUnit: '章',
+    emptyListText: '小说频道暂无已发布章节。',
+    emptyFilterText: '没有匹配章节，请尝试调整筛选条件。',
+    footerLabel: '小说',
+  },
+};
 
 function escapeHtml(value) {
   return String(value || '')
@@ -29,6 +63,146 @@ function formatDate(value) {
   }).format(ts);
 }
 
+function getChannelConfig(channel) {
+  return CHANNEL_CONFIGS[channel] || CHANNEL_CONFIGS[DEFAULT_CHANNEL];
+}
+
+function getRequestedChannel() {
+  const params = new URLSearchParams(window.location.search);
+  const requested = (params.get('channel') || '').trim();
+  return requested && CHANNEL_CONFIGS[requested] ? requested : DEFAULT_CHANNEL;
+}
+
+function getChannelHref(channel) {
+  if (channel === DEFAULT_CHANNEL) {
+    return './index.html';
+  }
+
+  return `./index.html?channel=${encodeURIComponent(channel)}`;
+}
+
+function setMetaContent(selector, value) {
+  const element = document.querySelector(selector);
+  if (element) {
+    element.setAttribute('content', value);
+  }
+}
+
+function setPageMetadata(title, description, ogType) {
+  document.title = title;
+  setMetaContent('meta[name="description"]', description);
+  setMetaContent('meta[property="og:title"]', title);
+  setMetaContent('meta[property="og:description"]', description);
+
+  if (ogType) {
+    setMetaContent('meta[property="og:type"]', ogType);
+  }
+}
+
+function applySiteChrome(channel, pageKind, item = null) {
+  const config = getChannelConfig(channel);
+  document.body.dataset.channel = channel;
+
+  const brandEl = document.getElementById('siteBrand');
+  if (brandEl) {
+    brandEl.textContent = config.label;
+    brandEl.href = getChannelHref(channel);
+  }
+
+  const footerEl = document.getElementById('siteFooterText');
+  if (footerEl) {
+    footerEl.textContent = `作者：Vik Qian · 版权所有 © 2026 ${config.footerLabel}`;
+  }
+
+  const navLinks = [
+    ['navAi', 'ai', CHANNEL_CONFIGS.ai.label],
+    ['navNovel', 'novel', CHANNEL_CONFIGS.novel.label],
+  ];
+
+  navLinks.forEach(([elementId, navChannel, label]) => {
+    const link = document.getElementById(elementId);
+    if (!link) {
+      return;
+    }
+
+    link.textContent = label;
+    link.href = getChannelHref(navChannel);
+    if (navChannel === channel) {
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  });
+
+  if (pageKind === 'index') {
+    setPageMetadata(config.label, config.description, 'website');
+    return;
+  }
+
+  if (item) {
+    setPageMetadata(`${item.title} - ${config.label}`, item.summary || config.description, 'article');
+    return;
+  }
+
+  setPageMetadata(`详情页 - ${config.label}`, `${config.label}内容详情页。`, 'article');
+}
+
+function getItemTypeLabel(item) {
+  return item.typeLabel || getTypeLabel(item.type);
+}
+
+function buildTypeLabelMap(items) {
+  const map = new Map();
+
+  items.forEach((item) => {
+    if (!item.type) {
+      return;
+    }
+
+    map.set(item.type, getItemTypeLabel(item));
+  });
+
+  return map;
+}
+
+function getItemListMeta(item) {
+  if (item.channel === 'novel') {
+    const parts = [];
+    if (Number.isFinite(item.sequence)) {
+      parts.push(`第${item.sequence}章`);
+    }
+
+    if (item.topic.length) {
+      parts.push(item.topic.join(' / '));
+    }
+
+    return parts.join(' · ') || '小说章节';
+  }
+
+  const topics = item.topic.length ? item.topic.join(' / ') : '未分类';
+  return `${formatDate(item.date || item.updatedAt)} · ${topics}`;
+}
+
+function getPostMetaText(item) {
+  if (item.channel === 'novel') {
+    const parts = ['小说'];
+    const typeLabel = getItemTypeLabel(item);
+
+    if (typeLabel) {
+      parts.push(typeLabel);
+    }
+
+    if (Number.isFinite(item.sequence)) {
+      parts.push(`第${item.sequence}章`);
+    }
+
+    return parts.join(' · ');
+  }
+
+  const topics = item.topic.length ? item.topic.join(' / ') : '未分类';
+  return `${getItemTypeLabel(item)} · ${formatDate(item.date || item.updatedAt)} · ${topics}`;
+}
+
 function getPostHref(item) {
   const page = typeof item.page === 'string' ? item.page.trim() : '';
   if (page) {
@@ -39,14 +213,13 @@ function getPostHref(item) {
 
 function renderCard(item) {
   const href = getPostHref(item);
-  const topics = item.topic.length ? item.topic.join(' / ') : '未分类';
 
   return `
     <article class="card">
-      <span class="pill">${escapeHtml(getTypeLabel(item.type))}</span>
+      <span class="pill">${escapeHtml(getItemTypeLabel(item))}</span>
       <h3><a href="${href}">${escapeHtml(item.title)}</a></h3>
       <p>${escapeHtml(item.summary || '暂无摘要')}</p>
-      <p class="muted">${escapeHtml(formatDate(item.date || item.updatedAt))} · ${escapeHtml(topics)}</p>
+      <p class="muted">${escapeHtml(getItemListMeta(item))}</p>
     </article>
   `;
 }
@@ -72,44 +245,82 @@ function updateSelectOptions(selectEl, values, formatter = (value) => value) {
   });
 }
 
+function applyIndexPageLabels(channel) {
+  const config = getChannelConfig(channel);
+  const headingEl = document.getElementById('all-title');
+  const introEl = document.getElementById('channelDescription');
+  const keywordInput = document.getElementById('keyword');
+  const typeLabelEl = document.querySelector('label[for="type"]');
+  const yearFieldEl = document.querySelector('[data-filter-field="year"]');
+
+  if (headingEl) {
+    headingEl.textContent = config.indexHeading;
+  }
+
+  if (introEl) {
+    introEl.textContent = config.indexIntro;
+  }
+
+  if (keywordInput) {
+    keywordInput.placeholder = config.keywordPlaceholder;
+  }
+
+  if (typeLabelEl) {
+    typeLabelEl.textContent = config.typeFilterLabel;
+  }
+
+  if (yearFieldEl) {
+    yearFieldEl.hidden = !config.yearFilterVisible;
+  }
+}
+
 async function initIndexPage() {
   const contentListEl = document.getElementById('contentList');
   const resultMetaEl = document.getElementById('resultMeta');
-
+  const channel = getRequestedChannel();
+  const config = getChannelConfig(channel);
   const keywordInput = document.getElementById('keyword');
   const typeSelect = document.getElementById('type');
   const topicSelect = document.getElementById('topic');
   const yearSelect = document.getElementById('year');
 
+  applySiteChrome(channel, 'index');
+  applyIndexPageLabels(channel);
+
   try {
-    const published = await listPublishedContent();
+    const published = await listPublishedContent(channel);
 
     if (!published.length) {
-      renderEmptyState(contentListEl, '请先在 content-index.json 中将内容状态设为 published。');
-      resultMetaEl.textContent = '已发布内容 0 篇';
+      renderEmptyState(contentListEl, config.emptyListText);
+      resultMetaEl.textContent = `已发布 0 ${config.resultUnit}`;
       return;
     }
 
     const filters = getFilterOptions(published);
-    updateSelectOptions(typeSelect, filters.types, getTypeLabel);
+    const typeLabels = buildTypeLabelMap(published);
+    updateSelectOptions(typeSelect, filters.types, (value) => typeLabels.get(value) || getTypeLabel(value));
     updateSelectOptions(topicSelect, filters.topics);
     updateSelectOptions(yearSelect, filters.years);
+
+    if (!config.yearFilterVisible) {
+      yearSelect.value = '';
+    }
 
     const applyFilters = () => {
       const filtered = queryContent(published, {
         keyword: keywordInput.value,
         type: typeSelect.value,
         topic: topicSelect.value,
-        year: yearSelect.value,
+        year: config.yearFilterVisible ? yearSelect.value : '',
       });
 
       if (!filtered.length) {
-        renderEmptyState(contentListEl, '没有匹配结果，请尝试调整筛选条件。');
+        renderEmptyState(contentListEl, config.emptyFilterText);
       } else {
         contentListEl.innerHTML = filtered.map(renderCard).join('');
       }
 
-      resultMetaEl.textContent = `共 ${filtered.length} 篇内容（已发布总数 ${published.length}）`;
+      resultMetaEl.textContent = `共 ${filtered.length} ${config.resultUnit}（已发布总数 ${published.length} ${config.resultUnit}）`;
     };
 
     [keywordInput, typeSelect, topicSelect, yearSelect].forEach((element) => {
@@ -219,7 +430,7 @@ function initTocActiveState() {
   records.forEach((record) => observer.observe(record.target));
 }
 
-const TOC_WIDTH_STORAGE_KEY = 'ai-era.toc.width';
+const TOC_WIDTH_STORAGE_KEY = 'content-site.toc.width';
 
 function initTocResizer() {
   const layout = document.querySelector('.post-layout');
@@ -347,10 +558,12 @@ async function initPostPage() {
   const postMetaEl = document.getElementById('postMeta');
   const postSummaryEl = document.getElementById('postSummary');
   const postContentEl = document.getElementById('postContent');
+  const requestedChannel = getRequestedChannel();
+  applySiteChrome(requestedChannel, 'post');
   initTocResizer();
 
   try {
-    const published = await listPublishedContent();
+    const published = await listAllPublishedContent();
     if (!published.length) {
       postTitleEl.textContent = '暂无可阅读内容';
       postMetaEl.textContent = '请先发布内容。';
@@ -361,9 +574,9 @@ async function initPostPage() {
 
     const params = new URLSearchParams(window.location.search);
     const requestedId = params.get('id');
-    const currentIndex = requestedId ? published.findIndex((item) => item.id === requestedId) : 0;
+    const requestedItem = requestedId ? published.find((item) => item.id === requestedId) : null;
 
-    if (requestedId && currentIndex < 0) {
+    if (requestedId && !requestedItem) {
       postTitleEl.textContent = '内容不存在或未发布';
       postMetaEl.textContent = `未找到 id=${requestedId}`;
       postContentEl.innerHTML =
@@ -372,13 +585,24 @@ async function initPostPage() {
       return;
     }
 
-    const item = published[currentIndex < 0 ? 0 : currentIndex];
-    const topics = item.topic.length ? item.topic.join(' / ') : '未分类';
+    const channel = requestedItem?.channel || requestedChannel;
+    const channelItems = sortContentItems(filterContentByChannel(published, channel), channel);
+    if (!channelItems.length) {
+      postTitleEl.textContent = '暂无可阅读内容';
+      postMetaEl.textContent = `${getChannelConfig(channel).label}频道暂无已发布内容。`;
+      postContentEl.innerHTML = '<div class="note">当前频道没有可阅读内容。</div>';
+      renderToc([]);
+      return;
+    }
 
-    document.title = `${item.title} - AI时代`;
+    const currentIndex = requestedItem
+      ? channelItems.findIndex((item) => item.id === requestedItem.id)
+      : 0;
+    const item = requestedItem || channelItems[0];
+    applySiteChrome(item.channel, 'post', item);
 
     postTitleEl.textContent = item.title;
-    postMetaEl.textContent = `${getTypeLabel(item.type)} · ${formatDate(item.date || item.updatedAt)} · ${topics}`;
+    postMetaEl.textContent = getPostMetaText(item);
     postSummaryEl.textContent = item.summary || '';
 
     const { html, toc } = await renderMarkdownDocument(item.source);
@@ -386,7 +610,7 @@ async function initPostPage() {
     await renderMermaidDiagrams(postContentEl);
     renderToc(toc);
     initTocActiveState();
-    renderPostNavigation(published, currentIndex < 0 ? 0 : currentIndex);
+    renderPostNavigation(channelItems, currentIndex < 0 ? 0 : currentIndex);
   } catch (error) {
     console.error(error);
     postTitleEl.textContent = '加载失败';

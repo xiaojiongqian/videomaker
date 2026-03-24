@@ -1,4 +1,5 @@
 const INDEX_URL = "./data/content-index.json";
+const DEFAULT_CHANNEL = "ai";
 
 const TYPE_LABELS = {
   article: "文章",
@@ -11,16 +12,30 @@ let indexCache;
 function normalizeItem(item) {
   const topics = Array.isArray(item.topic) ? item.topic : [];
   const date = item.date || item.updatedAt || "";
+  const sequence = Number.parseInt(String(item.sequence || ""), 10);
 
   return {
     ...item,
+    channel: item.channel || DEFAULT_CHANNEL,
     topic: topics,
     type: item.type || "article",
+    typeLabel: item.typeLabel || "",
     status: item.status || "draft",
     date,
+    sequence: Number.isFinite(sequence) ? sequence : null,
     summary: item.summary || "",
+    seriesTitle: item.seriesTitle || "",
+    chapterId: item.chapterId || "",
     updatedAt: item.updatedAt || date,
-    searchableText: [item.title || "", item.summary || "", topics.join(" "), item.type || ""]
+    searchableText: [
+      item.title || "",
+      item.summary || "",
+      topics.join(" "),
+      item.type || "",
+      item.typeLabel || "",
+      item.seriesTitle || "",
+      item.chapterId || "",
+    ]
       .join(" ")
       .toLowerCase(),
   };
@@ -34,6 +49,27 @@ function getSortTimestamp(item) {
 
 function sortByRecent(items) {
   return [...items].sort((a, b) => getSortTimestamp(b) - getSortTimestamp(a));
+}
+
+function sortNovel(items) {
+  return [...items].sort((a, b) => {
+    const aSequence = Number.isFinite(a.sequence) ? a.sequence : Number.MAX_SAFE_INTEGER;
+    const bSequence = Number.isFinite(b.sequence) ? b.sequence : Number.MAX_SAFE_INTEGER;
+
+    if (aSequence !== bSequence) {
+      return aSequence - bSequence;
+    }
+
+    return String(a.title || "").localeCompare(String(b.title || ""), "zh-CN");
+  });
+}
+
+export function sortContentItems(items, channel = "") {
+  if (channel === "novel") {
+    return sortNovel(items);
+  }
+
+  return sortByRecent(items);
 }
 
 export async function loadContentIndex() {
@@ -51,9 +87,22 @@ export async function loadContentIndex() {
   return indexCache;
 }
 
-export async function listPublishedContent() {
+export async function listAllPublishedContent() {
   const list = await loadContentIndex();
-  return sortByRecent(list.filter((item) => item.status === "published"));
+  return list.filter((item) => item.status === "published");
+}
+
+export function filterContentByChannel(items, channel = "") {
+  if (!channel) {
+    return [...items];
+  }
+
+  return items.filter((item) => item.channel === channel);
+}
+
+export async function listPublishedContent(channel = "") {
+  const list = await listAllPublishedContent();
+  return sortContentItems(filterContentByChannel(list, channel), channel);
 }
 
 export function getTypeLabel(type) {

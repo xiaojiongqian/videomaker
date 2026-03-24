@@ -7,6 +7,7 @@
 - 完整 SOP 文档：`SOP.md`
 - 内容总索引：`host/data/content-index.json`
 - 站点仅展示：`status = "published"` 条目
+- 发布后访问地址：`https://xiaojiongqian.github.io/videomaker/index.html`
 
 ## 本地预览
 

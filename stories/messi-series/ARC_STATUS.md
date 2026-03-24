@@ -12,23 +12,23 @@
 - Note: 这一段只负责把门打开，不急着把人物命运解释完。
 
 ## ARC-02 十号还没有重量
-- Status: active
+- Status: completed
 - Time window: 2004-2009
 - Pressure: 名声比成长更快到来。
 - Planned chapters:
-  - CH005《替补席尽头的灯》 [done]
+  - CH005《一级一级往上走》 [done]
   - CH006《人们开始拿他和前人比较》 [done]
   - CH007《跑过整条中线的人》 [done]
-  - CH008《金球不能回答的问题》 [next]
+  - CH008《金球不能回答的问题》 [done]
 - Keep open: 不把奖项、名场面和外界比较提前写成完整答案。
 
 ## ARC-03 蓝白条纹的山
-- Status: queued
+- Status: active
 - Time window: 2010-2016
 - Pressure: 国家队失利、公众审判和自我怀疑。
 - Planned chapters:
-  - CH009《更衣室里最安静的人》
-  - CH010《马拉卡纳的长走廊》
+  - CH009《更衣室里最安静的人》 [done]
+  - CH010《马拉卡纳的长走廊》 [next]
   - CH011《第三次决赛之后》
   - CH012《短暂退场》
 

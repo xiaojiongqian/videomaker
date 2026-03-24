@@ -177,6 +177,72 @@
      - 2007 年 5 月 10 日，国王杯半决赛次回合，巴塞罗那客场 0 比 4 负于赫塔费
      - 巴萨在首回合 5 比 2 领先的情况下，最终以总比分 5 比 6 被淘汰
 
+25. FC Barcelona, “A decade of Messi as Barça's no.10”
+   - 链接: https://www.fcbarcelona.com/en/news/792899/a-decade-of-messi-as-barcas-no10
+   - 用途:
+     - 2008 年 7 月 24 日，对希伯尼安的友谊赛里，梅西第一次身披巴塞罗那 10 号
+     - 2008 年 8 月 3 日，俱乐部正式宣布他将在 2008/09 赛季穿 10 号
+     - 2008/09 西甲首轮对努曼西亚，是梅西正式联赛中第一次穿 10 号
+
+26. FIFA, “Messi and Argentina grab gold in Beijing”
+   - 链接: https://inside.fifa.com/tournaments/mens/mensolympic/beijing2008/news/messi-and-argentina-grab-gold-in-beijing
+   - 用途:
+     - 2008 年 8 月 23 日，北京奥运男足决赛，阿根廷 1 比 0 击败尼日利亚夺冠
+     - 比赛在鸟巢进行，现场 89102 名观众，天气炎热且湿度极高
+     - 第 58 分钟，梅西为迪马利亚送出致胜助攻
+     - 梅西赛后公开表示，赢得奥运金牌是自己的梦想之一
+
+27. FC Barcelona, “Iniesta's wonder goal at Stamford Bridge”
+   - 链接: https://www.fcbarcelona.com/en/football/first-team/noticias/1124684/el-milagro-de-iniesta-en-stamford-bridge
+   - 用途:
+     - 2009 年 5 月 6 日，欧冠半决赛次回合对切尔西，补时阶段梅西在禁区前沿重新接住解围球并横传伊涅斯塔
+     - 伊涅斯塔破门后，巴萨以 1 比 1 战平切尔西，并在首回合 0 比 0 后靠客场进球闯进罗马决赛
+     - 这一球为巴萨后来的三冠王赛季接上了最后那条线
+
+28. UEFA, “Messi leads Barça to Rome glory”
+   - 链接: https://www.uefa.com/uefachampionsleague/news/01e0-0e7398054ce6-4b27ea9955b6-1000--messi-leads-barca-to-rome-glory/
+   - 用途:
+     - 2009 年 5 月 27 日，欧冠决赛在罗马奥林匹克球场进行，巴塞罗那 2 比 0 击败曼联
+     - 埃托奥第 10 分钟首开纪录，梅西第 70 分钟接哈维传中头球破门
+     - 梅西以 9 球结束该届欧冠
+     - 巴萨成为第一支在同一赛季拿下联赛、国王杯和欧冠的西班牙球队
+
+29. UEFA, “Messi wins 2009 Ballon d'Or”
+   - 链接: https://www.uefa.com/uefachampionsleague/news/0254-0d7c88baed8d-31759f0c45c3-1000--messi-wins-2009-ballon-d-or/
+   - 用途:
+     - 2009 年 12 月 1 日，梅西赢得生涯第一座金球奖
+     - 他拿到 473 分，以 240 分的创纪录优势领先第二名 C 罗
+     - 这座金球奖与 2009 年巴萨的联赛、国王杯和欧冠三冠王直接相关
+
+30. FIFA, “Watch Messi's highlights and goals from every World Cup game”
+   - 链接: https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/lionel-messi-games-highlights-watch
+   - 用途:
+     - 2010 年 7 月 3 日，南非世界杯四分之一决赛，阿根廷在开普敦 0 比 4 负于德国
+     - 这场比赛是梅西职业生涯中一次极重的世界杯挫败节点
+
+31. FIFA, “Immortal Messi reaches century of international goals”
+   - 链接: https://www.fifa.com/en/articles/immortal-messi-reaches-century-of-international-goals
+   - 用途:
+     - 梅西在 2010 年南非世界杯未能进球
+     - 2011 年 8 月，萨维利亚把队长袖标交给梅西
+
+32. CONMEBOL Copa América, “2011 Copa América; Uruguay become Champions in Argentina”
+   - 链接: https://copaamerica.com/en/news/uruguay-become-champions-during-argentina-2011
+   - 用途:
+     - 2011 年美洲杯由阿根廷主办
+     - 四分之一决赛，阿根廷与乌拉圭 1 比 1 战平后，最终在点球大战中止步
+
+33. CONMEBOL Copa América, “Fernando Muslera in the CONMEBOL Copa América 2011”
+   - 链接: https://copaamerica.com/en/news/fernando-muslera-in-the-conmebol-copa-america-2011
+   - 用途:
+     - 2011 年美洲杯四分之一决赛点球大战中，梅西罚进阿根廷第一球
+     - 特维斯失手，乌拉圭以点球 5 比 4 淘汰阿根廷
+
+34. CONMEBOL Copa América, “Argentina's all-time top scorers in the CONMEBOL Copa América™”
+   - 链接: https://copaamerica.com/en/news/argentina-all-time-copa-america-top-scorers
+   - 用途:
+     - 梅西在 2011 年美洲杯出战 4 场，没有进球
+
 ## Source Use Rules
 - 仅把上述来源能支撑的事实写成确定表述。
 - 没有公开来源支撑的对白、心理活动、家庭细节，不写成“实际发生”。

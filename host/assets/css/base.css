@@ -16,6 +16,10 @@ body {
   line-height: 1.65;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 a {
   color: var(--color-primary);
   text-decoration: none;

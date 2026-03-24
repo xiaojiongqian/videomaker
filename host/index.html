@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI时代</title>
-    <meta name="description" content="AI时代：支持筛选与检索的内容卡片列表。" />
+    <meta name="description" content="支持筛选与检索的多频道内容列表。" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="AI时代" />
-    <meta property="og:description" content="支持筛选与检索的内容卡片列表。" />
+    <meta property="og:description" content="支持筛选与检索的多频道内容列表。" />
     <meta name="twitter:card" content="summary" />
     <link rel="stylesheet" href="./assets/css/theme.css" />
     <link rel="stylesheet" href="./assets/css/base.css" />
@@ -17,10 +17,10 @@
     <a class="skip-link" href="#main-content">跳到正文</a>
     <header class="site-header">
       <div class="container site-header__inner">
-        <a class="brand" href="./index.html">AI时代</a>
+        <a id="siteBrand" class="brand" href="./index.html">AI时代</a>
         <nav class="nav" aria-label="主导航">
-          <a aria-current="page" href="./index.html">首页</a>
-          <a href="./post.html">详情页</a>
+          <a id="navAi" aria-current="page" href="./index.html">AI时代</a>
+          <a id="navNovel" href="./index.html?channel=novel">小说</a>
         </nav>
       </div>
     </header>
@@ -29,25 +29,26 @@
       <section class="section">
         <div class="container stack">
           <section class="stack" aria-labelledby="all-title">
-            <h1 id="all-title">内容筛选</h1>
+            <h1 id="all-title">AI时代</h1>
+            <p id="channelDescription" class="muted">支持按关键词、类型、主题与年份筛选已发布内容。</p>
             <section class="toolbar" aria-label="筛选工具栏">
-              <div class="field">
+              <div class="field" data-filter-field="keyword">
                 <label for="keyword">关键词</label>
                 <input id="keyword" type="search" placeholder="输入标题、摘要或标签" />
               </div>
-              <div class="field">
+              <div class="field" data-filter-field="type">
                 <label for="type">类型</label>
                 <select id="type">
                   <option value="">全部</option>
                 </select>
               </div>
-              <div class="field">
+              <div class="field" data-filter-field="topic">
                 <label for="topic">主题</label>
                 <select id="topic">
                   <option value="">全部</option>
                 </select>
               </div>
-              <div class="field">
+              <div class="field" data-filter-field="year">
                 <label for="year">年份</label>
                 <select id="year">
                   <option value="">全部</option>
@@ -64,7 +65,7 @@
 
     <footer class="site-footer">
       <div class="container">
-        <p>作者：Vik Qian · 版权所有 © 2026 AI时代</p>
+        <p id="siteFooterText">作者：Vik Qian · 版权所有 © 2026 AI时代</p>
       </div>
     </footer>
 

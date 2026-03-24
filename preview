@@ -67,6 +67,7 @@ echo
 echo "Preview URL:"
 echo "  http://localhost:${PORT}/"
 echo "  http://localhost:${PORT}/index.html"
+echo "  http://localhost:${PORT}/index.html?channel=novel"
 echo "  http://localhost:${PORT}/index"
 echo "  http://localhost:${PORT}/post/pr-merge-guide.html"
 echo "  http://localhost:${PORT}/post/pr-merge-guide"
