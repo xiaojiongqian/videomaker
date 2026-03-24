@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-03-23T15:04:02.193Z",
+  "model": "gemini-3.1-flash-image-preview",
+  "service": "vertex",
+  "serviceOrder": [
+    "vertex",
+    "gemini"
+  ],
+  "prompt": "Create a minimalist editorial image for a reflective moment when a training session lost focus and everyone had to reset.\n\nVisual idea: an almost empty seminar-room threshold or corridor in soft morning light, with a few understated chairs slightly out of alignment and a single quiet clock presence implied in the composition. The feeling should be not dramatic punishment, but a pause for self-awareness and returning to one's place.\n\nStyle: extreme minimalism, calm architectural photography, warm white walls, muted gray chairs, subtle beige floor, soft natural light, lots of empty space, gentle shadows, very low visual noise.\n\nMood: honest, sobering, inward-looking, calm.\n\nAvoid: crowds, scolding teacher, facial expressions, text, numbers, posters, corporate office clichés, vivid colors, heavy contrast, cinematic melodrama.",
+  "refs": [],
+  "outDir": "/Users/vik.qian/study/videomaker/articals/7-habits-trainning/images",
+  "requestConfig": {
+    "maxOutputTokens": 32768,
+    "temperature": 1,
+    "topP": 0.95,
+    "responseModalities": [
+      "TEXT",
+      "IMAGE"
+    ],
+    "thinkingConfig": {
+      "includeThoughts": false,
+      "thinkingLevel": "HIGH"
+    },
+    "imageConfig": {
+      "aspectRatio": "16:9",
+      "imageSize": "1K"
+    },
+    "safetySettings": [
+      {
+        "category": "HARM_CATEGORY_HATE_SPEECH",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_HARASSMENT",
+        "threshold": "OFF"
+      }
+    ]
+  },
+  "effectiveRequestConfig": {
+    "maxOutputTokens": 32768,
+    "temperature": 1,
+    "topP": 0.95,
+    "responseModalities": [
+      "TEXT",
+      "IMAGE"
+    ],
+    "thinkingConfig": {
+      "includeThoughts": false,
+      "thinkingLevel": "HIGH"
+    },
+    "imageConfig": {
+      "aspectRatio": "16:9",
+      "imageSize": "1K"
+    },
+    "safetySettings": [
+      {
+        "category": "HARM_CATEGORY_HATE_SPEECH",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+        "threshold": "OFF"
+      },
+      {
+        "category": "HARM_CATEGORY_HARASSMENT",
+        "threshold": "OFF"
+      }
+    ]
+  },
+  "responseTextPath": null,
+  "images": [
+    "/Users/vik.qian/study/videomaker/articals/7-habits-trainning/images/7-habits-corridor-01.png",
+    "/Users/vik.qian/study/videomaker/articals/7-habits-trainning/images/7-habits-corridor-02.png"
+  ]
+}
