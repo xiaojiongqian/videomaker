@@ -21,8 +21,20 @@ description: 长篇小说对白与角色声音修订。用于打磨对白、区�
 - `scope`
 - `context_bundle`
   - 至少包括原对白、说话者、角色状态、场景压力
+  - 若来自质量闭环，还应包括 `quality_scorecard`、`blockers`、`targeted_fix_list`
 - `constraints`
 - `expected_outputs`
+
+## Targeted Voice Fix
+
+如果任务来自审计闭环，只修对白和互动类 blocker。
+
+默认做法：
+
+- 锁住既有事实和 beats，不改剧情骨架
+- 优先修 `character_embodiment`、潜台词、串音、解释性台词
+- 能用 1 到 3 处局部替换解决，就不要整场重写
+- 如果根因是场景太薄，明确回退 `novel-scene-dramatizer`
 
 ## Workflow
 

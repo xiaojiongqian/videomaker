@@ -24,6 +24,7 @@
   - 初始化小说项目文件
 - `references/`
   - 查看写作、张力、审计、对白和上下文卫生指导
+  - 处理 sub-agent 超时与降级执行时，额外读取 `references/execution-reliability.md`
 
 ## Layout
 
@@ -41,5 +42,7 @@
   - 项目初始化模板
 - `references/`
   - 可按需加载的创作与审计参考
+- `references/execution-reliability.md`
+  - sub-agent 粒度、超时恢复、降级执行和质量保护规则
 - `skills/novel-orchestrator-main/references/orchestrator-system/`
   - 仅存在于主 skill 真源中的本地系统说明，不会被复制到子 skill

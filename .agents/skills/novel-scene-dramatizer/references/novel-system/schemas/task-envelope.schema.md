@@ -28,12 +28,18 @@ execution:
   attempt: 1
   started_at: "2026-03-21T10:00:00Z"
   executor_mode: "subagent"
+  timeout_budget_ms: 60000
+  max_attempts: 2
 input_snapshot:
   snapshot_id: "snapshot-001"
   ref: "workflows/CHXXX/01-context.md"
   blocks: ["current_state", "open_loops", "recent_chapter_summaries"]
   source_refs: ["CURRENT_STATE.md", "OPEN_LOOPS.md", "summaries/CHXXX.summary.md"]
-extensions: {}
+extensions:
+  reliability:
+    output_contract: "compact-structured"
+    max_chapters_in_scope: 1
+    scope_reduction_required_on_retry: true
 ```
 
 必填字段：
@@ -56,6 +62,7 @@ extensions: {}
   - 说明任务由谁调度、继承了哪些上游工件
 - `execution`
   - 说明这次调用的执行方式、attempt 和时间戳
+  - 包括 timeout budget 和最大尝试次数
 - `input_snapshot`
   - 固定本次子 skill 允许消费的上下文快照
 - `extensions`

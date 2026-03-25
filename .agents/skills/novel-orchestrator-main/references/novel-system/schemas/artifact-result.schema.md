@@ -9,6 +9,8 @@ agent_role: "novel-continuity-auditor"
 status: "completed"
 execution:
   mode: "subagent"
+  degraded_execution: false
+  fallback_reason_code: ""
   trace_ref: "workflows/CHXXX/09-execution-log.json"
   provenance:
     agent_session_id: "agent-123"
@@ -43,6 +45,7 @@ extensions: {}
 - `recommendations` 为主 skill 的下一步建议
 - `proposed_writebacks` 为建议写回目标
 - `execution` 为真实执行来源和输入快照
+  - 如经历 timeout fallback，应显式标记 `degraded_execution`
 
 兼容说明：
 

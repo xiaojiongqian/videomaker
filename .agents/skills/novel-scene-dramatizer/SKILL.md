@@ -27,12 +27,17 @@ description: 长篇小说场景与章节扩写。用于把已批准的章纲、s
 - `scope`
 - `context_bundle`
   - 至少包括已批准的章纲或 scene beats、必要设定、相关状态
+  - 若来自质量闭环，还应包括现稿、`quality_scorecard`、`blockers`、`targeted_fix_list`
 - `constraints`
 - `expected_outputs`
 
 如果没有清楚的场面支点或压力线，返回 `blocked`，建议先补 plan。
 
 ## Expansion Rules
+
+开头前 20% 默认先做这件事：
+
+- 把读者直接推到冲突、等待、门槛、结果快要落下的瞬间
 
 每个关键段落尽量具备：
 
@@ -46,6 +51,35 @@ description: 长篇小说场景与章节扩写。用于把已批准的章纲、s
   - 留下余波，把下一段逼出来
 
 如果一个段落没有 `contact` 和 `shift`，它大概率只是摘要。
+
+每章至少要让 1 个核心事件慢下来写，不能所有节点都按同样速度划过去。
+
+## Targeted Revision Mode
+
+如果任务来自审计闭环，默认从现稿出发做局部修复，而不是整章重写。
+
+优先顺序：
+
+1. 开头抓力不足
+2. 核心事件不够硬
+3. dominant scene 被桥接段吃掉
+4. 章末没有发热余波
+
+执行要求：
+
+- 先冻结已通过的段落和 beats
+- 只改受影响的段落、场面链或章末落点
+- 每次修复优先处理 `2 到 3` 个 blocker cluster
+- 新增段落必须增加 `contact` 或 `shift`
+- 如果根因其实是上游结构错误，返回给 `novel-plot-architect`
+
+## Dispatch Scope
+
+默认 `1 chapter` 或 `1 dominant scene chain / dispatch`。
+
+- 不在一次 sub-agent 调用里重写多章正文
+- 如果用户要批量优化，先分诊，再逐章下发
+- 如果 scope 已经过大，返回 `blocked` 并要求拆分
 
 ## Prefer Events Over Commentary
 
@@ -71,6 +105,7 @@ description: 长篇小说场景与章节扩写。用于把已批准的章纲、s
 - 先让读者一遍读懂时间、层级、门槛和结果
 - 段首优先落到人、动作、物件、比分、空间
 - 少用总结句、评论句、主题句开路
+- 抽象判断后应尽快回到动作和后果
 - 少用连续模板句式撑节奏
 - 章末直接写清推进和余波，不拿隐喻代替结论
 
@@ -109,11 +144,12 @@ description: 长篇小说场景与章节扩写。用于把已批准的章纲、s
 
 ## Workflow
 
-1. 把计划压成场面链
-2. 先写 dominant scene
-3. 用最短的 bridge 搬运必要结果
-4. 只在需要处补互动和主观线
-5. 检查章末余波是否仍挂在具体场面上
+1. 判断是全新扩写还是 `targeted_revision`
+2. 把计划或 blocker 列表压成场面链
+3. 先写或重写 dominant scene
+4. 用最短的 bridge 搬运必要结果
+5. 只在需要处补互动和主观线
+6. 检查章末余波是否仍挂在具体场面上
 
 ## Output
 
@@ -130,6 +166,8 @@ description: 长篇小说场景与章节扩写。用于把已批准的章纲、s
 - `scene_draft`
 - `chapter_draft`
 - `prose_revision`
+- `targeted_prose_revision`
+- `revision_scope`
 
 ## Guardrails
 
@@ -137,6 +175,7 @@ description: 长篇小说场景与章节扩写。用于把已批准的章纲、s
 - 不靠评论、总结、履历式罗列支撑正文
 - 不虚构会改变理解的私密细节和对白
 - 如果读者需要自己重排时间线或因果链，视为失败，应重写
+- 不因修 1 个局部问题就重刷整章文风；先保住已通过的场面和节奏
 
 ## Shared References
 

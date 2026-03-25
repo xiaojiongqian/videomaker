@@ -13,6 +13,17 @@ execution_policy:
   orchestration_mode: "multi-skill-subagents"
   require_subagents: true
   trace_file: "09-execution-log.json"
+  dispatch_budget:
+    max_parallel_dispatches: 2
+    max_chapters_per_dispatch:
+      continuity_audit: 1
+      dialogue_audit: 1
+      chapter_plan: 1
+      chapter_draft: 1
+      chapter_summary: 2
+    default_wait_budget_ms: 60000
+    max_respawns_per_dispatch: 1
+    require_scope_reduction_on_retry: true
   required_dispatches:
     - agent_role: "novel-plot-architect"
       output_refs: ["02-plan.json"]
@@ -30,8 +41,13 @@ execution_policy:
       output_refs: ["07-summary.json"]
       when: "always"
   fallback_policy:
-    allow_modes: []
+    allow_modes: ["approved-fallback"]
+    allowed_reason_codes:
+      - "env-no-subagent-support"
+      - "subagent-timeout"
+      - "subagent-no-response"
     require_exception_entry: true
+    deny_writeback_on_timeout_fallback: true
 notes: "Do not archive until lint passes."
 ```
 
@@ -46,5 +62,6 @@ notes: "Do not archive until lint passes."
     - `always`
     - `required_steps.<name>`
 - `fallback_policy.allow_modes`
-  - 空数组表示 fail closed
-  - 如果未来允许 `approved-fallback`，必须同时登记 trace exception
+  - `approved-fallback` 只能在 policy 允许且 trace 已登记 exception 时使用
+- `dispatch_budget`
+  - 限制并行度、单次 dispatch 章节数、等待预算和重派次数

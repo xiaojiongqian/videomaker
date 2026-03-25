@@ -24,6 +24,17 @@ description: 长篇小说连续性与一致性审计。用于审查章纲、场�
 - `constraints`
 - `expected_outputs`
 
+## Dispatch Scope
+
+为保证独立审计稳定返回，默认限制如下：
+
+- 完整 `quality_scorecard` 默认只审 `1 chapter`
+- 如果一次给多章，先做 `triage pass`
+  - 只返回排序、是否过线、最重 blocker
+  - 不展开长篇逐章详评
+- 如果输入已经超过这个粒度，优先返回 `blocked`
+  - 并建议如何拆分
+
 ## Audit Dimensions
 
 默认检查三组问题：
@@ -37,19 +48,60 @@ description: 长篇小说连续性与一致性审计。用于审查章纲、场�
    - 是否有 `disturbance / pursuit / escalation / turn / residue`
    - 冲突是否真正落成事件、选择、代价和结果
 3. 语言与表面
+   - 前 20% 是否真的抓人
+   - 是否存在不可删除的核心事件
+   - 章末是否留下有效钩子
    - 是否写成总结、评论、资料改写或履历表
    - 是否缺少人物在场感、互动单元和主角声音
    - 是否桥接事实压倒硬场面
    - 是否作者直接替读者解释重点
    - 是否模板味、空心过桥句、顺读困难
 
+## Excellent Scorecard
+
+默认把章节质量拆成 8 个维度，每项 `0-10`：
+
+1. `opening_hook`
+2. `core_event`
+3. `escalation`
+4. `character_embodiment`
+5. `scene_execution`
+6. `ending_hook`
+7. `continuity_causality`
+8. `language_surface`
+
+总分 `80`。
+
+默认通过线：
+
+- `score_total >= 72/80`
+- 没有 `blockers`
+
+默认 blocker 触发条件包括：
+
+- 硬连续性冲突
+- 前 20% 仍未进入扰动 / 压力
+- 没有不可删除的核心事件
+- 场面链塌成事实链或资料带
+- 章末没有余波或钩子
+- 主角长期不在压力线上且无叙事理由
+- 模板味、总结味或解释句严重压过事件
+
 ## Workflow
 
 1. 列出待审对象和证据范围
 2. 逐维度比对相关 state / summary / canon
-3. 对每个问题给严重度、置信度和证据
-4. 给出最小修复建议
-5. 如果问题来自上游规划或扩写，明确指出应回退到哪个 skill
+3. 先给 `quality_scorecard`
+4. 对每个问题给严重度、置信度和证据
+5. 标出 `blockers`、`preferred_owner` 和最小修复范围
+6. 给出 `pass / continue_revision / blocked` 决策
+7. 如果问题来自上游规划或扩写，明确指出应回退到哪个 skill
+
+如果 `constraints.output_contract` 要求紧凑模式：
+
+- 先给结构化分数和 blocker
+- 每项理由压到 `1 到 2` 句
+- 不写长段散文式评论
 
 ## Output
 
@@ -57,9 +109,16 @@ description: 长篇小说连续性与一致性审计。用于审查章纲、场�
 
 - `status`
 - `artifacts`
+  - `quality_scorecard`
+    - 每项维度分数、简短理由、`score_total`
+  - `decision`
+    - `pass` / `continue_revision` / `blocked`
 - `diagnostics`
+  - `blockers`
   - 每条 finding 带 `analysis_dimension`、`severity`、`confidence`、`evidence_refs`
 - `recommendations`
+  - `targeted_fix_list`
+    - 每项至少包含 `failed_dimension`、`problem`、`minimal_fix`、`preferred_owner`、`rewrite_scope`
 - `proposed_writebacks`
 
 如果没有发现问题，也要说明残余风险来自哪里。
@@ -70,6 +129,8 @@ description: 长篇小说连续性与一致性审计。用于审查章纲、场�
 - 不把审计意见伪装成 canon
 - 不把纯文风偏好和门禁缺陷混为一谈
 - 如果输入不足，明确标记 `blocked` 或低置信度
+- 不给“增强文采”这类空泛建议；修复建议必须能落到具体段落、场面或结构位点
+- 如果多章任务无法在稳定预算里完成，先要求拆分，不要硬撑到超时
 
 ## Shared References
 

@@ -36,6 +36,29 @@
 2. 对同一大纲并行给多个场景方案
 3. 对同一章节并行产出多个分析维度的 findings
 
+## Dispatch Sizing
+
+默认 dispatch 粒度：
+
+- `novel-continuity-auditor`
+  - `1 chapter` 完整审计
+  - 最多 `2 chapters` 轻量分诊
+- `novel-dialogue-editor`
+  - `1 chapter` 或 `1 dialogue scene`
+- `novel-plot-architect`
+  - `1 chapter` 详细 beats
+  - 多章请求先做 route plan
+- `novel-scene-dramatizer`
+  - `1 chapter` 或 `1 dominant scene chain`
+- `novel-chapter-summarizer`
+  - 已稳定正文时可批量 `2 chapters`
+
+如果任务范围是 `CH001-CH010` 这类大包：
+
+1. 先 triage
+2. 再逐章拆给真正需要的 sub-agent
+3. 修完只复审变更章
+
 ## Standard Chapter Workflow
 
 1. 读取 `INDEX.md` 和 `CURRENT_STATE.md`
@@ -46,6 +69,14 @@
 6. 汇总并修订
 7. 调用 `novel-chapter-summarizer`
 8. 由 `novel-orchestrator-main` 决定写回
+
+## Timeout Recovery
+
+1. 对长任务只等一次正常预算，不忙轮询
+2. 超时后先缩 scope，再收紧输出结构，再重派一次
+3. 第二次仍失败时，只有 fallback policy 允许的任务可以降级执行
+4. timeout fallback 不得单独触发 canon 写回
+5. 旧 agent 应关闭，避免迟到结果污染当前轮次
 
 ## Standard Task Types
 

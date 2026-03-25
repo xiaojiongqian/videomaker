@@ -21,6 +21,7 @@ description: 长篇小说情节与结构规划。用于规划 master outline、a
 - `scope`
 - `context_bundle`
   - 至少包括当前状态、相关摘要、角色动态、开放回路
+  - 若来自质量闭环，还应包括现稿、`quality_scorecard`、`blockers`、`targeted_fix_list`
 - `constraints`
 - `expected_outputs`
 
@@ -36,13 +37,50 @@ description: 长篇小说情节与结构规划。用于规划 master outline、a
 
 章节规划时，再补：
 
+- `opening hook`
 - `disturbance`
 - `pursuit`
 - `escalation`
 - `irreversible turn`
+- `core event`
 - `residue`
 
+其中：
+
+- `opening hook` 负责前 20% 抓人
+- `core event` 必须是这一章删不掉的硬节点
+- `residue` 必须能直接勾住下一章，而不是只给主题判断
+
 如果这些说不清，说明 plan 还不够可写。
+
+## Targeted Repair Mode
+
+如果任务来自审计闭环，不默认重做全章规划。
+
+默认做法：
+
+- 只读取失败维度和受影响段落 / 场面
+- 先产出 `repair_plan`，再补 `chapter_promise` 或 `scene_beats`
+- 每个修复项都说明：
+  - `failed_dimension`
+  - `repair_goal`
+  - `affected_beats`
+  - `new_pressure_or_turn`
+  - `expected_score_gain`
+
+常见归属：
+
+- `opening_hook`、`core_event`、`escalation` 失效：优先由你修
+- 如果只是局部语言或对白问题，不要抢走 `novel-scene-dramatizer` / `novel-dialogue-editor` 的工作
+
+## Dispatch Scope
+
+默认 `1 chapter / dispatch`。
+如果用户一次要求多章详细规划：
+
+- 先给跨章 route plan
+- 不要在一次 dispatch 里展开多章完整 beats
+- 真正下放到 sub-agent 时，逐章拆开
 
 ## Plan Scenes, Not Essays
 
@@ -50,7 +88,7 @@ description: 长篇小说情节与结构规划。用于规划 master outline、a
 
 - 1 个 dominant scene
 - 1 条压力线
-- 3 到 5 个 beats
+- 2 到 4 个 beats
 - 1 个章末余波
 
 其余同型节点优先压成 `bridge cluster`，不要平均展开。
@@ -72,9 +110,9 @@ description: 长篇小说情节与结构规划。用于规划 master outline、a
 
 ## Workflow
 
-1. 确认规划层级
-2. 读取当前义务
-3. 搭建冲突链
+1. 确认规划层级或 `targeted_repair` 模式
+2. 读取当前义务或 blocker 列表
+3. 搭建或修补冲突链
 4. 安排信息释放
 5. 压缩成 scene-ready beats
 6. 标出后续依赖和不可违背事实
@@ -95,6 +133,8 @@ description: 长篇小说情节与结构规划。用于规划 master outline、a
 - `chapter_plan`
 - `scene_beats`
 - `reveal_plan`
+- `repair_plan`
+- `patched_scene_beats`
 
 ## Guardrails
 
@@ -102,6 +142,7 @@ description: 长篇小说情节与结构规划。用于规划 master outline、a
 - 不要只给主题结论不给场面
 - 不要靠巧合推动重大转折
 - 如果某条 beat 稍微压缩就变成时间线条目，继续补足场面支点或互动单元
+- 如果只存在 1 到 2 个局部 blocker，不要借机重设计整个 arc
 
 ## Shared References
 
