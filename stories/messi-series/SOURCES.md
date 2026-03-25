@@ -219,12 +219,16 @@
    - 用途:
      - 2010 年 7 月 3 日，南非世界杯四分之一决赛，阿根廷在开普敦 0 比 4 负于德国
      - 这场比赛是梅西职业生涯中一次极重的世界杯挫败节点
+     - 2014 年世界杯期间，梅西在波黑、伊朗、尼日利亚、瑞士、荷兰和德国等比赛中的关键节点可从官方回看页面交叉确认
+     - 2014 年 7 月 13 日，阿根廷在马拉卡纳的决赛中加时 0 比 1 负于德国；官方回看页同时回顾了梅西该场比赛的重要机会
 
 31. FIFA, “Immortal Messi reaches century of international goals”
    - 链接: https://www.fifa.com/en/articles/immortal-messi-reaches-century-of-international-goals
    - 用途:
      - 梅西在 2010 年南非世界杯未能进球
      - 2011 年 8 月，萨维利亚把队长袖标交给梅西
+     - 梅西在通往 2014 年世界杯的南美区预选赛中打进 10 球
+     - 梅西在 2014 年世界杯一路打进 4 球并最终获得赛事金球奖
 
 32. CONMEBOL Copa América, “2011 Copa América; Uruguay become Champions in Argentina”
    - 链接: https://copaamerica.com/en/news/uruguay-become-champions-during-argentina-2011
@@ -242,6 +246,63 @@
    - 链接: https://copaamerica.com/en/news/argentina-all-time-copa-america-top-scorers
    - 用途:
      - 梅西在 2011 年美洲杯出战 4 场，没有进球
+
+35. CONMEBOL, “Argentina afianza su liderato (3-0)”
+   - 链接: https://www.conmebol.com/banners/argentina-afianza-su-liderato-3-0/
+   - 用途:
+     - 2013 年 3 月 22 日，阿根廷在纪念碑球场 3 比 0 击败委内瑞拉
+     - 伊瓜因打进两球，梅西在第 45 分钟罚进点球
+     - 该场比赛属于巴西世界杯南美区预选赛，阿根廷继续领跑积分榜
+
+36. CONMEBOL, “Argentina y la magia de Messi, pusieron las cosas en el exacto lugar: 2-1”
+   - 链接: https://www.conmebol.com/banners/argentina-y-la-magia-de-messi-pusieron-las-cosas-en-el-exacto-lugar-2-1/
+   - 用途:
+     - 2014 年 6 月 15 日，阿根廷在马拉卡纳 2 比 1 击败波黑
+     - 比赛开场 2 分钟由科拉希纳茨自摆乌龙，梅西在第 65 分钟打进第二球
+
+37. CONMEBOL, “En la agonía, Messi le dio el triunfo y clasificación a la Argentina: 1-0”
+   - 链接: https://www.conmebol.com/banners/en-la-agonia-messi-le-dio-el-triunfo-y-clasificacion-la-argentina-1-0/
+   - 用途:
+     - 2014 年 6 月 21 日，阿根廷在贝洛奥里藏特 1 比 0 击败伊朗
+     - 梅西在补时阶段打进制胜球，帮助阿根廷提前出线
+
+38. CONMEBOL, “Messi quer continuar na racha contra Suíça e colocar Argentina nas quartas”
+   - 链接: https://www.conmebol.com/pt-br/banners-pt-br/messi-quer-continuar-na-racha-contra-suica-e-colocar-argentina-nas-quartas/
+   - 用途:
+     - 阿根廷在 2014 年世界杯小组赛前三场的比分分别为 2 比 1 波黑、1 比 0 伊朗、3 比 2 尼日利亚
+     - 梅西在这三场比赛里一共打进 4 球
+     - 对尼日利亚一战，阿根廷 3 比 2 取胜，梅西梅开二度
+
+39. CONMEBOL, “Argentina inscribe su nombre como cuartofinalista. Le ganó a Suiza 1-0”
+   - 链接: https://www.conmebol.com/banners/argentina-inscribe-su-nombre-como-cuartofinalista-le-gano-suiza-1-0/
+   - 用途:
+     - 2014 年 7 月 1 日，阿根廷在八分之一决赛加时 1 比 0 击败瑞士
+     - 迪马利亚在第 118 分钟接梅西传球破门
+
+40. CONMEBOL, “Tras años de espera, Lucas Biglia tiene su gran oportunidad con Argentina”
+   - 链接: https://www.conmebol.com/sin-categorizar/tras-anos-de-espera-lucas-biglia-tiene-su-gran-oportunidad-con-argentina/
+   - 用途:
+     - 阿根廷在 2014 年世界杯四分之一决赛中 1 比 0 击败比利时
+     - 这场胜利让阿根廷 24 年来第一次回到世界杯半决赛
+
+41. CONMEBOL, “Argentina finalista del Mundial. Eliminó a Holanda en penales: 4-2”
+   - 链接: https://www.conmebol.com/banners/argentina-finalista-del-mundial-elimino-holanda-en-penales-4-2/
+   - 用途:
+     - 2014 年 7 月 9 日，阿根廷与荷兰在 120 分钟内 0 比 0 战平后进入点球大战
+     - 梅西率先罚进点球，罗梅罗扑出弗拉尔和斯内德的点球
+     - 阿根廷点球 4 比 2 获胜，1990 年后首次打进世界杯决赛
+
+42. CONMEBOL, “Alemania conquistó la Copa Mundial. Argentina fue una inmensa dignidad: 1-0”
+   - 链接: https://www.conmebol.com/banners/alemania-conquisto-la-copa-mundial-argentina-fue-una-inmensa-dignidad-1-0/
+   - 用途:
+     - 2014 年 7 月 13 日，阿根廷与德国在马拉卡纳的世界杯决赛中加时 0 比 1 告负
+     - 格策在第 113 分钟破门
+     - 阿根廷在比赛中拥有关键机会，伊瓜因曾在上半场获得近乎单刀的射门
+
+43. FIFA+, “Lionel Messi | Golden Ball Award | 2014 FIFA World Cup Brazil™”
+   - 链接: https://www.plus.fifa.com/es/content/lionel-messi-balon-de-oro-copa-mundial-de-la-fifa-brasil-2014/36920125-8fdb-4847-94f6-0ada8a8e4aa9
+   - 用途:
+     - 梅西在 2014 年世界杯决赛失利后领取赛事金球奖
 
 ## Source Use Rules
 - 仅把上述来源能支撑的事实写成确定表述。
