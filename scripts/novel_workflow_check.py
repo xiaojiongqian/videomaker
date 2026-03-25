@@ -95,6 +95,8 @@ OUTPUT_STAGE_SPECS = {
     "07-summary.json": "summarized",
 }
 
+SEVERITY_RANK = {"none": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
+
 META_PATTERNS = [
     r"本章",
     r"这一章",
@@ -181,21 +183,20 @@ def require_string_list(value: Any, field: str, path: Path, issues: list[str], *
     return [item.strip() for item in value]
 
 
-def require_nonempty_markdown(path: Path, issues: list[str]) -> None:
+def require_nonempty_markdown(path: Path, issues: list[str]) -> str | None:
+    """Return the file text if non-empty, else append an issue and return None."""
     if not path.exists():
         issues.append(f"Missing markdown artifact: {path}")
-        return
+        return None
 
     text = path.read_text(encoding="utf-8").strip()
     if not text:
         issues.append(f"Empty markdown artifact: {path}")
+        return None
+    return text
 
 
-def lint_meta_surface(path: Path, issues: list[str]) -> None:
-    if not path.exists():
-        return
-
-    text = path.read_text(encoding="utf-8")
+def lint_meta_surface(text: str, path: Path, issues: list[str]) -> None:
     for pattern in META_PATTERNS:
         match = re.search(pattern, text)
         if match:
@@ -206,17 +207,17 @@ def severity_from_entry(entry: object) -> int:
     if not isinstance(entry, dict):
         return 0
     severity = str(entry.get("severity", "none")).strip().lower()
-    return {"none": 0, "low": 1, "medium": 2, "high": 3}.get(severity, 0)
+    return SEVERITY_RANK.get(severity, 0)
 
 
 def entry_is_blocking(entry: object) -> bool:
     if not isinstance(entry, dict):
         return False
     severity = severity_from_entry(entry)
-    if severity >= 3:
+    if severity >= SEVERITY_RANK["high"]:
         return True
     dimension = str(entry.get("analysis_dimension", "")).strip()
-    return severity >= 2 and dimension in MEDIUM_BLOCKING_DIMENSIONS
+    return severity >= SEVERITY_RANK["medium"] and dimension in MEDIUM_BLOCKING_DIMENSIONS
 
 
 def is_strict_manifest(manifest: dict[str, Any]) -> bool:
@@ -832,23 +833,9 @@ def check_chapter(project_root: Path, chapter_id: str) -> CheckResult:
                     issues.append(str(exc))
 
         dialogue_path = workflow_dir / "05-dialogue-audit.json"
-        if required_steps.get("dialogue_audit", False):
-            if not dialogue_path.exists():
-                issues.append(f"Missing required dialogue audit: {dialogue_path}")
-            else:
-                try:
-                    dialogue_data = validate_contract_json(
-                        dialogue_path,
-                        issues,
-                        strict=strict,
-                        expected_task_type=JSON_STAGE_SPECS["05-dialogue-audit.json"]["task_type"],
-                        expected_agent_role=JSON_STAGE_SPECS["05-dialogue-audit.json"]["agent_role"],
-                    )
-                    if strict and dialogue_data:
-                        cross_check_contract_with_trace(dialogue_path, dialogue_data, trace_data, issues)
-                except ValueError as exc:
-                    issues.append(str(exc))
-        elif dialogue_path.exists():
+        if required_steps.get("dialogue_audit", False) and not dialogue_path.exists():
+            issues.append(f"Missing required dialogue audit: {dialogue_path}")
+        if dialogue_path.exists():
             try:
                 dialogue_data = validate_contract_json(
                     dialogue_path,
@@ -864,8 +851,9 @@ def check_chapter(project_root: Path, chapter_id: str) -> CheckResult:
 
     if status_rank >= STATUS_INDEX["revised"]:
         revised_path = workflow_dir / "06-revised.md"
-        require_nonempty_markdown(revised_path, issues)
-        lint_meta_surface(revised_path, issues)
+        revised_text = require_nonempty_markdown(revised_path, issues)
+        if revised_text is not None:
+            lint_meta_surface(revised_text, revised_path, issues)
 
     if status_rank >= STATUS_INDEX["summarized"]:
         summary_json = workflow_dir / "07-summary.json"
@@ -892,9 +880,10 @@ def check_chapter(project_root: Path, chapter_id: str) -> CheckResult:
     if status_rank >= STATUS_INDEX["archived"]:
         chapter_path = project_root / "chapters" / f"{chapter_id}.md"
         summary_path = project_root / "summaries" / f"{chapter_id}.summary.md"
-        require_nonempty_markdown(chapter_path, issues)
+        chapter_text = require_nonempty_markdown(chapter_path, issues)
         require_nonempty_markdown(summary_path, issues)
-        lint_meta_surface(chapter_path, issues)
+        if chapter_text is not None:
+            lint_meta_surface(chapter_text, chapter_path, issues)
 
     return CheckResult(chapter_id=chapter_id, status=status, workflow_dir=workflow_dir, issues=issues)
 

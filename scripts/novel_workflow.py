@@ -14,18 +14,15 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from novel_workflow_check import check_chapter, infer_chapter_id, iter_workflow_chapters, print_result
-
-
-STATUS_ORDER = [
-    "initialized",
-    "planned",
-    "drafted",
-    "audited",
-    "revised",
-    "summarized",
-    "archived",
-]
+from novel_workflow_check import (
+    MEDIUM_BLOCKING_DIMENSIONS,
+    SEVERITY_RANK,
+    STATUS_ORDER,
+    check_chapter,
+    infer_chapter_id,
+    iter_workflow_chapters,
+    print_result,
+)
 
 DEFAULT_CONTRACT_VERSION = "2026-03"
 DEFAULT_MANIFEST_SCHEMA_VERSION = "1.1"
@@ -77,7 +74,6 @@ TASK_SPECS = {
         "agent_role": "novel-chapter-summarizer",
     },
 }
-SEVERITY_RANK = {"none": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
 
 
 def parse_args() -> argparse.Namespace:
@@ -392,6 +388,12 @@ def parse_json_payload(text: str) -> dict[str, Any]:
     raise ValueError("Sub-agent response was not valid JSON")
 
 
+def _render_bullet_list(items: list[str], fallback: str = "无", *, indent: str = "") -> str:
+    if not items:
+        return f"{indent}- {fallback}"
+    return "\n".join(f"{indent}- {item}" for item in items)
+
+
 def render_summary_markdown(chapter_id: str, payload: dict[str, Any]) -> str:
     one_line = str(payload.get("one_line_summary", "")).strip()
     actor_refs = listify(payload.get("actor_refs"))
@@ -403,16 +405,6 @@ def render_summary_markdown(chapter_id: str, payload: dict[str, Any]) -> str:
     advanced = listify(open_loops.get("advanced")) if isinstance(open_loops, dict) else []
     resolved = listify(open_loops.get("resolved")) if isinstance(open_loops, dict) else []
 
-    def render_list(items: list[str], fallback: str = "无") -> str:
-        if not items:
-            return f"- {fallback}"
-        return "\n".join(f"- {item}" for item in items)
-
-    def render_sublist(items: list[str]) -> str:
-        if not items:
-            return "  - 无"
-        return "\n".join(f"  - {item}" for item in items)
-
     return "\n".join(
         [
             f"# Chapter Summary: {chapter_id}",
@@ -421,24 +413,24 @@ def render_summary_markdown(chapter_id: str, payload: dict[str, Any]) -> str:
             f"- {one_line or '待补充'}",
             "",
             "## Actor Refs",
-            render_list(actor_refs),
+            _render_bullet_list(actor_refs),
             "",
             "## Major Beats",
-            render_list(major_beats),
+            _render_bullet_list(major_beats),
             "",
             "## State Changes",
-            render_list(state_changes),
+            _render_bullet_list(state_changes),
             "",
             "## Open Loops",
             "- Opened:",
-            render_sublist(opened),
+            _render_bullet_list(opened, indent="  "),
             "- Advanced:",
-            render_sublist(advanced),
+            _render_bullet_list(advanced, indent="  "),
             "- Resolved:",
-            render_sublist(resolved),
+            _render_bullet_list(resolved, indent="  "),
             "",
             "## Carry Forward",
-            render_list(carry_forward),
+            _render_bullet_list(carry_forward),
             "",
         ]
     )
@@ -472,11 +464,6 @@ def render_writeback_markdown(project_root: Path, chapter_id: str, summary_paylo
         else "- 本次重跑不回滚全局写作位置；frontier 状态文件保持当前章节进度不变"
     )
 
-    def render_lines(items: list[str], fallback: str = "无") -> str:
-        if not items:
-            return f"- {fallback}"
-        return "\n".join(f"- {item}" for item in items)
-
     canon_lines = major_beats or ["本章 admitted facts 见 `07-summary.json` 的 `major_beats`。"]
     return "\n".join(
         [
@@ -495,11 +482,11 @@ def render_writeback_markdown(project_root: Path, chapter_id: str, summary_paylo
             "",
             "## Open Loops",
             "- Opened:",
-            render_lines(opened),
+            _render_bullet_list(opened),
             "- Advanced:",
-            render_lines(advanced),
+            _render_bullet_list(advanced),
             "- Resolved:",
-            render_lines(resolved),
+            _render_bullet_list(resolved),
             "",
             "## Source Sync",
             "- `SOURCES.md` updates:",
@@ -518,14 +505,6 @@ def severity_from_entry(entry: object) -> int:
     if not isinstance(entry, dict):
         return 0
     return SEVERITY_RANK.get(str(entry.get("severity", "none")).lower(), 0)
-
-
-MEDIUM_BLOCKING_DIMENSIONS = {
-    "narrative-surface",
-    "commentary-drift",
-    "readability",
-    "prose-naturalness",
-}
 
 
 def entry_is_blocking(entry: object) -> bool:
@@ -658,6 +637,34 @@ def run_codex_exec(prompt: str, *, codex_bin: str, workdir: Path, model: str) ->
         return agent_session_id, output_path.read_text(encoding="utf-8")
 
 
+def _append_failed_dispatch(
+    trace_path: Path,
+    spec: dict[str, Any],
+    task_id: str,
+    context_refs: list[str],
+    started_at: str,
+    model: str,
+    exc: Exception,
+) -> None:
+    append_dispatch(
+        trace_path,
+        {
+            "task_id": task_id,
+            "agent_role": spec["agent_role"],
+            "mode": "subagent",
+            "status": "failed",
+            "agent_session_id": "",
+            "agent_run_id": "",
+            "input_refs": context_refs,
+            "output_refs": [spec["filename"]],
+            "started_at": started_at,
+            "completed_at": utc_now_iso(),
+            "model": model.strip(),
+            "notes": str(exc),
+        },
+    )
+
+
 def build_execution_block(
     *,
     context_refs: list[str],
@@ -703,26 +710,8 @@ def dispatch_json_task(
         ensure_successful_status(payload, task_id)
         completed_at = utc_now_iso()
     except Exception as exc:
-        append_dispatch(
-            trace_path,
-            {
-                "task_id": task_id,
-                "agent_role": spec["agent_role"],
-                "mode": "subagent",
-                "status": "failed",
-                "agent_session_id": "",
-                "agent_run_id": "",
-                "input_refs": context_refs,
-                "output_refs": [spec["filename"]],
-                "started_at": started_at,
-                "completed_at": utc_now_iso(),
-                "model": model.strip(),
-                "notes": str(exc),
-            },
-        )
-        raise
-
-    template = load_template_json(project_root, spec["filename"], chapter_id, chapter_title)
+        _append_failed_dispatch(trace_path, spec, task_id, context_refs, started_at, model, exc)
+        raise(project_root, spec["filename"], chapter_id, chapter_title)
     template["task_id"] = task_id
     template["task_type"] = spec["task_type"]
     template["agent_role"] = spec["agent_role"]
@@ -784,23 +773,7 @@ def dispatch_markdown_task(
         agent_session_id, message = run_codex_exec(prompt, codex_bin=codex_bin, workdir=project_root, model=model)
         completed_at = utc_now_iso()
     except Exception as exc:
-        append_dispatch(
-            trace_path,
-            {
-                "task_id": task_id,
-                "agent_role": spec["agent_role"],
-                "mode": "subagent",
-                "status": "failed",
-                "agent_session_id": "",
-                "agent_run_id": "",
-                "input_refs": context_refs,
-                "output_refs": [spec["filename"]],
-                "started_at": started_at,
-                "completed_at": utc_now_iso(),
-                "model": model.strip(),
-                "notes": str(exc),
-            },
-        )
+        _append_failed_dispatch(trace_path, spec, task_id, context_refs, started_at, model, exc)
         raise
 
     markdown = sanitize_agent_message(message)
@@ -1308,7 +1281,7 @@ def run_chapter(
         write_markdown(workflow_dir / "06-revised.md", candidate_text)
         set_manifest_status(project_root, chapter_id, "revised")
 
-        revised_text = (workflow_dir / "06-revised.md").read_text(encoding="utf-8").strip()
+        revised_text = candidate_text.strip()
         summary_data = dispatch_json_task(
             project_root=project_root,
             chapter_id=chapter_id,
