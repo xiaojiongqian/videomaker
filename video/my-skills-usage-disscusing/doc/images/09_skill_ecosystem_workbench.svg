@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="workbenchBg" x1="180" y1="70" x2="1390" y2="840" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A101D"/>
+      <stop offset="0.58" stop-color="#121A2B"/>
+      <stop offset="1" stop-color="#1A2435"/>
+    </linearGradient>
+    <linearGradient id="workbenchAccent" x1="260" y1="180" x2="1320" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6DB8FF"/>
+      <stop offset="1" stop-color="#8FE0D1"/>
+    </linearGradient>
+    <filter id="workbenchShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="#02060D" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" rx="42" fill="url(#workbenchBg)"/>
+  <text x="120" y="118" fill="#F4F7FB" font-size="52" font-family="Arial, sans-serif" font-weight="700">Skill Ecosystem Workbench</text>
+  <text x="120" y="164" fill="#9EB8D8" font-size="24" font-family="Arial, sans-serif">One workspace, many reusable methods, one growing operating system</text>
+
+  <g filter="url(#workbenchShadow)">
+    <rect x="110" y="220" width="1380" height="580" rx="38" fill="#0E1728" stroke="#243950" stroke-width="2"/>
+
+    <rect x="150" y="270" width="340" height="480" rx="28" fill="#111E32" stroke="#2E4B68"/>
+    <text x="200" y="330" fill="#F4F7FB" font-size="30" font-family="Arial, sans-serif" font-weight="700">Repo Explorer</text>
+    <rect x="190" y="372" width="250" height="26" rx="13" fill="#22344C"/>
+    <rect x="190" y="416" width="190" height="26" rx="13" fill="#6DB8FF" fill-opacity="0.72"/>
+    <rect x="190" y="460" width="225" height="26" rx="13" fill="#22344C"/>
+    <rect x="190" y="504" width="206" height="26" rx="13" fill="#22344C"/>
+    <rect x="190" y="548" width="170" height="26" rx="13" fill="#8FE0D1" fill-opacity="0.42"/>
+    <rect x="190" y="592" width="232" height="26" rx="13" fill="#22344C"/>
+
+    <rect x="540" y="270" width="420" height="220" rx="28" fill="#111E32" stroke="#2E4B68"/>
+    <text x="592" y="330" fill="#F4F7FB" font-size="30" font-family="Arial, sans-serif" font-weight="700">Agent Console</text>
+    <rect x="590" y="372" width="320" height="34" rx="17" fill="#1A2A41"/>
+    <rect x="590" y="424" width="236" height="20" rx="10" fill="#8FE0D1" fill-opacity="0.5"/>
+    <rect x="590" y="458" width="300" height="20" rx="10" fill="#22344C"/>
+
+    <rect x="540" y="528" width="420" height="222" rx="28" fill="#111E32" stroke="#2E4B68"/>
+    <text x="592" y="588" fill="#F4F7FB" font-size="30" font-family="Arial, sans-serif" font-weight="700">Shared Library</text>
+    <rect x="590" y="626" width="110" height="72" rx="18" fill="#16273F"/>
+    <rect x="720" y="626" width="110" height="72" rx="18" fill="#16273F"/>
+    <rect x="850" y="626" width="110" height="72" rx="18" fill="#16273F"/>
+    <text x="617" y="669" fill="#DDE8F7" font-size="18" font-family="Arial, sans-serif">Skills</text>
+    <text x="745" y="669" fill="#DDE8F7" font-size="18" font-family="Arial, sans-serif">Prompts</text>
+    <text x="880" y="669" fill="#DDE8F7" font-size="18" font-family="Arial, sans-serif">Assets</text>
+
+    <rect x="1010" y="270" width="430" height="480" rx="28" fill="#111E32" stroke="#2E4B68"/>
+    <text x="1060" y="330" fill="#F4F7FB" font-size="30" font-family="Arial, sans-serif" font-weight="700">Ops Surface</text>
+
+    <rect x="1060" y="374" width="330" height="74" rx="22" fill="#16273F"/>
+    <text x="1105" y="420" fill="#DDE8F7" font-size="22" font-family="Arial, sans-serif">Scheduled actions</text>
+
+    <rect x="1060" y="476" width="330" height="74" rx="22" fill="#16273F"/>
+    <text x="1123" y="522" fill="#DDE8F7" font-size="22" font-family="Arial, sans-serif">QA / Reports</text>
+
+    <rect x="1060" y="578" width="330" height="74" rx="22" fill="#16273F"/>
+    <text x="1128" y="624" fill="#DDE8F7" font-size="22" font-family="Arial, sans-serif">Git / PR flow</text>
+  </g>
+
+  <path d="M490 502 H540" stroke="url(#workbenchAccent)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M960 380 H1010" stroke="url(#workbenchAccent)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M960 640 H1010" stroke="url(#workbenchAccent)" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="515" cy="502" r="18" fill="#F6B36A"/>
+  <circle cx="985" cy="380" r="18" fill="#8FE0D1"/>
+  <circle cx="985" cy="640" r="18" fill="#6DB8FF"/>
+</svg>

@@ -1,5 +1,17 @@
 [
   {
+    "id": "agent-skills-into-workflow",
+    "title": "别再堆提示词了：Agent Skill 如何让 AI 真正进工作流",
+    "type": "video-note",
+    "topic": ["AI 编程", "Agent", "Skills", "工作流"],
+    "date": "2026-03-28",
+    "summary": "从重上下文、临时提示词和单点自动化的局限出发，解释为什么把方法、脚本、知识和约束沉淀成 skill，才是让 AI 真正进入工作流的关键一步。",
+    "cover": "../video/my-skills-usage-disscusing/doc/images/07_skill_shift_concept.svg",
+    "source": "../video/my-skills-usage-disscusing/doc/我的agent skill使用情况分析和研讨 _cut_sum.md",
+    "status": "published",
+    "updatedAt": "2026-03-28"
+  },
+  {
     "id": "introduce-agent-skills",
     "title": "Agent Skill：把一次性提示词，变成可复用的能力模块",
     "type": "article",

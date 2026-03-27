@@ -1,0 +1,78 @@
+{
+  "video_path": "/Users/vik.qian/study/videomaker/video/my-skills-usage-disscusing/我的agent skill使用情况分析和研讨 _cut.mp4",
+  "duration": 1200.72,
+  "screenshots": [
+    {
+      "path": "/Users/vik.qian/study/videomaker/video/my-skills-usage-disscusing/doc/images/01_frame_30s.jpg",
+      "filename": "01_frame_30s.jpg",
+      "timestamp": 30,
+      "timestamp_str": "00:30"
+    },
+    {
+      "path": "/Users/vik.qian/study/videomaker/video/my-skills-usage-disscusing/doc/images/02_frame_130s.jpg",
+      "filename": "02_frame_130s.jpg",
+      "timestamp": 130.06,
+      "timestamp_str": "02:10"
+    },
+    {
+      "path": "/Users/vik.qian/study/videomaker/video/my-skills-usage-disscusing/doc/images/03_frame_230s.jpg",
+      "filename": "03_frame_230s.jpg",
+      "timestamp": 230.12,
+      "timestamp_str": "03:50"
+    },
+    {
+      "path": "/Users/vik.qian/study/videomaker/video/my-skills-usage-disscusing/doc/images/04_frame_330s.jpg",
+      "filename": "04_frame_330s.jpg",
+      "timestamp": 330.18,
+      "timestamp_str": "05:30"
+    },
+    {
+      "path": "/Users/vik.qian/study/videomaker/video/my-skills-usage-disscusing/doc/images/05_frame_430s.jpg",
+      "filename": "05_frame_430s.jpg",
+      "timestamp": 430.24,
+      "timestamp_str": "07:10"
+    },
+    {
+      "path": "/Users/vik.qian/study/videomaker/video/my-skills-usage-disscusing/doc/images/06_frame_530s.jpg",
+      "filename": "06_frame_530s.jpg",
+      "timestamp": 530.3,
+      "timestamp_str": "08:50"
+    },
+    {
+      "path": "/Users/vik.qian/study/videomaker/video/my-skills-usage-disscusing/doc/images/07_frame_630s.jpg",
+      "filename": "07_frame_630s.jpg",
+      "timestamp": 630.3599999999999,
+      "timestamp_str": "10:30"
+    },
+    {
+      "path": "/Users/vik.qian/study/videomaker/video/my-skills-usage-disscusing/doc/images/08_frame_730s.jpg",
+      "filename": "08_frame_730s.jpg",
+      "timestamp": 730.4199999999998,
+      "timestamp_str": "12:10"
+    },
+    {
+      "path": "/Users/vik.qian/study/videomaker/video/my-skills-usage-disscusing/doc/images/09_frame_830s.jpg",
+      "filename": "09_frame_830s.jpg",
+      "timestamp": 830.4799999999998,
+      "timestamp_str": "13:50"
+    },
+    {
+      "path": "/Users/vik.qian/study/videomaker/video/my-skills-usage-disscusing/doc/images/10_frame_930s.jpg",
+      "filename": "10_frame_930s.jpg",
+      "timestamp": 930.5399999999997,
+      "timestamp_str": "15:30"
+    },
+    {
+      "path": "/Users/vik.qian/study/videomaker/video/my-skills-usage-disscusing/doc/images/11_frame_1030s.jpg",
+      "filename": "11_frame_1030s.jpg",
+      "timestamp": 1030.5999999999997,
+      "timestamp_str": "17:10"
+    },
+    {
+      "path": "/Users/vik.qian/study/videomaker/video/my-skills-usage-disscusing/doc/images/12_frame_1130s.jpg",
+      "filename": "12_frame_1130s.jpg",
+      "timestamp": 1130.6599999999996,
+      "timestamp_str": "18:50"
+    }
+  ]
+}
