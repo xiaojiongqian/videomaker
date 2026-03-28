@@ -1,6 +1,6 @@
 ---
 name: novel-orchestrator-main
-description: 长篇小说工程主调度与共享真源宿主。用于把长篇小说项目当作有状态、可持续维护的创作工程来推进：识别当前任务属于规划、生成、审计还是状态同步；决定最小上下文加载；安排串行或并行步骤；协调 novel-bible-manager、novel-plot-architect、novel-scene-dramatizer、novel-dialogue-editor、novel-continuity-auditor、novel-chapter-summarizer 等子 skill；校验契约并统一写回 INDEX.md、CURRENT_STATE.md、OPEN_LOOPS.md、FORESHADOWS.md、CHARACTER_ARCS.md、RECENT_EVENTS.md 等文件。它还作为共享 novel-system 资料的唯一真源。当用户提到长篇小说策划、章节推进、设定维护、连续性检查、章节摘要、伏笔追踪或状态同步时触发。
+description: 长篇小说工程主调度与共享真源宿主。用于把小说项目当作有状态、可持续维护的创作工程来推进：识别任务属于规划、生成、审计还是状态同步；决定最小上下文加载；组织 `mainline / explorer / critic` 三角协作；协调 novel-bible-manager、novel-plot-architect、novel-scene-dramatizer、novel-dialogue-editor、novel-continuity-auditor、novel-chapter-summarizer 等子 skill；校验契约并统一写回 INDEX.md、CURRENT_STATE.md、OPEN_LOOPS.md、FORESHADOWS.md、CHARACTER_ARCS.md、RECENT_EVENTS.md 等文件。它还作为共享 novel-system 资料的唯一真源。当用户提到长篇小说策划、章节推进、设定维护、连续性检查、章节摘要、伏笔追踪或状态同步时触发。
 ---
 
 # 长篇小说主调度
@@ -28,10 +28,17 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
 - `scene chain over fact chain`
   - 每章优先围绕 1 个 dominant scene 展开，必要时再加 1 个扩展场面
   - 其余同型节点优先压成 `bridge cluster`
+- `productive disagreement`
+  - 除正文主写 skill 外，支持型 skill 默认不走“单声道共识”
+  - 要显式制造 `mainline / explorer / critic` 三角张力
+  - `explorer` 负责找更强可能性，`critic` 负责拆穿伪升级，主调度只吸收最小但更强的改动
 - `bounded quality loop`
   - 先拿到可审草稿，再做独立审计
   - 只修 `blockers` 和最低分维度，不整章反复推倒
   - 默认最多 3 轮；提升不足 `3/80` 或修复开始外溢时停止
+- `bounded adversarial loop`
+  - 支持型 skill 的三角协作默认最多 `2` 轮
+  - 如果第二轮开始只剩口味分歧或装饰性升级，就停止，不制造内耗
 - `small dispatches beat heroic dispatches`
   - sub-agent 默认吃小任务，不吃“十章一起审”这类大包
   - 先做轻量分诊，再把真正需要处理的章节拆开
@@ -41,6 +48,35 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
   - 状态文件帮助后续写作，不反过来统治正文
 - `serial by default`
   - 生成新内容后再做审计和摘要；只有互不污染的分析任务才并行
+
+## Triadic Tension Protocol
+
+对不直接承担整章正文生成的支持型 skill，默认套用三种 stance：
+
+1. `mainline`
+   - 在既有 scope、canon 和当前状态内，交付最稳、最可执行的版本
+2. `explorer`
+   - 负责找被压扁的可能性
+   - 默认探索更强阻力、更具体代价、更反直觉但合理的关系走向、更可重复调用的场面锚点、更热的余波
+   - 只产出候选，不直接定稿
+3. `critic`
+   - 负责拆穿伪张力
+   - 默认攻击巧合推进、空 stakes、模板桥接、关系过平、信息先于事件、设定条目履历化、修补看似变强其实更难写
+
+协同顺序固定如下：
+
+1. `mainline pass`
+2. `explorer pass`
+3. `critic pass`
+4. `orchestrator synthesis`
+
+综合规则：
+
+- 不做平均主义折中；优先选择“最小但更强”的升级
+- `critic` 必须同时审 `mainline` 和 `explorer` 产物
+- `explorer` 可以挑战当前方案，但不能偷改硬 canon
+- 如果争议落到硬冲突、证据不足或 scope 失控，返回 `needs_review`
+- `novel-continuity-auditor` 保持外部硬门禁角色，不用 explorer 稀释它的独立性
 
 ## Read Context Progressively
 
@@ -59,21 +95,37 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
 - 定向修订默认 `1 chapter` 或 `1 dominant scene chain / dispatch`
 - 多章节请求先做 `triage pass`，不要直接把详细 scorecard 压给一个 agent
 
+对已实现三角协议的支持型 skill，再加三条限制：
+
+- `explorer` 默认只给 `2 到 3` 个高杠杆候选，不展开大包 brainstorming
+- `critic` 默认只抓会明显伤害读感、因果或后续可写性的点
+- `synthesis` 默认只吸收 `1 到 2` 个升级，不把所有好点子一起塞进同一章
+
 ## Route by Task
 
 - `novel-bible-manager`
-  - 维护静态设定和动态状态
+  - `mainline` 维护静态设定和动态状态
+  - `explorer` 挖可复用的 tension asset、关系错位和 active unknown
+  - `critic` 拦 unsupported writeback、履历化条目和伪深度
 - `novel-plot-architect`
-  - 规划 arc、章纲、scene beats、信息释放
+  - `mainline` 规划 arc、章纲、scene beats、信息释放
+  - `explorer` 提供更强 disturbance、代价、转折和 residue 候选
+  - `critic` 压测因果、可写性和假升级
 - `novel-scene-dramatizer`
   - 把已批准计划扩成场景或章节草稿
+  - 正文主写者，优先保持单一强声音，不强制混入内部 critic
 - `novel-dialogue-editor`
-  - 修对白和互动声音
+  - `mainline` 修对白和互动声音
+  - `explorer` 提供更有潜台词和压差的 line / interaction option
+  - `critic` 拆穿串音、解释性台词和装饰性机锋
 - `novel-continuity-auditor`
   - 做连续性、小说性和语言表面门禁
   - 输出 `quality_scorecard`、`blockers`、`targeted_fix_list`
+  - 外部独立批判者，不与 explorer 混岗
 - `novel-chapter-summarizer`
-  - 生成最小可传递记忆和状态写回草案
+  - `mainline` 生成最小可传递记忆和状态写回草案
+  - `explorer` 标出真正值得带到后文的余波和 tension residue
+  - `critic` 拦截把核心事件压成主题总结或漏掉后续义务的摘要
 
 如果一个任务同时要求“生成”和“判断”，先生成，再审计。
 
@@ -102,12 +154,39 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
 
 1. 读最小状态
 2. 立 chapter promise
-3. 如需规划，调用 `novel-plot-architect`
-4. 调用 `novel-scene-dramatizer` 生成或修正文稿
-5. 如对白薄弱，再调用 `novel-dialogue-editor`
-6. 进入 `quality_loop`
-7. 通过后调用 `novel-chapter-summarizer`
-8. 只在结果稳定后写回状态文件
+3. 如需规划、设定整理、对白修订或摘要沉淀，先跑对应 skill 的 `support_tension_loop`
+4. 如需结构方案，调用 `novel-plot-architect`
+5. 调用 `novel-scene-dramatizer` 生成或修正文稿
+6. 如对白薄弱，再调用 `novel-dialogue-editor`
+7. 进入 `quality_loop`
+8. 通过后调用 `novel-chapter-summarizer`
+9. 只在结果稳定后写回状态文件
+
+## Run the Support-Skill Tension Loop
+
+当任务落到 `novel-bible-manager`、`novel-plot-architect`、`novel-dialogue-editor`、`novel-chapter-summarizer` 时，默认执行：
+
+1. `mainline pass`
+   - 先拿一个稳的基础版本
+2. `explorer pass`
+   - 只找高杠杆升级
+   - 默认回答“哪里还能更险、更具体、更可回收”
+3. `critic pass`
+   - 只抓会让结果变虚、变假、变平或变难写的点
+4. `synthesis`
+   - 只接入最小强升级
+   - 把未采纳候选留在 `diagnostics` 或 `recommendations`
+5. `handoff`
+   - 只把综合后的稳定产物交给下游正文、审计或写回
+
+降级规则：
+
+- 纯规范化小任务允许用 `mini-loop`
+  - `explorer` 最多补 `1` 个 tension asset 候选
+  - `critic` 最多补 `1` 个关键风险
+- 如果支持型 skill 还没有显式三角协议，先跑 `mainline`
+  - 再由主调度或 `novel-continuity-auditor` 提供外部 critic fallback
+- 如果 loop 连续两轮都没有带来清晰增益，停止，不把 brainstorming 当成果
 
 ## Keep Sub-Agent Runs Small
 
@@ -145,6 +224,7 @@ description: 长篇小说工程主调度与共享真源宿主。用于把长篇�
 4. `route only failed dimensions`
    - 把每个 blocker 转成 1 个最小修复任务
    - 优先修最低分维度和会卡住整章读感的硬伤
+   - 如果修复归属支持型 skill，优先走对应的 `support_tension_loop`
 5. `owner mapping`
    - 结构缺口、核心事件缺失、压力线失效：`novel-plot-architect`
    - 开头不抓人、场面发虚、桥接过量、章末不热：`novel-scene-dramatizer`
@@ -221,11 +301,13 @@ sub-agent 超时不是“多等一会儿”就算处理了。
 - `routing_decision`
 - `artifacts`
   - 如运行 `quality_loop`，补 `quality_loop_report`
+  - 如运行三角协作，补 `tension_synthesis_report`
 - `diagnostics`
 - `recommendations`
 - `proposed_writebacks`
 - `execution`
   - 如发生 timeout recovery，补 `degraded_execution`、`recovery_actions`、`fallback_reason_codes`
+  - 如运行三角协作，补 `stance_runs`、`accepted_upgrades`、`rejected_variants`
 
 ## Shared References
 

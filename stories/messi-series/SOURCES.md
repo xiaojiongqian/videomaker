@@ -304,6 +304,26 @@
    - 用途:
      - 梅西在 2014 年世界杯决赛失利后领取赛事金球奖
 
+44. CONMEBOL Copa América, “Chile reaches the top for the first time in 2015”
+   - 链接: https://copaamerica.com/en/news/chile-reaches-the-top-for-the-first-time-in-2015
+   - 用途:
+     - 2015 年美洲杯由智利主办
+     - 智利在圣地亚哥的决赛中与阿根廷 0 比 0 踢满常规时间和加时赛后，点球 4 比 1 取胜，第一次夺得美洲杯
+
+45. CONMEBOL Copa América, “Chile become two-time champions in 2016”
+   - 链接: https://copaamerica.com/en/news/chile-become-two-time-champions-in-2016
+   - 用途:
+     - 2016 年百年美洲杯首次在美国举行
+     - 智利在对阿根廷的决赛中再度 0 比 0 战平后，点球 4 比 2 取胜，连续第二年夺冠
+     - 阿根廷点球大战里，梅西与比格利亚罚失，智利由弗朗西斯科·席尔瓦罚进制胜点球
+
+46. FIFA, “Messi calls time on international career”
+   - 链接: https://inside.fifa.com/news/messi-calls-time-on-international-career-2803995
+   - 用途:
+     - 2016 年百年美洲杯半决赛对美国，梅西用任意球打进个人国家队第 55 球，成为阿根廷队史射手王
+     - 2016 年美洲杯决赛点球大战中，罗梅罗先扑出智利第一脚点球，梅西随后把自己的点球踢高
+     - 赛后，梅西公开表示自己将退出阿根廷国家队
+
 ## Source Use Rules
 - 仅把上述来源能支撑的事实写成确定表述。
 - 没有公开来源支撑的对白、心理活动、家庭细节，不写成“实际发生”。

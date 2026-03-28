@@ -29,8 +29,8 @@
 - Planned chapters:
   - CH009《更衣室里最安静的人》 [done]
   - CH010《马拉卡纳的长走廊》 [done]
-  - CH011《第三次决赛之后》 [next]
-  - CH012《短暂退场》
+  - CH011《第三次决赛之后》 [done]
+  - CH012《短暂退场》 [next]
 
 ## ARC-04 把失败穿在身上
 - Status: queued
