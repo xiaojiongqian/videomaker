@@ -324,6 +324,70 @@
      - 2016 年美洲杯决赛点球大战中，罗梅罗先扑出智利第一脚点球，梅西随后把自己的点球踢高
      - 赛后，梅西公开表示自己将退出阿根廷国家队
 
+47. ESPN, “Argentina coach Tata Martino quits post over federation chaos”
+   - 链接: https://www.espn.com/soccer/story/_/id/37478581/argentina-coach-tata-martino-quits-post-federation-chaos
+   - 用途:
+     - 2016 年 7 月 5 日，马蒂诺在美洲杯决赛失利后不久辞去阿根廷主帅职务
+     - 其离任与阿根廷足协的不确定状态和奥运组队问题有关
+
+48. DW, “Argentina fans beg Messi not to quit national team”
+   - 链接: https://www.dw.com/en/argentina-fans-plead-for-messi-to-reconsider/a-19374389
+   - 用途:
+     - 2016 年 7 月初，阿根廷国内出现公开挽留梅西的街头与舆论声浪
+     - 布宜诺斯艾利斯有球迷在雨中聚集，请求梅西重新考虑退出决定
+
+49. The Guardian, “Lionel Messi back in Argentina squad after reversing retirement decision”
+   - 链接: https://www.theguardian.com/football/2016/aug/13/lionel-messi-argentina-reversing-retirement-decision
+   - 用途:
+     - 2016 年 8 月，在与新任主帅包萨谈过后，梅西决定回返国家队
+     - 梅西在声明中表示阿根廷足球问题很多，他不想再制造另一个问题，并更愿意从内部提供帮助
+     - 阿根廷随后把梅西列入对乌拉圭和委内瑞拉的世预赛名单
+
+50. The Irish Times, “Lionel Messi on the scoresheet after Argentina retirement U-turn”
+   - 链接: https://www.irishtimes.com/sport/soccer/international/lionel-messi-on-the-scoresheet-after-argentina-retirement-u-turn-1.2776904
+   - 用途:
+     - 2016 年 9 月 1 日，梅西在门多萨对乌拉圭的世界杯预选赛里回返国家队
+     - 他在第 42 分钟的射门经何塞·希门尼斯折射入网，帮助阿根廷 1 比 0 取胜
+
+51. FIFA, “Sampaoli takes charge of Argentina”
+   - 链接: https://inside.fifa.com/tournaments/mens/worldcup/2018russia/news/sampaoli-takes-charge-of-argentina-2892132
+   - 用途:
+     - 2017 年 6 月 1 日，桑保利正式成为阿根廷主帅
+     - 其上任时阿根廷在世预赛积分榜排第五，距离直接晋级区差 1 分
+     - FIFA 页面同时回顾了包萨在 2017 年 4 月初下课这一事实
+
+52. FIFA, “Trio qualify amid tense South American finale”
+   - 链接: https://inside.fifa.com/tournaments/mens/worldcup/2018russia/news/trio-qualify-amid-south-american-drama-2913011
+   - 用途:
+     - 2017 年 10 月 10 日，阿根廷在基多 3 比 1 逆转厄瓜多尔，拿到俄罗斯世界杯资格
+     - 厄瓜多尔在开场不久先取得领先，梅西随后上演帽子戏法
+
+53. FIFA, “Iceland thwart Argentina on World Cup debut”
+   - 链接: https://inside.fifa.com/tournaments/mens/worldcup/2018russia/news/iceland-secure-historic-first-world-cup-point-2958355
+   - 用途:
+     - 2018 年 6 月 16 日，阿根廷与冰岛 1 比 1 战平
+     - 阿圭罗先破门，芬博阿松随后扳平
+     - 梅西在下半场罚失点球
+
+54. FIFA, “Croatia advance on a dark night for Argentina”
+   - 链接: https://inside.fifa.com/tournaments/mens/worldcup/2018russia/news/croatia-advance-on-a-dark-night-for-argentina-2964326
+   - 用途:
+     - 2018 年 6 月 21 日，阿根廷 0 比 3 负于克罗地亚
+     - 雷比奇利用门将失误首开纪录，莫德里奇和拉基蒂奇随后继续扩大比分
+
+55. FIFA, “Rojo returns to haunt Nigeria as Argentina progress”
+   - 链接: https://inside.fifa.com/tournaments/mens/worldcup/2018russia/news/rojo-returns-to-haunt-nigeria-as-argentina-progress
+   - 用途:
+     - 2018 年 6 月 26 日，对尼日利亚必须取胜的小组赛里，梅西先破门，摩西点球扳平
+     - 罗霍在第 86 分钟打进制胜球，帮助阿根廷 2 比 1 过关
+
+56. FIFA, “France into quarter-finals after seven-goal thriller”
+   - 链接: https://inside.fifa.com/en/news/review-france--argentina-2978977
+   - 用途:
+     - 2018 年 6 月 30 日，阿根廷在喀山以 3 比 4 负于法国，止步十六强
+     - 格列兹曼点球首开纪录，迪马利亚扳平，梅西转身后的射门经梅尔卡多折射帮助阿根廷一度反超
+     - 帕瓦尔与姆巴佩随后完成反打，阿圭罗补时的头球不足以改写结局
+
 ## Source Use Rules
 - 仅把上述来源能支撑的事实写成确定表述。
 - 没有公开来源支撑的对白、心理活动、家庭细节，不写成“实际发生”。

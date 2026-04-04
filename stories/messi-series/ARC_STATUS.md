@@ -23,22 +23,22 @@
 - Keep open: 不把奖项、名场面和外界比较提前写成完整答案。
 
 ## ARC-03 蓝白条纹的山
-- Status: active
+- Status: completed
 - Time window: 2010-2016
 - Pressure: 国家队失利、公众审判和自我怀疑。
 - Planned chapters:
   - CH009《更衣室里最安静的人》 [done]
   - CH010《马拉卡纳的长走廊》 [done]
   - CH011《第三次决赛之后》 [done]
-  - CH012《短暂退场》 [next]
+  - CH012《短暂退场》 [done]
 
 ## ARC-04 把失败穿在身上
-- Status: queued
+- Status: active
 - Time window: 2017-2021
 - Pressure: 衰老、重组和承担责任。
 - Planned chapters:
-  - CH013《世界杯之后的清晨》
-  - CH014《老队长的训练鞋》
+  - CH013《世界杯之后的清晨》 [done]
+  - CH014《老队长的训练鞋》 [next]
   - CH015《马拉卡纳的回声终于变了方向》
   - CH016《奖杯落进手里时没有人说话》
 
