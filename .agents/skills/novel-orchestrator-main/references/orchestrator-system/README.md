@@ -9,3 +9,5 @@
   - 系统目标、主从边界与整体原则
 - `architecture.md`
   - orchestrator、子 skill 与全局状态协调职责
+- `quality-council.md`
+  - 多 sub-agent 质量议会、评分归属、修复派工与收敛规则

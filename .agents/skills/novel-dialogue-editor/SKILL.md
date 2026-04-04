@@ -44,6 +44,10 @@ description: 长篇小说对白与角色声音修订。用于打磨对白、区�
 - 优先修 `character_embodiment`、潜台词、串音、解释性台词
 - 能用 1 到 3 处局部替换解决，就不要整场重写
 - 如果根因是场景太薄，明确回退 `novel-scene-dramatizer`
+- 修复回执至少带：
+  - `touched_dimensions`
+  - `expected_score_gain`
+  - `locked_dimensions_respected`
 
 `explorer` 默认找：
 
@@ -58,6 +62,31 @@ description: 长篇小说对白与角色声音修订。用于打磨对白、区�
 - 只有好听句子，没有局面变化
 - 为了“有张力”硬塞不符合身份的信息或表白
 
+## Quality Council Seat
+
+当被 `novel-orchestrator-main` 作为 `voice_embodiment_seat` 调用时，你优先做角色在场感评审，不直接改稿。
+
+你拥有的 canonical 维度：
+
+- `character_embodiment`
+
+你可以附带 advisory comment 到：
+
+- `language_surface`
+- `scene_execution`
+
+执行要求：
+
+- 默认只读取 `seat_context_snapshot`
+  - 不读取同轮 `peer_findings`、`peer_scorecards`、作者自述修复理由
+- 只给 `character_embodiment` 打 canonical 分
+- 必须指出是哪种失真：
+  - `voice blur`
+  - `explained subtext`
+  - `no-pressure dialogue`
+  - `protagonist absent`
+- 如果问题根因是场面太薄，不用对白补丁硬撑，直接建议回退 `novel-scene-dramatizer`
+
 ## Workflow
 
 1. 识别说话者此刻想要什么、怕什么、如何回避
@@ -68,6 +97,22 @@ description: 长篇小说对白与角色声音修订。用于打磨对白、区�
    - 拆穿串音、直白解释、无推进感
 5. 在不改变事实的前提下选最小强升级
 6. 如果根因是场景太薄，明确回退给上游
+
+## Quality Council Review Workflow
+
+当 `task_type` 是 `quality-seat-voice-embodiment` 或目标明确要求评分时，默认执行：
+
+1. 只锁定 `character_embodiment`
+2. 给出 `0-10` 分、证据和最低成本修复
+3. 把问题压成 `1 到 2` 个 interaction cluster
+4. 每个 cluster 至少说明：
+   - `minimal_fix`
+   - `rewrite_scope`
+   - `expected_score_gain`
+   - 是否可能伤到已锁定维度
+5. 如果最优解不是对白，而是动作或场面，明确把 owner 让出去
+6. 如果当前 phase 是 `re-audit`
+   - 重点检查修复是否只是把人话说得更漂亮，却没有让角色目标、回避和压力更清楚
 
 ## Editing Priorities
 
@@ -103,6 +148,8 @@ description: 长篇小说对白与角色声音修订。用于打磨对白、区�
 - `voice_notes`
 - `subtext_option_set`
 - `dialogue_break_report`
+- `voice_embodiment_seat_scorecard`
+- `interaction_repair_brief`
 
 ## Guardrails
 
@@ -112,6 +159,7 @@ description: 长篇小说对白与角色声音修订。用于打磨对白、区�
 - 如果直接开口会破坏真实感，优先用动作或短心理线，不要硬加引号
 - `explorer` 不得虚构会改写事实的新秘密或关键告白
 - `critic` 不得把所有锋利感都削成安全中性口吻
+- 作为评审席位时，不把“我能改得更好”当成当前文本已经合格的证据
 
 ## Shared References
 

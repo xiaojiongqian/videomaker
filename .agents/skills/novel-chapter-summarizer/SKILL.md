@@ -33,6 +33,9 @@ description: 长篇小说章节摘要与状态沉淀。用于把章节草稿或�
 - `constraints`
 - `expected_outputs`
 
+如果 `context_bundle.quality_loop_report` 明确显示本章仍未 `pass`，且用户没有显式要求“先总结未稳定草稿”，默认返回 `blocked` 或 `needs_review`。
+摘要沉淀默认只服务于已过线或已被用户明确确认的文本版本。
+
 `explorer` 默认追问：
 
 - 本章最该继续发热的余波是什么
@@ -48,6 +51,7 @@ description: 长篇小说章节摘要与状态沉淀。用于把章节草稿或�
 ## Workflow
 
 1. 提取可确认事实
+   - 先确认本章是否已经通过 `quality_council_loop` 或得到用户明确确认
 2. 先做 `mainline` 事件账本
    - 谁在场
    - 谁做了什么
@@ -117,6 +121,7 @@ description: 长篇小说章节摘要与状态沉淀。用于把章节草稿或�
 - 不借摘要夹带主题结论和作者解释
 - `explorer` 只能强化保留，不能发明新伏笔或新剧情
 - `critic` 要分清“文本有意保留空白”和“摘要把关键义务漏掉了”这两件事
+- 对未过线草稿，不默认产出可直接写回状态文件的摘要
 
 ## Shared References
 

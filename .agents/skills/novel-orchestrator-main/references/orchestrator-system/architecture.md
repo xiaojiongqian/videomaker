@@ -17,6 +17,34 @@
 子 skill 不应自行决定全局状态写回。
 子 skill 不应自行解释整个项目状态。
 
+## Quality Council Layer
+
+当任务目标是“写到可发布”而不是“先出一稿”时，主调度默认加一层 `quality_council_loop`。
+
+这一层的职责划分如下：
+
+- orchestrator
+  - 生成 round id
+  - fan-out 多个独立评分席位
+  - 汇总 canonical scorecard
+  - 决定修复 owner、修复顺序和停止条件
+- `novel-plot-architect`
+  - `story_engine_seat`
+  - 拥有 `opening_hook`、`core_event`、`escalation`
+- `novel-scene-dramatizer`
+  - `scene_heat_seat`
+  - 拥有 `scene_execution`、`ending_hook`
+- `novel-dialogue-editor`
+  - `voice_embodiment_seat`
+  - 拥有 `character_embodiment`
+- `novel-continuity-auditor`
+  - `canon_surface_gate`
+  - 拥有 `continuity_causality`、`language_surface`
+  - 对 hard blocker 和 writeback eligibility 拥有 veto
+
+质量闭环的本质不是“更多意见”，而是“把评分权拆成稳定契约”。
+这样每个 sub-agent 只负责自己最擅长、最可复查的维度。
+
 ## Sub-Skills
 
 - `novel-bible-manager`

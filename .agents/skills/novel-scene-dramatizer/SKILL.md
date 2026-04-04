@@ -72,6 +72,28 @@ description: 长篇小说场景与章节扩写。用于把已批准的章纲、s
 - 每次修复优先处理 `2 到 3` 个 blocker cluster
 - 新增段落必须增加 `contact` 或 `shift`
 - 如果根因其实是上游结构错误，返回给 `novel-plot-architect`
+- 修复回执至少带：
+  - `touched_dimensions`
+  - `expected_score_gain`
+  - `locked_dimensions_respected`
+
+## Quality Council Seat
+
+当被 `novel-orchestrator-main` 作为 `scene_heat_seat` 调用时，你优先做“场面热度评审”，不直接重写。
+
+你拥有的 canonical 维度：
+
+- `scene_execution`
+- `ending_hook`
+
+执行要求：
+
+- 默认只读取 `seat_context_snapshot`
+  - 不读取同轮 `peer_findings`、`peer_scorecards`、作者自述修复理由
+- 只给 owned dimension 打 canonical 分
+- 明确指出哪一段只是 `bridge facts`，哪一段真正承担 dominant scene
+- 章末必须判断余波是否仍挂在具体动作、物件或结果上
+- 如果当前轮文本是由 `novel-scene-dramatizer` 写出来的，也必须用新的评审 session 来打分
 
 ## Dispatch Scope
 
@@ -151,6 +173,22 @@ description: 长篇小说场景与章节扩写。用于把已批准的章纲、s
 5. 只在需要处补互动和主观线
 6. 检查章末余波是否仍挂在具体场面上
 
+## Quality Council Review Workflow
+
+当 `task_type` 是 `quality-seat-scene-heat` 或目标明确要求评分时，默认执行：
+
+1. 只检查 `scene_execution` 和 `ending_hook`
+2. 判断 dominant scene 是否真的承担不可删除的推进
+3. 找出最伤热度的 `bridge leak`、`scene blur` 或 `cold ending`
+4. 对每个问题给：
+   - `minimal_fix`
+   - `rewrite_scope`
+   - `expected_score_gain`
+   - 是否会影响 `locked_dimensions`
+5. 如果根因明显属于上游结构或对白，不自己吞掉，而是标注正确 owner
+6. 如果当前 phase 是 `re-audit` 且你被标为 `counterforce seat`
+   - 重点检查修复是否把文本改成“解释更顺了，但场面热度死了”或“结构更稳了，但现场感消失了”
+
 ## Output
 
 至少返回：
@@ -168,6 +206,9 @@ description: 长篇小说场景与章节扩写。用于把已批准的章纲、s
 - `prose_revision`
 - `targeted_prose_revision`
 - `revision_scope`
+- `scene_heat_seat_scorecard`
+- `scene_heat_report`
+- `ending_residue_report`
 
 ## Guardrails
 
@@ -176,6 +217,7 @@ description: 长篇小说场景与章节扩写。用于把已批准的章纲、s
 - 不虚构会改变理解的私密细节和对白
 - 如果读者需要自己重排时间线或因果链，视为失败，应重写
 - 不因修 1 个局部问题就重刷整章文风；先保住已通过的场面和节奏
+- 作为评审席位时，不用“我可以重写得更好”代替证据化评分
 
 ## Shared References
 

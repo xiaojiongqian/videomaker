@@ -54,6 +54,27 @@ description: 长篇小说情节与结构规划。用于规划 master outline、a
 - 可轻易压缩成时间线条目的段落
 - 平均用力、没有 dominant scene 的 plan
 
+## Quality Council Seat
+
+当被 `novel-orchestrator-main` 作为 `story_engine_seat` 调用时，你优先做评审，不直接改稿。
+
+你拥有的 canonical 维度：
+
+- `opening_hook`
+- `core_event`
+- `escalation`
+
+执行要求：
+
+- 默认只读取 `seat_context_snapshot`
+  - 可包含现稿、当前 round 的 `locked_dimensions`、上一轮聚合结果
+  - 不读取同轮 `peer_findings`、`peer_scorecards`、作者自述修复理由
+- 只给 owned dimension 打 canonical 分
+- 非 owned dimension 可以给 `advisory_findings`
+- 必须指出最低成本、最可能提分的结构修复
+- 如果当前输入来自你自己上一轮写出的方案，也要按评审席位身份重新审
+  - 不默认为自己背书
+
 ## Planning Rules
 
 无论粒度大小，都尽量回答：
@@ -113,6 +134,26 @@ description: 长篇小说情节与结构规划。用于规划 master outline、a
 - `mainline` 先给最低可修方案
 - `explorer` 只对失败维度补更强替代
 - `critic` 检查修复是否只是加码，而没有新因果或新压力
+- 修复回执至少带：
+  - `touched_dimensions`
+  - `expected_score_gain`
+  - `locked_dimensions_respected`
+
+## Quality Council Review Workflow
+
+当 `task_type` 是 `quality-seat-story-engine` 或目标明确要求评分时，默认执行：
+
+1. 只锁定 `opening_hook`、`core_event`、`escalation`
+2. 逐项给 `0-10` 分和证据
+3. 把真正的结构根因压成 `1 到 2` 个 repair cluster
+4. 对每个 cluster 指明：
+   - `minimal_fix`
+   - `preferred_owner`
+   - `expected_score_gain`
+   - `rewrite_scope`
+5. 如果问题其实是场面落地或对白问题，降级成 advisory，不抢修别人的维度
+6. 如果当前 phase 是 `re-audit` 且你被标为 `counterforce seat`
+   - 重点检查修复是否把问题从“结构缺口”偷换成“热闹但空”
 
 ## Dispatch Scope
 
@@ -190,6 +231,8 @@ description: 长篇小说情节与结构规划。用于规划 master outline、a
 - `pressure_upgrade_options`
 - `plan_break_report`
 - `tension_synthesis`
+- `story_engine_seat_scorecard`
+- `story_engine_repair_brief`
 
 ## Guardrails
 
@@ -201,6 +244,7 @@ description: 长篇小说情节与结构规划。用于规划 master outline、a
 - `explorer` 不靠无来由的极端事件抬高张力；升级必须仍受 canon 和人物选择约束
 - `critic` 不要求“更大更惨”本身；必须指出哪条因果、代价或场面支点失效
 - 如果多个候选都成立，不平均混搭；交付 1 条主方案，再把其余强备选放进 `recommendations`
+- 作为评审席位时，不用“重写整章大纲”逃避局部修复
 
 ## Shared References
 

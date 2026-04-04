@@ -36,6 +36,19 @@ description: 长篇小说工程主调度与共享真源宿主。用于把小说�
   - 先拿到可审草稿，再做独立审计
   - 只修 `blockers` 和最低分维度，不整章反复推倒
   - 默认最多 3 轮；提升不足 `3/80` 或修复开始外溢时停止
+- `quality council ratchet`
+  - 质量闭环默认由多个独立评分席位组成，不把“是否过线”交给单一 agent
+  - 每个席位只拥有自己那部分维度，主调度汇总后再派最小修复任务
+  - 已达标维度默认冻结，除非后续轮次有新证据证明它被修坏了
+- `independent context before consensus`
+  - 互相校验默认建立在独立上下文上，而不是共享同一份理由后互相背书
+  - 首轮评分默认 `blind audit`
+    - 不把同轮 peer finding、peer scorecard、作者自述修复理由直接喂给别的评分席位
+  - 主调度只在席位独立交卷后做聚合
+- `counterforce over harmony`
+  - 质量提升默认来自不同力量的拉扯，而不是尽快达成共识
+  - repair owner 负责把问题修到更强
+  - counterforce seat 负责证明这次修复不是伪升级、过拟合或局部自嗨
 - `bounded adversarial loop`
   - 支持型 skill 的三角协作默认最多 `2` 轮
   - 如果第二轮开始只剩口味分歧或装饰性升级，就停止，不制造内耗
@@ -111,17 +124,26 @@ description: 长篇小说工程主调度与共享真源宿主。用于把小说�
   - `mainline` 规划 arc、章纲、scene beats、信息释放
   - `explorer` 提供更强 disturbance、代价、转折和 residue 候选
   - `critic` 压测因果、可写性和假升级
+  - 在 `quality_council_loop` 中默认担任 `story_engine_seat`
+    - canonical 负责 `opening_hook`、`core_event`、`escalation`
 - `novel-scene-dramatizer`
   - 把已批准计划扩成场景或章节草稿
   - 正文主写者，优先保持单一强声音，不强制混入内部 critic
+  - 在 `quality_council_loop` 中默认担任 `scene_heat_seat`
+    - canonical 负责 `scene_execution`、`ending_hook`
 - `novel-dialogue-editor`
   - `mainline` 修对白和互动声音
   - `explorer` 提供更有潜台词和压差的 line / interaction option
   - `critic` 拆穿串音、解释性台词和装饰性机锋
+  - 在 `quality_council_loop` 中默认担任 `voice_embodiment_seat`
+    - canonical 负责 `character_embodiment`
 - `novel-continuity-auditor`
   - 做连续性、小说性和语言表面门禁
   - 输出 `quality_scorecard`、`blockers`、`targeted_fix_list`
   - 外部独立批判者，不与 explorer 混岗
+  - 在 `quality_council_loop` 中默认担任 `canon_surface_gate`
+    - canonical 负责 `continuity_causality`、`language_surface`
+    - 对硬连续性 blocker 和写回资格拥有最终 veto
 - `novel-chapter-summarizer`
   - `mainline` 生成最小可传递记忆和状态写回草案
   - `explorer` 标出真正值得带到后文的余波和 tension residue
@@ -158,7 +180,7 @@ description: 长篇小说工程主调度与共享真源宿主。用于把小说�
 4. 如需结构方案，调用 `novel-plot-architect`
 5. 调用 `novel-scene-dramatizer` 生成或修正文稿
 6. 如对白薄弱，再调用 `novel-dialogue-editor`
-7. 进入 `quality_loop`
+7. 进入 `quality_council_loop`
 8. 通过后调用 `novel-chapter-summarizer`
 9. 只在结果稳定后写回状态文件
 
@@ -208,34 +230,98 @@ description: 长篇小说工程主调度与共享真源宿主。用于把小说�
 2. 只把低分章拆出去单独审
 3. 修复后只复审动过的章节
 
-## Run the Quality Loop
+## Run the Quality Council Loop
 
-当目标是“写到优秀 / 达标 / 可发布”时，默认执行有界闭环：
+当目标是“写到优秀 / 达标 / 可发布”时，默认把 `quality_loop` 实现为 `quality_council_loop`，而不是单一审计器闭环。
+
+### Council Seats
+
+- `story_engine_seat`
+  - `novel-plot-architect`
+  - `task_type: quality-seat-story-engine`
+  - canonical 负责 `opening_hook`、`core_event`、`escalation`
+- `scene_heat_seat`
+  - `novel-scene-dramatizer`
+  - `task_type: quality-seat-scene-heat`
+  - canonical 负责 `scene_execution`、`ending_hook`
+- `voice_embodiment_seat`
+  - `novel-dialogue-editor`
+  - `task_type: quality-seat-voice-embodiment`
+  - canonical 负责 `character_embodiment`
+- `canon_surface_gate`
+  - `novel-continuity-auditor`
+  - `task_type: quality-council-gate`
+  - canonical 负责 `continuity_causality`、`language_surface`
+  - 对硬连续性 blocker、证据不足和写回资格拥有最终 veto
+
+### Council Rules
+
+- 评分席位必须是 fresh sub-agent session
+  - 当前轮负责生成或修文的那个 agent session，不直接给自己的产物打分
+- 首轮评分默认 `blind audit`
+  - 每个 seat 只拿自己的 `seat_context_snapshot`
+  - 不看同轮 `peer_findings`、`peer_scorecards`、author self-justification
+  - 允许看上一轮的聚合结果，但不允许在本轮交卷前偷看同轮别人怎么判
+- 其他席位可以给非 owned dimension 提 advisory comment
+  - 但 canonical score 只认 owner seat
+- `canon_surface_gate` 发现硬 blocker 时，默认直接阻止通过
+- 已达 `8/10` 且无 blocker 的维度默认进入 `locked_dimensions`
+  - 后续轮次除非有明确回归证据，不重新改写
+- 每轮默认最多派 `2` 个 repair owner
+  - 先修根因，再修表层
+- repair 后默认跑 `counterforce challenge`
+  - 至少由 1 个非 owner seat 从相反压力方向复核
+  - `canon_surface_gate` 继续保留最终 veto
+
+### Workflow
 
 1. `pass_0`
    - 基于现有 plan 或现稿，先拿到一版可审文本
-2. `independent audit`
-   - 调用 `novel-continuity-auditor`
-   - 如果运行环境支持 sub-agent，优先独立 dispatch，避免生成方自评
-   - 如果只能串行 fallback，在 `diagnostics` 标明
-   - 默认 1 章 1 个 audit dispatch；多章只做 triage
-3. `stop on pass`
-   - 若 `score_total >= 72/80` 且无 `blockers`，视为达到优秀线
-4. `route only failed dimensions`
-   - 把每个 blocker 转成 1 个最小修复任务
-   - 优先修最低分维度和会卡住整章读感的硬伤
+2. `council fan-out`
+   - 草稿稳定后，优先并行 dispatch 四个评分席位
+   - 每个席位拿独立 `seat_context_snapshot`
+     - `story_engine_seat` 优先拿 chapter promise、scene beats、现稿、最小状态
+     - `scene_heat_seat` 优先拿现稿、dominant scene chain、段落边界、最小状态
+     - `voice_embodiment_seat` 优先拿对白片段、互动片段、角色状态、场景压力
+     - `canon_surface_gate` 优先拿现稿、canon、摘要、当前状态
+   - 如果环境受限，至少保证 `canon_surface_gate` 独立 dispatch
+   - 其他席位可串行 fallback，但必须在 trace 里记明
+3. `aggregation`
+   - 把四个席位的 owned score 合并成 canonical `quality_scorecard`
+   - 同时记录 `seat_scorecards`、`advisory_findings`、`locked_dimensions`、`council_round_reports`、`round_decision`
+4. `stop on pass`
+   - `score_total >= 72/80`
+   - 无 `blockers`
+   - 没有任何 canonical 维度低于 `7/10`
+   - 读者能复述本章核心事件、压力升级和章末余波
+5. `route only failed clusters`
+   - 把 failed dimensions 合并成最小 repair cluster
+   - 优先修最低分维度和会拖垮整章读感的根因
    - 如果修复归属支持型 skill，优先走对应的 `support_tension_loop`
-5. `owner mapping`
-   - 结构缺口、核心事件缺失、压力线失效：`novel-plot-architect`
-   - 开头不抓人、场面发虚、桥接过量、章末不热：`novel-scene-dramatizer`
-   - 角色串音、潜台词太直白、对白无压：`novel-dialogue-editor`
-   - 设定 / 时间线 / canon 冲突：`novel-bible-manager`
-6. `re-audit`
-   - 修完后必须再次调用 `novel-continuity-auditor`
-7. `stop conditions`
+6. `owner mapping`
+   - `opening_hook`、`core_event`、`escalation`：`novel-plot-architect`
+   - `scene_execution`、`ending_hook`、桥接过量、场面发虚：`novel-scene-dramatizer`
+   - `character_embodiment`、串音、潜台词太直白、对白无压：`novel-dialogue-editor`
+   - `language_surface`、模板句、解释句过量、顺读阻塞：默认 `novel-scene-dramatizer`
+     - 若问题局部集中在对白，则转 `novel-dialogue-editor`
+   - `continuity_causality`、设定 / 时间线 / canon 冲突：`novel-bible-manager`
+7. `repair pass`
+   - repair owner 只改本轮失败 cluster，不推倒整章
+   - repair 回执至少带 `touched_dimensions`、`expected_score_gain`、`locked_dimensions_respected`
+8. `re-audit`
+   - 局部修订：重跑 failed seat + `counterforce seat` + `canon_surface_gate`
+   - 结构或章末被改动：重跑完整 council
+   - `counterforce seat` 默认映射：
+     - `novel-plot-architect` repair -> `scene_heat_seat`
+     - `novel-scene-dramatizer` repair -> `story_engine_seat`
+     - `novel-dialogue-editor` repair -> `scene_heat_seat`
+     - `novel-bible-manager` repair -> `story_engine_seat`
+9. `stop conditions`
    - 达到通过线
-   - 已做 3 轮
+   - 已做 `3` 轮
    - 本轮提升小于 `3/80`
+   - 没有任何 failed dimension 至少提升 `1` 分
+   - 同一 blocker 连续两轮重复出现
    - 为修 1 个局部问题开始引发大面积结构漂移
 
 不要把它实现成无限“重写直到满意”。
@@ -279,6 +365,7 @@ sub-agent 超时不是“多等一会儿”就算处理了。
 
 - `score_total >= 72/80`
 - 无 `blockers`
+- 没有任何 canonical 维度低于 `7/10`
 - 读者能复述本章核心事件、压力升级和章末余波
 
 如果用户要求“写厚”：
@@ -300,7 +387,10 @@ sub-agent 超时不是“多等一会儿”就算处理了。
 - `status`
 - `routing_decision`
 - `artifacts`
-  - 如运行 `quality_loop`，补 `quality_loop_report`
+  - 如运行 `quality_council_loop`，补 `quality_loop_report`
+  - `quality_loop_report` 默认至少包含 `seat_scorecards`、`advisory_findings`、`council_round_reports`、`locked_dimensions`、`round_decision`
+  - 如运行 `blind audit`，补 `seat_context_snapshots`、`review_isolation`
+  - 如运行 `counterforce challenge`，补 `counterforce_checks`
   - 如运行三角协作，补 `tension_synthesis_report`
 - `diagnostics`
 - `recommendations`
@@ -315,3 +405,4 @@ sub-agent 超时不是“多等一会儿”就算处理了。
 - `references/novel-system/references/story-engine.md`
 - `references/novel-system/references/story-quality.md`
 - `references/novel-system/references/language-surface.md`
+- `references/orchestrator-system/quality-council.md`

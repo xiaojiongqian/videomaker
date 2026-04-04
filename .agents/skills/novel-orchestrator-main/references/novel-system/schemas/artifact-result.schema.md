@@ -27,6 +27,26 @@ change_set: []
 extensions: {}
 ```
 
+在 `quality-council-loop` 下，`extensions.quality_loop` 推荐至少带：
+
+```yaml
+quality_loop:
+  workflow_mode: "quality-council-loop"
+  council_id: "CHXXX-qc"
+  round_index: 1
+  phase: "audit"
+  seat_id: "scene_heat_seat"
+  seat_task_type: "quality-seat-scene-heat"
+  review_isolation: "blind-seat-audit"
+  peer_visibility: "blind"
+  seat_context_snapshot_ref: "workflows/CHXXX/quality/round-1/scene-heat-context.md"
+  owned_dimensions: ["scene_execution", "ending_hook"]
+  pass_signal: "continue_revision"
+  locked_dimensions_observed: ["opening_hook"]
+  counterforce_seat_id: ""
+  round_decision: "continue_revision"
+```
+
 状态枚举：
 
 - `ready`

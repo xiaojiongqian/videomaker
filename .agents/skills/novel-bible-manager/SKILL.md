@@ -35,6 +35,12 @@ description: 长篇小说设定与状态档案维护。用于维护和修订世�
 
 如果来源不足以确认事实，返回 `blocked` 或冲突诊断，不要硬写入 canon。
 
+如果任务来自 `quality_council_loop` 的 `continuity_causality` 修复：
+
+- 默认只补最小 canon patch 或冲突定位
+- 如果正文尚未稳定过线，优先返回 `proposed_writebacks`，不要抢先改大块 canon
+- 只有“恢复既有 canon 一致性”这类低歧义修复，才允许直接进入最小 change set
+
 ## Tension Roles
 
 `explorer` 默认回答：
@@ -71,6 +77,15 @@ description: 长篇小说设定与状态档案维护。用于维护和修订世�
    - 拦 unsupported writeback、过度抽象条目、履历化角色卡、误把候选当事实
 8. 输出最小变更集
    - 优先条目 patch 和 change set，不整份覆盖大文件
+
+如果当前任务是质量闭环里的 canon repair，再额外返回：
+
+- `touched_dimensions`
+- `touched_entities`
+- `expected_score_gain`
+- `locked_dimensions_respected`
+- `writeback_mode`
+  - `proposal_only` / `minimal_patch`
 
 ## What To Preserve
 
@@ -123,6 +138,7 @@ description: 长篇小说设定与状态档案维护。用于维护和修订世�
 - `explorer` 产物必须显式标成 `candidate`、`unknown` 或 `recommendation`
 - `critic` 要区分“硬冲突”和“值得保留的未知”，不要把所有空白都当 bug 修掉
 - 不为了显得深刻就把条目写成抽象评论；优先保存后续真会被场景调用的低成本记忆
+- 在质量闭环里，不用扩大 canon 改写范围来掩盖正文局部问题
 
 ## Shared References
 

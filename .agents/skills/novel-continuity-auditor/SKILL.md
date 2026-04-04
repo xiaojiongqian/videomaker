@@ -87,6 +87,39 @@ description: 长篇小说连续性与一致性审计。用于审查章纲、场�
 - 主角长期不在压力线上且无叙事理由
 - 模板味、总结味或解释句严重压过事件
 
+如果任务运行在 `quality_council_loop` 中：
+
+- 你的 canonical 维度只有：
+  - `continuity_causality`
+  - `language_surface`
+- 对其余 6 个维度只给 `advisory_scores`
+  - 不覆盖 owner seat 的 canonical 分
+- 你仍保留对硬连续性冲突、证据不足和写回资格的最终 veto
+- 首轮 gate 默认也走 `blind audit`
+  - 优先只读 `seat_context_snapshot`
+  - 不在交卷前偷看同轮 peer finding
+
+## Quality Council Gate
+
+当被 `novel-orchestrator-main` 作为 `canon_surface_gate` 调用时，优先做 gate，而不是通篇重评。
+
+gate 职责：
+
+- 检查 hard canon conflict、时间线断裂、知识边界错位
+- 检查语言表面是否已严重伤害可读性
+- 复核其他 seat 的修复是否引入新冲突
+- 判断本轮产物是否具备写回资格
+
+gate 输出至少要包含：
+
+- `gate_decision`
+  - `pass` / `continue_revision` / `blocked`
+- `gate_veto`
+  - 没有则显式写 `none`
+- `owned_dimension_scores`
+- `advisory_scores`
+- `writeback_eligibility`
+
 ## Workflow
 
 1. 列出待审对象和证据范围
@@ -96,6 +129,16 @@ description: 长篇小说连续性与一致性审计。用于审查章纲、场�
 5. 标出 `blockers`、`preferred_owner` 和最小修复范围
 6. 给出 `pass / continue_revision / blocked` 决策
 7. 如果问题来自上游规划或扩写，明确指出应回退到哪个 skill
+
+如果当前任务是 `quality-council-gate`：
+
+- 先给 `owned_dimension_scores`
+- 再给 `gate_veto` 和 `writeback_eligibility`
+- 非 owned dimension 只保留简短 advisory，不展开全面接管
+
+如果当前 phase 是 `re-audit` 且 repair 刚完成：
+
+- 额外检查 repair 是否引入了新的 canon 漂移、语言表面回退或 writeback 风险
 
 如果 `constraints.output_contract` 要求紧凑模式：
 
@@ -111,6 +154,10 @@ description: 长篇小说连续性与一致性审计。用于审查章纲、场�
 - `artifacts`
   - `quality_scorecard`
     - 每项维度分数、简短理由、`score_total`
+  - `gate_seat_scorecard`
+    - `continuity_causality`、`language_surface`、`gate_veto`
+  - `advisory_scorecard`
+    - 非 owned dimension 的观察，不覆盖 canonical score
   - `decision`
     - `pass` / `continue_revision` / `blocked`
 - `diagnostics`
@@ -131,6 +178,7 @@ description: 长篇小说连续性与一致性审计。用于审查章纲、场�
 - 如果输入不足，明确标记 `blocked` 或低置信度
 - 不给“增强文采”这类空泛建议；修复建议必须能落到具体段落、场面或结构位点
 - 如果多章任务无法在稳定预算里完成，先要求拆分，不要硬撑到超时
+- 作为 gate 时，不用 advisory comment 偷偷覆盖其他 seat 的 canonical owner
 
 ## Shared References
 

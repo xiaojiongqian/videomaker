@@ -22,6 +22,13 @@ dispatches:
     completed_at: "2026-03-21T10:02:00Z"
     model: "gpt-5.3-codex"
     notes: ""
+    extensions:
+      quality_loop:
+        council_id: "CHXXX-qc"
+        round_index: 1
+        phase: "audit"
+        seat_id: "story_engine_seat"
+        owned_dimensions: ["opening_hook", "core_event", "escalation"]
 exceptions:
   - agent_role: "novel-plot-architect"
     output_refs: ["02-plan.json"]
@@ -60,3 +67,5 @@ exceptions:
 - `exceptions`
   - 只在 manifest fallback policy 允许时使用
   - 没有 exception，就不能把非 `subagent` 的 required dispatch 视为合法
+- `extensions.quality_loop`
+  - 用来标记某次 dispatch 属于哪个 council round、哪个 seat、哪个 phase
