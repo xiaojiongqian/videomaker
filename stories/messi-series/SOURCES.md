@@ -388,6 +388,100 @@
      - 格列兹曼点球首开纪录，迪马利亚扳平，梅西转身后的射门经梅尔卡多折射帮助阿根廷一度反超
      - 帕瓦尔与姆巴佩随后完成反打，阿圭罗补时的头球不足以改写结局
 
+57. FIFA, “Scaloni, Aimar to lead Argentina on interim basis”
+   - 链接: https://inside.fifa.com/news/scaloni-aimar-to-lead-argentina-on-interim-basis
+   - 用途:
+     - 2018 年 8 月 2 日，在俄罗斯世界杯出局和桑保利离任后，斯卡洛尼与艾马尔被安排临时带领阿根廷国家队
+     - 这次安排最初被设定为过渡性质，阿根廷足协当时并未立刻确定长期主帅
+
+58. CONMEBOL, “Argentina celebra goles de Icardi y Dybala para batir a México”
+   - 链接: https://www.conmebol.com/noticias/argentina-celebra-goles-de-icardi-y-dybala-para-batir-mexico/
+   - 用途:
+     - 2018 年 11 月，阿根廷连续两场以 2 比 0 击败墨西哥，重组初期第一次显出一点稳定轮廓
+     - 报道同时记录，斯卡洛尼在 2018 年底前后正逐步获得继续带队踢到 2019 年美洲杯的支持
+
+59. CONMEBOL, “Messi é convocado para amistosos da Argentina contra Venezuela e Marrocos”
+   - 链接: https://www.conmebol.com/pt-br/noticias-pt-br/messi-e-convocado-para-amistosos-da-argentina-contra-venezuela-e-marrocos/
+   - 用途:
+     - 2019 年 3 月 7 日，梅西在缺席国家队八个多月后，重回对委内瑞拉与摩洛哥两场热身赛名单
+     - 报道明确指出，他上一次为阿根廷出场正是 2018 年 6 月 30 日对法国的世界杯八分之一决赛
+
+60. CONMEBOL Copa América, “Copa América 2019”
+   - 链接: https://copaamerica.com/en/copa-america-2019
+   - 用途:
+     - 2019 年美洲杯在巴西举行，阿根廷在小组赛阶段先后 0 比 2 负于哥伦比亚、1 比 1 平巴拉圭、2 比 0 胜卡塔尔
+     - 阿根廷随后 2 比 0 胜委内瑞拉打进四强，半决赛 0 比 2 负于巴西，三四名决赛 2 比 1 胜智利
+
+61. CONMEBOL Copa América, “Vibrant and intense tie between Argentina and Paraguay”
+   - 链接: https://copaamerica.com/en/news/vibrant-and-intense-tie-between-argentina-and-paraguay
+   - 用途:
+     - 2019 年 6 月 19 日，阿根廷与巴拉圭 1 比 1 战平
+     - 梅西通过点球把比分追平，阿根廷在小组赛第二轮后只拿到 1 分
+
+62. CONMEBOL Copa América, “Brazil defeated Argentina 2-0 and will play the final in Maracana”
+   - 链接: https://copaamerica.com/en/news/brazil-defeated-argentina-2-0-and-will-play-the-final-in-maracana
+   - 用途:
+     - 2019 年 7 月 2 日，美洲杯半决赛里巴西 2 比 0 击败阿根廷
+     - 进球者为热苏斯和菲尔米诺，阿根廷再次倒在离马拉卡纳只差一步的地方
+
+63. CONMEBOL Copa América, “Argentina defeated Chile 2-1 to win third place”
+   - 链接: https://copaamerica.com/en/news/argentina-defeated-chile-2-1-to-win-third-place
+   - 用途:
+     - 2019 年 7 月 6 日，阿根廷 2 比 1 击败智利，拿到美洲杯第三名
+     - 阿圭罗和迪巴拉上半场先后进球，梅西参与了阿根廷的第一粒进球
+
+64. CONMEBOL, “Comunicado Oficial”
+   - 链接: https://www.conmebol.com/noticias/comunicado-oficial-2-2/
+   - 用途:
+     - 2020 年 3 月 17 日，受新冠疫情影响，CONMEBOL 将原定 2020 年举行的美洲杯整体推迟到 2021 年
+
+65. CONMEBOL, “Brasil será sede de la CONMEBOL Copa América 2021”
+   - 链接: https://www.conmebol.com/noticias/brasil-sera-sede-de-la-conmebol-copa-america-2021/
+   - 用途:
+     - 2021 年 5 月 31 日，CONMEBOL 确认巴西承办当年的美洲杯
+
+66. CONMEBOL, “¡El fixture de La CONMEBOL Copa América 2021!”
+   - 链接: https://www.conmebol.com/noticias/el-fixture-de-la-conmebol-copa-america-2021/
+   - 用途:
+     - 2021 年 6 月 3 日，CONMEBOL 公布调整后的赛程
+     - 决赛地点被明确放在马拉卡纳，赛事场馆分布于里约、巴西利亚、戈亚尼亚和库亚巴
+
+67. CONMEBOL Copa América, “Copa América 2021”
+   - 链接: https://copaamerica.com/en/copa-america-2021
+   - 用途:
+     - 2021 年美洲杯由巴西承办，阿根廷在小组赛以 1 比 1 平智利、1 比 0 胜乌拉圭、1 比 0 胜巴拉圭、4 比 1 胜玻利维亚的不败战绩进入淘汰赛
+     - 这张官方总表同时确认了阿根廷 3 比 0 胜厄瓜多尔、点球淘汰哥伦比亚、以及决赛 1 比 0 胜巴西的路线
+
+68. CONMEBOL Copa América, “Argentina beat Ecuador and will meet Colombia in the Semi-Final”
+   - 链接: https://copaamerica.com/en/news/argentina-beat-ecuador-and-will-meet-colombia-in-the-semi-final
+   - 用途:
+     - 2021 年 7 月 3 日，阿根廷 3 比 0 击败厄瓜多尔
+     - 德保罗、劳塔罗和梅西先后进球，梅西还送出两次助攻，直接参与全部三粒进球
+
+69. CONMEBOL Copa América, “Argentina beat Colombia on penalties to set up a final against Brazil”
+   - 链接: https://copaamerica.com/en/news/argentina-beat-colombia-on-penalties-to-set-up-a-final-against-brazil/
+   - 用途:
+     - 2021 年 7 月 6 日，阿根廷与哥伦比亚 90 分钟 1 比 1 战平后点球 3 比 2 晋级
+     - 劳塔罗在常规时间先破门，达米安·马丁内斯在点球大战里扑出三球
+
+70. CONMEBOL Copa América, “Argentina beat Brazil at the Maracanã to win the CONMEBOL Copa America”
+   - 链接: https://copaamerica.com/en/novedades/argentina-supera-a-brasil-y-se-corona-campeon-de-la-conmebol-copa-america-tras-28-anos
+   - 用途:
+     - 2021 年 7 月 10 日，阿根廷在马拉卡纳 1 比 0 击败巴西，拿下 28 年来的第一座国际大赛冠军
+     - 德保罗长传、迪马利亚挑射的配合打进全场唯一进球
+
+71. CONMEBOL Copa América, “Messi, the best player at the CONMEBOL Copa America 2021”
+   - 链接: https://copaamerica.com/en/news/messi-the-best-player-at-the-conmebol-copa-america-2021
+   - 用途:
+     - 终场后，梅西在马拉卡纳落泪、逐一拥抱队友并在场上与家人视频通话
+     - 梅西被评为赛事最佳球员；文中同时回顾其在整届赛事里的进球、助攻和带队作用
+
+72. AFA, “La serie invicta de Scaloni al frente de la Selección llega a 27 partidos”
+   - 链接: https://www.afa.com.ar/es/posts/la-serie-invicta-de-scaloni-al-frente-de-la-seleccion-llega-a-26-partidos
+   - 用途:
+     - AFA 官方回顾了斯卡洛尼执教下从 2019 年美洲杯三四名决赛击败智利开始，到 2021 年美洲杯夺冠为止的连续不败序列
+     - 这份序列有助于确认 2019 第三名到 2021 冠军之间，阿根廷逐步建立稳定性与连续性的路径
+
 ## Source Use Rules
 - 仅把上述来源能支撑的事实写成确定表述。
 - 没有公开来源支撑的对白、心理活动、家庭细节，不写成“实际发生”。

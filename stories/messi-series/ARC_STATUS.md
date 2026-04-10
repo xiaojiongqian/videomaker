@@ -33,21 +33,21 @@
   - CH012《短暂退场》 [done]
 
 ## ARC-04 把失败穿在身上
-- Status: active
+- Status: completed
 - Time window: 2017-2021
 - Pressure: 衰老、重组和承担责任。
 - Planned chapters:
   - CH013《世界杯之后的清晨》 [done]
-  - CH014《老队长的训练鞋》 [next]
-  - CH015《马拉卡纳的回声终于变了方向》
-  - CH016《奖杯落进手里时没有人说话》
+  - CH014《老队长的训练鞋》 [done]
+  - CH015《马拉卡纳的回声终于变了方向》 [done]
+  - CH016《奖杯落进手里时没有人说话》 [done]
 
 ## ARC-05 群星终于朝同一片草地下落
-- Status: queued
+- Status: active
 - Time window: 2022 及其余波
 - Pressure: 最后一轮证明，以及终于允许自己停下。
 - Planned chapters:
-  - CH017《沙漠里的第一脚球》
+  - CH017《沙漠里的第一脚球》 [next]
   - CH018《输给沙特之后的门》
   - CH019《决赛踢到时间失去形状》
   - CH020《世界终于不再要求他证明》
