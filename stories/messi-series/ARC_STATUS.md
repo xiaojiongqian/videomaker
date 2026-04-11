@@ -43,11 +43,11 @@
   - CH016《奖杯落进手里时没有人说话》 [done]
 
 ## ARC-05 群星终于朝同一片草地下落
-- Status: active
+- Status: completed
 - Time window: 2022 及其余波
 - Pressure: 最后一轮证明，以及终于允许自己停下。
 - Planned chapters:
-  - CH017《沙漠里的第一脚球》 [next]
-  - CH018《输给沙特之后的门》
-  - CH019《决赛踢到时间失去形状》
-  - CH020《世界终于不再要求他证明》
+  - CH017《沙漠里的第一脚球》 [done]
+  - CH018《输给沙特之后的门》 [done]
+  - CH019《决赛踢到时间失去形状》 [done]
+  - CH020《世界终于不再要求他证明》 [done]

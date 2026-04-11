@@ -482,6 +482,64 @@
      - AFA 官方回顾了斯卡洛尼执教下从 2019 年美洲杯三四名决赛击败智利开始，到 2021 年美洲杯夺冠为止的连续不败序列
      - 这份序列有助于确认 2019 第三名到 2021 冠军之间，阿根廷逐步建立稳定性与连续性的路径
 
+73. UEFA, “Italy 0-3 Argentina: South American champions cruise to Finalissima glory”
+   - 链接: https://www.uefa.com/finalissima/news/0276-1549514538ab-f782a73cf733-1000--italy-0-3-argentina-south-american-champions-cruise-to-fi/
+   - 用途:
+     - 2022 年 6 月 1 日，阿根廷在温布利 3 比 0 击败意大利，拿下 Finalissima
+     - 劳塔罗、迪马利亚和迪巴拉分别进球，确认了这场比赛的关键动作链
+     - 该文同时确认阿根廷在这场比赛前已保持 32 场不败
+
+74. UEFA, “Argentina's Lionel Messi named official Finalissima Player of the Match”
+   - 链接: https://www.uefa.com/finalissima/news/0276-1549531afce1-16d40688390d-1000--argentina-s-lionel-messi-named-official-finalissima-play/
+   - 用途:
+     - 确认梅西在 Finalissima 结束后获得官方全场最佳
+     - 补强“美洲杯之后，外界已把阿根廷当成真正热门”这一过渡节点中的个人表现锚点
+
+75. FIFA, “Salem secures sensational Saudi script flip”
+   - 链接: https://www.fifa.com/en/articles/argentina-saudi-arabia-2022
+   - 用途:
+     - 2022 年 11 月 22 日，阿根廷世界杯首战 1 比 2 负于沙特阿拉伯
+     - 梅西通过点球首开纪录，随后谢赫里与达瓦萨里在下半场完成逆转
+     - 这场比赛是卡塔尔周期第一道核心挫败节点
+
+76. FIFA, “L'Argentina è ancora viva: battuto il Messico 2-0”
+   - 链接: https://www.fifa.com/it/articles/qatar-2022-argentina-ancora-viva-battuto-il-messico-2-0
+   - 用途:
+     - 2022 年 11 月 26 日，对墨西哥的关键小组赛里，梅西第 64 分钟破门，恩佐·费尔南德斯第 87 分钟锁定 2 比 0
+     - 文章明确指出这场比赛直到梅西进球前都非常胶着，适合作为 CH018 的主场面事实支撑
+
+77. FIFA Training Centre, “Post Match Summary Reports - FIFA World Cup 2022”
+   - 链接: https://www.fifatrainingcentre.com/en/fwc2022/post-match-summaries/post-match-summary-reports.php?continueFlag=4f84fffbfc7b9ee63da71dc2f06bc998
+   - 用途:
+     - 汇总确认 2022 世界杯中阿根廷 1 比 2 负沙特、2 比 0 胜墨西哥、2 比 0 胜波兰、2 比 1 胜澳大利亚、2 比 2 平荷兰后点球晋级、3 比 0 胜克罗地亚，以及决赛 3 比 3 平法国后点球夺冠的完整路线
+     - 作为 CH017-CH020 中日期、比分、轮次和路线的总表核对依据
+
+78. FIFA, “Watch Messi's highlights and goals from every World Cup game”
+   - 链接: https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/lionel-messi-games-highlights-watch
+   - 用途:
+     - 用于交叉确认 2022 世界杯里梅西对澳大利亚、荷兰和克罗地亚的关键动作节点
+     - 文中明确回顾了半决赛对克罗地亚的点球、对格瓦迪奥尔的过人和助攻阿尔瓦雷斯等核心画面
+
+79. FIFA, “Argentina v France | Greatest Games | FIFA World Cup 2022”
+   - 链接: https://www.fifa.com/en/tournaments/mens/worldcup/articles/argentina-france-2022-final-greatest-games
+   - 用途:
+     - 交叉确认 2022 年世界杯决赛阿根廷与法国 120 分钟 3 比 3、点球 4 比 2 的完整结果
+     - 文章明确给出梅西两球、迪马利亚一球，以及姆巴佩帽子戏法的关键得分信息
+     - 同时补充了决赛场地、出场阵容和“最伟大决赛之一”的官方回顾框架
+
+80. Inside FIFA, “Triumphant Argentina conclude unprecedented FIFA World Cup”
+   - 链接: https://inside.fifa.com/en/tournaments/mens/worldcup/qatar2022/news/triumphant-argentina-conclude-unprecedented-fifa-world-cup
+   - 用途:
+     - 确认梅西在世界杯夺冠后首次举起大力神杯，并以第 26 次世界杯出场刷新纪录
+     - 确认他在 2022 年第二次获得赛事金球奖，法国前锋姆巴佩获得金靴
+     - 提供卢赛尔决赛到赛事整体收束的官方后记视角，适合 CH020 的终章余波
+
+81. FIFA, “Argentina supporters win FIFA Fan Award”
+   - 链接: https://www.fifa.com/en/articles/argentina-supporters-win-fifa-fan-the-best-fifa-football-awards
+   - 用途:
+     - 确认阿根廷球迷因 2022 世界杯期间在卡塔尔和回国后的支持获得 FIFA Fan Award
+     - 文章同时回顾了卡塔尔看台的《Muchachos》歌声与球队、球迷之间被反复提起的强连接
+
 ## Source Use Rules
 - 仅把上述来源能支撑的事实写成确定表述。
 - 没有公开来源支撑的对白、心理活动、家庭细节，不写成“实际发生”。
