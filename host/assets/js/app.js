@@ -11,33 +11,122 @@ import { renderMermaidDiagrams } from './diagram-renderer.js';
 import { renderMarkdownDocument } from './markdown-renderer.js';
 
 const DEFAULT_CHANNEL = 'ai';
+const DEFAULT_LANGUAGE = 'zh-CN';
 
-const CHANNEL_CONFIGS = {
-  ai: {
-    label: 'AI时代',
-    description: '支持筛选与检索的 AI 内容卡片列表。',
-    indexHeading: 'AI时代',
-    indexIntro: '支持按关键词、类型、主题与年份筛选已发布内容。',
-    keywordPlaceholder: '输入标题、摘要或标签',
-    typeFilterLabel: '类型',
-    yearFilterVisible: true,
-    resultUnit: '篇',
-    emptyListText: 'AI时代频道暂无已发布内容。',
-    emptyFilterText: '没有匹配结果，请尝试调整筛选条件。',
-    footerLabel: 'AI时代',
+const UI_STRINGS = {
+  'zh-CN': {
+    channels: {
+      ai: {
+        label: 'AI时代',
+        description: '支持筛选与检索的 AI 内容卡片列表。',
+        indexHeading: 'AI时代',
+        indexIntro: '支持按关键词、类型、主题与年份筛选已发布内容。',
+        keywordPlaceholder: '输入标题、摘要或标签',
+        typeFilterLabel: '类型',
+        yearFilterVisible: true,
+        resultUnit: '篇',
+        emptyListText: 'AI时代频道暂无已发布内容。',
+        emptyFilterText: '没有匹配结果，请尝试调整筛选条件。',
+        footerLabel: 'AI时代',
+      },
+      novel: {
+        label: '小说',
+        description: '支持筛选与检索的小说章节列表。',
+        indexHeading: '小说',
+        indexIntro: '支持按关键词、系列与主题筛选已发布章节。',
+        keywordPlaceholder: '输入章节标题、摘要或标签',
+        typeFilterLabel: '系列',
+        yearFilterVisible: false,
+        resultUnit: '章',
+        emptyListText: '小说频道暂无已发布章节。',
+        emptyFilterText: '没有匹配章节，请尝试调整筛选条件。',
+        footerLabel: '小说',
+      },
+    },
+    pageTitleFallback: '详情页',
+    pageDescriptionFallback: '内容详情页。',
+    typeFallback: '未分类',
+    dateUnknown: '日期未知',
+    listEmptyTitle: '暂无内容',
+    listError: '加载失败，请稍后重试。',
+    listErrorMeta: '内容加载失败',
+    noContentTitle: '暂无可阅读内容',
+    noPublishedMeta: '请先发布内容。',
+    noPublishedNote: 'content-index.json 中没有 published 内容。',
+    notFoundTitle: '内容不存在或未发布',
+    notFoundNote: '请返回首页重新选择内容，或确认 id 对应内容状态为 published。',
+    noChannelContentNote: '当前频道没有可阅读内容。',
+    loadFailedTitle: '加载失败',
+    loadFailedMeta: '无法读取详情内容',
+    skipLink: '跳到正文',
+    mainNav: '主导航',
+    tocTitle: '目录',
+    tocAriaLabel: '目录',
+    noToc: '暂无目录',
+    introLabel: '文章简介',
+    postNavLabel: '上一篇下一篇',
+    noMoreContent: '没有更多内容',
+    footerTemplate: '作者：Vik Qian · 版权所有 © 2026 {label}',
+    novelMetaLabel: '小说',
+    novelChapterLabel: (sequence) => `第${sequence}章`,
+    novelChapterFallback: '小说章节',
   },
-  novel: {
-    label: '小说',
-    description: '支持筛选与检索的小说章节列表。',
-    indexHeading: '小说',
-    indexIntro: '支持按关键词、系列与主题筛选已发布章节。',
-    keywordPlaceholder: '输入章节标题、摘要或标签',
-    typeFilterLabel: '系列',
-    yearFilterVisible: false,
-    resultUnit: '章',
-    emptyListText: '小说频道暂无已发布章节。',
-    emptyFilterText: '没有匹配章节，请尝试调整筛选条件。',
-    footerLabel: '小说',
+  en: {
+    channels: {
+      ai: {
+        label: 'AI Era',
+        description: 'A searchable library of AI notes and published pieces.',
+        indexHeading: 'AI Era',
+        indexIntro: 'Browse published work by keyword, format, topic, and year.',
+        keywordPlaceholder: 'Search titles, summaries, or tags',
+        typeFilterLabel: 'Format',
+        yearFilterVisible: true,
+        resultUnit: 'items',
+        emptyListText: 'No published items are available in AI Era yet.',
+        emptyFilterText: 'No matches found. Try adjusting the filters.',
+        footerLabel: 'AI Era',
+      },
+      novel: {
+        label: 'Novel',
+        description: 'A searchable library of published novel chapters.',
+        indexHeading: 'Novel',
+        indexIntro: 'Browse published chapters by keyword, series, and topic.',
+        keywordPlaceholder: 'Search chapter titles, summaries, or tags',
+        typeFilterLabel: 'Series',
+        yearFilterVisible: false,
+        resultUnit: 'chapters',
+        emptyListText: 'No published chapters are available in Novel yet.',
+        emptyFilterText: 'No matching chapters found. Try adjusting the filters.',
+        footerLabel: 'Novel',
+      },
+    },
+    pageTitleFallback: 'Details',
+    pageDescriptionFallback: 'Content detail page.',
+    typeFallback: 'Uncategorized',
+    dateUnknown: 'Unknown date',
+    listEmptyTitle: 'No content yet',
+    listError: 'Failed to load. Please try again later.',
+    listErrorMeta: 'Failed to load content',
+    noContentTitle: 'Nothing to read yet',
+    noPublishedMeta: 'Please publish content first.',
+    noPublishedNote: 'No published entries were found in content-index.json.',
+    notFoundTitle: 'This content does not exist or is not published',
+    notFoundNote: 'Please return to the index and choose another entry, or confirm that the requested id is published.',
+    noChannelContentNote: 'There is no readable content in this channel right now.',
+    loadFailedTitle: 'Load failed',
+    loadFailedMeta: 'Unable to load the detail page',
+    skipLink: 'Skip to content',
+    mainNav: 'Main navigation',
+    tocTitle: 'Contents',
+    tocAriaLabel: 'Table of contents',
+    noToc: 'No table of contents',
+    introLabel: 'Chapter intro',
+    postNavLabel: 'Previous and next chapters',
+    noMoreContent: 'No more content',
+    footerTemplate: 'Author: Vik Qian · Copyright © 2026 {label}',
+    novelMetaLabel: 'Novel',
+    novelChapterLabel: (sequence) => `Chapter ${sequence}`,
+    novelChapterFallback: 'Novel chapter',
   },
 };
 
@@ -53,7 +142,7 @@ function escapeHtml(value) {
 function formatDate(value) {
   const ts = Date.parse(value || '');
   if (Number.isNaN(ts)) {
-    return value || '日期未知';
+    return value || UI_STRINGS[DEFAULT_LANGUAGE].dateUnknown;
   }
 
   return new Intl.DateTimeFormat('zh-CN', {
@@ -63,14 +152,31 @@ function formatDate(value) {
   }).format(ts);
 }
 
-function getChannelConfig(channel) {
-  return CHANNEL_CONFIGS[channel] || CHANNEL_CONFIGS[DEFAULT_CHANNEL];
+function normalizeUiLanguage(value) {
+  return String(value || '').trim().toLowerCase().startsWith('en') ? 'en' : DEFAULT_LANGUAGE;
+}
+
+function getUiLanguage(item = null, fallback = DEFAULT_LANGUAGE) {
+  if (item?.language) {
+    return normalizeUiLanguage(item.language);
+  }
+
+  return normalizeUiLanguage(fallback);
+}
+
+function getStrings(language = DEFAULT_LANGUAGE) {
+  return UI_STRINGS[getUiLanguage(null, language)] || UI_STRINGS[DEFAULT_LANGUAGE];
+}
+
+function getChannelConfig(channel, language = DEFAULT_LANGUAGE) {
+  const strings = getStrings(language);
+  return strings.channels[channel] || strings.channels[DEFAULT_CHANNEL];
 }
 
 function getRequestedChannel() {
   const params = new URLSearchParams(window.location.search);
   const requested = (params.get('channel') || '').trim();
-  return requested && CHANNEL_CONFIGS[requested] ? requested : DEFAULT_CHANNEL;
+  return requested && UI_STRINGS[DEFAULT_LANGUAGE].channels[requested] ? requested : DEFAULT_CHANNEL;
 }
 
 function getChannelHref(channel) {
@@ -100,8 +206,11 @@ function setPageMetadata(title, description, ogType) {
 }
 
 function applySiteChrome(channel, pageKind, item = null) {
-  const config = getChannelConfig(channel);
+  const language = pageKind === 'post' && item ? getUiLanguage(item) : DEFAULT_LANGUAGE;
+  const strings = getStrings(language);
+  const config = getChannelConfig(channel, language);
   document.body.dataset.channel = channel;
+  document.documentElement.lang = language;
 
   const brandEl = document.getElementById('siteBrand');
   if (brandEl) {
@@ -111,21 +220,21 @@ function applySiteChrome(channel, pageKind, item = null) {
 
   const footerEl = document.getElementById('siteFooterText');
   if (footerEl) {
-    footerEl.textContent = `作者：Vik Qian · 版权所有 © 2026 ${config.footerLabel}`;
+    footerEl.textContent = strings.footerTemplate.replace('{label}', config.footerLabel);
   }
 
   const navLinks = [
-    ['navAi', 'ai', CHANNEL_CONFIGS.ai.label],
-    ['navNovel', 'novel', CHANNEL_CONFIGS.novel.label],
+    ['navAi', 'ai'],
+    ['navNovel', 'novel'],
   ];
 
-  navLinks.forEach(([elementId, navChannel, label]) => {
+  navLinks.forEach(([elementId, navChannel]) => {
     const link = document.getElementById(elementId);
     if (!link) {
       return;
     }
 
-    link.textContent = label;
+    link.textContent = getChannelConfig(navChannel, language).label;
     link.href = getChannelHref(navChannel);
     if (navChannel === channel) {
       link.setAttribute('aria-current', 'page');
@@ -144,7 +253,7 @@ function applySiteChrome(channel, pageKind, item = null) {
     return;
   }
 
-  setPageMetadata(`详情页 - ${config.label}`, `${config.label}内容详情页。`, 'article');
+  setPageMetadata(`${strings.pageTitleFallback} - ${config.label}`, `${config.label} ${strings.pageDescriptionFallback}`, 'article');
 }
 
 function getItemTypeLabel(item) {
@@ -166,26 +275,32 @@ function buildTypeLabelMap(items) {
 }
 
 function getItemListMeta(item) {
+  const language = getUiLanguage(item);
+  const strings = getStrings(language);
+
   if (item.channel === 'novel') {
     const parts = [];
     if (Number.isFinite(item.sequence)) {
-      parts.push(`第${item.sequence}章`);
+      parts.push(strings.novelChapterLabel(item.sequence));
     }
 
     if (item.topic.length) {
       parts.push(item.topic.join(' / '));
     }
 
-    return parts.join(' · ') || '小说章节';
+    return parts.join(' · ') || strings.novelChapterFallback;
   }
 
-  const topics = item.topic.length ? item.topic.join(' / ') : '未分类';
+  const topics = item.topic.length ? item.topic.join(' / ') : strings.typeFallback;
   return `${formatDate(item.date || item.updatedAt)} · ${topics}`;
 }
 
 function getPostMetaText(item) {
+  const language = getUiLanguage(item);
+  const strings = getStrings(language);
+
   if (item.channel === 'novel') {
-    const parts = ['小说'];
+    const parts = [strings.novelMetaLabel];
     const typeLabel = getItemTypeLabel(item);
 
     if (typeLabel) {
@@ -193,13 +308,13 @@ function getPostMetaText(item) {
     }
 
     if (Number.isFinite(item.sequence)) {
-      parts.push(`第${item.sequence}章`);
+      parts.push(strings.novelChapterLabel(item.sequence));
     }
 
     return parts.join(' · ');
   }
 
-  const topics = item.topic.length ? item.topic.join(' / ') : '未分类';
+  const topics = item.topic.length ? item.topic.join(' / ') : strings.typeFallback;
   return `${getItemTypeLabel(item)} · ${formatDate(item.date || item.updatedAt)} · ${topics}`;
 }
 
@@ -225,9 +340,10 @@ function renderCard(item) {
 }
 
 function renderEmptyState(container, text) {
+  const strings = getStrings(DEFAULT_LANGUAGE);
   container.innerHTML = `
     <article class="card empty-state">
-      <h3>暂无内容</h3>
+      <h3>${escapeHtml(strings.listEmptyTitle)}</h3>
       <p class="muted">${escapeHtml(text)}</p>
     </article>
   `;
@@ -246,7 +362,7 @@ function updateSelectOptions(selectEl, values, formatter = (value) => value) {
 }
 
 function applyIndexPageLabels(channel) {
-  const config = getChannelConfig(channel);
+  const config = getChannelConfig(channel, DEFAULT_LANGUAGE);
   const headingEl = document.getElementById('all-title');
   const introEl = document.getElementById('channelDescription');
   const keywordInput = document.getElementById('keyword');
@@ -278,7 +394,7 @@ async function initIndexPage() {
   const contentListEl = document.getElementById('contentList');
   const resultMetaEl = document.getElementById('resultMeta');
   const channel = getRequestedChannel();
-  const config = getChannelConfig(channel);
+  const config = getChannelConfig(channel, DEFAULT_LANGUAGE);
   const keywordInput = document.getElementById('keyword');
   const typeSelect = document.getElementById('type');
   const topicSelect = document.getElementById('topic');
@@ -339,9 +455,10 @@ async function initIndexPage() {
 function renderToc(tocItems) {
   const tocList = document.getElementById('tocList');
   const topLevelItems = tocItems.filter((item) => item.level === 2);
+  const strings = getStrings(getUiLanguage(window.__contentItem || null));
 
   if (!topLevelItems.length) {
-    tocList.innerHTML = '<li class="muted">暂无目录</li>';
+    tocList.innerHTML = `<li class="muted">${escapeHtml(strings.noToc)}</li>`;
     return;
   }
 
@@ -535,6 +652,7 @@ function initTocResizer() {
 function renderPostNavigation(items, currentIndex) {
   const navEl = document.getElementById('postNav');
   const links = [];
+  const strings = getStrings(getUiLanguage(window.__contentItem || null));
 
   if (currentIndex > 0) {
     const prev = items[currentIndex - 1];
@@ -550,7 +668,7 @@ function renderPostNavigation(items, currentIndex) {
     );
   }
 
-  navEl.innerHTML = links.length ? links.join('') : '<span class="muted">没有更多内容</span>';
+  navEl.innerHTML = links.length ? links.join('') : `<span class="muted">${escapeHtml(strings.noMoreContent)}</span>`;
 }
 
 async function initPostPage() {
@@ -565,9 +683,10 @@ async function initPostPage() {
   try {
     const published = await listAllPublishedContent();
     if (!published.length) {
-      postTitleEl.textContent = '暂无可阅读内容';
-      postMetaEl.textContent = '请先发布内容。';
-      postContentEl.innerHTML = '<div class="note">content-index.json 中没有 published 内容。</div>';
+      const strings = getStrings(DEFAULT_LANGUAGE);
+      postTitleEl.textContent = strings.noContentTitle;
+      postMetaEl.textContent = strings.noPublishedMeta;
+      postContentEl.innerHTML = `<div class="note">${escapeHtml(strings.noPublishedNote)}</div>`;
       renderToc([]);
       return;
     }
@@ -577,10 +696,10 @@ async function initPostPage() {
     const requestedItem = requestedId ? published.find((item) => item.id === requestedId) : null;
 
     if (requestedId && !requestedItem) {
-      postTitleEl.textContent = '内容不存在或未发布';
+      const strings = getStrings(DEFAULT_LANGUAGE);
+      postTitleEl.textContent = strings.notFoundTitle;
       postMetaEl.textContent = `未找到 id=${requestedId}`;
-      postContentEl.innerHTML =
-        '<div class="note">请返回首页重新选择内容，或确认 id 对应内容状态为 published。</div>';
+      postContentEl.innerHTML = `<div class="note">${escapeHtml(strings.notFoundNote)}</div>`;
       renderToc([]);
       return;
     }
@@ -591,9 +710,10 @@ async function initPostPage() {
       : filterContentByChannel(published, channel);
     const channelItems = sortContentItems(scopedItems, channel);
     if (!channelItems.length) {
-      postTitleEl.textContent = '暂无可阅读内容';
-      postMetaEl.textContent = `${getChannelConfig(channel).label}频道暂无已发布内容。`;
-      postContentEl.innerHTML = '<div class="note">当前频道没有可阅读内容。</div>';
+      const strings = getStrings(DEFAULT_LANGUAGE);
+      postTitleEl.textContent = strings.noContentTitle;
+      postMetaEl.textContent = `${getChannelConfig(channel, DEFAULT_LANGUAGE).label}频道暂无已发布内容。`;
+      postContentEl.innerHTML = `<div class="note">${escapeHtml(strings.noChannelContentNote)}</div>`;
       renderToc([]);
       return;
     }
@@ -602,6 +722,7 @@ async function initPostPage() {
       ? channelItems.findIndex((item) => item.id === requestedItem.id)
       : 0;
     const item = requestedItem || channelItems[0];
+    window.__contentItem = item;
     applySiteChrome(item.channel, 'post', item);
 
     postTitleEl.textContent = item.title;
@@ -616,8 +737,9 @@ async function initPostPage() {
     renderPostNavigation(channelItems, currentIndex < 0 ? 0 : currentIndex);
   } catch (error) {
     console.error(error);
-    postTitleEl.textContent = '加载失败';
-    postMetaEl.textContent = '无法读取详情内容';
+    const strings = getStrings(DEFAULT_LANGUAGE);
+    postTitleEl.textContent = strings.loadFailedTitle;
+    postMetaEl.textContent = strings.loadFailedMeta;
     postContentEl.innerHTML = `<div class="note">${escapeHtml(error.message)}</div>`;
     renderToc([]);
   }

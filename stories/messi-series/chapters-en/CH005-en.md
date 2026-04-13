@@ -1,12 +1,18 @@
 # CH005 Climbing One Level at a Time
 
+## Every Level Kept Calling Him Up
+
 Youth training had just ended, and Messi was about to head back to the residence, when the coaching staff stopped him. "Don't go back. Get your things. You're going with the first team." He froze for a second. "Now?" They nodded. Sweat was still drying on him. He had not even changed his boots. But the road in front of him had already been altered. The evening that should have taken him back to old La Masia suddenly became the evening he reported to the first team.
 
 At the start of the 2003/04 season, by age, he still belonged in U19B. But that year Barcelona did not move him upward one careful step at a time. Every few weeks, the road rose again: U19B, U19A, Barca C, Barca B, and above them all, the first team. Against Hercules, Barcelona won 3-0 and he made his debut at that level. Against Gimnastic de Tarragona, he scored. Later, against Granollers, Barcelona won 8-1 and he hit a hat-trick. Every time the team sheet lifted him another rung, he kept finding a way to leave his name behind on the scoreboard. And even after training was over, when everyone else headed toward the showers, he still stayed at the edge of the pitch for a few extra touches. Someone asked him, "Still not enough?" Messi pinned the ball under his foot, looked up, and said, "A little more." That sentence seemed to say the whole season in advance.
 
+## Touching the First-Team Touchline
+
 On November 16, 2003, the friendly against Porto had reached its later stages when Frank Rijkaard finally gestured toward the bench. The message was obvious: warm up. Messi was on his feet almost at once, tugging his training top off as he ran toward the touchline. In the 71st minute, Fernando Navarro came off, and Messi, aged 16 years and 145 days, stepped on for his first appearance with Barcelona's first team. When he actually crossed the line, he did not stop, and he did not look back. The ground under his feet was still grass, and there was still a ball ahead of him, but this was now the touchline of the highest level inside Barca's whole system.
 
 But that moment only meant he had touched the door. It did not mean he had stayed there. What the club really needed to see next was whether he could carry that upward surge into official adult football. Thirteen days later, against Europa, he made his first official squad for Barca C, played all 90 minutes, and the team won 2-1. The door kept opening upward. What truly hardened the story, though, came a little later.
+
+## Taking an Adult Match Back by Force
 
 Against Gramenet B, Barca C were still trailing 2-1 in the 88th minute. People at the side were already checking the clock. Even the sound from the bench had dropped. The match looked as if it had only its last breath left. Messi equalized first to make it 2-2. The ball had barely hit the net before he turned, snatched it up, and ran back toward the center circle without celebrating at all. There was no time left for joy. In the 90th minute, the chance dropped back near the box again. He chased it, struck it, and made it 3-2. A match that had still been slipping away two minutes earlier was dragged back by him alone.
 

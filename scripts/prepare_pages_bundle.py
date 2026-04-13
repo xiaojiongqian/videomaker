@@ -46,6 +46,48 @@ TYPE_LABELS = {
     "video-note": "视频总结",
     "audio-note": "音频总结",
 }
+DEFAULT_LANGUAGE = "zh-CN"
+ENGLISH_LANGUAGE = "en"
+UI_STRINGS = {
+    DEFAULT_LANGUAGE: {
+        "channels": {
+            "ai": "AI时代",
+            "novel": "小说",
+        },
+        "skip_link": "跳到正文",
+        "main_nav": "主导航",
+        "toc_title": "目录",
+        "toc_aria_label": "目录",
+        "no_toc": "暂无目录",
+        "intro_label": "文章简介",
+        "post_nav_label": "上一篇下一篇",
+        "no_more_content": "没有更多内容",
+        "footer_template": "作者：Vik Qian · 版权所有 © 2026 {label}",
+        "type_fallback": "未分类",
+        "date_unknown": "日期未知",
+        "novel_meta_label": "小说",
+        "novel_chapter_fallback": "小说章节",
+    },
+    ENGLISH_LANGUAGE: {
+        "channels": {
+            "ai": "AI Era",
+            "novel": "Novel",
+        },
+        "skip_link": "Skip to content",
+        "main_nav": "Main navigation",
+        "toc_title": "Contents",
+        "toc_aria_label": "Table of contents",
+        "no_toc": "No table of contents",
+        "intro_label": "Chapter intro",
+        "post_nav_label": "Previous and next chapters",
+        "no_more_content": "No more content",
+        "footer_template": "Author: Vik Qian · Copyright © 2026 {label}",
+        "type_fallback": "Uncategorized",
+        "date_unknown": "Unknown date",
+        "novel_meta_label": "Novel",
+        "novel_chapter_fallback": "Novel chapter",
+    },
+}
 
 
 def parse_args() -> argparse.Namespace:
@@ -75,6 +117,19 @@ def get_item_channel(item: dict) -> str:
     return normalize_channel(str(item.get("channel", DEFAULT_CHANNEL)))
 
 
+def normalize_language(value: str) -> str:
+    language = value.strip().lower()
+    return ENGLISH_LANGUAGE if language.startswith("en") else DEFAULT_LANGUAGE
+
+
+def get_item_language(item: dict) -> str:
+    return normalize_language(str(item.get("language", DEFAULT_LANGUAGE)))
+
+
+def get_strings(language: str = DEFAULT_LANGUAGE) -> dict[str, str | dict[str, str]]:
+    return UI_STRINGS.get(normalize_language(language), UI_STRINGS[DEFAULT_LANGUAGE])
+
+
 def get_item_type_label(item: dict) -> str:
     type_label = str(item.get("typeLabel", "")).strip()
     if type_label:
@@ -82,10 +137,19 @@ def get_item_type_label(item: dict) -> str:
     return TYPE_LABELS.get(str(item.get("type", "")).strip(), str(item.get("type", "")).strip() or "未分类")
 
 
-def get_channel_label(channel: str) -> str:
-    if channel == "novel":
-        return "小说"
-    return "AI时代"
+def get_channel_label(channel: str, language: str = DEFAULT_LANGUAGE) -> str:
+    strings = get_strings(language)
+    channels = strings["channels"]
+    return str(channels["novel"] if channel == "novel" else channels["ai"])
+
+
+def get_novel_sequence_label(sequence_value: object, language: str = DEFAULT_LANGUAGE) -> str:
+    if str(sequence_value).isdigit():
+        if normalize_language(language) == ENGLISH_LANGUAGE:
+            return f"Chapter {sequence_value}"
+        return f"第{sequence_value}章"
+
+    return str(get_strings(language)["novel_chapter_fallback"])
 
 
 def get_channel_index_href(channel: str, relative_prefix: str = ".") -> str:
@@ -258,6 +322,7 @@ def build_story_site_items(repo_root: Path) -> list[dict]:
                     "source": f"../{chapter_path.relative_to(repo_root).as_posix()}",
                     "status": "published",
                     "channel": channel,
+                    "language": normalize_language(str(config.get("language", DEFAULT_LANGUAGE))),
                     "sequence": parse_chapter_sequence(chapter_id, fallback_sequence),
                     "chapterId": chapter_id,
                     "seriesTitle": series_title,
@@ -769,7 +834,9 @@ def build_post_static_html(
     version = quote(asset_version, safe="") if asset_version else ""
     suffix = f"?v={version}" if version else ""
     channel = get_item_channel(item)
-    channel_label = get_channel_label(channel)
+    language = get_item_language(item)
+    strings = get_strings(language)
+    channel_label = get_channel_label(channel, language)
     brand_href = get_channel_index_href(channel, "..")
     ai_href = get_channel_index_href(DEFAULT_CHANNEL, "..")
     novel_href = get_channel_index_href("novel", "..")
@@ -785,7 +852,7 @@ def build_post_static_html(
         if entry["level"] == 2
     )
     if not toc_html:
-        toc_html = '<li class="muted">暂无目录</li>'
+        toc_html = f'<li class="muted">{html.escape(str(strings["no_toc"]))}</li>'
 
     def nav_link(prefix: str, suffix_text: str, nav_item: dict) -> str:
         href = nav_item.get("page") or f'./post.html?id={quote(str(nav_item.get("id", "")), safe="")}'
@@ -801,23 +868,26 @@ def build_post_static_html(
         nav_links.append(nav_link("← ", "", prev_item))
     if next_item:
         nav_links.append(nav_link("", " →", next_item))
-    nav_html = "".join(nav_links) if nav_links else '<span class="muted">没有更多内容</span>'
+    nav_html = (
+        "".join(nav_links)
+        if nav_links
+        else f'<span class="muted">{html.escape(str(strings["no_more_content"]))}</span>'
+    )
 
     topics = item.get("topic") or []
-    topic_text = " / ".join(topics) if isinstance(topics, list) and topics else "未分类"
+    topic_text = " / ".join(topics) if isinstance(topics, list) and topics else str(strings["type_fallback"])
     type_label = html.escape(get_item_type_label(item))
     if channel == "novel":
-        sequence_value = item.get("sequence")
-        sequence_text = f"第{sequence_value}章" if str(sequence_value).isdigit() else "小说章节"
-        post_meta = f'小说 · {type_label} · {html.escape(sequence_text)}'
+        sequence_text = get_novel_sequence_label(item.get("sequence"), language)
+        post_meta = f'{html.escape(str(strings["novel_meta_label"]))} · {type_label} · {html.escape(sequence_text)}'
     else:
-        date_value = item.get("date") or item.get("updatedAt") or "日期未知"
+        date_value = item.get("date") or item.get("updatedAt") or str(strings["date_unknown"])
         post_meta = f"{type_label} · {html.escape(str(date_value))} · {html.escape(topic_text)}"
     summary = html.escape(str(item.get("summary", "")))
     title = html.escape(str(item.get("title", "未命名内容")))
 
     return f"""<!doctype html>
-<html lang="zh-CN">
+<html lang="{language}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -832,39 +902,39 @@ def build_post_static_html(
     <link rel="stylesheet" href="{asset('../assets/css/components.css')}" />
   </head>
   <body data-page="post-static">
-    <a class="skip-link" href="#main-content">跳到正文</a>
+    <a class="skip-link" href="#main-content">{html.escape(str(strings["skip_link"]))}</a>
     <header class="site-header">
       <div class="container site-header__inner">
         <a id="siteBrand" class="brand" href="{brand_href}">{channel_label}</a>
-        <nav class="nav" aria-label="主导航">
-          <a id="navAi"{ai_current} href="{ai_href}">AI时代</a>
-          <a id="navNovel"{novel_current} href="{novel_href}">小说</a>
+        <nav class="nav" aria-label="{html.escape(str(strings["main_nav"]))}">
+          <a id="navAi"{ai_current} href="{ai_href}">{html.escape(get_channel_label(DEFAULT_CHANNEL, language))}</a>
+          <a id="navNovel"{novel_current} href="{novel_href}">{html.escape(get_channel_label("novel", language))}</a>
         </nav>
       </div>
     </header>
     <main id="main-content">
       <section class="section section--compact">
         <div class="container post-layout">
-          <aside class="toc" aria-label="目录">
-            <h2>目录</h2>
+          <aside class="toc" aria-label="{html.escape(str(strings["toc_aria_label"]))}">
+            <h2>{html.escape(str(strings["toc_title"]))}</h2>
             <ul id="tocList">{toc_html}</ul>
           </aside>
           <div class="toc-resizer" aria-hidden="true"></div>
           <article class="post" aria-labelledby="post-title">
-            <header class="post-intro-panel" aria-label="文章简介">
+            <header class="post-intro-panel" aria-label="{html.escape(str(strings["intro_label"]))}">
               <p id="postMeta" class="muted">{post_meta}</p>
               <h1 id="post-title">{title}</h1>
               <p id="postSummary" class="post-intro-summary muted">{summary}</p>
             </header>
             <div id="postContent" class="stack">{body_html}</div>
-            <nav aria-label="上一篇下一篇" class="chips" id="postNav">{nav_html}</nav>
+            <nav aria-label="{html.escape(str(strings["post_nav_label"]))}" class="chips" id="postNav">{nav_html}</nav>
           </article>
         </div>
       </section>
     </main>
     <footer class="site-footer">
       <div class="container">
-        <p id="siteFooterText">作者：Vik Qian · 版权所有 © 2026 {channel_label}</p>
+        <p id="siteFooterText">{html.escape(str(strings["footer_template"]).replace("{label}", channel_label))}</p>
       </div>
     </footer>
     <script type="module" src="{asset('../assets/js/post-static.js')}"></script>

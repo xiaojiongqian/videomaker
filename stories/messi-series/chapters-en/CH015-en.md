@@ -1,5 +1,7 @@
 # CH015 When the Maracana Echo Turned Around
 
+## The Final Site Brought the Old Echo Back
+
 On June 3, 2021, when CONMEBOL released the revised Copa America schedule, one word at the end of the bracket carried more weight than the rest.
 
 Maracana.
@@ -8,11 +10,15 @@ The tournament had originally belonged to 2020 before the pandemic pushed it bac
 
 Argentina did not charge straight at it. After finishing third at the 2019 Copa America, Scaloni's team had built something harder and less dramatic first. They stopped losing. Friendlies, World Cup qualifiers, tight matches that did not always sparkle, all of them began stacking one on top of another. The important thing was not that every performance looked beautiful. The important thing was that the same players kept learning one another's runs, pauses, and silences. Messi was still the captain, of course. But names like Rodrigo De Paul, Lautaro Martinez, Angel Di Maria, and Emiliano Martinez were no longer just passing figures beside him. They were beginning to carry parts of the road under their own feet.
 
+## This Argentina Learned to Stay Steady First
+
 That was why Argentina's 2021 Copa America did not feel noisy. They drew 1-1 with Chile after Messi scored from a free kick. They beat Uruguay 1-0, Paraguay 1-0, and Bolivia 4-1. The scorelines were not huge most of the time, and the tournament did not feel as if it were trying to enter history every night. Yet that restraint made the change easier to see. Argentina were no longer waiting until the last ten minutes to place their life beneath one player. They were holding the order of the match first, and then letting Messi prise the opening wider when it appeared.
 
 The quarter-final against Ecuador showed the change in full. Near the end of the first half, Messi could have tried to force his own shot. Instead he slipped the ball to De Paul for 1-0. Later, Argentina pressed again and Messi helped create the second goal for Lautaro. In stoppage time, he curled in a free kick himself to make it 3-0. He was still the brightest player on the pitch, but the light worked differently now. The team had stood upright first. Then he had pushed the match farther forward.
 
 The semi-final against Colombia still hurt in the old places. Early in the game, Messi opened the right side, sent the ball across, and Lautaro finished for 1-0. In the second half, Luis Diaz equalized. Ninety minutes ended level, and the match was dragged to the penalty spot again. In earlier years, the memory would have reached the spot before the ball did. But this time the first thing that did not fall was Argentina themselves. Messi scored the opening penalty. Leandro Paredes scored. Lautaro scored. De Paul sent his over. Yet the line did not break, because Emiliano Martinez was still in goal. He saved from Davinson Sanchez. He saved from Yerry Mina. He saved from Edwin Cardona. For the first time, the spot did not cut the road apart after Messi had done his own part.
+
+## At the Maracana, the Echo Finally Turned
 
 On July 10, in Rio de Janeiro, the opponent in the final was Brazil.
 

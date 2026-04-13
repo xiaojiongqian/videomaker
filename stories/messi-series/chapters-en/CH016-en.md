@@ -1,5 +1,7 @@
 # CH016 No One Spoke When the Trophy Reached Him
 
+## The Man Fell Before the Words
+
 When the final whistle sounded at the Maracana on July 10, 2021, Messi did not sprint toward the corner flag or leap into the air. He seemed to empty out all at once. His knees gave way first. Then his head dropped. The unfinished nights of the previous years were still there somewhere behind him - 2014 at the Maracana, 2015 in Santiago, 2016 at MetLife, 2018 in Russia, even the anxious road through 2019. But this time they did not catch him and drag him backward again.
 
 The tears arrived first. The teammates arrived right after them.
@@ -9,6 +11,8 @@ What felt most different that night was how little anyone rushed to explain it. 
 He embraced one teammate after another. He hugged the coaching staff. At one point he crouched on the grass and made a video call to his family. The movements were not grand. They did not need grand speeches to lift them higher. For him, this stadium had once seemed destined to preserve only the corridor from 2014 and the personal award that had felt like the wrong object in the wrong hands. Seven years later, the order of the night had finally been rewritten.
 
 In 2014, the defeat came first and the Golden Ball was placed beside it. In 2021, the personal awards still came near him again, but for the first time they could step politely to the side. Because the first thing truly handed to him now was the trophy Argentina had been waiting twenty-eight years to touch, and the first senior major title of his own international career.
+
+## At Last the Trophy Walked Toward Him
 
 By the time the podium was ready, the players were filing up in rows. Messi took the medal around his neck. The blue and white shirts crowded in tightly around him. The cup was standing just ahead. When it was finally passed into his hands, the moment looked quieter than anyone might have expected.
 
@@ -23,6 +27,8 @@ That was the most important part of the trophy. Of course it did not erase every
 He had worn failure for a very long time. He had worn it so long that continuing to stay had started to look like habit. On this night, he was holding another kind of weight at last.
 
 The crowd, of course, was shouting by then. The teammates, of course, were bouncing around him.
+
+## When It Finally Landed, No One Spoke
 
 But when the trophy reached his hands, no one spoke.
 

@@ -17,6 +17,7 @@ function normalizeItem(item) {
   return {
     ...item,
     channel: item.channel || DEFAULT_CHANNEL,
+    language: item.language || "zh-CN",
     topic: topics,
     type: item.type || "article",
     typeLabel: item.typeLabel || "",

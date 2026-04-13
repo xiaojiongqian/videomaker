@@ -1,5 +1,7 @@
 # CH017 The First Kick in the Desert
 
+## The Unbeaten Run Inflated the Expectation
+
 On June 1, 2022, less than a year after the Copa America triumph at the Maracana, Argentina went to Wembley for another final. The occasion was called the Finalissima, which made it sound almost ceremonial, as if it were there mainly to decorate the previous summer. But what it really tested was something else: winning once had not released this team from the need to prove anything.
 
 Lautaro Martinez scored first against Italy. Angel Di Maria chipped Gianluigi Donnarumma for the second. Paulo Dybala added a third in stoppage time. Argentina won 3-0, and Messi was named player of the match. The grass at Wembley was full of smiles by the end. Yet the important thing about that night was not that it made the pressure disappear. It changed the name of the pressure instead. Before, the question had been whether Argentina could win something at all. Now the question was harsher precisely because they had. If they had already done that, what about the World Cup?
@@ -7,6 +9,8 @@ Lautaro Martinez scored first against Italy. Angel Di Maria chipped Gianluigi Do
 In the months that followed, the team looked more and more like one that had genuinely arrived at its own time. The unbeaten run stretched longer. The lineup settled. Players such as Rodrigo De Paul, Enzo Fernandez, Alexis Mac Allister, and Julian Alvarez began to look less like supporting figures and more like parts of the structure itself. Messi was still the captain and still the first player people saw when they looked at Argentina. But this time he was not standing in front of a team that needed patching every week. He was standing in the middle of one that had slowly trained itself into rhythm and belief.
 
 That was exactly why the expectation around Qatar felt fuller and heavier than before. The old doubt had not vanished, but it had been covered by something even denser. If this really was his last World Cup, then surely the final sentence had to be written here.
+
+## The First Kick in the Desert Went Wrong
 
 On November 22, at Lusail, Argentina opened their tournament against Saudi Arabia.
 
@@ -21,6 +25,8 @@ The match that had seemed to be resting in Argentina's hands suddenly belonged t
 Of course Argentina kept pushing. Messi kept searching for spaces. Tagliafico had a chance. Alvarez had one too. Mohammed Al-Owais kept the goal shut. When the final whistle went, the scoreboard did not offer a single polite disguise. The unbeaten run that had stretched all the way from the summer of 2019 ended on the first day of the World Cup.
 
 People had spent months saying that winning the Copa America had at least allowed Messi and Argentina to breathe more freely before Qatar. Lusail suggested something almost crueler. Sometimes the first answer does not lighten the second question at all. Sometimes it makes the second question heavier, because the world begins to believe you really might finish the whole thing.
+
+## Every Match After That Became a Door
 
 So the first kick in the desert did not open the road.
 
