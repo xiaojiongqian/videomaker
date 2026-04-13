@@ -1,5 +1,10 @@
 # Characters
 
+## Detailed Assets
+
+- 详细角色卡请优先查看 [assets/characters/INDEX.md](/Users/vik.qian/study/videomaker/stories/messi-series/assets/characters/INDEX.md)
+- 本文件保留为全书级简表，强调最核心的角色定位与写作约束
+
 ## 里奥·梅西
 - Role: 主角
 - Public baseline: 出生于罗萨里奥，左脚球员，少年时期长期被体格问题和成长治疗阴影笼罩。

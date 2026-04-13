@@ -1,12 +1,22 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "contract_version": "2026-03",
   "chapter_id": "CHXXX",
   "chapter_title": "Chapter Title",
   "status": "initialized",
   "required_steps": {
     "continuity_audit": true,
-    "dialogue_audit": false
+    "dialogue_audit": false,
+    "quality_council": true
+  },
+  "asset_policy": {
+    "require_asset_refs_in_context": true,
+    "character_asset_index": "../../assets/characters/INDEX.md",
+    "preferred_asset_dirs": [
+      "../../assets/characters",
+      "../../assets/objects",
+      "../../assets/scenes"
+    ]
   },
   "execution_policy": {
     "orchestration_mode": "multi-skill-subagents",
@@ -52,7 +62,48 @@
     "fallback_policy": {
       "allow_modes": [],
       "require_exception_entry": true
+    },
+    "quality_council": {
+      "enabled": true,
+      "blind_audit": true,
+      "seat_context_ref": "10-seat-context-snapshots.json",
+      "seat_dispatches": [
+        {
+          "seat": "story_engine_seat",
+          "agent_role": "novel-plot-architect",
+          "output_refs": [
+            "11-story-engine-seat.json"
+          ]
+        },
+        {
+          "seat": "scene_heat_seat",
+          "agent_role": "novel-scene-dramatizer",
+          "output_refs": [
+            "12-scene-heat-seat.json"
+          ]
+        },
+        {
+          "seat": "voice_embodiment_seat",
+          "agent_role": "novel-dialogue-editor",
+          "output_refs": [
+            "13-voice-seat.json"
+          ]
+        },
+        {
+          "seat": "canon_surface_gate",
+          "agent_role": "novel-continuity-auditor",
+          "output_refs": [
+            "14-canon-surface-gate.json"
+          ]
+        }
+      ],
+      "report_ref": "15-quality-council-report.json",
+      "pass_rule": {
+        "score_total_min": 72,
+        "minimum_canonical_dimension": 7,
+        "allow_blockers": false
+      }
     }
   },
-  "notes": "Update status as the workflow advances. Do not archive the chapter until lint passes."
+  "notes": "Update status as the workflow advances. Do not archive the chapter until lint passes and the quality council report reaches pass."
 }

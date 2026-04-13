@@ -6,6 +6,7 @@
 
 本项目从 CH005 起默认使用 workflow 目录驱动章节推进。
 如果存在 `scripts/novel_workflow.py`，优先通过 runner 操作流程，而不是手工维护状态。
+新章节进入 workflow 前，先读 [ASSETS.md](/Users/vik.qian/study/videomaker/stories/messi-series/ASSETS.md) 与 [assets/characters/INDEX.md](/Users/vik.qian/study/videomaker/stories/messi-series/assets/characters/INDEX.md)。
 
 ## Directory Layout
 
@@ -13,6 +14,8 @@
   - 正式归档章节正文，只放通过门禁的稳定稿
 - `summaries/`
   - 正式归档章节摘要
+- `assets/`
+  - 人物 / 物件 / 场面共享真源
 - `workflows/CHxxx/`
   - 单章工作流工件
 
@@ -40,6 +43,12 @@
   - 本次 canon admission、状态写回和来源同步说明
 - `09-execution-log.json`
   - 真实 sub-agent 调度痕迹、required role provenance 与显式 fallback exception
+- `10-seat-context-snapshots.json`
+  - 四个 quality council 席位的独立上下文快照
+- `11-story-engine-seat.json` / `12-scene-heat-seat.json` / `13-voice-seat.json` / `14-canon-surface-gate.json`
+  - 四个席位的独立评审结果
+- `15-quality-council-report.json`
+  - 主调度聚合后的 quality council 报告
 
 ## Workflow Status
 
@@ -63,19 +72,23 @@
 ## Default Chapter Pipeline
 
 1. 主调度读取 `INDEX.md`、`CURRENT_STATE.md`、`OPEN_LOOPS.md`、相关 summaries
-2. 写 `01-context.md`
-3. 主调度以真实 sub-agent dispatch 方式调用 `novel-plot-architect`，并把 provenance 记入 `09-execution-log.json`
-4. `novel-plot-architect` 产出 `02-plan.json`
-5. 主调度以真实 sub-agent dispatch 方式调用 `novel-scene-dramatizer`
-6. `novel-scene-dramatizer` 产出 `03-draft.md`
-7. 主调度以真实 sub-agent dispatch 方式调用 `novel-continuity-auditor`
-8. `novel-continuity-auditor` 产出 `04-continuity-audit.json`
-9. 如 manifest 要求，再由真实 sub-agent 调用 `novel-dialogue-editor` 产出 `05-dialogue-audit.json`
-10. 主调度汇总修订，产出 `06-revised.md`
-11. 主调度以真实 sub-agent dispatch 方式调用 `novel-chapter-summarizer`
-12. `novel-chapter-summarizer` 产出 `07-summary.json`
-13. 主调度写 `08-writeback.md`
-14. 通过 lint 后，才归档到 `chapters/`、`summaries/` 和状态文件
+2. 主调度读取角色 / 物件 / 场面 assets
+3. 写 `01-context.md`
+4. 在 `01-context.md` 的 `Assets Refs` 中登记本章实际使用的资产
+5. 主调度以真实 sub-agent dispatch 方式调用 `novel-plot-architect`，并把 provenance 记入 `09-execution-log.json`
+6. `novel-plot-architect` 产出 `02-plan.json`
+7. 主调度以真实 sub-agent dispatch 方式调用 `novel-scene-dramatizer`
+8. `novel-scene-dramatizer` 产出 `03-draft.md`
+9. 主调度以真实 sub-agent dispatch 方式调用 `novel-continuity-auditor`
+10. `novel-continuity-auditor` 产出 `04-continuity-audit.json`
+11. 如 manifest 要求，再由真实 sub-agent 调用 `novel-dialogue-editor` 产出 `05-dialogue-audit.json`
+12. 主调度汇总修订，产出 `06-revised.md`
+13. 对稳定稿默认进入 `quality_council`
+14. 四个席位分别产出 `10-15` council 工件
+15. 主调度以真实 sub-agent dispatch 方式调用 `novel-chapter-summarizer`
+16. `novel-chapter-summarizer` 产出 `07-summary.json`
+17. 主调度写 `08-writeback.md`
+18. 通过 lint 后，才归档到 `chapters/`、`summaries/` 和状态文件
 
 ## Default Commands
 
@@ -130,6 +143,7 @@ python3 scripts/novel_workflow.py check stories/messi-series CH005
 
 - 从新的 template 初始化的章节，默认 `execution_policy.require_subagents = true`
 - `09-execution-log.json` 是强制门禁文件，不是可选日志
+- `10-15` council bundle 默认也视为强制门禁文件
 - `02-plan.json`、`04-continuity-audit.json`、`05-dialogue-audit.json`、`07-summary.json` 在 strict mode 下必须带：
   - `contract_version`
   - `task_id`
@@ -148,6 +162,7 @@ python3 scripts/novel_workflow.py check stories/messi-series CH005
 - `07-summary.json` 缺失
 - `08-writeback.md` 缺失
 - strict workflow 缺失 `09-execution-log.json`
+- strict workflow 缺失 `10-15` council bundle
 - strict workflow 缺失 required role provenance
 - strict workflow artifact 缺少 `contract_version`、`task_id`、`execution` 或 `recommendations`
 - 正文含元叙事 / 作者工作台泄漏

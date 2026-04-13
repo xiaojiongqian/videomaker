@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "chapter_id": "CHXXX",
+  "task_type": "quality-council-gate",
+  "agent_role": "novel-continuity-auditor",
+  "status": "ready",
+  "gate_decision": "pending",
+  "gate_veto": "none",
+  "writeback_eligibility": "pending",
+  "owned_dimension_scores": {
+    "continuity_causality": {
+      "score": 0,
+      "reason": ""
+    },
+    "language_surface": {
+      "score": 0,
+      "reason": ""
+    }
+  },
+  "advisory_scores": [],
+  "recommendations": [],
+  "execution": {
+    "mode": "pending",
+    "trace_ref": "09-execution-log.json"
+  }
+}

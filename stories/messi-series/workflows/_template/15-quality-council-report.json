@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "chapter_id": "CHXXX",
+  "quality_loop_report": {
+    "seat_scorecards": [],
+    "advisory_findings": [],
+    "council_round_reports": [],
+    "locked_dimensions": [],
+    "round_decision": "pending",
+    "counterforce_checks": []
+  },
+  "canonical_scorecard": {
+    "score_total": 0,
+    "pass": false,
+    "blockers": []
+  },
+  "next_action": ""
+}

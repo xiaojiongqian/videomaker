@@ -1,9 +1,22 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "contract_version": "2026-03",
   "chapter_id": "CHXXX",
   "orchestrator_role": "novel-orchestrator-main",
   "status": "ready",
+  "visibility": {
+    "ui_note": "Historical sub-agent messages may not replay in the current thread. Treat this file and the 10-15 council artifacts as the canonical collaboration trace.",
+    "trace_artifacts": [
+      "09-execution-log.json",
+      "10-seat-context-snapshots.json",
+      "11-story-engine-seat.json",
+      "12-scene-heat-seat.json",
+      "13-voice-seat.json",
+      "14-canon-surface-gate.json",
+      "15-quality-council-report.json"
+    ]
+  },
   "dispatches": [],
+  "council_rounds": [],
   "exceptions": []
 }

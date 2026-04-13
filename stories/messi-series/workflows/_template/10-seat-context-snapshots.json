@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "chapter_id": "CHXXX",
+  "quality_council_round": 1,
+  "review_isolation": {
+    "mode": "blind_audit",
+    "note": "Do not inject same-round peer findings before each seat submits."
+  },
+  "seat_context_snapshots": {
+    "story_engine_seat": {
+      "owner_role": "novel-plot-architect",
+      "context_refs": []
+    },
+    "scene_heat_seat": {
+      "owner_role": "novel-scene-dramatizer",
+      "context_refs": []
+    },
+    "voice_embodiment_seat": {
+      "owner_role": "novel-dialogue-editor",
+      "context_refs": []
+    },
+    "canon_surface_gate": {
+      "owner_role": "novel-continuity-auditor",
+      "context_refs": []
+    }
+  }
+}

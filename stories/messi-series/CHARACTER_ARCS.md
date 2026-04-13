@@ -1,6 +1,9 @@
 # Character Arcs
 
+- Detailed assets: [assets/characters/INDEX.md](/Users/vik.qian/study/videomaker/stories/messi-series/assets/characters/INDEX.md)
+
 ## 里奥·梅西
+- Asset: [里奥·梅西](/Users/vik.qian/study/videomaker/stories/messi-series/assets/characters/lionel-messi.md)
 - Arc phase: 从“把失败真正穿在身上的老队长”到“世界终于不再要求他证明的人”
 - Current state:
   - External: 2022 年 12 月 18 日，阿根廷在卢赛尔与法国 120 分钟战成 3 比 3 后点球 4 比 2 夺冠；梅西捧起世界杯，并第二次拿到赛事金球奖
@@ -11,12 +14,14 @@
   - “家”如何从长期压力来源，变成能把最重答案回赠给他的地方
 
 ## 豪尔赫·梅西
+- Asset: [豪尔赫·梅西](/Users/vik.qian/study/videomaker/stories/messi-series/assets/characters/jorge-messi.md)
 - Arc phase: 从陪同者变成真正的押注者
 - Current state:
   - External: 必须继续推进俱乐部承诺落地
   - Narrative pressure: 后续章节只根据公开信息呈现其现实承担，不延展未证实家庭细节
 
 ## 卡莱斯·雷克萨奇
+- Asset: [卡莱斯·雷克萨奇](/Users/vik.qian/study/videomaker/stories/messi-series/assets/characters/carles-rexach.md)
 - Arc phase: 从观察者变成担保人
 - Current state:
   - External: 已给出个人承诺

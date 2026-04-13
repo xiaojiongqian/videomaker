@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "chapter_id": "CHXXX",
+  "task_type": "quality-seat-story-engine",
+  "agent_role": "novel-plot-architect",
+  "status": "ready",
+  "owned_dimension_scores": {
+    "opening_hook": {
+      "score": 0,
+      "reason": ""
+    },
+    "core_event": {
+      "score": 0,
+      "reason": ""
+    },
+    "escalation": {
+      "score": 0,
+      "reason": ""
+    }
+  },
+  "advisory_findings": [],
+  "recommendations": [],
+  "execution": {
+    "mode": "pending",
+    "trace_ref": "09-execution-log.json"
+  }
+}

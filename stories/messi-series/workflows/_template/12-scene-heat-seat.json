@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "chapter_id": "CHXXX",
+  "task_type": "quality-seat-scene-heat",
+  "agent_role": "novel-scene-dramatizer",
+  "status": "ready",
+  "owned_dimension_scores": {
+    "scene_execution": {
+      "score": 0,
+      "reason": ""
+    },
+    "ending_hook": {
+      "score": 0,
+      "reason": ""
+    }
+  },
+  "bridge_leaks": [],
+  "recommendations": [],
+  "execution": {
+    "mode": "pending",
+    "trace_ref": "09-execution-log.json"
+  }
+}

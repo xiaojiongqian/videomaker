@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "contract_version": "2026-03",
+  "chapter_id": "CHXXX",
+  "task_type": "quality-seat-voice-embodiment",
+  "agent_role": "novel-dialogue-editor",
+  "status": "ready",
+  "owned_dimension_scores": {
+    "character_embodiment": {
+      "score": 0,
+      "reason": ""
+    }
+  },
+  "interaction_clusters": [],
+  "recommendations": [],
+  "execution": {
+    "mode": "pending",
+    "trace_ref": "09-execution-log.json"
+  }
+}

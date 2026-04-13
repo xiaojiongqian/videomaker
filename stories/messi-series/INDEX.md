@@ -9,6 +9,7 @@
 - Latest chapter: CH020 世界终于不再要求他证明
 
 ## Directory Roles
+- assets/: 共享人物 / 物件 / 场面资产卡与可复用真源
 - chapters/: 已定稿章节正文
 - summaries/: 章节摘要与最小可传递记忆
 - timeline/: 系列大纲、时间锚点与章节路线图
@@ -25,10 +26,11 @@
 1. CURRENT_STATE.md
 2. ARC_STATUS.md
 3. OPEN_LOOPS.md
-4. summaries/CH001.summary.md
-5. timeline/SERIES_OUTLINE.md
-6. SOURCES.md
-7. WORKFLOW.md
+4. assets/characters/INDEX.md
+5. summaries/CH001.summary.md
+6. timeline/SERIES_OUTLINE.md
+7. SOURCES.md
+8. WORKFLOW.md
 
 ## Suggested Next Task
-- 做一轮全书总校，并把站点发布配置、英文版目录或后续改编需求建立在已完成的 CH001-CH020 双语正文之上。
+- 用固定 sub-agent workflow 补齐后续章节工件，并继续扩充 assets 目录，让人物 / 物件 / 场面真源能支撑后续总校、改编与发布链路。
