@@ -45,3 +45,19 @@ It had wiped away Argentina's two-goal lead. It had dragged Messi's second lead 
 When Montiel's penalty hit the net, the first thing that moved was not a conclusion.
 
 It was the net itself.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: The man standing at the center of the final where every unfinished question arrives at once.
+- Current Status: He has done his part in both the final and the shootout, and he has crossed the last great wall with Argentina at last.
+
+### Julian Alvarez
+- Summary: The forward whose running gives the Croatia semi-final its clean shape.
+- Current Status: He has helped Argentina reach the final more steadily, without asking Messi to carry every step alone.
+
+### Emiliano Martinez
+- Summary: The goalkeeper who drags the whole story back from the brink one second before penalties.
+- Current Status: His save from Kolo Muani has preserved everything Argentina had pulled into reach.

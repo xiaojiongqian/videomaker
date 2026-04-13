@@ -25,3 +25,19 @@ Once he said it, the previous three years seemed to reorder themselves at once. 
 After the third final, the first thing to fall was not an answer.
 
 It was him.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: The captain who keeps taking Argentina to finals and then becomes the one to speak the thought of leaving aloud.
+- Current Status: After the miss at MetLife, he has spoken the first sentence that feels like a real exit.
+
+### Sergio Romero
+- Summary: The goalkeeper who saves early in the shootout and briefly makes it seem as if this time might be different.
+- Current Status: He has done his part at the opening of the shootout, but still cannot keep the whole line from breaking again.
+
+### Argentina
+- Summary: A team that can no longer pretend this is just one isolated defeat.
+- Current Status: It has not only lost another trophy; it suddenly looks close to losing Messi with it.

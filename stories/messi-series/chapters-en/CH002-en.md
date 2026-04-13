@@ -19,3 +19,19 @@ And so the weeks kept dragging by. The same staircase. The same list. The same w
 Official clearance had still not come through.
 
 But he had already settled one part of the matter in his own head: he would not go back. He would stay here, wait out the six months, and wait until that list finally carried his name for the first time.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: Inside the old La Masia, he says he wants to stay for real, even while official matches remain out of reach.
+- Current Status: He is inside the system now and has chosen Barcelona in his own mind, but match eligibility is still trapped behind paperwork and waiting.
+
+### Jorge Messi
+- Summary: Father and keeper of the possible way back, the one who is willing to ask whether they should return home.
+- Current Status: He is still handling the practical side of exile while watching his son choose to stay anyway.
+
+### Gerard Pique
+- Summary: A representative of the boys around Messi, helping La Masia feel like more than rules and distance.
+- Current Status: Along with the other boys, he is making the wait outside the official list a little more livable.

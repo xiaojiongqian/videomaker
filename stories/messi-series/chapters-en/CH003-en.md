@@ -19,3 +19,19 @@ Then, on the very next touch, he was already chasing after it.
 That road had broken after only one week.
 
 Now that he was standing back on the grass again, what came next was not only about getting into another match. It was about proving the road would not break so easily a second time.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: He finally sees his name on the official team sheet, only to taste both a debut goal and a broken leg within a week.
+- Current Status: He has gone from waiting boy to official player, then straight back to the stand and the crutches.
+
+### Jorge Messi
+- Summary: The father who watches the long wait finally break open through a real match.
+- Current Status: Now he is no longer dealing only with paperwork, but with recovery and the task of coming back again.
+
+### Barcelona U14A
+- Summary: The first side that truly lets Messi into the order of official competition.
+- Current Status: It has opened the door for him once, but now it must wait for his recovery before it can let him back through.

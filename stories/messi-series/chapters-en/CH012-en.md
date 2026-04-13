@@ -25,3 +25,19 @@ The goal did not settle the debt of the previous two summers. It did not answer 
 What remained after the brief exit was not relief.
 
 It was responsibility, put back on his shoulders.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: A man pulled between wanting to step away and being unable to leave the whole line behind.
+- Current Status: He has returned to the team, taken the armband again, and scored against Uruguay, but the deeper burden is still there.
+
+### Edgardo Bauza
+- Summary: The new coach who carries the plea for return directly to Barcelona.
+- Current Status: He has helped reconnect the line, but he cannot erase the defeats that made the break possible.
+
+### Gerardo Martino
+- Summary: The outgoing coach whose departure exposes the disorder around the team.
+- Current Status: He has left, and in doing so he has made the wider chaos harder to ignore.

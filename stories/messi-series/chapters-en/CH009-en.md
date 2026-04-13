@@ -13,3 +13,19 @@ It was not as if Argentina had not tried to chase the game that night. After con
 In August 2011, after Sabella took charge, he handed the captain's armband to Messi. That band around his arm could not win matches by itself, but it did immediately change who stood at the front when the team walked out. Before kickoff, he was the one beside the referee. Before the opening whistle, he was the one who went to the center for the coin toss. After defeat, he was the one the cameras and the questions found first. The newspapers could once still place someone else's name beside his in a headline. By now, Argentina had no one else to step out in front of him.
 
 From then on, the dressing room, the tunnel, and those minutes before kickoff were no longer only about comparison. Messi was still the quietest man in the room, but when the team moved forward, the first step had to be his. The next time he came out of the tunnel, that strip of cloth on his left arm would no longer mean identity alone. It would have to carry Argentina's road with it.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: A player glowing brightly at club level while growing heavier and heavier inside Argentina.
+- Current Status: He has just come through the 2010 World Cup and the 2011 Copa America without a national-team answer, and now the captain's armband is his.
+
+### Alejandro Sabella
+- Summary: The coach who first tightens Argentina and then places formal leadership on Messi.
+- Current Status: He has turned public comparison and expectation into the concrete duty of captaincy.
+
+### Argentina
+- Summary: The national line that no amount of club glory can answer by itself.
+- Current Status: It is still waiting for an answer in blue and white, and it is beginning to press that demand back onto Messi more directly than before.

@@ -17,3 +17,19 @@ That made his situation in those two years even clearer. Against Chelsea in 2006
 Being seen was no longer the problem.
 
 What waited for him now was no longer how to make people remember him, but how to press those huge nights one by one into results that actually lasted.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: From Stamford Bridge to Getafe, he begins to be asked for answers on the biggest nights.
+- Current Status: He is no longer just a young substitute, yet injury and team results still cling tightly to every miracle.
+
+### Xavi
+- Summary: The midfielder who keeps Barcelona's attacking structure legible and makes Messi's decisive touches land inside a pattern.
+- Current Status: He remains a crucial part of the order that lets Messi's moments truly change matches.
+
+### Barcelona
+- Summary: The team lifted by Messi's breakthrough moments and still forced to absorb the cost of unfinished growth.
+- Current Status: It has seen him decide the biggest games, but it also knows that one miracle does not solve everything that follows.

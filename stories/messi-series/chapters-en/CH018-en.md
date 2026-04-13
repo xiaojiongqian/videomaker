@@ -31,3 +31,19 @@ That was how the road through Qatar changed after Saudi Arabia. Mexico was a doo
 By the time the last of those doors swung open, what lay ahead was no longer only a path.
 
 It was two matches between Argentina and the end of the whole story.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: The captain who pushes the key back into the lock after Saudi Arabia.
+- Current Status: He has reopened Argentina's road with the goal against Mexico and led the team all the way into the final two matches.
+
+### Enzo Fernandez
+- Summary: One of the first of the new generation to put his own hand into the lock.
+- Current Status: His goal against Mexico shows that he is not only following Messi; he can open the road himself as well.
+
+### Emiliano Martinez
+- Summary: The goalkeeper who slams his hands into the match when the door is almost closing.
+- Current Status: He has protected Argentina against Australia and the Netherlands at the tournament's most dangerous edges.

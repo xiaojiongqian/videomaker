@@ -27,3 +27,19 @@ The next morning, the World Cup was over, but the question it left behind was no
 After the World Cup, what stayed first was not an answer.
 
 It was that pair of boots by the door, and a captain who now looked older than before.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: The older captain who drags Argentina into Russia and then has to wear another failure on top of the old ones.
+- Current Status: He has saved qualification with a hat-trick, only to carry a new World Cup defeat against France.
+
+### Jorge Sampaoli
+- Summary: The coach who takes over during the most unstable stretch of the cycle.
+- Current Status: He has made it to Russia with the team, but he cannot make it coherent under maximum pressure.
+
+### Argentina
+- Summary: A team that still needs Messi to kick the door open first.
+- Current Status: It has stumbled into the World Cup and then fallen back out without finding a durable shape.

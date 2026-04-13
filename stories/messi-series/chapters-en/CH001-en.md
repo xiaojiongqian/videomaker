@@ -21,3 +21,19 @@ It was not a formal contract, and it did not solve every problem at once. Regist
 His name had been left behind first.
 
 But the hardest part was still ahead. Whether he could truly move in, whether he could truly get on the pitch, neither of those questions had been answered yet.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: From dusty pitches in Rosario to the trial in Barcelona, he turns raw talent into something nobody at the touchline can ignore.
+- Current Status: His name has been written onto the napkin, but staying, treatment, and formal eligibility are all still unresolved.
+
+### Jorge Messi
+- Summary: Father and practical risk-bearer, holding the road together between bills, treatment, and the move abroad.
+- Current Status: He has brought Messi to Barcelona and is still chasing paperwork, housing, and costs from one day to the next.
+
+### Carles Rexach
+- Summary: The decisive talent-spotter who turns maybe into a clear personal commitment.
+- Current Status: He has written Messi's name down, but the formal institutional confirmation is still to come.

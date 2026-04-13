@@ -25,3 +25,19 @@ People had spent months saying that winning the Copa America had at least allowe
 So the first kick in the desert did not open the road.
 
 It turned every match that followed into a door.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: A captain entering Qatar with one answer already won, only to feel the final question grow heavier.
+- Current Status: He has scored first against Saudi Arabia, yet the World Cup has immediately narrowed into a series of survival doors.
+
+### Lionel Scaloni
+- Summary: The coach who has turned Argentina into a genuine contender.
+- Current Status: He has built a mature, settled team, and now he must prove it can survive the worst possible start.
+
+### Argentina
+- Summary: A side transformed from old sufferers into a team the whole world now demands a final answer from.
+- Current Status: The unbeaten run is gone, and every match that remains now forbids another step backward.

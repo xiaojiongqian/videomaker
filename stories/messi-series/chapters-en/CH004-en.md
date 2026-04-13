@@ -15,3 +15,15 @@ That one match tied the previous year and this year together at once. The year b
 This level was already beginning to feel too small to hold him.
 
 The only thing that had not arrived yet was the official word sending him upward.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: The boy who finally completes a full season after injury and turns continuity into goals again.
+- Current Status: He has taken the mask off, finished the season, and is beginning to look too large for this level to hold.
+
+### Barcelona U14A
+- Summary: The team that gives Messi his competitive rhythm back after the injury break.
+- Current Status: It has watched him turn a full season and a final into an unmistakable sign of upward movement.

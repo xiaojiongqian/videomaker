@@ -21,3 +21,19 @@ On December 1, the Ballon d'Or vote pinned that year down once more. At twenty-t
 The next time people looked at Messi, they would not be looking only at the number 10 on his back.
 
 They would be looking first at the scoreboard beside Argentina's blue and white shirt.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: The player who takes Barcelona's 10, wins Olympic gold, keeps Stamford Bridge alive, seals Rome, and wins the Ballon d'Or.
+- Current Status: His authority on the club side has hardened, but that only leaves Argentina's question waiting for him more directly.
+
+### Angel Di Maria
+- Summary: The runner who turns Messi's through ball into Olympic gold.
+- Current Status: He has completed the final touch in Beijing and helped give the blue-and-white shirt one real answer.
+
+### Andres Iniesta
+- Summary: The finisher at Stamford Bridge who turns Messi's last rescue pass into survival.
+- Current Status: He has received the ball at the final second and pulled Barcelona back from a door that was almost shut.

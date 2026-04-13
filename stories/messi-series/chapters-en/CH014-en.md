@@ -23,3 +23,19 @@ That is what changed the meaning of the boots by the door. After France, they ha
 The old captain's boots did not first learn how to celebrate.
 
 They learned how to come back the next day.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: A captain who returns, while also learning that returning no longer means repairing everything at once.
+- Current Status: He is back in the squad, but what he needs now is a team that grows around him rather than collapses toward him.
+
+### Lionel Scaloni
+- Summary: A coach who begins as a temporary figure and ends up rescuing the order of the rebuild first.
+- Current Status: He has earned the right to continue by stabilizing training and daily routine before anything glamorous.
+
+### Pablo Aimar
+- Summary: A quiet but concrete training-ground presence during the reset.
+- Current Status: He is helping Scaloni turn the post-World Cup vacuum into repeatable daily work.

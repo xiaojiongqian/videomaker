@@ -21,3 +21,19 @@ It became the place that returned the heaviest answer to him instead.
 The world no longer needed him to prove himself.
 
 The grass had already said it for him.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: A man who no longer has to defend his identity one tournament at a time.
+- Current Status: He is now a world champion, a Golden Ball winner again, and finally beyond the old duty of proving himself.
+
+### Argentina
+- Summary: The collective that finally gives the heaviest answer back instead of only asking for it.
+- Current Status: It is world champion now, and it is no longer defined only by what it demanded from Messi.
+
+### Gonzalo Montiel
+- Summary: The taker who turns the final ounce of possibility into fact.
+- Current Status: The penalty is in, the ending is fixed, and there is no room left for the old question to return.

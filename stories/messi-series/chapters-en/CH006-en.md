@@ -19,3 +19,19 @@ By the end of September 2005, even UEFA had begun publicly describing him as "th
 But having a bigger name pasted onto him first did not mean he had already secured a steadier place.
 
 The next thing that lit up over his head would no longer be only a substitution board.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: The boy who finally reaches his official first-team debut and first official goal.
+- Current Status: His name is now inside Barcelona's formal records and on the scoreboard, but his place is not fully secure yet.
+
+### Ronaldinho
+- Summary: The older star whose passing finally turns the wait into a goal that counts.
+- Current Status: He has used his own gravity and generosity to push Messi into the visible center of the first team.
+
+### Frank Rijkaard
+- Summary: The coach willing to give Messi his official league entrance.
+- Current Status: He has opened the senior door for real, even though Messi is still moving from prodigy to regular member.

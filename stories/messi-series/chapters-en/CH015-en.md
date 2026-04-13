@@ -27,3 +27,19 @@ The second half was heavy. Brazil pushed higher. The tackles and the retreats gr
 When the whistle finally blew, the first thing that returned was not applause.
 
 It was the old echo from the Maracana, and for the first time it had turned around.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: A captain who no longer has to serve as the only final answer every second.
+- Current Status: He has brought Argentina back to the Maracana and watched the old echo turn around for the first time.
+
+### Rodrigo De Paul
+- Summary: One of the midfielders who helps this newer Argentina truly connect the road through the middle.
+- Current Status: He is no longer just orbiting Messi; he is now one of the men carrying the match forward himself.
+
+### Emiliano Martinez
+- Summary: The goalkeeper who changes what the penalty spot means for Argentina.
+- Current Status: His saves against Colombia have kept the semi-final from reopening the old wound.

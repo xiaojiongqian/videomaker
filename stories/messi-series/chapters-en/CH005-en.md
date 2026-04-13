@@ -15,3 +15,19 @@ That mattered more than simply being called up with the first team. Being invite
 By then, every level of the team sheet had already carried his name at least once. But no level could any longer treat him as a boy who had merely been invited up to take a look.
 
 The next time someone stopped him at the edge of a training session, what ought to be waiting for him would no longer be just another friendly. It would be a chance to place his name inside Barcelona's first-team record book for real.
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: In one season, he keeps getting pushed upward and starts turning both the first-team touchline and adult football into reality.
+- Current Status: He has touched the first-team friendly stage and adult competitive football, but his permanent level is still unresolved.
+
+### Frank Rijkaard
+- Summary: The coach who begins drawing Messi toward the orbit of the first team.
+- Current Status: He has already used Messi in Porto, but he has not yet fixed him inside the senior hierarchy.
+
+### Barcelona's Youth Ladder
+- Summary: The whole structure of youth and reserve levels that keeps moving Messi upward.
+- Current Status: It is promoting him again and again, but it has not yet given him one final place to belong.

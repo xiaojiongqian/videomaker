@@ -37,3 +37,23 @@ But the final whistle was not the final step. After losing the World Cup final, 
 After he walked out of that long corridor in the Maracana, the question changed its wording.
 
 Before, people had asked whether he could carry Argentina this far. Now they would ask: if he had already dragged the team all the way to the door, why had the final touch still not gone through?
+
+-------
+
+## Important Characters
+
+### Lionel Messi
+- Summary: The captain who drags Argentina all the way into the World Cup final in Brazil.
+- Current Status: He has proved he can carry the national team to the edge of the trophy, and now must bear the question of why the last step still failed.
+
+### Alejandro Sabella
+- Summary: The coach who narrows the team first and gives this Argentina side its stable shape.
+- Current Status: He has built an Argentina capable of reaching the final, but not one that can push the final touch through.
+
+### Angel Di Maria
+- Summary: The runner who receives Messi's last pass at the narrowest knockout gate.
+- Current Status: His goal against Switzerland has bought Argentina one more round of life.
+
+### Sergio Romero
+- Summary: The quiet but crucial goalkeeper who holds the penalty night together against the Netherlands.
+- Current Status: He has helped Argentina stand at the door of the final, even if he cannot change what happens at the Maracana.
