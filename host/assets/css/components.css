@@ -387,6 +387,7 @@
   border-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-border));
   background: var(--color-primary-soft);
   box-shadow: var(--shadow-md);
+  text-decoration: none;
   outline: none;
 }
 
