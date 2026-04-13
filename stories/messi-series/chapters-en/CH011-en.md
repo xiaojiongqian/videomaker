@@ -38,12 +38,15 @@ It was him.
 
 ### Lionel Messi
 - Summary: The captain who keeps taking Argentina to finals and then becomes the one to speak the thought of leaving aloud.
+- Age & Appearance: 29; short-haired and bearded, compact through the frame, with fatigue and silence showing more clearly in his face than before.
 - Current Status: After the miss at MetLife, he has spoken the first sentence that feels like a real exit.
 
 ### Sergio Romero
 - Summary: The goalkeeper who saves early in the shootout and briefly makes it seem as if this time might be different.
+- Age & Appearance: 29; tall, broad-shouldered, long-armed, with the kind of goal-line presence that fills space quickly.
 - Current Status: He has done his part at the opening of the shootout, but still cannot keep the whole line from breaking again.
 
 ### Argentina
 - Summary: A team that can no longer pretend this is just one isolated defeat.
+- Age & Appearance: Age not applicable; the blue-and-white shirt still looks familiar, but the faces inside it have been hollowed a little by repeated final defeats.
 - Current Status: It has not only lost another trophy; it suddenly looks close to losing Messi with it.

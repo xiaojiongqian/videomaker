@@ -34,12 +34,15 @@ They would be looking first at the scoreboard beside Argentina's blue and white 
 
 ### Lionel Messi
 - Summary: The player who takes Barcelona's 10, wins Olympic gold, keeps Stamford Bridge alive, seals Rome, and wins the Ballon d'Or.
+- Age & Appearance: 21 to 22; stronger and tighter through the frame, still youthful in the face, short dark hair, and looking more like the center of the team once the number 10 is his.
 - Current Status: His authority on the club side has hardened, but that only leaves Argentina's question waiting for him more directly.
 
 ### Angel Di Maria
 - Summary: The runner who turns Messi's through ball into Olympic gold.
+- Age & Appearance: 20; slender and long-limbed, narrow-faced, light through the legs, cutting diagonally like a line that suddenly opens space.
 - Current Status: He has completed the final touch in Beijing and helped give the blue-and-white shirt one real answer.
 
 ### Andres Iniesta
 - Summary: The finisher at Stamford Bridge who turns Messi's last rescue pass into survival.
+- Age & Appearance: 24 to 25; slim, with very short hair and a low center of gravity that makes every turn and first touch look light.
 - Current Status: He has received the ball at the final second and pulled Barcelona back from a door that was almost shut.

@@ -38,12 +38,15 @@ It turned every match that followed into a door.
 
 ### Lionel Messi
 - Summary: A captain entering Qatar with one answer already won, only to feel the final question grow heavier.
+- Age & Appearance: 34 to 35; wearing the fuller beard of his later years, still compact in body, but much quieter in expression than when he was young.
 - Current Status: He has scored first against Saudi Arabia, yet the World Cup has immediately narrowed into a series of survival doors.
 
 ### Lionel Scaloni
 - Summary: The coach who has turned Argentina into a genuine contender.
+- Age & Appearance: 44; lean, short-haired, stubbled, holding the team's rhythm on the touchline as if gripping it in his fist.
 - Current Status: He has built a mature, settled team, and now he must prove it can survive the worst possible start.
 
 ### Argentina
 - Summary: A side transformed from old sufferers into a team the whole world now demands a final answer from.
+- Age & Appearance: Age not applicable; the blue-and-white line stands straighter now, fitter in body and more coordinated in movement, like a mature side at last.
 - Current Status: The unbeaten run is gone, and every match that remains now forbids another step backward.

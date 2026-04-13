@@ -30,12 +30,15 @@ What waited for him now was no longer how to make people remember him, but how t
 
 ### Lionel Messi
 - Summary: From Stamford Bridge to Getafe, he begins to be asked for answers on the biggest nights.
+- Age & Appearance: 18 to 19; still short but more powerfully built, quicker off the mark, already unmistakable as dark-haired, head down, left foot close to the ball.
 - Current Status: He is no longer just a young substitute, yet injury and team results still cling tightly to every miracle.
 
 ### Xavi
 - Summary: The midfielder who keeps Barcelona's attacking structure legible and makes Messi's decisive touches land inside a pattern.
+- Age & Appearance: 26 to 27; medium-built, short dark hair, clean facial lines, with a stance and turn that always look precise.
 - Current Status: He remains a crucial part of the order that lets Messi's moments truly change matches.
 
 ### Barcelona
 - Summary: The team lifted by Messi's breakthrough moments and still forced to absorb the cost of unfinished growth.
+- Age & Appearance: Age not applicable; visually a high, bright line of red and blue, glamorous on the surface and still carrying a little unfinished youth underneath.
 - Current Status: It has seen him decide the biggest games, but it also knows that one miracle does not solve everything that follows.

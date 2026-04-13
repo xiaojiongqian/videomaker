@@ -42,12 +42,15 @@ It was that pair of boots by the door, and a captain who now looked older than b
 
 ### Lionel Messi
 - Summary: The older captain who drags Argentina into Russia and then has to wear another failure on top of the old ones.
+- Age & Appearance: 30 to 31; bearded, still tightly built, but already carrying a little of the heaviness that comes from years under load.
 - Current Status: He has saved qualification with a hat-trick, only to carry a new World Cup defeat against France.
 
 ### Jorge Sampaoli
 - Summary: The coach who takes over during the most unstable stretch of the cycle.
+- Age & Appearance: 57 to 58; not tall, bald, all quick movements, carrying himself on the touchline as if every nerve is pulled tight.
 - Current Status: He has made it to Russia with the team, but he cannot make it coherent under maximum pressure.
 
 ### Argentina
 - Summary: A team that still needs Messi to kick the door open first.
+- Age & Appearance: Age not applicable; the blue-and-white shirt looks like a shell assembled in a hurry, unstable both in shape and expression.
 - Current Status: It has stumbled into the World Cup and then fallen back out without finding a durable shape.

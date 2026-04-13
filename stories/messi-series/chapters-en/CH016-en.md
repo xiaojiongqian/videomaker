@@ -40,12 +40,15 @@ By that point, nothing needed explaining anymore.
 
 ### Lionel Messi
 - Summary: The man who finally receives an answer back from Argentina instead of only giving one.
+- Age & Appearance: 34; beard and sweat hanging together on his face, his dropped shoulders somehow making the weight of all those years even clearer.
 - Current Status: He has lifted his first truly desired senior international title, and the old question has gone quiet for now.
 
 ### Argentina
 - Summary: No longer only the blue-and-white shirt that demands answers.
+- Age & Appearance: Age not applicable; the blue-and-white kit is soaked with sweat and tears that night, bodies pressed close enough to finally look like one whole.
 - Current Status: It has finally placed the most important senior international trophy back into Messi's hands.
 
 ### Angel Di Maria
 - Summary: The player who actually finishes the last decisive touch of the final.
+- Age & Appearance: 33; lean and long, narrow-shouldered, light and quick in his running, especially sharp in that decisive final burst.
 - Current Status: His run and chip remain the most concrete act behind the trophy reaching Argentina's hands.

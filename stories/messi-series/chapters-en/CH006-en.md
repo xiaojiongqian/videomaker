@@ -32,12 +32,15 @@ The next thing that lit up over his head would no longer be only a substitution 
 
 ### Lionel Messi
 - Summary: The boy who finally reaches his official first-team debut and first official goal.
+- Age & Appearance: 17 to 18; compact and sharper through the legs, dark hair against the forehead, still obviously teenage even in the number 30 shirt.
 - Current Status: His name is now inside Barcelona's formal records and on the scoreboard, but his place is not fully secure yet.
 
 ### Ronaldinho
 - Summary: The older star whose passing finally turns the wait into a goal that counts.
+- Age & Appearance: 24 to 25; hair tied back, smile wide, movements loose and dazzling, with star light all over his presence.
 - Current Status: He has used his own gravity and generosity to push Messi into the visible center of the first team.
 
 ### Frank Rijkaard
 - Summary: The coach willing to give Messi his official league entrance.
+- Age & Appearance: 42; tall, steady, hard-featured, and often so even-faced that the decision seems made before the words.
 - Current Status: He has opened the senior door for real, even though Messi is still moving from prodigy to regular member.

@@ -34,12 +34,15 @@ But the hardest part was still ahead. Whether he could truly move in, whether he
 
 ### Lionel Messi
 - Summary: From dusty pitches in Rosario to the trial in Barcelona, he turns raw talent into something nobody at the touchline can ignore.
+- Age & Appearance: 13; very small for his age, with thin legs, narrow shoulders, dark hair falling over his forehead, and a shirt that still hangs loose on him.
 - Current Status: His name has been written onto the napkin, but staying, treatment, and formal eligibility are all still unresolved.
 
 ### Jorge Messi
 - Summary: Father and practical risk-bearer, holding the road together between bills, treatment, and the move abroad.
+- Age & Appearance: 42; a middle-aged factory-worker look, with short hair, slightly rounded shoulders, and a face still tight from doing the sums.
 - Current Status: He has brought Messi to Barcelona and is still chasing paperwork, housing, and costs from one day to the next.
 
 ### Carles Rexach
 - Summary: The decisive talent-spotter who turns maybe into a clear personal commitment.
+- Age & Appearance: 53; solidly built, hair brushed back, carrying the air of an old Barca man who decides quickly from the touchline.
 - Current Status: He has written Messi's name down, but the formal institutional confirmation is still to come.

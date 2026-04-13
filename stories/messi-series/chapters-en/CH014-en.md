@@ -36,12 +36,15 @@ They learned how to come back the next day.
 
 ### Lionel Messi
 - Summary: A captain who returns, while also learning that returning no longer means repairing everything at once.
+- Age & Appearance: 31; bearded, harder in the facial lines, returning as a quieter but heavier old captain.
 - Current Status: He is back in the squad, but what he needs now is a team that grows around him rather than collapses toward him.
 
 ### Lionel Scaloni
 - Summary: A coach who begins as a temporary figure and ends up rescuing the order of the rebuild first.
+- Age & Appearance: 40; lean, short-haired, stubbled, wearing a training kit with some of his old player sharpness still visible.
 - Current Status: He has earned the right to continue by stabilizing training and daily routine before anything glamorous.
 
 ### Pablo Aimar
 - Summary: A quiet but concrete training-ground presence during the reset.
+- Age & Appearance: 39; slim, soft-faced, short-haired, with the calm of someone who demonstrates rhythm rather than talks it.
 - Current Status: He is helping Scaloni turn the post-World Cup vacuum into repeatable daily work.

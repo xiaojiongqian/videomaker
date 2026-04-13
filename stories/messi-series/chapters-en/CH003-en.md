@@ -32,12 +32,15 @@ Now that he was standing back on the grass again, what came next was not only ab
 
 ### Lionel Messi
 - Summary: He finally sees his name on the official team sheet, only to taste both a debut goal and a broken leg within a week.
+- Age & Appearance: 13; small and still very child-faced, looking light in the number 9 shirt and even more fragile once the crutches arrive.
 - Current Status: He has gone from waiting boy to official player, then straight back to the stand and the crutches.
 
 ### Jorge Messi
 - Summary: The father who watches the long wait finally break open through a real match.
+- Age & Appearance: 42; hard lines in the face, rough working hands, and a touchline posture built on holding emotion in.
 - Current Status: Now he is no longer dealing only with paperwork, but with recovery and the task of coming back again.
 
 ### Barcelona U14A
 - Summary: The first side that truly lets Messi into the order of official competition.
+- Age & Appearance: Age not applicable; visually a line of teenage Barca shirts and names on a team sheet, the first real collective order that lets him in.
 - Current Status: It has opened the door for him once, but now it must wait for his recovery before it can let him back through.

@@ -32,12 +32,15 @@ But he had already settled one part of the matter in his own head: he would not 
 
 ### Lionel Messi
 - Summary: Inside the old La Masia, he says he wants to stay for real, even while official matches remain out of reach.
+- Age & Appearance: 13; still a very small boy, thin-legged and narrow-shouldered, dark hair down over his brow, looking even slighter in the corridors of old La Masia.
 - Current Status: He is inside the system now and has chosen Barcelona in his own mind, but match eligibility is still trapped behind paperwork and waiting.
 
 ### Jorge Messi
 - Summary: Father and keeper of the possible way back, the one who is willing to ask whether they should return home.
+- Age & Appearance: 42; short-haired and medium-built, with tired eyes and the look of a man carrying both the bills and the way back on his shoulders.
 - Current Status: He is still handling the practical side of exile while watching his son choose to stay anyway.
 
 ### Gerard Pique
 - Summary: A representative of the boys around Messi, helping La Masia feel like more than rules and distance.
+- Age & Appearance: 14; already taller than most boys his age, long-limbed and skinny, with a lot of boyhood still showing.
 - Current Status: Along with the other boys, he is making the wait outside the official list a little more livable.

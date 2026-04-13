@@ -38,12 +38,15 @@ It was responsibility, put back on his shoulders.
 
 ### Lionel Messi
 - Summary: A man pulled between wanting to step away and being unable to leave the whole line behind.
+- Age & Appearance: 29; beard fuller now, eyes heavier, the captain's armband seeming to hang on him with the fatigue.
 - Current Status: He has returned to the team, taken the armband again, and scored against Uruguay, but the deeper burden is still there.
 
 ### Edgardo Bauza
 - Summary: The new coach who carries the plea for return directly to Barcelona.
+- Age & Appearance: 58; tall and thick-set, with heavy features and the look of an old-school coach who has come to speak plainly.
 - Current Status: He has helped reconnect the line, but he cannot erase the defeats that made the break possible.
 
 ### Gerardo Martino
 - Summary: The outgoing coach whose departure exposes the disorder around the team.
+- Age & Appearance: 53; on the lean side, with short greying hair and a restrained expression that still shows the wear of disorder.
 - Current Status: He has left, and in doing so he has made the wider chaos harder to ignore.

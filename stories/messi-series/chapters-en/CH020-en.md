@@ -34,12 +34,15 @@ The grass had already said it for him.
 
 ### Lionel Messi
 - Summary: A man who no longer has to defend his identity one tournament at a time.
+- Age & Appearance: 35; full-bearded, eyes red, still visibly compact and durable even when he drops to cover his face.
 - Current Status: He is now a world champion, a Golden Ball winner again, and finally beyond the old duty of proving himself.
 
 ### Argentina
 - Summary: The collective that finally gives the heaviest answer back instead of only asking for it.
+- Age & Appearance: Age not applicable; the blue-and-white shirts gleam under gold medals and sweat, finally looking like a complete answer.
 - Current Status: It is world champion now, and it is no longer defined only by what it demanded from Messi.
 
 ### Gonzalo Montiel
 - Summary: The taker who turns the final ounce of possibility into fact.
+- Age & Appearance: 25; compact and strong, short-haired, not imposing in size at the spot but very firm in presence.
 - Current Status: The penalty is in, the ending is fixed, and there is no room left for the old question to return.

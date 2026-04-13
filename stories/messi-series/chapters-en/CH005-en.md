@@ -28,12 +28,15 @@ The next time someone stopped him at the edge of a training session, what ought 
 
 ### Lionel Messi
 - Summary: In one season, he keeps getting pushed upward and starts turning both the first-team touchline and adult football into reality.
+- Age & Appearance: 16; still short, but tighter and stronger through the body, with messy dark hair and a dribbling stance that keeps his center of gravity very low.
 - Current Status: He has touched the first-team friendly stage and adult competitive football, but his permanent level is still unresolved.
 
 ### Frank Rijkaard
 - Summary: The coach who begins drawing Messi toward the orbit of the first team.
+- Age & Appearance: 41; tall and broad-backed, calm-faced, the kind of coach who seems to keep the decision in his eyes first.
 - Current Status: He has already used Messi in Porto, but he has not yet fixed him inside the senior hierarchy.
 
 ### Barcelona's Youth Ladder
 - Summary: The whole structure of youth and reserve levels that keeps moving Messi upward.
+- Age & Appearance: Age not applicable; visually a stack of different shirts, training grounds, and team sheets, like a staircase that keeps lifting him upward.
 - Current Status: It is promoting him again and again, but it has not yet given him one final place to belong.

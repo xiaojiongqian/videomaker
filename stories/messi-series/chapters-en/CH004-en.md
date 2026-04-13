@@ -28,8 +28,10 @@ The only thing that had not arrived yet was the official word sending him upward
 
 ### Lionel Messi
 - Summary: The boy who finally completes a full season after injury and turns continuity into goals again.
+- Age & Appearance: 14 to 15; still slight in frame, but with more strength beginning to grow in the legs, youthful in the face, and especially bright-eyed once the mask is strapped on.
 - Current Status: He has taken the mask off, finished the season, and is beginning to look too large for this level to hold.
 
 ### Barcelona U14A
 - Summary: The team that gives Messi his competitive rhythm back after the injury break.
+- Age & Appearance: Age not applicable; a whole row of red-and-blue youth bodies, more settled in rhythm and more capable of taking him back in.
 - Current Status: It has watched him turn a full season and a final into an unmistakable sign of upward movement.

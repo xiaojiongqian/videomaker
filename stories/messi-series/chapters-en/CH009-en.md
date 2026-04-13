@@ -26,12 +26,15 @@ From then on, the dressing room, the tunnel, and those minutes before kickoff we
 
 ### Lionel Messi
 - Summary: A player glowing brightly at club level while growing heavier and heavier inside Argentina.
+- Age & Appearance: 23 to 24; fully grown into a top professional body, with a heavier stride, a tighter face, and a more strained expression in blue and white than in club colors.
 - Current Status: He has just come through the 2010 World Cup and the 2011 Copa America without a national-team answer, and now the captain's armband is his.
 
 ### Alejandro Sabella
 - Summary: The coach who first tightens Argentina and then places formal leadership on Messi.
+- Age & Appearance: 56; lean, receding-haired, quiet-eyed, looking like a man who wants to pull the whole team inward first.
 - Current Status: He has turned public comparison and expectation into the concrete duty of captaincy.
 
 ### Argentina
 - Summary: The national line that no amount of club glory can answer by itself.
+- Age & Appearance: Age not applicable; the blue-and-white shirt looks familiar in a crowd, but heavy too, with tension hanging over the whole side.
 - Current Status: It is still waiting for an answer in blue and white, and it is beginning to press that demand back onto Messi more directly than before.

@@ -52,16 +52,20 @@ Before, people had asked whether he could carry Argentina this far. Now they wou
 
 ### Lionel Messi
 - Summary: The captain who drags Argentina all the way into the World Cup final in Brazil.
+- Age & Appearance: 27; at his physical peak, short-haired with beard stubble, quick-stepping, the captain's armband making him look calmer and heavier at once.
 - Current Status: He has proved he can carry the national team to the edge of the trophy, and now must bear the question of why the last step still failed.
 
 ### Alejandro Sabella
 - Summary: The coach who narrows the team first and gives this Argentina side its stable shape.
+- Age & Appearance: 59; lean and quiet, with thinning hair and a slightly closed stance, as if holding a whole order of play in front of him.
 - Current Status: He has built an Argentina capable of reaching the final, but not one that can push the final touch through.
 
 ### Angel Di Maria
 - Summary: The runner who receives Messi's last pass at the narrowest knockout gate.
+- Age & Appearance: 26; slender, long-striding, narrow-faced, attacking space like a diagonal cut through the box.
 - Current Status: His goal against Switzerland has bought Argentina one more round of life.
 
 ### Sergio Romero
 - Summary: The quiet but crucial goalkeeper who holds the penalty night together against the Netherlands.
+- Age & Appearance: 27; tall and long-armed, short-haired, quiet in goal but large once he sets himself.
 - Current Status: He has helped Argentina stand at the door of the final, even if he cannot change what happens at the Maracana.

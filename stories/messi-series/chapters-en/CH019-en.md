@@ -60,12 +60,25 @@ It was the net itself.
 
 ### Lionel Messi
 - Summary: The man standing at the center of the final where every unfinished question arrives at once.
+- Age & Appearance: 35; beard, captain's armband, and a heavier body language all present, as if he has carried every earlier year into the center of this final.
 - Current Status: He has done his part in both the final and the shootout, and he has crossed the last great wall with Argentina at last.
 
 ### Julian Alvarez
 - Summary: The forward whose running gives the Croatia semi-final its clean shape.
+- Age & Appearance: 22; compact, quick-stepping, still young in the face, always seeming able to force one more half-step out of a run.
 - Current Status: He has helped Argentina reach the final more steadily, without asking Messi to carry every step alone.
+
+### Angel Di Maria
+- Summary: The finest and sharpest edge of Argentina's first half in the final.
+- Age & Appearance: 34; slender and narrow-shouldered, stretching the whole pitch from the left and still moving with a light, sharp stride.
+- Current Status: He has produced the stretch of play in Lusail that felt most like Argentina had finally arrived.
+
+### Lautaro Martinez
+- Summary: The forward who still refuses to hide in extra time and keeps attacking the most uncomfortable space in front of goal.
+- Age & Appearance: 25; sturdy through the upper body and legs, short-haired, built like a striker who keeps leaning into contact.
+- Current Status: He has kept pushing Argentina toward France's goal even in the messiest phase of the match.
 
 ### Emiliano Martinez
 - Summary: The goalkeeper who drags the whole story back from the brink one second before penalties.
+- Age & Appearance: 30; tall, long-armed, broad-backed, and even more willing to put himself in front of the ball when the moment turns extreme.
 - Current Status: His save from Kolo Muani has preserved everything Argentina had pulled into reach.

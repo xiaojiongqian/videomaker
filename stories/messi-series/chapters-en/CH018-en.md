@@ -46,12 +46,20 @@ It was two matches between Argentina and the end of the whole story.
 
 ### Lionel Messi
 - Summary: The captain who pushes the key back into the lock after Saudi Arabia.
+- Age & Appearance: 35; beard thick, facial lines harder, still able to pull the whole stadium's gaze onto his left foot the moment it lands.
 - Current Status: He has reopened Argentina's road with the goal against Mexico and led the team all the way into the final two matches.
 
 ### Enzo Fernandez
 - Summary: One of the first of the new generation to put his own hand into the lock.
+- Age & Appearance: 21; still young in the face, short-haired, cool-eyed, and more composed on the ball than his age suggests.
 - Current Status: His goal against Mexico shows that he is not only following Messi; he can open the road himself as well.
+
+### Julian Alvarez
+- Summary: The forward who always chases half a step farther than everyone else and turns loose moments into real openings.
+- Age & Appearance: 22; compact and springy, with a boyish face, short dark hair, and a habit of throwing his upper body into every chase.
+- Current Status: He has started taking Argentina's front-foot pressure onto himself for real at this World Cup.
 
 ### Emiliano Martinez
 - Summary: The goalkeeper who slams his hands into the match when the door is almost closing.
+- Age & Appearance: 30; tall and powerfully built, with a wide reach, diving as if he will throw his whole body straight into danger.
 - Current Status: He has protected Argentina against Australia and the Netherlands at the tournament's most dangerous edges.
