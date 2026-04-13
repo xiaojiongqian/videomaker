@@ -53,6 +53,13 @@ function sortByRecent(items) {
 
 function sortNovel(items) {
   return [...items].sort((a, b) => {
+    const aSeries = String(a.typeLabel || a.seriesTitle || a.type || "");
+    const bSeries = String(b.typeLabel || b.seriesTitle || b.type || "");
+    const seriesCompare = aSeries.localeCompare(bSeries, "zh-CN");
+    if (seriesCompare !== 0) {
+      return seriesCompare;
+    }
+
     const aSequence = Number.isFinite(a.sequence) ? a.sequence : Number.MAX_SAFE_INTEGER;
     const bSequence = Number.isFinite(b.sequence) ? b.sequence : Number.MAX_SAFE_INTEGER;
 

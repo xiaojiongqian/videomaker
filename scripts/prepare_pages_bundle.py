@@ -119,6 +119,63 @@ def parse_summary_one_line(markdown_text: str) -> str:
     return ""
 
 
+def truncate_summary(text: str, limit: int = 220) -> str:
+    normalized = re.sub(r"\s+", " ", text).strip()
+    if len(normalized) <= limit:
+        return normalized
+
+    cut = normalized[: limit + 1]
+    if " " in cut:
+        cut = cut.rsplit(" ", 1)[0]
+    if len(cut) < int(limit * 0.6):
+        cut = normalized[:limit]
+    return cut.rstrip(" .,;:") + "..."
+
+
+def parse_markdown_lead_paragraph(markdown_text: str) -> str:
+    lines = strip_front_matter(markdown_text).splitlines()
+    paragraph_lines: list[str] = []
+    title_skipped = False
+    in_code_block = False
+
+    for raw_line in lines:
+        fence_match = CODE_FENCE_LINE.match(raw_line)
+        if fence_match:
+            in_code_block = not in_code_block
+            continue
+        if in_code_block:
+            continue
+
+        stripped = raw_line.strip()
+        if not stripped:
+            if paragraph_lines:
+                break
+            continue
+
+        if not title_skipped and stripped.startswith("# "):
+            title_skipped = True
+            continue
+
+        if stripped.startswith("#") or stripped == "-------":
+            if paragraph_lines:
+                break
+            continue
+
+        if stripped.startswith(("- ", "* ", "+ ")) or OL_LINE.match(stripped):
+            if paragraph_lines:
+                break
+            continue
+
+        if IMAGE_LINE.match(stripped):
+            if paragraph_lines:
+                break
+            continue
+
+        paragraph_lines.append(stripped)
+
+    return truncate_summary(" ".join(paragraph_lines))
+
+
 def parse_project_snapshot_value(markdown_text: str, key: str) -> str:
     in_snapshot = False
     key_prefix = f"- {key}:"
@@ -138,7 +195,7 @@ def parse_project_snapshot_value(markdown_text: str, key: str) -> str:
 
 
 def parse_chapter_sequence(chapter_id: str, fallback: int) -> int:
-    match = re.search(r"(\d+)$", chapter_id)
+    match = re.search(r"(\d+)", chapter_id)
     if match:
         return int(match.group(1))
     return fallback
@@ -187,6 +244,8 @@ def build_story_site_items(repo_root: Path) -> list[dict]:
             chapter_summary = ""
             if summary_path.exists():
                 chapter_summary = parse_summary_one_line(summary_path.read_text(encoding="utf-8"))
+            if not chapter_summary:
+                chapter_summary = parse_markdown_lead_paragraph(chapter_text)
 
             items.append(
                 {
@@ -232,6 +291,7 @@ def sort_items_for_channel(items: list[dict], channel: str) -> list[dict]:
         return sorted(
             relevant,
             key=lambda item: (
+                str(item.get("typeLabel") or item.get("seriesTitle") or item.get("type") or ""),
                 int(item.get("sequence")) if str(item.get("sequence", "")).isdigit() else 10**9,
                 str(item.get("title", "")),
             ),
@@ -821,7 +881,7 @@ def write_static_post_pages(out_root: Path, items: list[dict], asset_version: st
     for channel in channels:
         published_items = sort_items_for_channel(items, channel)
 
-        for index, item in enumerate(published_items):
+        for item in published_items:
             source_ref = str(item.get("source", "")).strip()
             if not source_ref:
                 continue
@@ -832,8 +892,13 @@ def write_static_post_pages(out_root: Path, items: list[dict], asset_version: st
 
             markdown_text = strip_front_matter(source_path.read_text(encoding="utf-8"))
             body_html, toc = render_markdown_basic(markdown_text, source_path, post_dir, out_root)
-            prev_item = published_items[index - 1] if index > 0 else None
-            next_item = published_items[index + 1] if index < len(published_items) - 1 else None
+            nav_items = published_items
+            if channel == "novel" and item.get("type"):
+                nav_items = [candidate for candidate in published_items if candidate.get("type") == item.get("type")]
+
+            nav_index = nav_items.index(item) if item in nav_items else -1
+            prev_item = nav_items[nav_index - 1] if nav_index > 0 else None
+            next_item = nav_items[nav_index + 1] if 0 <= nav_index < len(nav_items) - 1 else None
             page_html = build_post_static_html(item, body_html, toc, prev_item, next_item, asset_version)
             output_path = post_dir / f'{quote(str(item["id"]), safe="")}.html'
             output_path.write_text(page_html, encoding="utf-8")

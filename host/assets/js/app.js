@@ -586,7 +586,10 @@ async function initPostPage() {
     }
 
     const channel = requestedItem?.channel || requestedChannel;
-    const channelItems = sortContentItems(filterContentByChannel(published, channel), channel);
+    const scopedItems = requestedItem?.channel === 'novel' && requestedItem?.type
+      ? filterContentByChannel(published, channel).filter((item) => item.type === requestedItem.type)
+      : filterContentByChannel(published, channel);
+    const channelItems = sortContentItems(scopedItems, channel);
     if (!channelItems.length) {
       postTitleEl.textContent = '暂无可阅读内容';
       postMetaEl.textContent = `${getChannelConfig(channel).label}频道暂无已发布内容。`;

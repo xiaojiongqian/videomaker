@@ -1,0 +1,31 @@
+{
+  "channel": "novel",
+  "type": "messi-series-en",
+  "typeLabel": "The One Who Saw the Gaps",
+  "topic": ["Sports Coming-of-Age", "Documentary Sports Fiction"],
+  "chaptersDir": "../messi-series/chapters-en",
+  "summariesDir": "../messi-series/summaries-en",
+  "indexFile": "INDEX.md",
+  "publishedChapters": [
+    "CH001-en",
+    "CH002-en",
+    "CH003-en",
+    "CH004-en",
+    "CH005-en",
+    "CH006-en",
+    "CH007-en",
+    "CH008-en",
+    "CH009-en",
+    "CH010-en",
+    "CH011-en",
+    "CH012-en",
+    "CH013-en",
+    "CH014-en",
+    "CH015-en",
+    "CH016-en",
+    "CH017-en",
+    "CH018-en",
+    "CH019-en",
+    "CH020-en"
+  ]
+}
