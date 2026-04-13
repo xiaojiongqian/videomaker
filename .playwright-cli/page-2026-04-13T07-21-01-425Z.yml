@@ -1,0 +1,149 @@
+- generic [active] [ref=e1]:
+  - link "跳到正文" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "小说" [ref=e5] [cursor=pointer]:
+        - /url: ../index.html?channel=novel
+      - navigation "主导航" [ref=e6]:
+        - link "AI时代" [ref=e7] [cursor=pointer]:
+          - /url: ../index.html
+        - link "小说" [ref=e8] [cursor=pointer]:
+          - /url: ../index.html?channel=novel
+  - main [ref=e9]:
+    - generic [ref=e11]:
+      - complementary "目录" [ref=e12]:
+        - heading "目录" [level=2] [ref=e13]
+        - list [ref=e14]:
+          - listitem [ref=e15]:
+            - link "土场、病单和不肯停球" [ref=e16] [cursor=pointer]:
+              - /url: "#土场病单和不肯停球"
+          - listitem [ref=e17]:
+            - link "去巴塞罗那试试看" [ref=e18] [cursor=pointer]:
+              - /url: "#去巴塞罗那试试看"
+          - listitem [ref=e19]:
+            - link "漫长等待最后落到餐巾纸上" [ref=e20] [cursor=pointer]:
+              - /url: "#漫长等待最后落到餐巾纸上"
+          - listitem [ref=e21]:
+            - link "本章重要角色说明" [ref=e22] [cursor=pointer]:
+              - /url: "#本章重要角色说明"
+      - article "CH001 餐巾纸上的名字" [ref=e24]:
+        - generic "文章简介" [ref=e25]:
+          - paragraph [ref=e26]: 小说 · 《看见缝隙的人》 · 第1章
+          - heading "CH001 餐巾纸上的名字" [level=1] [ref=e27]
+          - paragraph [ref=e28]: 从罗萨里奥街头和纽维尔少年队的日子，到生长激素缺乏带来的治疗压力，再到2000年9月巴塞罗那试训和12月14日的餐巾纸承诺，梅西第一次被巴塞罗那真正写到纸上。
+        - generic [ref=e29]:
+          - heading "CH001 餐巾纸上的名字" [level=1] [ref=e30]
+          - heading "土场、病单和不肯停球" [level=2] [ref=e31]
+          - paragraph [ref=e32]: 球刚滚进土坑里，几个比他高一头的孩子就一起扑了过去。只有梅西没乱。他先用左脚把球轻轻一粘，再从两条腿之间往前一拨，人也跟着钻了过去。有人在场边喊：“把球传出来！”他没抬头，肩一缩，又带着球往前跑。父亲豪尔赫下班赶到场边时，先看见的总是这一幕：那个小小的身影埋着头，带球从一群大孩子腿边往前挤。罗萨里奥很多球场都不像正经球场，更像一块被孩子们踩熟了的空地。草长得不齐，边上有土，球一滚过去就会带起一层灰。梅西小时候就是在这种地方追球的。
+          - paragraph [ref=e33]: 他在纽维尔老男孩少年队越踢越顺，麻烦却不是从球场上来的。先是长得慢，后来几乎不怎么长了。医院里的灯很白，医生把结果说得很平：生长激素缺乏，要治疗，要打针，也要花很多钱。那天晚上，家里的饭桌安静得厉害。母亲把账单折了一下，又展开；豪尔赫把那张纸接过去，用指节压住边角，一行一行往下看，像是想先把数字看熟，再决定拿什么去扛。梅西坐在旁边，手压着膝盖，一声不吭。过了很久，豪尔赫才说：“球先别停。”他不太会说安慰人的话，能先给出来的，通常只有这句。梅西抬起头，看了父亲一眼，点了点头。
+          - paragraph [ref=e34]: 第二天他还是照常去训练。个子不够，反而让他更容易从人缝里钻过去。别人一旦被围住，就会喊他名字，把球塞给他。梅西接球，转身，再往前。看起来最容易被撞开的那个孩子，偏偏总能把球带出来。问题是，光会踢球不够。药要打，钱要算，日子也要往下过。豪尔赫四处去问，俱乐部也不是没动过念头，可事情绕来绕去，还是落回同一堵墙上。留在罗萨里奥，路只会越来越窄。
+          - heading "去巴塞罗那试试看" [level=2] [ref=e35]
+          - paragraph [ref=e36]: 去巴塞罗那的主意，就是在这种时候慢慢成形的。先是有人提议，去欧洲试试看；后来，这个主意真的变成了一张机票、一只箱子和一次出发。2000年9月，梅西跟着豪尔赫到了巴塞罗那。陌生的城市铺在眼前，街道更宽，楼更高，空气里带着海边的潮气。豪尔赫提着箱子，走几步就回头看一眼，像怕这孩子真被这座城一下吞进去。到了训练场外，他没再多铺垫，只把箱子往地上一放，说：“先踢给他们看。”梅西把背包往上提了提，只回了一句：“好。”
+          - paragraph [ref=e37]: 试训在庞培亚那边开始。训练场很平，草很整齐，场边站着的人也比罗萨里奥多得多。刚分组时，没谁真把这个阿根廷来的小个子放在眼里。球衣挂在身上显得大，腿细，肩也窄，看着不像能在这种地方站稳的人。有人随口问他：“你踢哪边？”梅西把球停到脚下：“都行。”
+          - paragraph [ref=e38]: 哨声一响，事情就变了。第一次带球，他直接沿边线往里切；第二次变向，跟上来的人脚下一乱，重心先丢了；第三次，他从两三条腿之间把球带出来，顺势把人甩在身后。场边原本站得散的人，一点点往前挪。训练还没结束，就已经有人在问：“这孩子是谁？”梅西没看场边，只顾着继续踢。大人们还在为合同、治疗和住处反复商量，梅西先用试训把自己留在了场上。
+          - heading "漫长等待最后落到餐巾纸上" [level=2] [ref=e39]
+          - paragraph [ref=e40]: 两周试训结束后，训练场给的答案已经够清楚，真正的答复却一直没落下来。9月过去了，10月过去了，11月也过去了。白天去训练，晚上回去等消息，电话打来打去，总像差最后那一页纸。豪尔赫白天去问，晚上回来时外套里总带着一股烟味和潮气，进门先把钥匙放下，再说一句“再等等”。有一次他刚放下电话，梅西就从门边抬起头问：“他们到底要不要我？”豪尔赫没立刻接话，只把烟盒在掌心里攥了攥，才说：“再等等。”他不肯乱给准话，可也不肯先把路收回去。这个“再等等”拖了一周，又一周。一个十三岁的孩子，还没等来一句准话，就先学会了怎么在巴塞罗那等消息。
+          - paragraph [ref=e41]: 到了12月14日，雷克萨奇先不想再等了。那天下午，在庞培亚网球俱乐部的吧台边，正式文件没有带来，推来推去的话倒是已经听够了。桌上有杯子，有碟子，还有一张被水汽打湿的餐巾纸。桌边还有人想继续解释流程、继续往后推，雷克萨奇却先把手抬起来压了一下，意思很清楚：别再绕了。他本来就不是喜欢把判断拖成会议的人。那张纸被他拽过来，用手掌压平，低头就写。笔尖划过去的时候，桌边几个人都没说话，只听见纸被压住时发出一点轻微的皱响。
+          - paragraph [ref=e42]: 那不是正式合同，也没有马上把所有麻烦都解决。注册手续、治疗费用、住处安排，样样都还在后面。可从这一天起，梅西的名字第一次被巴塞罗那认真写到了纸上。到这一步，他不再只是训练场边被人议论的阿根廷小孩，巴塞罗那也不再只是口头上说愿意看看他。
+          - paragraph [ref=e43]: 名字先被留下来了。
+          - paragraph [ref=e44]: 可真正难熬的，还在后面。人住不住得进来，比赛踢不踢得上，都还没有答案。
+          - paragraph [ref=e45]: "-------"
+          - heading "本章重要角色说明" [level=2] [ref=e46]
+          - heading "里奥·梅西" [level=3] [ref=e47]
+          - list [ref=e48]:
+            - listitem [ref=e49]: 摘要：在罗萨里奥的土场和巴塞罗那试训里，他用最小的身体先把天赋踢成了所有人都看得见的东西。
+            - listitem [ref=e50]: 当前状态：名字已经被写上餐巾纸，但真正留下、治疗落地和正式资格都还没有稳下来。
+          - heading "豪尔赫·梅西" [level=3] [ref=e51]
+          - list [ref=e52]:
+            - listitem [ref=e53]: 摘要：父亲，也是那种不太会安慰、却会先把路继续往前扛的人。
+            - listitem [ref=e54]: 当前状态：已经把梅西带到巴塞罗那，也还在继续追着合同、住处和费用一项项顶下去。
+          - heading "卡莱斯·雷克萨奇" [level=3] [ref=e55]
+          - list [ref=e56]:
+            - listitem [ref=e57]: 摘要：关键识才者，也是最先不肯继续陪流程兜圈子的人。
+            - listitem [ref=e58]: 当前状态：已经拍板写下梅西的名字，但制度层面的正式确认仍在后面。
+        - navigation "全部章节" [ref=e59]:
+          - paragraph [ref=e60]: 全部章节
+          - list [ref=e61]:
+            - listitem [ref=e62]:
+              - link "第1章 · 餐巾纸上的名字" [ref=e63] [cursor=pointer]:
+                - /url: ../post/messi-series-ch001.html
+                - text: 01 餐巾纸上的名字
+            - listitem [ref=e64]:
+              - link "第2章 · 名单之外" [ref=e65] [cursor=pointer]:
+                - /url: ../post/messi-series-ch002.html
+                - text: 02 名单之外
+            - listitem [ref=e66]:
+              - link "第3章 · 一周之后" [ref=e67] [cursor=pointer]:
+                - /url: ../post/messi-series-ch003.html
+                - text: 03 一周之后
+            - listitem [ref=e68]:
+              - link "第4章 · 面具下的赛季" [ref=e69] [cursor=pointer]:
+                - /url: ../post/messi-series-ch004.html
+                - text: 04 面具下的赛季
+            - listitem [ref=e70]:
+              - link "第5章 · 一级一级往上走" [ref=e71] [cursor=pointer]:
+                - /url: ../post/messi-series-ch005.html
+                - text: 05 一级一级往上走
+            - listitem [ref=e72]:
+              - link "第6章 · 人们开始拿他和前人比较" [ref=e73] [cursor=pointer]:
+                - /url: ../post/messi-series-ch006.html
+                - text: 06 人们开始拿他和前人比较
+            - listitem [ref=e74]:
+              - link "第7章 · 跑过整条中线的人" [ref=e75] [cursor=pointer]:
+                - /url: ../post/messi-series-ch007.html
+                - text: 07 跑过整条中线的人
+            - listitem [ref=e76]:
+              - link "第8章 · 金球不能回答的问题" [ref=e77] [cursor=pointer]:
+                - /url: ../post/messi-series-ch008.html
+                - text: 08 金球不能回答的问题
+            - listitem [ref=e78]:
+              - link "第9章 · 更衣室里最安静的人" [ref=e79] [cursor=pointer]:
+                - /url: ../post/messi-series-ch009.html
+                - text: 09 更衣室里最安静的人
+            - listitem [ref=e80]:
+              - link "第10章 · 马拉卡纳的长走廊" [ref=e81] [cursor=pointer]:
+                - /url: ../post/messi-series-ch010.html
+                - text: 10 马拉卡纳的长走廊
+            - listitem [ref=e82]:
+              - link "第11章 · 第三次决赛之后" [ref=e83] [cursor=pointer]:
+                - /url: ../post/messi-series-ch011.html
+                - text: 11 第三次决赛之后
+            - listitem [ref=e84]:
+              - link "第12章 · 短暂退场" [ref=e85] [cursor=pointer]:
+                - /url: ../post/messi-series-ch012.html
+                - text: 12 短暂退场
+            - listitem [ref=e86]:
+              - link "第13章 · 世界杯之后的清晨" [ref=e87] [cursor=pointer]:
+                - /url: ../post/messi-series-ch013.html
+                - text: 13 世界杯之后的清晨
+            - listitem [ref=e88]:
+              - link "第14章 · 老队长的训练鞋" [ref=e89] [cursor=pointer]:
+                - /url: ../post/messi-series-ch014.html
+                - text: 14 老队长的训练鞋
+            - listitem [ref=e90]:
+              - link "第15章 · 马拉卡纳的回声终于变了方向" [ref=e91] [cursor=pointer]:
+                - /url: ../post/messi-series-ch015.html
+                - text: 15 马拉卡纳的回声终于变了方向
+            - listitem [ref=e92]:
+              - link "第16章 · 奖杯落进手里时没有人说话" [ref=e93] [cursor=pointer]:
+                - /url: ../post/messi-series-ch016.html
+                - text: 16 奖杯落进手里时没有人说话
+            - listitem [ref=e94]:
+              - link "第17章 · 沙漠里的第一脚球" [ref=e95] [cursor=pointer]:
+                - /url: ../post/messi-series-ch017.html
+                - text: 17 沙漠里的第一脚球
+            - listitem [ref=e96]:
+              - link "第18章 · 输给沙特之后的门" [ref=e97] [cursor=pointer]:
+                - /url: ../post/messi-series-ch018.html
+                - text: 18 输给沙特之后的门
+            - listitem [ref=e98]:
+              - link "第19章 · 决赛踢到时间失去形状" [ref=e99] [cursor=pointer]:
+                - /url: ../post/messi-series-ch019.html
+                - text: 19 决赛踢到时间失去形状
+            - listitem [ref=e100]:
+              - link "第20章 · 世界终于不再要求他证明" [ref=e101] [cursor=pointer]:
+                - /url: ../post/messi-series-ch020.html
+                - text: 20 世界终于不再要求他证明
+  - contentinfo [ref=e102]:
+    - paragraph [ref=e104]: 作者：Vik Qian · 版权所有 © 2026 小说

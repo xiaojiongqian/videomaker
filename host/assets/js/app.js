@@ -65,6 +65,7 @@ const UI_STRINGS = {
     noToc: '暂无目录',
     introLabel: '文章简介',
     postNavLabel: '上一篇下一篇',
+    allChaptersLabel: '全部章节',
     noMoreContent: '没有更多内容',
     footerTemplate: '作者：Vik Qian · 版权所有 © 2026 {label}',
     novelMetaLabel: '小说',
@@ -122,6 +123,7 @@ const UI_STRINGS = {
     noToc: 'No table of contents',
     introLabel: 'Chapter intro',
     postNavLabel: 'Previous and next chapters',
+    allChaptersLabel: 'All chapters',
     noMoreContent: 'No more content',
     footerTemplate: 'Author: Vik Qian · Copyright © 2026 {label}',
     novelMetaLabel: 'Novel',
@@ -324,6 +326,24 @@ function getPostHref(item) {
     return page;
   }
   return `./post.html?id=${encodeURIComponent(item.id)}`;
+}
+
+function getChapterDisplayTitle(item) {
+  const rawTitle = String(item?.title || '').trim();
+  if (!rawTitle) {
+    return '';
+  }
+
+  return rawTitle.replace(/^CH\d+(?:-en)?\s+/i, '').trim() || rawTitle;
+}
+
+function formatChapterButtonNumber(sequence, totalItems) {
+  if (!Number.isFinite(sequence)) {
+    return '•';
+  }
+
+  const width = totalItems >= 10 ? 2 : 1;
+  return String(sequence).padStart(width, '0');
 }
 
 function renderCard(item) {
@@ -651,8 +671,52 @@ function initTocResizer() {
 
 function renderPostNavigation(items, currentIndex) {
   const navEl = document.getElementById('postNav');
-  const links = [];
   const strings = getStrings(getUiLanguage(window.__contentItem || null));
+  const currentItem = window.__contentItem || null;
+
+  if (!navEl) {
+    return;
+  }
+
+  if (currentItem?.channel === 'novel') {
+    navEl.className = 'post-nav chapter-nav';
+    navEl.setAttribute('aria-label', strings.allChaptersLabel);
+
+    const totalItems = items.length;
+    const chapterLinks = items
+      .map((item, index) => {
+        const isCurrent = index === currentIndex;
+        const buttonLabel = formatChapterButtonNumber(item.sequence, totalItems);
+        const chapterTitle = getChapterDisplayTitle(item) || item.title || strings.novelChapterFallback;
+        const sequenceLabel = Number.isFinite(item.sequence)
+          ? strings.novelChapterLabel(item.sequence)
+          : strings.novelChapterFallback;
+        const currentAttr = isCurrent ? ' aria-current="page"' : '';
+
+        return `
+          <li class="chapter-nav__item">
+            <a
+              class="chapter-nav__link"
+              href="${escapeHtml(getPostHref(item))}"
+              title="${escapeHtml(chapterTitle)}"
+              data-tooltip="${escapeHtml(chapterTitle)}"
+              aria-label="${escapeHtml(`${sequenceLabel} · ${chapterTitle}`)}"${currentAttr}
+            >${escapeHtml(buttonLabel)}</a>
+          </li>
+        `;
+      })
+      .join('');
+
+    navEl.innerHTML = `
+      <p class="chapter-nav__label">${escapeHtml(strings.allChaptersLabel)}</p>
+      <ol class="chapter-nav__list">${chapterLinks}</ol>
+    `;
+    return;
+  }
+
+  navEl.className = 'post-nav chips';
+  navEl.setAttribute('aria-label', strings.postNavLabel);
+  const links = [];
 
   if (currentIndex > 0) {
     const prev = items[currentIndex - 1];

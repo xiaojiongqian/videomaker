@@ -8,6 +8,8 @@
   --color-primary-soft: #e0e7ff;
   --color-accent: #06b6d4;
   --color-toc-link: #334155;
+  --color-tooltip-bg: rgba(15, 23, 42, 0.96);
+  --color-tooltip-text: #f8fafc;
   --color-border: #e2e8f0;
   --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
   --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
@@ -34,6 +36,8 @@
     --color-text-muted: #94a3b8;
     --color-primary-soft: rgba(79, 70, 229, 0.2);
     --color-toc-link: #cbd5e1;
+    --color-tooltip-bg: rgba(226, 232, 240, 0.96);
+    --color-tooltip-text: #0f172a;
     --color-border: #1f2937;
     --shadow-sm: 0 1px 2px rgba(2, 6, 23, 0.35);
     --shadow-md: 0 8px 24px rgba(2, 6, 23, 0.35);

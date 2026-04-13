@@ -61,6 +61,7 @@ UI_STRINGS = {
         "no_toc": "暂无目录",
         "intro_label": "文章简介",
         "post_nav_label": "上一篇下一篇",
+        "all_chapters_label": "全部章节",
         "no_more_content": "没有更多内容",
         "footer_template": "作者：Vik Qian · 版权所有 © 2026 {label}",
         "type_fallback": "未分类",
@@ -80,6 +81,7 @@ UI_STRINGS = {
         "no_toc": "No table of contents",
         "intro_label": "Chapter intro",
         "post_nav_label": "Previous and next chapters",
+        "all_chapters_label": "All chapters",
         "no_more_content": "No more content",
         "footer_template": "Author: Vik Qian · Copyright © 2026 {label}",
         "type_fallback": "Uncategorized",
@@ -150,6 +152,22 @@ def get_novel_sequence_label(sequence_value: object, language: str = DEFAULT_LAN
         return f"第{sequence_value}章"
 
     return str(get_strings(language)["novel_chapter_fallback"])
+
+
+def clean_chapter_title(title: str) -> str:
+    raw_title = title.strip()
+    if not raw_title:
+        return ""
+    cleaned = re.sub(r"^CH\d+(?:-en)?\s+", "", raw_title, flags=re.IGNORECASE).strip()
+    return cleaned or raw_title
+
+
+def get_chapter_button_number(sequence_value: object, total_count: int) -> str:
+    if not str(sequence_value).isdigit():
+        return "•"
+
+    width = 2 if total_count >= 10 else 1
+    return str(int(sequence_value)).zfill(width)
 
 
 def get_channel_index_href(channel: str, relative_prefix: str = ".") -> str:
@@ -827,8 +845,7 @@ def build_post_static_html(
     item: dict,
     body_html: str,
     toc: list[dict],
-    prev_item: dict | None,
-    next_item: dict | None,
+    nav_items: list[dict],
     asset_version: str,
 ) -> str:
     version = quote(asset_version, safe="") if asset_version else ""
@@ -854,25 +871,54 @@ def build_post_static_html(
     if not toc_html:
         toc_html = f'<li class="muted">{html.escape(str(strings["no_toc"]))}</li>'
 
-    def nav_link(prefix: str, suffix_text: str, nav_item: dict) -> str:
-        href = nav_item.get("page") or f'./post.html?id={quote(str(nav_item.get("id", "")), safe="")}'
-        rel_href = href.replace("./", "../", 1)
-        title_text = html.escape(str(nav_item.get("title", "")))
-        return (
-            f'<a class="chip" href="{html.escape(rel_href, quote=True)}">'
-            f"{prefix}{title_text}{suffix_text}</a>"
-        )
+    nav_html = ""
+    nav_class = "post-nav chips"
+    nav_label = str(strings["post_nav_label"])
+    nav_index = nav_items.index(item) if item in nav_items else -1
 
-    nav_links: list[str] = []
-    if prev_item:
-        nav_links.append(nav_link("← ", "", prev_item))
-    if next_item:
-        nav_links.append(nav_link("", " →", next_item))
-    nav_html = (
-        "".join(nav_links)
-        if nav_links
-        else f'<span class="muted">{html.escape(str(strings["no_more_content"]))}</span>'
-    )
+    if channel == "novel":
+        nav_class = "post-nav chapter-nav"
+        nav_label = str(strings["all_chapters_label"])
+        total_count = len(nav_items)
+        nav_html = (
+            f'<p class="chapter-nav__label">{html.escape(nav_label)}</p>'
+            '<ol class="chapter-nav__list">'
+            + "".join(
+                (
+                    '<li class="chapter-nav__item">'
+                    f'<a class="chapter-nav__link" href="{html.escape((str(nav_item.get("page") or f"./post.html?id={quote(str(nav_item.get("id", "")), safe="")}")).replace("./", "../", 1), quote=True)}"'
+                    f' title="{html.escape(clean_chapter_title(str(nav_item.get("title", ""))), quote=True)}"'
+                    f' data-tooltip="{html.escape(clean_chapter_title(str(nav_item.get("title", ""))), quote=True)}"'
+                    f' aria-label="{html.escape(get_novel_sequence_label(nav_item.get("sequence"), language))} · {html.escape(clean_chapter_title(str(nav_item.get("title", ""))))}"'
+                    + (' aria-current="page"' if nav_item.get("id") == item.get("id") else "")
+                    + f'>{html.escape(get_chapter_button_number(nav_item.get("sequence"), total_count))}</a></li>'
+                )
+                for nav_item in nav_items
+            )
+            + "</ol>"
+        )
+    else:
+        def nav_link(prefix: str, suffix_text: str, nav_item: dict) -> str:
+            href = nav_item.get("page") or f'./post.html?id={quote(str(nav_item.get("id", "")), safe="")}'
+            rel_href = href.replace("./", "../", 1)
+            title_text = html.escape(str(nav_item.get("title", "")))
+            return (
+                f'<a class="chip" href="{html.escape(rel_href, quote=True)}">'
+                f"{prefix}{title_text}{suffix_text}</a>"
+            )
+
+        nav_links: list[str] = []
+        prev_item = nav_items[nav_index - 1] if nav_index > 0 else None
+        next_item = nav_items[nav_index + 1] if 0 <= nav_index < len(nav_items) - 1 else None
+        if prev_item:
+            nav_links.append(nav_link("← ", "", prev_item))
+        if next_item:
+            nav_links.append(nav_link("", " →", next_item))
+        nav_html = (
+            "".join(nav_links)
+            if nav_links
+            else f'<span class="muted">{html.escape(str(strings["no_more_content"]))}</span>'
+        )
 
     topics = item.get("topic") or []
     topic_text = " / ".join(topics) if isinstance(topics, list) and topics else str(strings["type_fallback"])
@@ -927,7 +973,7 @@ def build_post_static_html(
               <p id="postSummary" class="post-intro-summary muted">{summary}</p>
             </header>
             <div id="postContent" class="stack">{body_html}</div>
-            <nav aria-label="{html.escape(str(strings["post_nav_label"]))}" class="chips" id="postNav">{nav_html}</nav>
+            <nav aria-label="{html.escape(nav_label)}" class="{nav_class}" id="postNav">{nav_html}</nav>
           </article>
         </div>
       </section>
@@ -966,10 +1012,7 @@ def write_static_post_pages(out_root: Path, items: list[dict], asset_version: st
             if channel == "novel" and item.get("type"):
                 nav_items = [candidate for candidate in published_items if candidate.get("type") == item.get("type")]
 
-            nav_index = nav_items.index(item) if item in nav_items else -1
-            prev_item = nav_items[nav_index - 1] if nav_index > 0 else None
-            next_item = nav_items[nav_index + 1] if 0 <= nav_index < len(nav_items) - 1 else None
-            page_html = build_post_static_html(item, body_html, toc, prev_item, next_item, asset_version)
+            page_html = build_post_static_html(item, body_html, toc, nav_items, asset_version)
             output_path = post_dir / f'{quote(str(item["id"]), safe="")}.html'
             output_path.write_text(page_html, encoding="utf-8")
 
