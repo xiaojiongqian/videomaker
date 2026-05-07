@@ -10,7 +10,7 @@
 - 允许新增可选字段
 - 忽略未知非核心字段
 - 对不合格输出优先拒收、修复或重试
-- 把 workflow 状态契约和子 skill 结果契约分开
+- 把 workflow 状态契约和 role/sub-agent 结果契约分开
 - 把 provenance、execution、input snapshot 作为一等公民，而不是临时备注
 - 超时、重派、降级执行也属于一等执行事实，不能只留在聊天记录里
 
@@ -41,7 +41,7 @@ contract_version: "2026-03"
 - `schemas/context-bundle.schema.md`
   - 命名上下文块
 - `schemas/artifact-result.schema.md`
-  - 子 skill 输出封套
+  - role/sub-agent 输出封套
 - `schemas/change-set.schema.md`
   - 最小状态变更集
 - `schemas/character.schema.md`
@@ -66,7 +66,7 @@ contract_version: "2026-03"
 - `proposed_writebacks`
 - `execution`
 
-当 workflow 声明 `require_subagents: true` 时，还至少检查：
+当 workflow 显式声明并获准使用 `require_subagents: true` 时，还至少检查：
 
 - `execution_policy`
 - `required_dispatches`

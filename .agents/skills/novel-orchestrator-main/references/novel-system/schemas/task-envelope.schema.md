@@ -78,7 +78,7 @@ extensions:
   - 说明这次调用的执行方式、attempt 和时间戳
   - 包括 timeout budget 和最大尝试次数
 - `input_snapshot`
-  - 固定本次子 skill 允许消费的上下文快照
+  - 固定本次 role/sub-agent 允许消费的上下文快照
 - `extensions`
   - 未来扩展字段的 namespaced 容器
   - `extensions.quality_loop` 推荐承载：
@@ -101,4 +101,5 @@ extensions:
   - `subagent`
   - `approved-fallback`
   - `orchestrator`
-- 严格模式下，标准章节 workflow 的 role task 默认应使用 `subagent`
+- 严格模式下，且用户或运行环境明确允许 sub-agent 时，标准章节 workflow 的 role task 可使用 `subagent`
+- 普通模式下，在主线程内串行切换 role pack，并把 `executor_mode` 标为 `orchestrator` 或 `approved-fallback`
