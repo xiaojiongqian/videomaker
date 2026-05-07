@@ -10,7 +10,7 @@ required_steps:
   continuity_audit: true
   dialogue_audit: false
 execution_policy:
-  orchestration_mode: "multi-skill-subagents"
+  orchestration_mode: "single-skill-role-subagents"
   require_subagents: true
   trace_file: "09-execution-log.json"
   dispatch_budget:
@@ -25,19 +25,19 @@ execution_policy:
     max_respawns_per_dispatch: 1
     require_scope_reduction_on_retry: true
   required_dispatches:
-    - agent_role: "novel-plot-architect"
+    - agent_role: "plot_planner"
       output_refs: ["02-plan.json"]
       when: "always"
-    - agent_role: "novel-scene-dramatizer"
+    - agent_role: "scene_writer"
       output_refs: ["03-draft.md"]
       when: "always"
-    - agent_role: "novel-continuity-auditor"
+    - agent_role: "continuity_gate"
       output_refs: ["04-continuity-audit.json"]
       when: "required_steps.continuity_audit"
-    - agent_role: "novel-dialogue-editor"
+    - agent_role: "voice_editor"
       output_refs: ["05-dialogue-audit.json"]
       when: "required_steps.dialogue_audit"
-    - agent_role: "novel-chapter-summarizer"
+    - agent_role: "memory_summarizer"
       output_refs: ["07-summary.json"]
       when: "always"
   fallback_policy:

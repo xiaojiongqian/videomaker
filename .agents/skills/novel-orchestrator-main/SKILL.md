@@ -1,408 +1,178 @@
 ---
 name: novel-orchestrator-main
-description: 长篇小说工程主调度与共享真源宿主。用于把小说项目当作有状态、可持续维护的创作工程来推进：识别任务属于规划、生成、审计还是状态同步；决定最小上下文加载；组织 `mainline / explorer / critic` 三角协作；协调 novel-bible-manager、novel-plot-architect、novel-scene-dramatizer、novel-dialogue-editor、novel-continuity-auditor、novel-chapter-summarizer 等子 skill；校验契约并统一写回 INDEX.md、CURRENT_STATE.md、OPEN_LOOPS.md、FORESHADOWS.md、CHARACTER_ARCS.md、RECENT_EVENTS.md 等文件。它还作为共享 novel-system 资料的唯一真源。当用户提到长篇小说策划、章节推进、设定维护、连续性检查、章节摘要、伏笔追踪或状态同步时触发。
+description: 长篇、系列小说的一体化创作与状态维护 skill。用于小说策划、开放式续作、章纲/场景规划、正文扩写、对白与角色声音修订、连续性审计、质量闭环、章节摘要、故事圣经/canon/状态文件写回、伏笔与开放回路追踪；当用户提到长篇小说、系列故事、续集推进、设定维护、章节创作、质量审查、上下文压缩或状态同步时触发。
 ---
 
-# 长篇小说主调度
+# 长篇小说创作中枢
 
-## Overview
+## Mission
 
 把小说项目视为“正文 + 状态”的双轨系统。
-你负责解释任务、裁剪上下文、选择子 skill、汇总结果、决定写回。
+先写出好读、像小说的内容，再把已经稳定的事实沉淀为可延续的状态。
 
-总优先级固定如下：
+此 skill 是 novel 系列的唯一入口。不要再调用拆分前的 novel 子 skill；需要专业分工时，在同一个 skill 内切换 `role pack` 或派发 sub-agent 扮演对应 role。
 
-1. 先写出好读、像小说的正文
-2. 再补流程工件和状态沉淀
+## Load Context Progressively
 
-不要为了 workflow 完整性牺牲成品阅读感。
+按需分层读取，不一次塞满：
+
+1. `INDEX.md`、`CURRENT_STATE.md`
+2. `OPEN_LOOPS.md`、`FORESHADOWS.md`、`CHARACTER_ARCS.md`、`ARC_STATUS.md`、`RECENT_EVENTS.md`
+3. `WORLD.md`、`CHARACTERS.md`、`RULES.md`、`FACTIONS.md`、`LOCATIONS.md`
+4. 当前章节、相邻章节、相关摘要和用户新给的草稿
+
+只有在任务需要契约、模板或细则时，才读取对应 reference：
+
+- `references/novel-system/routing.md`: role pack、粒度和任务路由
+- `references/novel-system/references/serial-continuation.md`: 开放式续作和滚动规划
+- `references/orchestrator-system/quality-council.md`: 多席位质量闭环
+- `references/novel-system/contracts.md`: 输入输出契约
+- `references/novel-system/references/story-engine.md`: 情节引擎
+- `references/novel-system/references/scene-design.md`: 场面扩写
+- `references/novel-system/references/dialogue.md`: 对白与角色声音
+- `references/novel-system/references/continuity-check.md`: 连续性审计
+- `references/novel-system/templates/`: 新项目或状态文件模板
 
 ## Core Principles
 
-- `readability first`
-  - 先让读者顺着读懂谁在场、卡在哪、发生了什么、局面怎么变
-- `excellent chapter gate`
-  - 前 20% 内必须有即时张力、重大事件或情感冲击
-  - 每章至少有 1 个不可删除的核心事件
-  - 章末必须留下仍在发热的钩子，不用主题总结收口
-- `scene chain over fact chain`
-  - 每章优先围绕 1 个 dominant scene 展开，必要时再加 1 个扩展场面
-  - 其余同型节点优先压成 `bridge cluster`
-- `productive disagreement`
-  - 除正文主写 skill 外，支持型 skill 默认不走“单声道共识”
-  - 要显式制造 `mainline / explorer / critic` 三角张力
-  - `explorer` 负责找更强可能性，`critic` 负责拆穿伪升级，主调度只吸收最小但更强的改动
-- `bounded quality loop`
-  - 先拿到可审草稿，再做独立审计
-  - 只修 `blockers` 和最低分维度，不整章反复推倒
-  - 默认最多 3 轮；提升不足 `3/80` 或修复开始外溢时停止
-- `quality council ratchet`
-  - 质量闭环默认由多个独立评分席位组成，不把“是否过线”交给单一 agent
-  - 每个席位只拥有自己那部分维度，主调度汇总后再派最小修复任务
-  - 已达标维度默认冻结，除非后续轮次有新证据证明它被修坏了
-- `independent context before consensus`
-  - 互相校验默认建立在独立上下文上，而不是共享同一份理由后互相背书
-  - 首轮评分默认 `blind audit`
-    - 不把同轮 peer finding、peer scorecard、作者自述修复理由直接喂给别的评分席位
-  - 主调度只在席位独立交卷后做聚合
-- `counterforce over harmony`
-  - 质量提升默认来自不同力量的拉扯，而不是尽快达成共识
-  - repair owner 负责把问题修到更强
-  - counterforce seat 负责证明这次修复不是伪升级、过拟合或局部自嗨
-- `bounded adversarial loop`
-  - 支持型 skill 的三角协作默认最多 `2` 轮
-  - 如果第二轮开始只剩口味分歧或装饰性升级，就停止，不制造内耗
-- `small dispatches beat heroic dispatches`
-  - sub-agent 默认吃小任务，不吃“十章一起审”这类大包
-  - 先做轻量分诊，再把真正需要处理的章节拆开
-- `minimum viable planning`
-  - plan 只需要够写，不要过满到逼正文照施工图执行
-- `state supports prose`
-  - 状态文件帮助后续写作，不反过来统治正文
-- `serial by default`
-  - 生成新内容后再做审计和摘要；只有互不污染的分析任务才并行
+- `prose first`: 成品阅读感高于流程完整感。
+- `minimum viable planning`: 计划只要够写，不要把后续可能性提前封死。
+- `open serial by default`: 系列可以无限向后延展；只锁定已写成正文或用户明确确认的 canon。
+- `scene chain over fact chain`: 每章优先 1 个 dominant scene，必要时再加 1 个扩展场面，其余同型节点压成 bridge cluster。
+- `state supports prose`: 状态文件帮助后续写作，不反过来统治正文。
+- `bounded disagreement`: 用 `mainline / explorer / critic` 制造高价值张力，但只吸收最小且更强的升级。
+- `bounded quality loop`: 默认最多 3 轮；只修 blocker 和最低分维度，不把整章反复推倒。
+- `write back conservatively`: 不把猜测、候选方案、作者解释或未稳定草稿写成 canon。
 
-## Triadic Tension Protocol
+## Open-Ended Series Protocol
 
-对不直接承担整章正文生成的支持型 skill，默认套用三种 stance：
+不要假设故事一开始必须有完整终局。维护三个创作视野：
 
-1. `mainline`
-   - 在既有 scope、canon 和当前状态内，交付最稳、最可执行的版本
-2. `explorer`
-   - 负责找被压扁的可能性
-   - 默认探索更强阻力、更具体代价、更反直觉但合理的关系走向、更可重复调用的场面锚点、更热的余波
-   - 只产出候选，不直接定稿
-3. `critic`
-   - 负责拆穿伪张力
-   - 默认攻击巧合推进、空 stakes、模板桥接、关系过平、信息先于事件、设定条目履历化、修补看似变强其实更难写
+- `now`: 当前章/当前场景必须兑现的压力、选择和余波。
+- `near`: 接下来 1 到 3 章必须承接的 open loop、关系债务和可见后果。
+- `far`: 可长期保存但不急着解释的 sequel seeds、active unknown、关系裂缝、制度门槛和物件锚点。
 
-协同顺序固定如下：
+滚动推进时：
 
-1. `mainline pass`
-2. `explorer pass`
-3. `critic pass`
-4. `orchestrator synthesis`
+1. 只把已经确认的事实写进 canon。
+2. 把未来想法标成 `candidate`、`seed`、`active_unknown` 或 `recommendation`。
+3. 每次新续作开始，先做 `continuation handshake`：复述上一部稳定结局、未清义务、可继承代价、可丢弃的临时方案。
+4. 不为了铺大局牺牲当前章节的事件感；远期伏笔必须以当前场面里的具体压力、物件或关系动作出现。
 
-综合规则：
+## Role Packs
 
-- 不做平均主义折中；优先选择“最小但更强”的升级
-- `critic` 必须同时审 `mainline` 和 `explorer` 产物
-- `explorer` 可以挑战当前方案，但不能偷改硬 canon
-- 如果争议落到硬冲突、证据不足或 scope 失控，返回 `needs_review`
-- `novel-continuity-auditor` 保持外部硬门禁角色，不用 explorer 稀释它的独立性
+在同一个 skill 内按任务切换 role：
 
-## Read Context Progressively
+- `canon_keeper`: 维护世界观、角色、状态、open loops、伏笔和写回补丁。
+- `plot_planner`: 做 arc、章纲、scene beats、信息释放、续作入口和结构修复。
+- `scene_writer`: 扩写或局部修订场景/章节，让冲突、动作、代价和余波落地。
+- `voice_editor`: 修对白、角色口吻、潜台词、互动压差和主角在场感。
+- `continuity_gate`: 审连续性、时间线、知识边界、因果、语言表面和写回资格。
+- `memory_summarizer`: 生成章节摘要、recent events、state patch、carry-forward tension。
 
-默认按四层加载：
+支持型 role 默认使用三角协议：
 
-1. `INDEX.md`、`CURRENT_STATE.md`
-2. `OPEN_LOOPS.md`、`CHARACTER_ARCS.md`、`RECENT_EVENTS.md`、`ARC_STATUS.md`
-3. `WORLD.md`、`CHARACTERS.md`、`RULES.md` 等静态设定
-4. 当前章节、相邻章节、相关摘要
+1. `mainline`: 先给稳定可执行版本。
+2. `explorer`: 只提出 1 到 3 个更强但仍守 canon 的升级。
+3. `critic`: 拦截伪张力、巧合推进、履历化条目、串音、过度解释和 unsupported writeback。
+4. `synthesis`: 只接纳最小但更强的改动，其余放进 recommendations。
 
-只给子 skill 它真正需要的最小上下文。
+`scene_writer` 负责正文主写时，优先保持单一稳定声音；不要把内部争论写进正文。
 
-对 sub-agent 默认再加三条限制：
+## Standard Workflows
 
-- 全量质量审计默认 `1 chapter / dispatch`
-- 定向修订默认 `1 chapter` 或 `1 dominant scene chain / dispatch`
-- 多章节请求先做 `triage pass`，不要直接把详细 scorecard 压给一个 agent
+章节生成默认流程：
 
-对已实现三角协议的支持型 skill，再加三条限制：
+1. 读最小状态。
+2. 立 `chapter promise`: `disturbance`、`pursuit`、`escalation`、`irreversible_turn`、`residue`。
+3. 用 `plot_planner` 给 scene-ready beats。
+4. 用 `scene_writer` 写可审草稿。
+5. 如对白薄弱，用 `voice_editor` 做局部修订。
+6. 如目标是优秀/可发布，运行 `quality_council_loop`。
+7. 通过或用户确认后，用 `memory_summarizer` 摘要。
+8. 用 `canon_keeper` 生成最小状态写回。
 
-- `explorer` 默认只给 `2 到 3` 个高杠杆候选，不展开大包 brainstorming
-- `critic` 默认只抓会明显伤害读感、因果或后续可写性的点
-- `synthesis` 默认只吸收 `1 到 2` 个升级，不把所有好点子一起塞进同一章
+单点任务直接进入对应 role，不强制跑完整流程。
 
-## Route by Task
+如果用户一次给多章：
 
-- `novel-bible-manager`
-  - `mainline` 维护静态设定和动态状态
-  - `explorer` 挖可复用的 tension asset、关系错位和 active unknown
-  - `critic` 拦 unsupported writeback、履历化条目和伪深度
-- `novel-plot-architect`
-  - `mainline` 规划 arc、章纲、scene beats、信息释放
-  - `explorer` 提供更强 disturbance、代价、转折和 residue 候选
-  - `critic` 压测因果、可写性和假升级
-  - 在 `quality_council_loop` 中默认担任 `story_engine_seat`
-    - canonical 负责 `opening_hook`、`core_event`、`escalation`
-- `novel-scene-dramatizer`
-  - 把已批准计划扩成场景或章节草稿
-  - 正文主写者，优先保持单一强声音，不强制混入内部 critic
-  - 在 `quality_council_loop` 中默认担任 `scene_heat_seat`
-    - canonical 负责 `scene_execution`、`ending_hook`
-- `novel-dialogue-editor`
-  - `mainline` 修对白和互动声音
-  - `explorer` 提供更有潜台词和压差的 line / interaction option
-  - `critic` 拆穿串音、解释性台词和装饰性机锋
-  - 在 `quality_council_loop` 中默认担任 `voice_embodiment_seat`
-    - canonical 负责 `character_embodiment`
-- `novel-continuity-auditor`
-  - 做连续性、小说性和语言表面门禁
-  - 输出 `quality_scorecard`、`blockers`、`targeted_fix_list`
-  - 外部独立批判者，不与 explorer 混岗
-  - 在 `quality_council_loop` 中默认担任 `canon_surface_gate`
-    - canonical 负责 `continuity_causality`、`language_surface`
-    - 对硬连续性 blocker 和写回资格拥有最终 veto
-- `novel-chapter-summarizer`
-  - `mainline` 生成最小可传递记忆和状态写回草案
-  - `explorer` 标出真正值得带到后文的余波和 tension residue
-  - `critic` 拦截把核心事件压成主题总结或漏掉后续义务的摘要
+1. 先 triage。
+2. 只拆出真正需要处理的章节。
+3. 每个 sub-agent 默认只处理 1 章、1 个 dominant scene chain 或 1 个 repair cluster。
+4. 修复后只复审动过的章节。
 
-如果一个任务同时要求“生成”和“判断”，先生成，再审计。
+## Quality Gate
 
-## Set the Chapter Promise
+章节质量默认 8 维，每项 `0-10`，总分 `80`：
 
-章节起草前，先确认最小引擎：
-
-- `disturbance`
-- `pursuit`
+- `opening_hook`
+- `core_event`
 - `escalation`
-- `irreversible turn`
-- `residue`
-
-对纪实 / 传记 / 比赛线，再补四个问题：
-
-- dominant scene 是哪个具体时刻、物件或比赛节点
-- 压力线如何从开头压到章末
-- 哪些内容只是 `bridge facts`
-- 章末余波是什么，不要只剩主题总结
-
-如果这些说不清，先回退给 `novel-plot-architect`。
-
-## Standard Chapter Flow
-
-默认章节流程：
-
-1. 读最小状态
-2. 立 chapter promise
-3. 如需规划、设定整理、对白修订或摘要沉淀，先跑对应 skill 的 `support_tension_loop`
-4. 如需结构方案，调用 `novel-plot-architect`
-5. 调用 `novel-scene-dramatizer` 生成或修正文稿
-6. 如对白薄弱，再调用 `novel-dialogue-editor`
-7. 进入 `quality_council_loop`
-8. 通过后调用 `novel-chapter-summarizer`
-9. 只在结果稳定后写回状态文件
-
-## Run the Support-Skill Tension Loop
-
-当任务落到 `novel-bible-manager`、`novel-plot-architect`、`novel-dialogue-editor`、`novel-chapter-summarizer` 时，默认执行：
-
-1. `mainline pass`
-   - 先拿一个稳的基础版本
-2. `explorer pass`
-   - 只找高杠杆升级
-   - 默认回答“哪里还能更险、更具体、更可回收”
-3. `critic pass`
-   - 只抓会让结果变虚、变假、变平或变难写的点
-4. `synthesis`
-   - 只接入最小强升级
-   - 把未采纳候选留在 `diagnostics` 或 `recommendations`
-5. `handoff`
-   - 只把综合后的稳定产物交给下游正文、审计或写回
-
-降级规则：
-
-- 纯规范化小任务允许用 `mini-loop`
-  - `explorer` 最多补 `1` 个 tension asset 候选
-  - `critic` 最多补 `1` 个关键风险
-- 如果支持型 skill 还没有显式三角协议，先跑 `mainline`
-  - 再由主调度或 `novel-continuity-auditor` 提供外部 critic fallback
-- 如果 loop 连续两轮都没有带来清晰增益，停止，不把 brainstorming 当成果
-
-## Keep Sub-Agent Runs Small
-
-默认粒度：
-
-- `novel-continuity-auditor`
-  - 1 章完整 scorecard
-  - 最多 2 章轻量分诊，不输出长篇逐章细评
-- `novel-plot-architect`
-  - 1 章 plan 或 1 组 repair cluster
-- `novel-scene-dramatizer`
-  - 1 章正文或 1 条 dominant scene chain
-- `novel-dialogue-editor`
-  - 1 个对话场景或 1 章的对白修订
-
-如果用户一次点名 `CH001-CH010`：
-
-1. 先本地或轻量 sub-agent 做分诊
-2. 只把低分章拆出去单独审
-3. 修复后只复审动过的章节
-
-## Run the Quality Council Loop
-
-当目标是“写到优秀 / 达标 / 可发布”时，默认把 `quality_loop` 实现为 `quality_council_loop`，而不是单一审计器闭环。
-
-### Council Seats
-
-- `story_engine_seat`
-  - `novel-plot-architect`
-  - `task_type: quality-seat-story-engine`
-  - canonical 负责 `opening_hook`、`core_event`、`escalation`
-- `scene_heat_seat`
-  - `novel-scene-dramatizer`
-  - `task_type: quality-seat-scene-heat`
-  - canonical 负责 `scene_execution`、`ending_hook`
-- `voice_embodiment_seat`
-  - `novel-dialogue-editor`
-  - `task_type: quality-seat-voice-embodiment`
-  - canonical 负责 `character_embodiment`
-- `canon_surface_gate`
-  - `novel-continuity-auditor`
-  - `task_type: quality-council-gate`
-  - canonical 负责 `continuity_causality`、`language_surface`
-  - 对硬连续性 blocker、证据不足和写回资格拥有最终 veto
-
-### Council Rules
-
-- 评分席位必须是 fresh sub-agent session
-  - 当前轮负责生成或修文的那个 agent session，不直接给自己的产物打分
-- 首轮评分默认 `blind audit`
-  - 每个 seat 只拿自己的 `seat_context_snapshot`
-  - 不看同轮 `peer_findings`、`peer_scorecards`、author self-justification
-  - 允许看上一轮的聚合结果，但不允许在本轮交卷前偷看同轮别人怎么判
-- 其他席位可以给非 owned dimension 提 advisory comment
-  - 但 canonical score 只认 owner seat
-- `canon_surface_gate` 发现硬 blocker 时，默认直接阻止通过
-- 已达 `8/10` 且无 blocker 的维度默认进入 `locked_dimensions`
-  - 后续轮次除非有明确回归证据，不重新改写
-- 每轮默认最多派 `2` 个 repair owner
-  - 先修根因，再修表层
-- repair 后默认跑 `counterforce challenge`
-  - 至少由 1 个非 owner seat 从相反压力方向复核
-  - `canon_surface_gate` 继续保留最终 veto
-
-### Workflow
-
-1. `pass_0`
-   - 基于现有 plan 或现稿，先拿到一版可审文本
-2. `council fan-out`
-   - 草稿稳定后，优先并行 dispatch 四个评分席位
-   - 每个席位拿独立 `seat_context_snapshot`
-     - `story_engine_seat` 优先拿 chapter promise、scene beats、现稿、最小状态
-     - `scene_heat_seat` 优先拿现稿、dominant scene chain、段落边界、最小状态
-     - `voice_embodiment_seat` 优先拿对白片段、互动片段、角色状态、场景压力
-     - `canon_surface_gate` 优先拿现稿、canon、摘要、当前状态
-   - 如果环境受限，至少保证 `canon_surface_gate` 独立 dispatch
-   - 其他席位可串行 fallback，但必须在 trace 里记明
-3. `aggregation`
-   - 把四个席位的 owned score 合并成 canonical `quality_scorecard`
-   - 同时记录 `seat_scorecards`、`advisory_findings`、`locked_dimensions`、`council_round_reports`、`round_decision`
-4. `stop on pass`
-   - `score_total >= 72/80`
-   - 无 `blockers`
-   - 没有任何 canonical 维度低于 `7/10`
-   - 读者能复述本章核心事件、压力升级和章末余波
-5. `route only failed clusters`
-   - 把 failed dimensions 合并成最小 repair cluster
-   - 优先修最低分维度和会拖垮整章读感的根因
-   - 如果修复归属支持型 skill，优先走对应的 `support_tension_loop`
-6. `owner mapping`
-   - `opening_hook`、`core_event`、`escalation`：`novel-plot-architect`
-   - `scene_execution`、`ending_hook`、桥接过量、场面发虚：`novel-scene-dramatizer`
-   - `character_embodiment`、串音、潜台词太直白、对白无压：`novel-dialogue-editor`
-   - `language_surface`、模板句、解释句过量、顺读阻塞：默认 `novel-scene-dramatizer`
-     - 若问题局部集中在对白，则转 `novel-dialogue-editor`
-   - `continuity_causality`、设定 / 时间线 / canon 冲突：`novel-bible-manager`
-7. `repair pass`
-   - repair owner 只改本轮失败 cluster，不推倒整章
-   - repair 回执至少带 `touched_dimensions`、`expected_score_gain`、`locked_dimensions_respected`
-8. `re-audit`
-   - 局部修订：重跑 failed seat + `counterforce seat` + `canon_surface_gate`
-   - 结构或章末被改动：重跑完整 council
-   - `counterforce seat` 默认映射：
-     - `novel-plot-architect` repair -> `scene_heat_seat`
-     - `novel-scene-dramatizer` repair -> `story_engine_seat`
-     - `novel-dialogue-editor` repair -> `scene_heat_seat`
-     - `novel-bible-manager` repair -> `story_engine_seat`
-9. `stop conditions`
-   - 达到通过线
-   - 已做 `3` 轮
-   - 本轮提升小于 `3/80`
-   - 没有任何 failed dimension 至少提升 `1` 分
-   - 同一 blocker 连续两轮重复出现
-   - 为修 1 个局部问题开始引发大面积结构漂移
-
-不要把它实现成无限“重写直到满意”。
-闭环目标是稳定抬高成品，不是制造永动机。
-
-## Timeout Recovery Ladder
-
-sub-agent 超时不是“多等一会儿”就算处理了。
-默认按下面顺序恢复：
-
-1. `single wait`
-   - 只做一次正常等待，不忙轮询
-2. `shrink and respawn`
-   - 如果超时，先减半 scope，再收紧输出格式
-   - 默认只重派 1 次
-3. `approved fallback`
-   - 第二次仍超时，只有分析 / 摘要 / 轻量定向修订允许 fallback
-   - 必须在 `execution` 和 trace 里登记 `subagent-timeout` 或 `subagent-no-response`
-4. `quality guard`
-   - timeout fallback 产物不能单独作为 canon 写回依据
-   - 遇到 blocker、设定冲突或大结构改动，宁可停在 `needs_review`
-5. `close stale agents`
-   - 超时的旧 agent 不要长期挂着，避免后续结果互相污染
-
-稳定性来自缩 scope、收格式、记退化，不来自无限等待。
-
-## Quality Bar
-
-默认拦截这些问题：
-
-- 开头三段内仍未真正进入张力
-- 第一场景可以整段删除而不伤主线
-- 一章塞太多同型节点，读感变成资料带
-- 桥接事实压倒硬场面
-- 主角长期只被旁白代言
-- 章末只剩作者总结，没有余波
-- 关键情绪主要靠解释句，而不是动作、反应和物件落地
-- 语言顺读但读者说不清“这一章到底往前走了哪一步”
+- `character_embodiment`
+- `scene_execution`
+- `ending_hook`
+- `continuity_causality`
+- `language_surface`
 
 默认通过线：
 
 - `score_total >= 72/80`
 - 无 `blockers`
-- 没有任何 canonical 维度低于 `7/10`
+- 没有任何维度低于 `7/10`
 - 读者能复述本章核心事件、压力升级和章末余波
 
-如果用户要求“写厚”：
+常见 blocker：
 
-- 至少保证 2 个有效互动单元，或 1 条持续升级的互动链
-- 主角应至少有一次明确回应
-  - 开口、动作、短心理线都可以
-- 加厚后的新增篇幅必须增加 `contact` 或 `shift`，不能只增加解释
+- 前 20% 没有进入张力
+- 没有不可删除的核心事件
+- 场面链塌成事实链、资料带或主题评论
+- 主角长期只被旁白代言
+- 章末只剩总结，没有仍在发热的余波
+- 硬连续性、时间线、知识边界或 canon 冲突
+- 语言顺读但读者说不清本章往前走了哪一步
 
-## Write Back Conservatively
+高质量闭环使用 `quality_council_loop`：`story_engine_seat`、`scene_heat_seat`、`voice_embodiment_seat`、`canon_surface_gate` 独立评分，聚合后只修失败 cluster。
 
-只写回已经被正文或用户明确确认的事实。
-如果存在冲突、不确定解释或正文仍未稳定，先保留在 `diagnostics` 和 `recommendations`，不要抢先改 canon。
+## Writeback Rules
 
-## Output
+只写回以下内容：
 
-至少返回：
+- 已写入稳定正文的事实
+- 用户明确确认的设定
+- 审计通过且不与现有 canon 冲突的状态变化
+
+写回分流：
+
+- 静态设定：`WORLD.md`、`CHARACTERS.md`、`FACTIONS.md`、`LOCATIONS.md`、`RULES.md`
+- 动态状态：`CURRENT_STATE.md`、`RECENT_EVENTS.md`、`CHARACTER_ARCS.md`、`ARC_STATUS.md`
+- 叙事义务：`OPEN_LOOPS.md`、`FORESHADOWS.md`
+- 长期续作种子：标为 `seed`、`candidate`、`active_unknown`，不要伪装成已发生事实
+
+若正文未稳定，输出 `proposed_writebacks`，不要直接改 canon。
+
+## Output Shape
+
+按任务需要返回高信号结果。复杂任务至少包含：
 
 - `status`
 - `routing_decision`
 - `artifacts`
-  - 如运行 `quality_council_loop`，补 `quality_loop_report`
-  - `quality_loop_report` 默认至少包含 `seat_scorecards`、`advisory_findings`、`council_round_reports`、`locked_dimensions`、`round_decision`
-  - 如运行 `blind audit`，补 `seat_context_snapshots`、`review_isolation`
-  - 如运行 `counterforce challenge`，补 `counterforce_checks`
-  - 如运行三角协作，补 `tension_synthesis_report`
 - `diagnostics`
 - `recommendations`
 - `proposed_writebacks`
 - `execution`
-  - 如发生 timeout recovery，补 `degraded_execution`、`recovery_actions`、`fallback_reason_codes`
-  - 如运行三角协作，补 `stance_runs`、`accepted_upgrades`、`rejected_variants`
 
-## Shared References
+运行质量闭环时补：
 
-- `references/novel-system/contracts.md`
-- `references/novel-system/references/story-engine.md`
-- `references/novel-system/references/story-quality.md`
-- `references/novel-system/references/language-surface.md`
-- `references/orchestrator-system/quality-council.md`
+- `quality_loop_report`
+- `seat_scorecards`
+- `locked_dimensions`
+- `round_decision`
+- `targeted_fix_list`
+
+运行开放式续作规划时补：
+
+- `continuation_handshake`
+- `now_near_far_horizon`
+- `sequel_seeds`
+- `carry_forward_obligations`

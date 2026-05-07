@@ -5,7 +5,7 @@ schema_version: "1.0"
 contract_version: "2026-03"
 task_id: "task-001"
 task_type: "continuity-audit"
-agent_role: "novel-continuity-auditor"
+agent_role: "continuity_gate"
 status: "completed"
 execution:
   mode: "subagent"

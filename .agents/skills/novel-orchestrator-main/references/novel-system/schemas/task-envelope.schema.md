@@ -6,7 +6,7 @@ contract_version: "2026-03"
 session_id: "novel-project-session"
 task_id: "task-001"
 parent_task_id: "task-000"
-agent_role: "novel-plot-architect"
+agent_role: "plot_planner"
 task_type: "chapter-plan"
 objective: "Plan CHXXX around a visible threshold event that advances ARC-XX without resolving the primary conflict"
 priority: "normal"
@@ -101,4 +101,4 @@ extensions:
   - `subagent`
   - `approved-fallback`
   - `orchestrator`
-- 严格模式下，标准章节 workflow 的子 skill task 默认应使用 `subagent`
+- 严格模式下，标准章节 workflow 的 role task 默认应使用 `subagent`

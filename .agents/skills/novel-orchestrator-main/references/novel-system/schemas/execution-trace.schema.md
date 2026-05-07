@@ -8,7 +8,7 @@ orchestrator_role: "novel-orchestrator-main"
 status: "in_progress"
 dispatches:
   - task_id: "CHXXX-plan-001"
-    agent_role: "novel-plot-architect"
+    agent_role: "plot_planner"
     mode: "subagent"
     status: "completed"
     attempt: 1
@@ -30,13 +30,13 @@ dispatches:
         seat_id: "story_engine_seat"
         owned_dimensions: ["opening_hook", "core_event", "escalation"]
 exceptions:
-  - agent_role: "novel-plot-architect"
+  - agent_role: "plot_planner"
     output_refs: ["02-plan.json"]
     fallback_mode: "approved-fallback"
     reason_code: "env-no-subagent-support"
     approved_by: "user"
     justification: "Temporary outage in sub-agent runtime"
-  - agent_role: "novel-continuity-auditor"
+  - agent_role: "continuity_gate"
     output_refs: ["04-continuity-audit.json"]
     fallback_mode: "approved-fallback"
     reason_code: "subagent-timeout"

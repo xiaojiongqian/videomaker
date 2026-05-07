@@ -1,123 +1,106 @@
 # Quality Council
 
-`quality_council_loop` 是 `novel-orchestrator-main` 的默认高质量章节闭环。
+`quality_council_loop` is the high-quality chapter loop inside `novel-orchestrator-main`.
 
-它解决两个问题：
+It prevents two common failures:
 
-- 生成 agent 容易对自己的草稿过宽
-- 单一审计器容易把“结构、场面、对白、连续性”混成一张大意见单
-
-它还坚持两个工程原则：
-
-- 互相校验必须建立在独立上下文上
-- 质量来自不同力量的拉扯，而不是快速求和
+- The drafting role becomes too generous toward its own text.
+- A single reviewer mixes structure, scene heat, voice, continuity, and surface language into one vague opinion.
 
 ## Minimum Complete Unit
 
-最小完整单元不是“一个人写完再自己改”，而是一轮完整的：
+Run one bounded loop:
 
-1. 生成可审草稿
-2. 多席位独立评分
-3. 汇总 failed dimensions
-4. 最小修复
-5. 复审
-
-只要这五步能闭环，系统就能递归扩展到单章、单场面和跨章分诊。
+1. Produce a reviewable draft.
+2. Send independent council seats the same stable snapshot.
+3. Aggregate failed dimensions.
+4. Repair only the smallest failed cluster.
+5. Re-audit the affected dimensions plus counterforce checks.
 
 ## Seat Ownership
 
 - `story_engine_seat`
-  - skill: `novel-plot-architect`
-  - task_type: `quality-seat-story-engine`
+  - role pack: `plot_planner`
   - owns: `opening_hook`, `core_event`, `escalation`
 - `scene_heat_seat`
-  - skill: `novel-scene-dramatizer`
-  - task_type: `quality-seat-scene-heat`
+  - role pack: `scene_writer`
   - owns: `scene_execution`, `ending_hook`
 - `voice_embodiment_seat`
-  - skill: `novel-dialogue-editor`
-  - task_type: `quality-seat-voice-embodiment`
+  - role pack: `voice_editor`
   - owns: `character_embodiment`
 - `canon_surface_gate`
-  - skill: `novel-continuity-auditor`
-  - task_type: `quality-council-gate`
+  - role pack: `continuity_gate`
   - owns: `continuity_causality`, `language_surface`
-  - veto: hard blocker, writeback eligibility
+  - veto: hard canon conflict, evidence insufficiency, writeback ineligibility
 
-非 owner seat 可以评论，但不能覆盖 canonical score。
+Non-owner seats may leave advisory comments, but only owner seats set canonical scores.
 
-## Independent Context Protocol
+## Blind Audit
 
-`quality_council_loop` 的首轮评分默认是 `blind audit`：
+First-round scoring defaults to blind audit:
 
-- 每个 seat 收到独立的 `seat_context_snapshot`
-- 不共享同轮 `peer_findings`
-- 不共享同轮 `peer_scorecards`
-- 不把 author self-justification 当首轮评分依据
+- Each seat receives an independent `seat_context_snapshot`.
+- Seats do not see same-round peer findings.
+- Seats do not see same-round peer scorecards.
+- Seats do not use author self-justification as evidence.
 
-主调度只有在所有 seat 独立交卷后，才做聚合。
-如果一开始就共享解释，系统会更快达成表面一致，也更快失去真正的互相校验。
+The orchestrator aggregates only after seats return.
 
 ## Pass Rule
 
-默认通过线：
+Pass when all are true:
 
 - `score_total >= 72/80`
-- 无 `blockers`
-- 无 canonical 维度低于 `7/10`
-- `canon_surface_gate` 没有 veto
+- No `blockers`
+- No canonical dimension below `7/10`
+- `canon_surface_gate` has no veto
 
 ## Ratchet Rule
 
-为了避免闭环抖动，主调度默认维护 `locked_dimensions`：
-
-- `>= 8/10` 且无 blocker 的维度进入锁定
-- 后续轮次除非有新证据证明回归，否则不再改
-- repair owner 必须声明是否尊重了锁定维度
+- Dimensions scored `>= 8/10` with no blocker become `locked_dimensions`.
+- Repair owners must respect locked dimensions.
+- Reopen a locked dimension only when there is concrete regression evidence.
 
 ## Repair Routing
 
-默认一次只修最小 cluster：
+Map the failed root cause to the smallest owner:
 
-- 结构根因：`novel-plot-architect`
-- 场面热度 / 章末余波：`novel-scene-dramatizer`
-- 角色在场感 / 对白压差：`novel-dialogue-editor`
-- `language_surface`
-  - 默认：`novel-scene-dramatizer`
-  - 若问题局部集中在对白：`novel-dialogue-editor`
-- canon / 时间线 / 状态冲突：`novel-bible-manager`
+- Structure root cause: `plot_planner`
+- Scene heat, bridge leak, cold ending: `scene_writer`
+- Character embodiment, dialogue pressure, subtext: `voice_editor`
+- Language surface:
+  - default `scene_writer`
+  - use `voice_editor` if concentrated in dialogue
+- Canon, timeline, state conflict: `canon_keeper`, then `continuity_gate` verifies
 
-每轮默认最多 `2` 个 repair owner，避免多头改稿互相污染。
+Each round should use at most `2` repair owners.
 
 ## Counterforce Protocol
 
-repair 不以 owner 自报“修好了”为准。
-默认再派一个 `counterforce seat` 从相反方向复核：
+Do not accept owner self-report as proof.
 
-- `novel-plot-architect` repair
+- `plot_planner` repair
   - counterforce: `scene_heat_seat`
-  - 主要防“结构更稳，但场面变冷”
-- `novel-scene-dramatizer` repair
+  - check that stronger structure did not make the scene cold.
+- `scene_writer` repair
   - counterforce: `story_engine_seat`
-  - 主要防“更热闹，但推进更空”
-- `novel-dialogue-editor` repair
+  - check that hotter prose did not empty the plot turn.
+- `voice_editor` repair
   - counterforce: `scene_heat_seat`
-  - 主要防“台词更好听，但压力不落地”
-- `novel-bible-manager` repair
+  - check that better lines still land as pressure and action.
+- `canon_keeper` repair
   - counterforce: `story_engine_seat`
-  - 主要防“canon 更干净，但章节推进被写扁”
+  - check that cleaner canon did not flatten chapter propulsion.
 
-`canon_surface_gate` 不替代 counterforce，它只负责最终门禁和 veto。
+`canon_surface_gate` always keeps final veto.
 
 ## Convergence Guard
 
-默认停止条件：
+Stop when:
 
-- 达到通过线
-- 已做 `3` 轮
-- 总分提升小于 `3/80`
-- 没有任何 failed dimension 至少提升 `1`
-- 同一 blocker 连续两轮重复
-- 修复开始破坏已锁定维度
-
-这是一套收敛机制，不是永动机。
+- Pass rule is met.
+- Three rounds have run.
+- Total gain is below `3/80`.
+- No failed dimension rises by at least `1`.
+- The same blocker repeats for two rounds.
+- Repair begins to damage locked dimensions or cause broad structure drift.

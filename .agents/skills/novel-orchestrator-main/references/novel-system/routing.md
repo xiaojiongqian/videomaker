@@ -1,90 +1,91 @@
 # Routing
 
-## Task Routing Matrix
+## Role Pack Matrix
 
-- 设定整理、canon 修订、角色状态归档
-  - `novel-bible-manager`
-- 卷纲、arc、大纲、章纲、scene beats
-  - `novel-plot-architect`
-- 依据既定大纲扩写场景或章节
-  - `novel-scene-dramatizer`
-- 对白优化、角色口吻区分、潜台词增强
-  - `novel-dialogue-editor`
-- 连续性、时间线、动机、知识边界审计
-  - `novel-continuity-auditor`
-- 摘要压缩、recent events、state patch
-  - `novel-chapter-summarizer`
+Use these role packs inside `novel-orchestrator-main`; they are not separate skills.
 
-## Serial vs Parallel
-
-默认串行。
-只有在多个任务共享同一输入快照，且不会互相污染状态时才并行。
-
-必须串行的典型链路：
-
-1. 读状态
-2. 产出规划
-3. 扩写正文
-4. 审计草稿
-5. 修订草稿
-6. 生成摘要
-7. 同步状态
-
-适合并行的典型链路：
-
-1. 对同一草稿并行做连续性审计和对白诊断
-2. 对同一大纲并行给多个场景方案
-3. 对同一章节并行产出多个分析维度的 findings
+- `canon_keeper`
+  - Maintain canon, character state, timeline, current state, open loops, foreshadows, arc state, and minimal writeback patches.
+- `plot_planner`
+  - Plan master outline, arc, chapter promise, scene beats, reveal order, repair plans, and sequel entry points.
+- `scene_writer`
+  - Draft or revise a scene/chapter from approved beats; turn facts into events, actions, choices, costs, reactions, and residue.
+- `voice_editor`
+  - Revise dialogue, subtext, character voice, interaction pressure, and protagonist embodiment without changing plot facts.
+- `continuity_gate`
+  - Audit canon, timeline, knowledge boundaries, causality, language surface, and writeback eligibility.
+- `memory_summarizer`
+  - Compress stable chapters into summaries, recent events, state patches, carry-forward obligations, and tension residue.
 
 ## Dispatch Sizing
 
-默认 dispatch 粒度：
+Default unit:
 
-- `novel-continuity-auditor`
-  - `1 chapter` 完整审计
-  - 最多 `2 chapters` 轻量分诊
-- `novel-dialogue-editor`
-  - `1 chapter` 或 `1 dialogue scene`
-- `novel-plot-architect`
-  - `1 chapter` 详细 beats
-  - 多章请求先做 route plan
-- `novel-scene-dramatizer`
-  - `1 chapter` 或 `1 dominant scene chain`
-- `novel-chapter-summarizer`
-  - 已稳定正文时可批量 `2 chapters`
+- Full audit: `1 chapter`
+- Planning: `1 chapter`, `1 arc segment`, or `1 repair cluster`
+- Draft/revision: `1 chapter` or `1 dominant scene chain`
+- Dialogue pass: `1 dialogue scene` or the dialogue-bearing parts of `1 chapter`
+- Summary: stable text, usually `1 to 2 chapters`
+- State update: one coherent change set
 
-如果任务范围是 `CH001-CH010` 这类大包：
-
-1. 先 triage
-2. 再逐章拆给真正需要的 sub-agent
-3. 修完只复审变更章
+For large ranges such as `CH001-CH010`, triage first, then split only the failing chapters or clusters.
 
 ## Standard Chapter Workflow
 
-1. 读取 `INDEX.md` 和 `CURRENT_STATE.md`
-2. 加载相关状态与必要设定
-3. 调用 `novel-plot-architect`
-4. 调用 `novel-scene-dramatizer`
-5. 并行调用 `novel-continuity-auditor` 与 `novel-dialogue-editor`
-6. 汇总并修订
-7. 调用 `novel-chapter-summarizer`
-8. 由 `novel-orchestrator-main` 决定写回
+1. Read `INDEX.md` and `CURRENT_STATE.md`.
+2. Load relevant open loops, arcs, summaries, and canon.
+3. Set `chapter_promise`.
+4. Run `plot_planner` for scene-ready beats when structure is not already stable.
+5. Run `scene_writer` for a draft or targeted revision.
+6. Run `voice_editor` only when character embodiment or dialogue pressure is weak.
+7. Run `quality_council_loop` when the user asks for publishable/high-quality output.
+8. Run `memory_summarizer` after the text is stable.
+9. Run `canon_keeper` for conservative writebacks.
 
-## Timeout Recovery
+## Serial Continuation Workflow
 
-1. 对长任务只等一次正常预算，不忙轮询
-2. 超时后先缩 scope，再收紧输出结构，再重派一次
-3. 第二次仍失败时，只有 fallback policy 允许的任务可以降级执行
-4. timeout fallback 不得单独触发 canon 写回
-5. 旧 agent 应关闭，避免迟到结果污染当前轮次
+Use this when starting a sequel, extending beyond the planned outline, or continuing an indefinite series:
+
+1. `continuation_handshake`
+   - Summarize stable ending state, unresolved obligations, relationship debts, active unknowns, and usable seeds.
+2. `horizon split`
+   - `now`: current scene/chapter pressure.
+   - `near`: obligations for the next 1 to 3 chapters.
+   - `far`: seeds that can sleep without forcing an early payoff.
+3. `candidate discipline`
+   - Mark uncertain future ideas as `candidate`, `seed`, `active_unknown`, or `recommendation`.
+   - Do not write them into canon until confirmed by text or user.
+4. `episode entry`
+   - Give the new installment its own disturbance and core event.
+   - Inherit consequences, not homework lists.
+5. `state refresh`
+   - After a stable chapter, update summaries and state with only confirmed facts.
+
+## Serial vs Parallel
+
+Default to serial for generation chains:
+
+1. Plan
+2. Draft
+3. Audit
+4. Repair
+5. Summarize
+6. Write back
+
+Parallelize only when tasks share the same stable input snapshot and cannot contaminate one another, such as independent council seats reviewing the same draft.
 
 ## Standard Task Types
 
-- 规划类
-  - `master-outline`、`arc-plan`、`chapter-plan`、`scene-beats`、`reveal-plan`
-- 生成类
-  - `scene-draft`、`chapter-draft`、`dialogue-pass`、`prose-revision`、`chapter-summary`
-- 审计类
-  - `continuity-audit`、`character-consistency-audit`、`timeline-audit`、`dialogue-audit`
-- 状态更新类
-  - `story-bible-update`、`current-state-sync`、`open-loop-update`、`foreshadow-update`
+- Planning: `master-outline`, `arc-plan`, `chapter-plan`, `scene-beats`, `reveal-plan`, `continuation-plan`
+- Generation: `scene-draft`, `chapter-draft`, `dialogue-pass`, `prose-revision`
+- Audit: `continuity-audit`, `quality-council`, `character-consistency-audit`, `timeline-audit`, `dialogue-audit`
+- Memory: `chapter-summary`, `recent-events`, `current-state-sync`, `open-loop-update`, `foreshadow-update`
+- Canon: `story-bible-update`, `character-entry`, `world-rule-entry`, `timeline-entry`, `arc-state-entry`
+
+## Timeout Recovery
+
+1. Wait once.
+2. If it times out, shrink scope and tighten output format.
+3. Retry once.
+4. If it still fails, fallback only for light analysis, summary, or targeted revision.
+5. Timeout fallback cannot be the sole basis for canon writeback.
